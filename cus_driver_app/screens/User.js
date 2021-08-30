@@ -20,7 +20,7 @@ class User extends Component {
     render() {
         return(
             <SafeAreaView>
-                
+                <Text>User</Text>
             </SafeAreaView>
         );
     }

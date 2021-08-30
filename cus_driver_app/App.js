@@ -16,7 +16,8 @@ import {
     useColorScheme,
     View,
 } from 'react-native';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
     Colors,
     DebugInstructions,
@@ -24,29 +25,24 @@ import {
     LearnMoreLinks,
     ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import Tabs from './navigation/tab.js';
+const Stack = createNativeStackNavigator();
 
 const App = () => {
-    <View>
-
-    </View>
+    return(
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen
+                    name = 'Tabs'
+                    component = {Tabs}
+                    options={{header: () => null}}
+                ></Stack.Screen>
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
 const styles = StyleSheet.create({
-    sectionContainer: {
-        marginTop: 32,
-        paddingHorizontal: 24,
-    },
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: '600',
-    },
-    sectionDescription: {
-        marginTop: 8,
-        fontSize: 18,
-        fontWeight: '400',
-    },
-    highlight: {
-        fontWeight: '700',
-    },
+   
 });
 
 export default App;

@@ -20,7 +20,7 @@ class Orders extends Component {
     render() {
         return(
             <SafeAreaView>
-                
+                <Text>Order</Text>
             </SafeAreaView>
         );
     }

@@ -25,7 +25,7 @@ import {
 
 const Tab = createBottomTabNavigator();
 
-const Tab = () => {
+const Tabs = () => {
     return(
         <Tab.Navigator
             style = {styles.tabBottom}
@@ -36,7 +36,7 @@ const Tab = () => {
                         iconName  = overViewIcon;
                     } else if (route.name === 'Orders') {
                         iconName = orderIcon;
-                    } else if (route.name === 'Money') {
+                    } else if (route.name === 'MonenyFlow') {
                         iconName = moneyIcon;
                     } else if (route.name === 'User') {
                         iconName = accountIcon;
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Tab;
+export default Tabs;

@@ -4,12 +4,6 @@ import {
     Text,
     StyleSheet,
     SafeAreaView,
-    TouchableOpacity,
-    Image,
-    Animated,
-    ImageStore,
-    Alert,
-    FlatList
 } from "react-native";
 
 class OverView extends Component {
@@ -20,7 +14,7 @@ class OverView extends Component {
     render() {
         return(
             <SafeAreaView>
-                
+                <Text>Overview</Text>
             </SafeAreaView>
         );
     }

@@ -20,7 +20,7 @@ class MonenyFlow extends Component {
     render() {
         return(
             <SafeAreaView>
-                
+                <Text>MoneyFlow</Text>
             </SafeAreaView>
         );
     }
