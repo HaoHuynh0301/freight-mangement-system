@@ -4,12 +4,6 @@ import {
     Text,
     StyleSheet,
     SafeAreaView,
-    TouchableOpacity,
-    Image,
-    Animated,
-    ImageStore,
-    Alert,
-    FlatList
 } from "react-native";
 
 class User extends Component {
