@@ -18,6 +18,12 @@ class OverView extends Component {
         super(props);
     }
 
+    handleGetAppInformation(title) {
+        this.props.navigation.navigate('AppInformation', {
+            title: title
+        });
+    }
+
     renderAppInformation() {
         return(
             <View style={styles.appInforWapper}>
@@ -26,7 +32,11 @@ class OverView extends Component {
                 </View>
                 <View style={styles.appInforDetailWrapper}>
                     <Text style={styles.appInforDetail}>Điều khoản và quy định</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress = {() => {
+                            this.handleGetAppInformation('Điều khoản và quy định');
+                        }}
+                    >
                         <Image
                             source={rightArrowIcon}
                             style={styles.rightIcon}
@@ -35,7 +45,11 @@ class OverView extends Component {
                 </View>
                 <View style={styles.appInforDetailWrapper}>
                     <Text style={styles.appInforDetail}>Những câu hỏi thường gặp</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress = {() => {
+                            this.handleGetAppInformation('Những câu hỏi thường gặp');
+                        }}
+                    >
                         <Image
                             source={rightArrowIcon}
                             style={styles.rightIcon}
@@ -44,7 +58,11 @@ class OverView extends Component {
                 </View>
                 <View style={styles.appInforDetailWrapper}>
                     <Text style={styles.appInforDetail}>Tin tức</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress = {() => {
+                            this.handleGetAppInformation('Tin tức');
+                        }}
+                    >
                         <Image
                             source={rightArrowIcon}
                             style={styles.rightIcon}
@@ -143,7 +161,7 @@ const styles = StyleSheet.create({
     },
     rightIcon: {
         width: 20,
-        height: 20   
+        height: 25  
     },
     orderInformationWrapper: {
         flex: 1,
