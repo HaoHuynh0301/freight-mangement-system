@@ -12,6 +12,9 @@ import {
     impText,
     appFontSize
 } from '../contants';
+import {
+    Header
+} from '../components';
 
 class User extends Component {
     constructor(props) {
@@ -41,7 +44,7 @@ class User extends Component {
 
     renderUserPage() {
         <ScrollView style={styles.scrollView}>
-            <Text>Hello</Text>
+            <Header />
         </ScrollView>
     }
 
@@ -77,27 +80,27 @@ class User extends Component {
                     </View>
                 </View>
                 <TouchableOpacity 
-                        style = {styles.buttonLogin}
-                        onPress = {() => {
-                            this.handleSignInPressed()
-                        }}
+                    style = {styles.buttonLogin}
+                    onPress = {() => {
+                        this.handleSignInPressed()
+                    }}
+                >
+                    <Text style = {{fontSize: 20, fontWeight: 'bold'}}>Sign in</Text>
+                </TouchableOpacity>
+                <View style = {styles.registerWrapper}>
+                    <Text style = {styles.registerText}>Don't have any accounts ? </Text>
+                    <TouchableOpacity
+                        onPress = {() => {this.handleRegisterPressed()}}
                     >
-                        <Text style = {{fontSize: 20, fontWeight: 'bold'}}>Sign in</Text>
+                        <Text style = {styles.registerText}>Register an account</Text>
                     </TouchableOpacity>
-                    <View style = {styles.registerWrapper}>
-                        <Text style = {styles.registerText}>Don't have any accounts ? </Text>
-                        <TouchableOpacity
-                            onPress = {() => {this.handleRegisterPressed()}}
-                        >
-                            <Text style = {styles.registerText}>Register an account</Text>
-                        </TouchableOpacity>
-                    </View>
+                </View>
             </View>
         );
     }
 
     renderMainView() {
-        if(this.state.isAuth) {
+        if(!this.state.isAuth) {
             return(
                 this.renderUserPage()
             );
@@ -110,7 +113,7 @@ class User extends Component {
 
     render() {
         return(
-            <SafeAreaView>
+            <SafeAreaView style={styles.container}>
                 {this.renderMainView()}
             </SafeAreaView>
         );
@@ -118,8 +121,11 @@ class User extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
     scrollView: {
-
+        
     },
     signInWrapper: {
         height: '100%',

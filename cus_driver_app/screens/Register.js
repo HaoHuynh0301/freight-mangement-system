@@ -9,7 +9,7 @@ import {
     TextInput,
 } from 'react-native';
 import {
-    HeaderBackIcon
+    Header
 } from '../components';
 import {
     headerFontSize,
@@ -28,7 +28,10 @@ class Register extends Component {
             <View style={styles.container}>
                 <TouchableOpacity
                     style = {styles.iconBackWrapper}
-                    onPress={() => this.props.navigation.goBack()}
+                    onPress={() => {
+                        
+                        this.props.navigation.goBack()
+                    } }
                 >
                     <Image
                         source = {backIcon}
@@ -102,7 +105,7 @@ class Register extends Component {
                             console.log('ok');
                         }}
                     >
-                        <Text style = {{fontSize: 20, fontWeight: 'bold'}}>Sign in</Text>
+                        <Text style = {{fontSize: 20, fontWeight: 'bold'}}>Đăng ký</Text>
                     </TouchableOpacity>
                 </View>
             </View>
