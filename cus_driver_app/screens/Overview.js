@@ -71,7 +71,7 @@ class OverView extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.appInforDetailWrapper}>
-                    <Text style={styles.appInforDetail}>Delat và hủy lấy</Text>
+                    <Text style={styles.appInforDetail}>Delay và hủy lấy</Text>
                     <TouchableOpacity>
                         <Image
                             source={rightArrowIcon}
@@ -81,48 +81,23 @@ class OverView extends Component {
                 </View>
                 <View style={styles.appInforDetailWrapper}>
                     <Text style={styles.appInforDetail}>Giao thành công</Text>
-                    <TouchableOpacity>
-                        <Image
-                            source={rightArrowIcon}
-                            style={styles.rightIcon}
-                        ></Image>
-                    </TouchableOpacity>
+                    <Text style={styles.numberOfOrderText}>0-ĐH</Text>
                 </View>
                 <View style={styles.appInforDetailWrapper}>
                     <Text style={styles.appInforDetail}>Không giao được/ Lưu kho</Text>
-                    <TouchableOpacity>
-                        <Image
-                            source={rightArrowIcon}
-                            style={styles.rightIcon}
-                        ></Image>
-                    </TouchableOpacity>
+                    <Text style={styles.numberOfOrderText}>0-ĐH</Text>
                 </View>
                 <View style={styles.appInforDetailWrapper}>
                     <Text style={styles.appInforDetail}>Đơn hàng đổi trả</Text>
-                    <TouchableOpacity>
-                        <Image
-                            source={rightArrowIcon}
-                            style={styles.rightIcon}
-                        ></Image>
-                    </TouchableOpacity>
+                    <Text style={styles.numberOfOrderText}>0-ĐH</Text>
                 </View>
                 <View style={styles.appInforDetailWrapper}>
                     <Text style={styles.appInforDetail}>Tiền trả</Text>
-                    <TouchableOpacity>
-                        <Image
-                            source={rightArrowIcon}
-                            style={styles.rightIcon}
-                        ></Image>
-                    </TouchableOpacity>
+                    <Text style={styles.numberOfOrderText}>0-ĐH</Text>
                 </View>
                 <View style={styles.appInforDetailWrapper}>
                     <Text style={styles.appInforDetail}>Yêu cầu đổi trả</Text>
-                    <TouchableOpacity>
-                        <Image
-                            source={rightArrowIcon}
-                            style={styles.rightIcon}
-                        ></Image>
-                    </TouchableOpacity>
+                    <Text style={styles.numberOfOrderText}>0-ĐH</Text>
                 </View>
             </View>
         );
@@ -184,6 +159,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingRight: 10
+    },
+    numberOfOrderText: {
+        color: '#ff7733'
     }
 });
 
