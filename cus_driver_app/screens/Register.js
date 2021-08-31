@@ -6,7 +6,7 @@ import {
     SafeAreaView,
     TouchableOpacity,
     Image,
-    TextInput
+    TextInput,
 } from 'react-native';
 import {
     HeaderBackIcon
@@ -16,6 +16,7 @@ import {
     backIcon,
     appFontSize
 } from '../contants';
+import RadioGroup from 'react-native-radio-buttons-group';
 
 class Register extends Component {
     constructor(props) {
@@ -84,6 +85,15 @@ class Register extends Component {
                         style={styles.textInput}
                         placeholder = 'Số tài khoản ngân hàng'
                     ></TextInput>
+                </View>
+                <View style={styles.confirmationWrapper}>
+                    <RadioGroup 
+                        radioButtons = {['1']}
+                        onPress = {(key) => {
+                            console.log(key[0])
+                        }}
+                    />
+                    <Text>Tôi đã đọc và đồng ý với điều khoản</Text>
                 </View>
             </View>
         );
@@ -156,6 +166,12 @@ const styles = StyleSheet.create({
     paymentInforWrapper: {
         marginTop: 20,
         marginLeft: 10
+    },
+    confirmationWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 5
     }
 });
 
