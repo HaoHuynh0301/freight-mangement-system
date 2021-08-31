@@ -3,11 +3,14 @@ import {
     View,
     Text,
     StyleSheet,
-    SafeAreaView
+    SafeAreaView,
+    TouchableOpacity,
+    Image
 } from 'react-native';
 import {
-    HeaderBackIcon
-} from '../contants';
+    HeaderBackIcon,
+    backIcon
+} from '../components';
 
 class AppInformation extends Component {
     constructor(props) {
@@ -23,17 +26,51 @@ class AppInformation extends Component {
         });
     }
 
+    renderHeader() {
+        return(
+            <View style={styles.container}>
+                <TouchableOpacity
+                    style = {styles.iconBackWrapper}
+                    onPress={() => this.props.navigation.goBack()}
+                >
+                    <Image
+                        source = {backIcon}
+                        resizeMode = 'contain'
+                        style = {styles.backIcon}
+                    ></Image>
+                </TouchableOpacity>
+                <Text style = {styles.nameWrapper}>{this.state.headerTitle}</Text>
+            </View>
+        );
+    }
+
     render() {
         return(
             <SafeAreaView>
-                <HeaderBackIcon title={this.state.headerTitle}/>
+                {this.renderHeader()}
             </SafeAreaView>
         );
     }
 }
 
 const styles = StyleSheet.create({
-
+    nameWrapper: {
+        left: 140,
+        fontSize: 22,
+        color: '#000'
+    },
+    backIcon: {
+        width: 25,
+        height: 25
+    },
+    container: {
+        height: 70,
+        // width: '100%',
+        flexDirection: 'row',
+        backgroundColor: '#ff7733',
+        // justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
 });
 
 export default AppInformation;

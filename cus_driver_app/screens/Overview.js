@@ -19,7 +19,7 @@ class OverView extends Component {
     }
 
     handleGetAppInformation(title) {
-        this.props.navigation.navigate('AppInformation', {
+        this.props.navigation.push('AppInformation', {
             title: title
         });
     }

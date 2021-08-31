@@ -3,7 +3,9 @@ import {
     Text,
     SafeAreaView,
     StyleSheet,
-    View
+    TouchableOpacity,
+    View,
+    Image
 } from 'react-native';
 import {
     headerFontSize,
@@ -32,7 +34,7 @@ class HeaderBackIcon extends Component {
                         style = {styles.backIcon}
                     ></Image>
                 </TouchableOpacity>
-                <Text style = {styles.nameWrapper}></Text>
+                <Text style = {styles.nameWrapper}>{this.props.title}</Text>
             </View>
         );
     }

@@ -6,7 +6,8 @@ import {
     View
 } from 'react-native';
 import {
-    headerFontSize
+    headerFontSize,
+    backIcon
 } from '../contants';
 
 class Header extends Component {
