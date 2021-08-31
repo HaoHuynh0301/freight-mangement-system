@@ -24,6 +24,10 @@ class User extends Component {
     }
 
     handleSignInPressed() {
+        this.setState({
+            username: '',
+            password: ''
+        })
         this.props.navigation.navigate('Register', {
 
         });
