@@ -26,7 +26,8 @@ import {
     ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import {
-    AppInformation
+    AppInformation,
+    Register
 } from './screens';
 import Tabs from './navigation/tab.js';
 const Stack = createNativeStackNavigator();
@@ -43,6 +44,11 @@ const App = () => {
                 <Stack.Screen
                     name = 'AppInformation'
                     component = {AppInformation}
+                    options={{header: () => null}}
+                ></Stack.Screen>
+                <Stack.Screen
+                    name = 'Register'
+                    component = {Register}
                     options={{header: () => null}}
                 ></Stack.Screen>
             </Stack.Navigator>

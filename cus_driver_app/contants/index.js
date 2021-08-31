@@ -8,6 +8,7 @@ const backIcon = require('../assets/back-icon.png');
 // Font size
 const headerFontSize = 20;
 const appFontSize = 16;
+const impText = 25;
 
 export {
     overViewIcon,
@@ -15,6 +16,7 @@ export {
     moneyIcon,
     headerFontSize,
     appFontSize,
+    impText,
     rightArrowIcon,
     orderIcon,
     backIcon
