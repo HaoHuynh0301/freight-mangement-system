@@ -95,6 +95,16 @@ class Register extends Component {
                     />
                     <Text>Tôi đã đọc và đồng ý với điều khoản</Text>
                 </View>
+                <View style={{alignItems: 'center'}}>
+                    <TouchableOpacity 
+                        style = {styles.buttonRegister}
+                        onPress = {() => {
+                            console.log('ok');
+                        }}
+                    >
+                        <Text style = {{fontSize: 20, fontWeight: 'bold'}}>Sign in</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
@@ -172,7 +182,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 5
-    }
+    },
+    buttonRegister: {
+        backgroundColor: '#ff7733',
+        width: 350,
+        height: 40,
+        marginTop: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
 });
 
 export default Register;
