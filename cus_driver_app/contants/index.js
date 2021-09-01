@@ -9,6 +9,8 @@ const homeIcon = require('../assets/home-icon.png');
 const messageIcon = require('../assets/message-icon.png');
 const callIcon = require('../assets/call-icon.png');
 const cartIcon = require('../assets/card-icon.png');
+const bankIcon = require('../assets/bank-icon.png');
+const locationIcon = require('../assets/location-icon.png');
 
 // Font size
 const headerFontSize = 22;
@@ -29,5 +31,7 @@ export {
     orderIcon,
     backIcon,
     settingIcon,
-    cartIcon
+    cartIcon,
+    bankIcon,
+    locationIcon
 }

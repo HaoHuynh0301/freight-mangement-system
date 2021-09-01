@@ -18,7 +18,10 @@ import {
     homeIcon,
     messageIcon,
     callIcon,
-    cartIcon
+    cartIcon,
+    bankIcon,
+    locationIcon,
+    moneyIcon
 } from '../contants';
 import {
     Header
@@ -85,11 +88,17 @@ class User extends Component {
                         backgroundColor: '#E0E0E0',
                         height: 40,
                         width: 380,
-                        justifyContent: 'center',
-                        paddingLeft: 10
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                        flexDirection: 'row'
                         // borderRadius: 10
                     }}>
                         <Text style = {{fontSize: 17}}>Thông tin cơ bản</Text>
+                        <TouchableOpacity>
+                            <Text style = {{fontSize: 17, color: '#ff7733'}}>Sửa</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.basicInforDetail}>
                         <Image
@@ -117,6 +126,84 @@ class User extends Component {
                             source = {cartIcon}
                             style={styles.basicInforImage}
                         ></Image>
+                    </View>
+                </View>
+
+                <View style={styles.bankingInforWrapper}>
+                    <View style = {{
+                        backgroundColor: '#E0E0E0',
+                        height: 40,
+                        width: 380,
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                        flexDirection: 'row'
+                        // borderRadius: 10
+                    }}>
+                        <Text style = {{fontSize: 17}}>Thông tin ngân hàng, đối soát</Text>
+                        <TouchableOpacity>
+                            <Text style = {{fontSize: 17, color: '#ff7733'}}>Sửa</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.basicInforDetail}>
+                        <Image
+                            source = {homeIcon}
+                            style={styles.basicInforImage}
+                        ></Image>
+                        <Text style={styles.basicInforText}>HUYNH QUAN NHAT HAO</Text>
+                    </View>
+                    <View style={styles.basicInforDetail}>
+                        <Image
+                            source = {cartIcon}
+                            style={styles.basicInforImage}
+                        ></Image>
+                        <Text style={styles.basicInforText}>070110470515</Text>
+                    </View>
+                    <View style={styles.basicInforDetail}>
+                        <Image
+                            source = {bankIcon}
+                            style={styles.basicInforImage}
+                        ></Image>
+                        <Text style={styles.basicInforText}>STB - NGAN HANG TMCP</Text>
+                    </View>
+                    <View style={styles.basicInforDetail}>
+                        <Image
+                            source = {locationIcon}
+                            style={styles.basicInforImage}
+                        ></Image>
+                        <Text style={styles.basicInforText}>SACOMBANK CAN THO</Text>
+                    </View>
+                    <View style={styles.basicInforDetail}>
+                        <Image
+                            source = {moneyIcon}
+                            style={styles.basicInforImage}
+                        ></Image>
+                        <Text style={styles.basicInforText}>Đối soát 3 lần/tuần 2/4/6</Text>
+                    </View>
+                </View>
+                <View style={styles.locationInforWrapper}>
+                    <View style = {{
+                        backgroundColor: '#E0E0E0',
+                        height: 40,
+                        width: 380,
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                        flexDirection: 'row'
+                        // borderRadius: 10
+                    }}>
+                        <Text style = {{fontSize: 17}}>Địa chỉ, thông tin lấy hàng</Text>
+                        <TouchableOpacity>
+                            <Text style = {{fontSize: 17, color: '#ff7733'}}>Sửa</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.basicInforDetail}>
+                        <Text style={styles.basicInforText}>Hào / 0932843656</Text>
+                    </View>
+                    <View style={styles.basicInforDetail}>
+                        <Text style={styles.basicInforText}>Số 59/31</Text>
                     </View>
                 </View>
             </ScrollView>
@@ -275,7 +362,9 @@ const styles = StyleSheet.create({
         height: 50,
         flexDirection: 'row',
         paddingLeft: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        borderBottomWidth: 0.5,
+
     },
     basicInforImage: {
         height: 30,
@@ -284,6 +373,26 @@ const styles = StyleSheet.create({
     basicInforText: {
         fontSize: 17,
         marginLeft: 10
+    },
+    bankingInforWrapper: {
+        height: 290,
+        flexDirection: 'column',
+        // alignItems: 'center',
+        width: '92%',
+        backgroundColor: '#FFF',
+        alignSelf: 'center',
+        marginTop: 20,
+        borderRadius: 10
+    },
+    locationInforWrapper: {
+        height: 140,
+        flexDirection: 'column',
+        // alignItems: 'center',
+        width: '92%',
+        backgroundColor: '#FFF',
+        alignSelf: 'center',
+        marginTop: 20,
+        borderRadius: 10
     }
 });
 
