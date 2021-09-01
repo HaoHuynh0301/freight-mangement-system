@@ -14,7 +14,11 @@ import {
     appFontSize,
     headerFontSize,
     settingIcon,
-    accountIcon
+    accountIcon,
+    homeIcon,
+    messageIcon,
+    callIcon,
+    cartIcon
 } from '../contants';
 import {
     Header
@@ -74,6 +78,45 @@ class User extends Component {
                     }}>
                         <Text style = {styles.norText}>IHT</Text>
                         <Text style = {styles.norText}>S321312</Text>
+                    </View>
+                </View>
+                <View style={styles.basicInformationWrapper}>
+                    <View style = {{
+                        backgroundColor: '#E0E0E0',
+                        height: 40,
+                        width: 380,
+                        justifyContent: 'center',
+                        paddingLeft: 10
+                        // borderRadius: 10
+                    }}>
+                        <Text style = {{fontSize: 17}}>Thông tin cơ bản</Text>
+                    </View>
+                    <View style={styles.basicInforDetail}>
+                        <Image
+                            source = {homeIcon}
+                            style={styles.basicInforImage}
+                        ></Image>
+                        <Text style={styles.basicInforText}>ITH</Text>
+                    </View>
+                    <View style={styles.basicInforDetail}>
+                        <Image
+                            source = {callIcon}
+                            style={styles.basicInforImage}
+                        ></Image>
+                        <Text style={styles.basicInforText}>0932843656</Text>
+                    </View>
+                    <View style={styles.basicInforDetail}>
+                        <Image
+                            source = {messageIcon}
+                            style={styles.basicInforImage}
+                        ></Image>
+                        <Text style={styles.basicInforText}>hao152903@gmail.com</Text>
+                    </View>
+                    <View style={styles.basicInforDetail}>
+                        <Image
+                            source = {cartIcon}
+                            style={styles.basicInforImage}
+                        ></Image>
                     </View>
                 </View>
             </ScrollView>
@@ -146,7 +189,7 @@ class User extends Component {
 
     render() {
         return(
-            <SafeAreaView style = {{backgroundColor: '#FFF', flex: 1}}>
+            <SafeAreaView>
                 {this.renderMainView()}
             </SafeAreaView>
         );
@@ -216,6 +259,31 @@ const styles = StyleSheet.create({
     settingIcon: {
         height: 30,
         width: 30
+    },
+    basicInformationWrapper: {
+        height: 240,
+        width: '92%',
+        backgroundColor: '#FFF',
+        flexDirection: 'column',
+        alignSelf: 'center',
+        borderRadius: 10,
+        marginTop: 20,
+        // paddingLeft: 10,
+        // paddingRight: 10
+    },
+    basicInforDetail: {
+        height: 50,
+        flexDirection: 'row',
+        paddingLeft: 10,
+        alignItems: 'center'
+    },
+    basicInforImage: {
+        height: 30,
+        width: 30
+    },
+    basicInforText: {
+        fontSize: 17,
+        marginLeft: 10
     }
 });
 
