@@ -11,6 +11,7 @@ const callIcon = require('../assets/call-icon.png');
 const cartIcon = require('../assets/card-icon.png');
 const bankIcon = require('../assets/bank-icon.png');
 const locationIcon = require('../assets/location-icon.png');
+const keyIcon = require('../assets/key-icon.png');
 
 // Font size
 const headerFontSize = 22;
@@ -18,6 +19,7 @@ const appFontSize = 18;
 const impText = 27;
 
 export {
+    keyIcon,
     homeIcon,
     messageIcon,
     callIcon,

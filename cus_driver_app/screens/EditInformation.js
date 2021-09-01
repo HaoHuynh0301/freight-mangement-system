@@ -7,18 +7,33 @@ import {
     TouchableOpacity,
     View,
     Image,
-    ScrollView
+    ScrollView,
+    TextInput
 } from 'react-native';
 import {
     headerFontSize,
+    backIcon,
     bankIcon,
     homeIcon,
-    cartIcon
+    cartIcon,
+    locationIcon,
+    moneyIcon,
+    accountIcon,
+    messageIcon,
+    callIcon,
+    keyIcon,
+    appFontSize
 } from '../contants';
 
 class EditInformation extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            shopName: '',
+            phoneNumber: '',
+            email: '',
+            password: ''
+        }
     }
 
     renderHeader() {
@@ -42,63 +57,93 @@ class EditInformation extends Component {
     }
 
     renderEditInformationView() {
-        <ScrollView>
-            <View style={styles.bankingInforWrapper}>
-                <View style = {{
-                    backgroundColor: '#E0E0E0',
-                    height: 40,
-                    width: 380,
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    paddingLeft: 10,
-                    paddingRight: 10,
-                    flexDirection: 'row'
-                    // borderRadius: 10
-                }}>
-                    <Text style = {{fontSize: 17}}>Thông tin ngân hàng, đối soát</Text>
-                    <TouchableOpacity
-                        
-                    >
-                        <Text style = {{fontSize: 17, color: '#ff7733'}}>Sửa</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.basicInforDetail}>
-                    <Image
-                        source = {homeIcon}
-                        style={styles.basicInforImage}
-                    ></Image>
-                    <Text style={styles.basicInforText}>HUYNH QUAN NHAT HAO</Text>
-                </View>
-                <View style={styles.basicInforDetail}>
-                    <Image
-                        source = {cartIcon}
-                        style={styles.basicInforImage}
-                    ></Image>
-                    <Text style={styles.basicInforText}>070110470515</Text>
-                </View>
-                <View style={styles.basicInforDetail}>
-                    <Image
-                        source = {bankIcon}
-                        style={styles.basicInforImage}
-                    ></Image>
-                    <Text style={styles.basicInforText}>STB - NGAN HANG TMCP</Text>
-                </View>
-                <View style={styles.basicInforDetail}>
-                    <Image
-                        source = {locationIcon}
-                        style={styles.basicInforImage}
-                    ></Image>
-                    <Text style={styles.basicInforText}>SACOMBANK CAN THO</Text>
-                </View>
-                <View style={styles.basicInforDetail}>
-                    <Image
-                        source = {moneyIcon}
-                        style={styles.basicInforImage}
-                    ></Image>
-                    <Text style={styles.basicInforText}>Đối soát 3 lần/tuần 2/4/6</Text>
-                </View>
-                </View>
-        </ScrollView>
+        return(
+            <ScrollView>
+                <View style={styles.bankingInforWrapper}>
+                    <View style = {{
+                        backgroundColor: '#E0E0E0',
+                        height: 40,
+                        width: 380,
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                        flexDirection: 'row'
+                        // borderRadius: 10
+                    }}>
+                        <Text style = {{fontSize: 17}}>Thông tin cơ bản</Text>
+                    </View>
+                        <View style={styles.basicInforDetail}>
+                            <Image
+                                source = {accountIcon}
+                                style={styles.basicInforImage}
+                            ></Image>
+                            <TextInput
+                                onChangeText = {(text) => {
+                                    this.setState({
+                                        shopName: text
+                                    });
+                                }}
+                                value = {this.state.shopName}
+                                placeholder = 'ITH'
+                                style={styles.inputText}
+                            ></TextInput>
+                        </View>
+                        <View style={styles.basicInforDetail}>
+                            <Image
+                                source = {callIcon}
+                                style={styles.basicInforImage}
+                            ></Image>
+                            <TextInput
+                                onChangeText = {(text) => {
+                                    this.setState({
+                                        phoneNumber: text
+                                    });
+                                }}
+                                value = {this.state.phoneNumber}
+                                placeholder = '0932843656'
+                                style={styles.inputText}
+                            ></TextInput>
+                        </View>
+                        <View style={styles.basicInforDetail}>
+                            <Image
+                                source = {messageIcon}
+                                style={styles.basicInforImage}
+                            ></Image>
+                            <TextInput
+                                onChangeText = {(text) => {
+                                    this.setState({
+                                        email: text
+                                    });
+                                }}
+                                value = {this.state.email}
+                                placeholder = 'hao152903@gmail.com'
+                                style={styles.inputText}
+                            ></TextInput>
+                        </View>
+                        <View style={styles.basicInforDetail}>
+                            <Image
+                                source = {keyIcon}
+                                style={styles.basicInforImage}
+                            ></Image>
+                            <TextInput
+                                onChangeText = {(text) => {
+                                    this.setState({
+                                        password: text
+                                    });
+                                }}
+                                placeholder = 'Mật khẩu'
+                                style={styles.inputText}
+                                secureTextEntry = {true}
+                            ></TextInput>
+                        </View>
+                    </View>
+            </ScrollView>
+        );
+    }
+
+    renderMainEditInformation() {
+
     }
 
     render() {
@@ -141,7 +186,7 @@ const styles = StyleSheet.create({
         height: 25
     },
     bankingInforWrapper: {
-        height: 290,
+        height: 240,
         flexDirection: 'column',
         // alignItems: 'center',
         width: '92%',
@@ -165,6 +210,10 @@ const styles = StyleSheet.create({
         fontSize: 17,
         marginLeft: 10
     },
+    inputText: {
+        marginLeft: 10,
+        fontSize: appFontSize
+    }
 });
 
 export default EditInformation;
