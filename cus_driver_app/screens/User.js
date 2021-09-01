@@ -6,11 +6,15 @@ import {
     SafeAreaView,
     TextInput,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    Image
 } from "react-native";
 import {
     impText,
-    appFontSize
+    appFontSize,
+    headerFontSize,
+    settingIcon,
+    accountIcon
 } from '../contants';
 import {
     Header
@@ -43,9 +47,38 @@ class User extends Component {
     }
 
     renderUserPage() {
-        <ScrollView style={styles.scrollView}>
-            <Header />
-        </ScrollView>
+        return(
+            <ScrollView style={styles.scrollView}>
+                <View style={styles.container}>
+                    <Text style={styles.userInformationText}>Tài khoản</Text>
+                    <TouchableOpacity>
+                        <Image
+                            source = {settingIcon}
+                            style={styles.settingIcon}
+                        ></Image>
+                    </TouchableOpacity>
+                </View>
+                <View style = {{
+                    marginTop: 20,
+                    paddingLeft: 10,
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center'
+                }}>
+                    <Image
+                        source = {accountIcon}
+                        style = {{height: 60, width: 60}}
+                    ></Image>
+                    <View style = {{
+                        marginLeft: 15,
+                    }}>
+                        <Text style = {styles.norText}>IHT</Text>
+                        <Text style = {styles.norText}>S321312</Text>
+                    </View>
+                </View>
+            </ScrollView>
+        );
+        
     }
 
     renderSignInPage() {
@@ -113,7 +146,7 @@ class User extends Component {
 
     render() {
         return(
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style = {{backgroundColor: '#FFF', flex: 1}}>
                 {this.renderMainView()}
             </SafeAreaView>
         );
@@ -121,9 +154,6 @@ class User extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
     scrollView: {
         
     },
@@ -167,6 +197,26 @@ const styles = StyleSheet.create({
     registerText: {
         fontSize: 15
     },
+    container: {
+        height: 70,
+        width: '100%',
+        flexDirection: 'row',
+        backgroundColor: '#FFF',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderWidth: 0.5,
+        paddingLeft: 10,
+        paddingRight: 10
+    },
+    userInformationText: {
+        fontSize: headerFontSize,
+        fontWeight: 'bold',
+        marginLeft: 10
+    },
+    settingIcon: {
+        height: 30,
+        width: 30
+    }
 });
 
 export default User;

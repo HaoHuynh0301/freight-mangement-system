@@ -4,11 +4,12 @@ const moneyIcon = require('../assets/money-icon.png');
 const orderIcon = require('../assets/order-icon.png');
 const rightArrowIcon = require('../assets/right-arrrow-icon.png');
 const backIcon = require('../assets/back-icon.png');
+const settingIcon = require('../assets/setting-icon.png');
 
 // Font size
-const headerFontSize = 20;
-const appFontSize = 16;
-const impText = 25;
+const headerFontSize = 22;
+const appFontSize = 18;
+const impText = 27;
 
 export {
     overViewIcon,
@@ -19,5 +20,6 @@ export {
     impText,
     rightArrowIcon,
     orderIcon,
-    backIcon
+    backIcon,
+    settingIcon
 }
