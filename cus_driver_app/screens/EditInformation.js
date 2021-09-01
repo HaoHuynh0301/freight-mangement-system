@@ -36,6 +36,10 @@ class EditInformation extends Component {
         }
     }
 
+    saveButtonPressed() {
+        console.log('Save');
+    }
+
     renderHeader() {
         return(
             <View style={styles.container}>
@@ -138,6 +142,24 @@ class EditInformation extends Component {
                             ></TextInput>
                         </View>
                     </View>
+                    <TouchableOpacity
+                        style={{
+                            width: '92%',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            alignSelf: 'center',
+                            height: 40,
+                            backgroundColor: '#ff7733',
+                            marginTop: 10,
+                            borderRadius: 10
+                        }}
+                        onPress = {() => {
+                            this.saveButtonPressed()
+                        }}
+                    >
+                        <Text>Lưu</Text>
+                    </TouchableOpacity>
             </ScrollView>
         );
     }

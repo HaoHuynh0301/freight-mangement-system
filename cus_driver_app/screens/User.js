@@ -102,7 +102,7 @@ class User extends Component {
                         <Text style = {{fontSize: 17}}>Thông tin cơ bản</Text>
                         <TouchableOpacity
                              onPress = {() => {
-                                this.editButtonPressed('Thông tin cơ bản')
+                                this.editButtonPressed('Sửa thông tin cơ bản')
                             }}
                         >
                             <Text style = {{fontSize: 17, color: '#ff7733'}}>Sửa</Text>
@@ -152,7 +152,7 @@ class User extends Component {
                         <Text style = {{fontSize: 17}}>Thông tin ngân hàng, đối soát</Text>
                         <TouchableOpacity
                             onPress = {() => {
-                                this.editButtonPressed('Ngân hàng')
+                                this.editButtonPressed('Sửa thông tin ngân hàng')
                             }}
                         >
                             <Text style = {{fontSize: 17, color: '#ff7733'}}>Sửa</Text>
@@ -209,7 +209,7 @@ class User extends Component {
                         <Text style = {{fontSize: 17}}>Địa chỉ, thông tin lấy hàng</Text>
                         <TouchableOpacity
                              onPress = {() => {
-                                this.editButtonPressed('Địa chỉ')
+                                this.editButtonPressed('Sửa địa chỉ')
                             }}
                         >
                             <Text style = {{fontSize: 17, color: '#ff7733'}}>Sửa</Text>
@@ -396,7 +396,6 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         alignItems: 'center',
         borderBottomWidth: 0.5,
-
     },
     basicInforImage: {
         height: 30,
