@@ -90,12 +90,12 @@ class Register extends Component {
                     ></TextInput>
                 </View>
                 <View style={styles.confirmationWrapper}>
-                    <RadioGroup 
+                    {/* <RadioGroup 
                         radioButtons = {['1']}
                         onPress = {(key) => {
                             console.log(key[0])
                         }}
-                    />
+                    /> */}
                     <Text>Tôi đã đọc và đồng ý với điều khoản</Text>
                 </View>
                 <View style={{alignItems: 'center'}}>

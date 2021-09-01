@@ -53,17 +53,21 @@ class User extends Component {
         });
     }
 
+    signOutButtonPressed() {
+        console.log('Sign out');
+    }
+
+    editButtonPressed(status) {
+        this.props.navigation.navigate('EditInformation', {
+            status: status
+        });
+    }
+
     renderUserPage() {
         return(
             <ScrollView style={styles.scrollView}>
                 <View style={styles.container}>
                     <Text style={styles.userInformationText}>Tài khoản</Text>
-                    <TouchableOpacity>
-                        <Image
-                            source = {settingIcon}
-                            style={styles.settingIcon}
-                        ></Image>
-                    </TouchableOpacity>
                 </View>
                 <View style = {{
                     marginTop: 20,
@@ -96,7 +100,11 @@ class User extends Component {
                         // borderRadius: 10
                     }}>
                         <Text style = {{fontSize: 17}}>Thông tin cơ bản</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                             onPress = {() => {
+                                this.editButtonPressed('Thông tin cơ bản')
+                            }}
+                        >
                             <Text style = {{fontSize: 17, color: '#ff7733'}}>Sửa</Text>
                         </TouchableOpacity>
                     </View>
@@ -142,7 +150,11 @@ class User extends Component {
                         // borderRadius: 10
                     }}>
                         <Text style = {{fontSize: 17}}>Thông tin ngân hàng, đối soát</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress = {() => {
+                                this.editButtonPressed('Ngân hàng')
+                            }}
+                        >
                             <Text style = {{fontSize: 17, color: '#ff7733'}}>Sửa</Text>
                         </TouchableOpacity>
                     </View>
@@ -195,7 +207,11 @@ class User extends Component {
                         // borderRadius: 10
                     }}>
                         <Text style = {{fontSize: 17}}>Địa chỉ, thông tin lấy hàng</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                             onPress = {() => {
+                                this.editButtonPressed('Địa chỉ')
+                            }}
+                        >
                             <Text style = {{fontSize: 17, color: '#ff7733'}}>Sửa</Text>
                         </TouchableOpacity>
                     </View>
@@ -205,6 +221,22 @@ class User extends Component {
                     <View style={styles.basicInforDetail}>
                         <Text style={styles.basicInforText}>Số 59/31</Text>
                     </View>
+                </View>
+                <View style= {{
+                    alignItems: 'center',
+                    marginTop: 20,
+                    marginBottom: 20
+                }}>
+                    <TouchableOpacity
+                        onPress = {() => {
+                            this.signOutButtonPressed()
+                        }}
+                    >
+                        <Text style={{
+                            fontSize: 17,
+                            fontStyle: 'italic'
+                        }}>Đăng xuất</Text>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         );

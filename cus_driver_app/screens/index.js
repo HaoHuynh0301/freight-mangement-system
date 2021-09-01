@@ -4,6 +4,7 @@ import OverView from "./Overview";
 import User from "./User";
 import AppInformation from "./AppInformation";
 import Register from "./Register";
+import EditInformation from "./EditInformation";
 
 export {
     MonenyFlow,
@@ -11,5 +12,6 @@ export {
     OverView,
     User,
     AppInformation,
-    Register
+    Register,
+    EditInformation
 }
