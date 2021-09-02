@@ -24,6 +24,7 @@ import {
     keyIcon,
     appFontSize
 } from '../contants';
+const axios = require('axios');
 
 class EditInformation extends Component {
     constructor(props) {
@@ -34,6 +35,20 @@ class EditInformation extends Component {
             email: '',
             password: ''
         }
+    }
+
+    getListOfBankds() {
+        axios.get(`https://api.vietqr.io/v1/banks`)
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    componentDidMount() {
+        this.getListOfBankds();
     }
 
     saveButtonPressed() {
@@ -161,6 +176,14 @@ class EditInformation extends Component {
                         <Text style={{fontSize: appFontSize}}>Lưu</Text>
                     </TouchableOpacity>
             </ScrollView>
+        );
+    }
+
+    renderEditBakingInformationView() {
+        return(
+            <View>
+
+            </View>
         );
     }
 
