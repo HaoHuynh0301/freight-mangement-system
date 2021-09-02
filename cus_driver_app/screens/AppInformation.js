@@ -11,7 +11,8 @@ import {
     headerFontSize,
     backIcon,
     appFontSize,
-    newIcon
+    newIcon,
+    greyColor
 } from '../contants';
 
 
@@ -61,8 +62,10 @@ class AppInformation extends Component {
 
     renderQuestions() {
         return(
-            <View>
-                <Text>Question</Text>
+            <View style={styles.questionsWrapper}>
+                <View style={styles.questionTitleWrapper}>
+                    <Text style={styles.questionTitleText}>Những câu hỏi thường gặp</Text>
+                </View>
             </View>
         );
     }
@@ -149,7 +152,9 @@ const styles = StyleSheet.create({
     },
     dieuKhoanWrapper: {
         flexDirection: 'column',
-        marginTop: 10
+        marginTop: 10,
+        paddingLeft: 10,
+        paddingRight: 10
     },
     textInformation: {
         fontSize: appFontSize
@@ -173,6 +178,25 @@ const styles = StyleSheet.create({
     newTitle: {
         fontSize: appFontSize,
         color: '#ff7733'
+    },
+    questionsWrapper: {
+        flexDirection: 'column',
+        width: '92%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center'
+    },
+    questionTitleWrapper: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: greyColor,
+        height: 50,
+        width: '100%'
+    },
+    questionTitleText: {
+        fontSize: appFontSize,
+
     }
 });
 

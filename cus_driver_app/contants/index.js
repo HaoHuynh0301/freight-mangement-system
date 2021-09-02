@@ -19,6 +19,9 @@ const headerFontSize = 22;
 const appFontSize = 18;
 const impText = 27;
 
+// Color
+const greyColor = '#DCDCDC';
+
 export {
     keyIcon,
     homeIcon,
@@ -37,5 +40,6 @@ export {
     cartIcon,
     bankIcon,
     locationIcon,
-    newIcon
+    newIcon,
+    greyColor
 }
