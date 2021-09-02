@@ -12,6 +12,7 @@ const cartIcon = require('../assets/card-icon.png');
 const bankIcon = require('../assets/bank-icon.png');
 const locationIcon = require('../assets/location-icon.png');
 const keyIcon = require('../assets/key-icon.png');
+const newIcon = require('../assets/new-icon.png');
 
 // Font size
 const headerFontSize = 22;
@@ -35,5 +36,6 @@ export {
     settingIcon,
     cartIcon,
     bankIcon,
-    locationIcon
+    locationIcon,
+    newIcon
 }

@@ -8,12 +8,10 @@ import {
     Image
 } from 'react-native';
 import {
-    HeaderBackIcon,
-} from '../components';
-import {
     headerFontSize,
     backIcon,
-    appFontSize
+    appFontSize,
+    newIcon
 } from '../contants';
 
 
@@ -69,6 +67,29 @@ class AppInformation extends Component {
         );
     }
 
+    renderNews() {
+        return(
+            <View
+                style={{
+                    flexDirection: 'column',
+                    marginTop: 10,
+                    alignItems: 'center'
+                }}
+            >
+                <View style={styles.newsDetailWrapper}>
+                    <View style={styles.newTitleWrapper}>
+                        <Image
+                            source = {newIcon}
+                            style={styles.newIcon}
+                        ></Image>
+                        <Text style={styles.newTitle}>THÔNG BÁO ĐANG LÀM ĐỀ TÀI</Text>
+                    </View>
+                    <Text style={styles.textInformation}>Huỳnh Quan Nhật Hào</Text>
+                </View>
+            </View>
+        );
+    }
+
     renderMainView() {
         const title = this.props.route.params.title;
         console.log(title);
@@ -82,6 +103,9 @@ class AppInformation extends Component {
                 this.renderQuestions()
             );
         }
+        return(
+            this.renderNews()
+        );
     }
 
     render() {
@@ -125,12 +149,30 @@ const styles = StyleSheet.create({
     },
     dieuKhoanWrapper: {
         flexDirection: 'column',
-        paddingLeft: 10,
-        paddingRight: 10,
         marginTop: 10
     },
     textInformation: {
         fontSize: appFontSize
+    },
+    newsDetailWrapper: {
+        flexDirection: 'column',
+        paddingLeft: 10,
+        paddingRight: 10,
+        backgroundColor: '#FFF',
+        width: '92%',
+        borderRadius: 10
+    },
+    newTitleWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    newIcon: {
+        width: 40,
+        height: 40
+    },
+    newTitle: {
+        fontSize: appFontSize,
+        color: '#ff7733'
     }
 });
 
