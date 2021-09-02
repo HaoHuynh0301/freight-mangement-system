@@ -158,7 +158,7 @@ class EditInformation extends Component {
                             this.saveButtonPressed()
                         }}
                     >
-                        <Text>Lưu</Text>
+                        <Text style={{fontSize: appFontSize}}>Lưu</Text>
                     </TouchableOpacity>
             </ScrollView>
         );
