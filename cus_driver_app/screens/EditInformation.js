@@ -92,6 +92,10 @@ class EditInformation extends Component {
         console.log('Save');
     }
 
+    bankingSaveButtonPressed() {
+        console.log('Bank save');
+    }
+
     renderHeader() {
         return(
             <View style={styles.container}>
@@ -297,12 +301,11 @@ class EditInformation extends Component {
                         }}>
                             <Picker
                                 style = {styles.banksPicker}
-                                selectedValue = {this.state.bankSelectedValue}
+                                selectedValue = {this.state.provinceSelectedValue}
                                 onValueChange = {(itemValue, itemIndex) => {
                                     console.log(itemValue)
                                     this.setState({
-                                        bankSelectedValue: itemValue,
-                                        bankSelectedIndex: itemIndex
+                                        provinceSelectedValue: itemValue,
                                     });
                                 }}
                             >
@@ -328,7 +331,7 @@ class EditInformation extends Component {
                         borderRadius: 10
                     }}
                     onPress = {() => {
-                        this.saveButtonPressed()
+                        this.bankingSaveButtonPressed()
                     }}
                 >
                     <Text style={{fontSize: appFontSize}}>Lưu</Text>
