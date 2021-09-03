@@ -8,8 +8,9 @@ import {
     View,
     Image,
     ScrollView,
-    TextInput
+    TextInput,
 } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import {
     headerFontSize,
     backIcon,
@@ -33,14 +34,25 @@ class EditInformation extends Component {
             shopName: '',
             phoneNumber: '',
             email: '',
-            password: ''
+            password: '',
+            banks: [],
+            accountName: '',
+            stk: '',
+            bankName: '',
+            bankLocation: '',
+            bankSelectedValue: '',
+            bankSelectedIndex: ''
         }
     }
 
     getListOfBankds() {
-        axios.get(`https://api.vietqr.io/v1/banks`)
+        axios.get(`https://api.vietqr.io/v1/banks/`)
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
+                this.setState({
+                    banks: response.data
+                });
+                console.log(this.state.banks);
             })
             .catch((error) => {
                 console.log(error);
@@ -181,21 +193,96 @@ class EditInformation extends Component {
 
     renderEditBakingInformationView() {
         return(
-            <View>
+            <ScrollView>
+                <View style={styles.bankingEditInforWrapper}>
+                    <View style = {{
+                        backgroundColor: '#E0E0E0',
+                        height: 40,
+                        width: 380,
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                        flexDirection: 'row'
+                        // borderRadius: 10
+                    }}>
+                        <Text style = {{fontSize: 17}}>Sửa thông tin ngân hàng, đối soát</Text>
+                    </View>
+                    <View style={styles.editBakingDetailWrapper}>
+                        <Text style = {{fontSize: 17}}>Chủ tài khoản</Text>
+                        <TextInput
+                            onChangeText = {(text) => {
+                                this.setState({
+                                    accountName: text
+                                });
+                            }}
+                            value = {this.state.accountName}
+                            placeholder = 'HUYNH QUAN NHAT HAO'
+                            style={styles.bankingEditInput}
+                        ></TextInput>
+                    </View>
+                    <View style={styles.editBakingDetailWrapper}>
+                        <Text style = {{fontSize: 17}}>Số tài khoản</Text>
+                        <TextInput
+                            onChangeText = {(text) => {
+                                this.setState({
+                                    stk: text
+                                });
+                            }}
+                            value = {this.state.stk}
+                            placeholder = '0701219318'
+                            style={styles.bankingEditInput}
+                        ></TextInput>
+                    </View>
+                    <View style={styles.editBakingDetailWrapper}>
+                        <Text style = {{fontSize: 17}}>Bấm để chọn ngân hàng</Text>
+                        <Picker
+                            selectedValue = {this.state.bankSelectedValue}
+                            onValueChange = {(itemValue, itemIndex) => {
+                                this.setState({
+                                    bankSelectedValue: itemValue,
+                                    bankSelectedIndex: itemIndex
+                                });
+                            }}
+                        >
+                            
+                        </Picker>
+                    </View>
+                </View>
+            </ScrollView>
+        );
+    }
 
+    renderLocationEditView() {
+        return(
+            <View>
+                <Text>Location</Text>
             </View>
         );
     }
 
     renderMainEditInformation() {
-
-    }
+        console.log(this.props.route.params.status);
+        const status = this.props.route.params.status;
+        if(status === 'Sửa thông tin cơ bản') {
+            return(
+                this.renderEditInformationView()
+            );
+        } else if(status === 'Sửa thông tin ngân hàng') {
+            return(
+                this.renderEditBakingInformationView()
+            );
+        }
+        return(
+            this.renderLocationEditView()
+        );
+    } 
 
     render() {
         return(
             <SafeAreaView>
                 {this.renderHeader()}
-                {this.renderEditInformationView()}
+                {this.renderMainEditInformation()}
             </SafeAreaView>
         );
     }
@@ -258,7 +345,33 @@ const styles = StyleSheet.create({
     inputText: {
         marginLeft: 10,
         fontSize: appFontSize
-    }
+    },
+    bankingEditInforWrapper: {
+        height: 320,
+        flexDirection: 'column',
+        // alignItems: 'center',
+        width: '92%',
+        backgroundColor: '#FFF',
+        alignSelf: 'center',
+        marginTop: 20,
+        borderRadius: 10,
+    },
+    editBakingDetailWrapper: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 10,
+    },
+    bankingEditInput: {
+        fontSize: 17,
+        borderWidth: 0.3,
+        borderRadius: 10,
+        marginTop: 5,
+        height: 40,
+        fontSize: 17
+    },
+    
 });
 
 export default EditInformation;
