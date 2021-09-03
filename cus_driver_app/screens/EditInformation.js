@@ -50,9 +50,8 @@ class EditInformation extends Component {
             .then((response) => {
                 // console.log(response.data);
                 this.setState({
-                    banks: response.data
+                    banks: response.data.data
                 });
-                console.log(this.state.banks);
             })
             .catch((error) => {
                 console.log(error);
@@ -239,13 +238,19 @@ class EditInformation extends Component {
                         <Picker
                             selectedValue = {this.state.bankSelectedValue}
                             onValueChange = {(itemValue, itemIndex) => {
+                                console.log(itemValue)
                                 this.setState({
                                     bankSelectedValue: itemValue,
                                     bankSelectedIndex: itemIndex
                                 });
+                                console.log(this.state.bankSelectedValue);
                             }}
                         >
-                            
+                            {this.state.banks.map((item) => {
+                                return(
+                                    <Picker.Item label = {item.name} value = {item.name} />
+                                );
+                            })}
                         </Picker>
                     </View>
                 </View>
