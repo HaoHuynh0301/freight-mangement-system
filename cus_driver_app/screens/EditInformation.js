@@ -23,7 +23,8 @@ import {
     messageIcon,
     callIcon,
     keyIcon,
-    appFontSize
+    appFontSize,
+    greyColor
 } from '../contants';
 const axios = require('axios');
 
@@ -31,17 +32,28 @@ class EditInformation extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            // User information
             shopName: '',
             phoneNumber: '',
             email: '',
             password: '',
+
+            // array got from API
             banks: [],
+            provinces: [],
+
+            // Banking information
             accountName: '',
             stk: '',
             bankName: '',
             bankLocation: '',
+
+            // Banking Picker
             bankSelectedValue: '',
-            bankSelectedIndex: ''
+            bankSelectedIndex: '',
+
+            // Provinces Pick
+            provinceSelectedValue: ''
         }
     }
 
@@ -58,8 +70,22 @@ class EditInformation extends Component {
             });
     }
 
+    getListOfProvinces() {
+        axios.get('https://provinces.open-api.vn/api/')
+            .then((response) => {
+                this.setState({
+                    provinces: response.data
+                });
+                // console.log(this.state.provinces);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
     componentDidMount() {
         this.getListOfBankds();
+        this.getListOfProvinces();
     }
 
     saveButtonPressed() {
@@ -235,25 +261,78 @@ class EditInformation extends Component {
                     </View>
                     <View style={styles.editBakingDetailWrapper}>
                         <Text style = {{fontSize: 17}}>Bấm để chọn ngân hàng</Text>
-                        <Picker
-                            selectedValue = {this.state.bankSelectedValue}
-                            onValueChange = {(itemValue, itemIndex) => {
-                                console.log(itemValue)
-                                this.setState({
-                                    bankSelectedValue: itemValue,
-                                    bankSelectedIndex: itemIndex
-                                });
-                                console.log(this.state.bankSelectedValue);
-                            }}
-                        >
-                            {this.state.banks.map((item) => {
-                                return(
-                                    <Picker.Item label = {item.name} value = {item.name} />
-                                );
-                            })}
-                        </Picker>
+                        <View style = {{
+                            borderWidth: 0.3,
+                            borderColor: greyColor,
+                            marginTop: 5,
+                            borderRadius: 10
+                        }}>
+                            <Picker
+                                style = {styles.banksPicker}
+                                selectedValue = {this.state.bankSelectedValue}
+                                onValueChange = {(itemValue, itemIndex) => {
+                                    console.log(itemValue)
+                                    this.setState({
+                                        bankSelectedValue: itemValue,
+                                        bankSelectedIndex: itemIndex
+                                    });
+                                    console.log(this.state.bankSelectedValue);
+                                }}
+                            >
+                                {this.state.banks.map((item) => {
+                                    return(
+                                        <Picker.Item label = {item.name} value = {item.name} />
+                                    );
+                                })}
+                            </Picker>
+                        </View>
+                    </View>
+                    <View style={styles.editBakingDetailWrapper}>
+                        <Text style = {{fontSize: 17}}>Bấm để chọn chi nhánh</Text>
+                        <View style = {{
+                            borderWidth: 0.3,
+                            borderColor: greyColor,
+                            marginTop: 5,
+                            borderRadius: 10
+                        }}>
+                            <Picker
+                                style = {styles.banksPicker}
+                                selectedValue = {this.state.bankSelectedValue}
+                                onValueChange = {(itemValue, itemIndex) => {
+                                    console.log(itemValue)
+                                    this.setState({
+                                        bankSelectedValue: itemValue,
+                                        bankSelectedIndex: itemIndex
+                                    });
+                                }}
+                            >
+                                {this.state.provinces.map((item) => {
+                                    return(
+                                        <Picker.Item label = {item.name} value = {item.name} />
+                                    );
+                                })}
+                            </Picker>
+                        </View>
                     </View>
                 </View>
+                <TouchableOpacity
+                    style={{
+                        width: '92%',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        height: 40,
+                        backgroundColor: '#ff7733',
+                        marginTop: 10,
+                        borderRadius: 10
+                    }}
+                    onPress = {() => {
+                        this.saveButtonPressed()
+                    }}
+                >
+                    <Text style={{fontSize: appFontSize}}>Lưu</Text>
+                </TouchableOpacity>
             </ScrollView>
         );
     }
@@ -352,7 +431,7 @@ const styles = StyleSheet.create({
         fontSize: appFontSize
     },
     bankingEditInforWrapper: {
-        height: 320,
+        height: 400,
         flexDirection: 'column',
         // alignItems: 'center',
         width: '92%',
@@ -374,9 +453,13 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginTop: 5,
         height: 40,
-        fontSize: 17
+        fontSize: 17,
+        paddingLeft: 10
     },
-    
+    banksPicker: {
+        borderWidth: 0.3,
+        borderColor: greyColor,
+    }
 });
 
 export default EditInformation;
