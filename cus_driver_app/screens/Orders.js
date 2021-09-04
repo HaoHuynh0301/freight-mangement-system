@@ -43,6 +43,10 @@ class Orders extends Component {
         );
     }
 
+    handleRefreshOrders() {
+        console.log('Refresh')
+    }
+
     renderMainView() {
         const renderItem = ({item}) => {
             return(
@@ -54,8 +58,17 @@ class Orders extends Component {
 
         const renderEmptyFavoriteProducts = () => {
             return(
-                <View>
-                    <Text>Empty</Text>
+                <View style={styles.emptyViewWrapper}>
+                    <Text style={styles.textSize}>Không tìm thấy đơn hàng</Text>
+                    <View style={styles.butonEmptyRefreshWrapper}>
+                        <TouchableOpacity 
+                            onPress = {() => {
+                                this.handleRefreshOrders();
+                            }}
+                        >
+                            <Text style={{alignSelf: 'center'}}>Bấm để thử lại</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             );
         }
@@ -89,7 +102,6 @@ class Orders extends Component {
                             <Text style={styles.textSize}>BBS</Text>
                         </TouchableOpacity>
                     </View>
-                    
                 </View>
                 <FlatList
                     data = {this.state.orders}
@@ -149,7 +161,15 @@ const styles = StyleSheet.create({
         width: 80,
         backgroundColor: orangeColor,
         marginLeft: 10,
-        borderRadius: 10
+        borderRadius: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     textSize: {
         fontSize: appFontSize
@@ -165,6 +185,23 @@ const styles = StyleSheet.create({
     plusIcon: {
         height: 40,
         width: 40
+    },
+    emptyViewWrapper: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        paddingTop: 100
+    },
+    butonEmptyRefreshWrapper: {
+        borderWidth: 1,
+        borderColor: greyColor,
+        height: 40,
+        width: 250,
+        marginTop: 10,
+        borderRadius: 10,
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'center'
     }
 });
 

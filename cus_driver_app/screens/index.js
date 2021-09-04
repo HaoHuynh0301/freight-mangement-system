@@ -5,6 +5,7 @@ import User from "./User";
 import AppInformation from "./AppInformation";
 import Register from "./Register";
 import EditInformation from "./EditInformation";
+import CreateOrder from './CreateOrder';
 
 export {
     MonenyFlow,
@@ -13,5 +14,6 @@ export {
     User,
     AppInformation,
     Register,
-    EditInformation
+    EditInformation,
+    CreateOrder
 }
