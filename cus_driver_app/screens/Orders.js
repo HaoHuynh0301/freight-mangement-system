@@ -4,11 +4,17 @@ import {
     Text,
     StyleSheet,
     SafeAreaView,
-    FlatList
+    FlatList,
+    TouchableOpacity,
+    Image
 } from "react-native";
 import {
     headerFontSize,
-    backIcon
+    backIcon,
+    orangeColor
+    ,greyColor,
+    appFontSize,
+    plusIcon,
 } from '../contants';
 
 class Orders extends Component {
@@ -16,14 +22,14 @@ class Orders extends Component {
         super(props);
         this.state = {
             orders: [
-                {
-                    name: 'One',
-                    id: 1
-                },
-                {
-                    name: 'Two',
-                    id: 2
-                }
+                // {
+                //     name: 'One',
+                //     id: 1
+                // },
+                // {
+                //     name: 'Two',
+                //     id: 2
+                // }
             ],
             selectedData: ''
         }
@@ -56,6 +62,35 @@ class Orders extends Component {
 
         return(
             <View>
+                <View style={styles.addNewOrderWrapper}>
+                    <View style={styles.sizeChooseWrapper}>
+                        <TouchableOpacity
+                            style={styles.chooseDetail}
+                            onPress = {() => {
+
+                            }}
+                        >
+                            <Text style={styles.textSize}>XFAST</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.chooseDetail}
+                            onPress = {() => {
+
+                            }}
+                        >
+                            <Text style={styles.textSize}>EXPRESS</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.chooseDetail}
+                            onPress = {() => {
+
+                            }}
+                        >
+                            <Text style={styles.textSize}>BBS</Text>
+                        </TouchableOpacity>
+                    </View>
+                    
+                </View>
                 <FlatList
                     data = {this.state.orders}
                     showsVerticalScrollIndicator = {false}
@@ -84,14 +119,52 @@ const styles = StyleSheet.create({
         height: 70,
         width: '100%',
         flexDirection: 'row',
-        backgroundColor: '#ff7733',
+        backgroundColor: '#FFF',
         justifyContent: 'flex-start',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderBottomWidth: 0.5,
+        borderBottomColor: greyColor
     },
     userInformationText: {
         fontSize: headerFontSize,
         fontWeight: 'bold',
         marginLeft: 10
+    },
+    addNewOrderWrapper: {
+        flexDirection: 'row',
+        // justifyContent: 'space-between'
+    },
+    sizeChooseWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        backgroundColor: '#FFF',
+        width: '100%',
+        height: 100
+    },
+    chooseDetail: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 80,
+        width: 80,
+        backgroundColor: orangeColor,
+        marginLeft: 10,
+        borderRadius: 10
+    },
+    textSize: {
+        fontSize: appFontSize
+    },
+    buttonAddNewOrder: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 40,
+        width: 40,
+        color: orangeColor
+    },
+    plusIcon: {
+        height: 40,
+        width: 40
     }
 });
 
