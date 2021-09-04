@@ -7,7 +7,7 @@ import {
     Image,
     StyleSheet,
     TextInput,
-    ScrollView
+    ScrollView,
 } from 'react-native';
 import {
     greyColor,
@@ -16,15 +16,40 @@ import {
     appFontSize,
     callIcon, 
     homeIcon,
-    accountIcon
+    accountIcon,
+    locationIcon
 } from '../contants';
+import {Picker} from '@react-native-picker/picker';
 
 class CreateOrder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            orderSize: this.props.route.params.status
+            orderSize: this.props.route.params.status,
+
+            //order size
+            orderSizeSelected: '',
+            orderSizes: [
+                {
+                    name: 'Giao hàng nhanh',
+                    id: 1
+                },
+                {
+                    name: 'Hàng vừa',
+                    id: 2
+                },
+                {
+                    name: 'Hàng lớn',
+                    id: 3
+                }
+            ]
         }
+    }
+
+    componentDidMount() {
+        // this.setState({
+        //     orderSizeSelected: this.props.route.params.status
+        // })
     }
 
     renderHeader() {
@@ -90,7 +115,14 @@ class CreateOrder extends Component {
                         </View>
                     </View>
                     <View style={styles.locationPickerWrapper}>
-
+                        <Image
+                            source = {locationIcon}
+                            style={styles.iconLocationInfor}
+                        ></Image>
+                    </View>
+                    <View style={styles.sizeChooseWrapper}>
+                        <Text style={styles.titleFontSize}>Lấy và giao tận nơi</Text>
+                        
                     </View>
                 </View>
             </ScrollView>
@@ -172,8 +204,19 @@ const styles = StyleSheet.create({
         fontSize: appFontSize
     },
     locationPickerWrapper: {
-        flexDirection: 'column',
-        alignItems: 'center'
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        marginTop: 10
+    },
+    sizeChooseWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20
+    },
+    orderSizePiker: {
+        borderWidth: 0.3,
+        borderColor: greyColor,
     }
 });
 
