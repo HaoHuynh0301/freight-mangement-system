@@ -14,6 +14,7 @@ const locationIcon = require('../assets/location-icon.png');
 const keyIcon = require('../assets/key-icon.png');
 const newIcon = require('../assets/new-icon.png');
 const plusIcon = require('../assets/plus-icon.png');
+const xIcon = require('../assets/x-icon.png');
 
 // Font size
 const headerFontSize = 22;
@@ -25,6 +26,7 @@ const greyColor = '#DCDCDC';
 const orangeColor = '#ff7733';
 
 export {
+    xIcon,
     keyIcon,
     homeIcon,
     messageIcon,

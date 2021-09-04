@@ -47,6 +47,12 @@ class Orders extends Component {
         console.log('Refresh')
     }
 
+    handleCreateOrderPressed(status) {
+        this.props.navigation.navigate('CreateOrder', {
+            status: status
+        });
+    }
+
     renderMainView() {
         const renderItem = ({item}) => {
             return(
@@ -80,26 +86,26 @@ class Orders extends Component {
                         <TouchableOpacity
                             style={styles.chooseDetail}
                             onPress = {() => {
-
+                                this.handleCreateOrderPressed(1)
                             }}
                         >
-                            <Text style={styles.textSize}>XFAST</Text>
+                            <Text style={{fontSize: 15}}>XFAST</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.chooseDetail}
                             onPress = {() => {
-
+                                this.handleCreateOrderPressed(2)
                             }}
                         >
-                            <Text style={styles.textSize}>EXPRESS</Text>
+                            <Text style={{fontSize: 15}}>EXPRESS</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.chooseDetail}
                             onPress = {() => {
-
+                                this.handleCreateOrderPressed(3)
                             }}
                         >
-                            <Text style={styles.textSize}>BBS</Text>
+                            <Text style={{fontSize: 15}}>BBS</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -128,7 +134,7 @@ class Orders extends Component {
 
 const styles = StyleSheet.create({
     headerContainer: {
-        height: 70,
+        height: 60,
         width: '100%',
         flexDirection: 'row',
         backgroundColor: '#FFF',
@@ -155,6 +161,7 @@ const styles = StyleSheet.create({
         height: 100
     },
     chooseDetail: {
+        fontSize: 15,
         justifyContent: 'center',
         alignItems: 'center',
         height: 80,
@@ -190,7 +197,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
-        paddingTop: 100
+        paddingTop: 130
     },
     butonEmptyRefreshWrapper: {
         borderWidth: 1,

@@ -28,7 +28,8 @@ import {
 import {
     AppInformation,
     Register,
-    EditInformation
+    EditInformation,
+    CreateOrder
 } from './screens';
 import Tabs from './navigation/tab.js';
 const Stack = createNativeStackNavigator();
@@ -55,6 +56,11 @@ const App = () => {
                 <Stack.Screen
                     name = 'EditInformation'
                     component = {EditInformation}
+                    options={{header: () => null}}
+                ></Stack.Screen>
+                <Stack.Screen
+                    name = 'CreateOrder'
+                    component = {CreateOrder}
                     options={{header: () => null}}
                 ></Stack.Screen>
             </Stack.Navigator>
