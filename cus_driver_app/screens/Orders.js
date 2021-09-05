@@ -15,7 +15,9 @@ import {
     ,greyColor,
     appFontSize,
     plusIcon,
-    deliveryIcon
+    deliveryIcon,
+    bycicleIcon,
+    rightArrowIcon
 } from '../contants';
 
 class Orders extends Component {
@@ -66,7 +68,7 @@ class Orders extends Component {
                 >
                     <View style={styles.productInformationDetailTitle}>
                         <Image
-                            source = {deliveryIcon}
+                            source = {bycicleIcon}
                             style = {styles.iconStyle}
                         ></Image>
                         <Text style={styles.appFontSize}>{item.id}</Text>
@@ -74,9 +76,21 @@ class Orders extends Component {
                             onPress = {() => {
                                 this.oppenOrderInformation(item.id)
                             }}
+                            style = {{
+                                paddingLeft: 190
+                            }}
                         >
-
+                            <Image
+                                source = {rightArrowIcon}
+                                style = {styles.rightArrowIconStyle}
+                            ></Image>
                         </TouchableOpacity>
+                    </View>
+                    <View style = {styles.productInformationDetail}>
+                        <Text>Tên: Huỳnh Quan Nhật Hào/ 0932843656</Text>
+                        <Text>Đại chỉ: Quản Trọng Hoàng, Hưng Lợi, Ninh Kiều, Cần Thơ</Text>
+                        <Text>Thu hộ: 200000 đ</Text>
+                        <Text>Ghi chú: Hàng dễ vỡ, vui lòng nhẹ tay</Text>
                     </View>
                 </View>
             );
@@ -233,11 +247,13 @@ const styles = StyleSheet.create({
     productInformationDetailWrapper: {
         width: '95%',
         backgroundColor: '#FFF',
-        marginTop: 5,
+        marginTop: 10,
         alignSelf: 'center',
         paddingLeft: 10,
         paddingRight: 10,
-        paddingTop: 5
+        paddingTop: 5,
+        paddingBottom: 10,
+        borderRadius: 8
     },
     productInformationDetailTitle: {
         flexDirection: 'row'
@@ -249,6 +265,13 @@ const styles = StyleSheet.create({
     },
     appFontSize: {
         fontSize: appFontSize
+    },
+    rightArrowIconStyle: {
+        height: 20,
+        width: 20,
+    },
+    productInformationDetail: {
+
     }
 });
 

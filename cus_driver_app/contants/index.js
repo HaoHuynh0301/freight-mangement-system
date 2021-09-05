@@ -16,6 +16,7 @@ const newIcon = require('../assets/new-icon.png');
 const plusIcon = require('../assets/plus-icon.png');
 const xIcon = require('../assets/x-icon.png');
 const deliveryIcon = require('../assets/delivery-icon.png');
+const bycicleIcon = require('../assets/bycicle-icon.png');
 
 // Font size
 const headerFontSize = 22;
@@ -27,6 +28,7 @@ const greyColor = '#DCDCDC';
 const orangeColor = '#ff7733';
 
 export {
+    bycicleIcon,
     deliveryIcon,
     xIcon,
     keyIcon,
