@@ -15,6 +15,7 @@ import {
     ,greyColor,
     appFontSize,
     plusIcon,
+    deliveryIcon
 } from '../contants';
 
 class Orders extends Component {
@@ -22,14 +23,14 @@ class Orders extends Component {
         super(props);
         this.state = {
             orders: [
-                // {
-                //     name: 'One',
-                //     id: 1
-                // },
-                // {
-                //     name: 'Two',
-                //     id: 2
-                // }
+                {
+                    name: 'One',
+                    id: 'WE213DSA89'
+                },
+                {
+                    name: 'Two',
+                    id: 'UW8973DQ98'
+                }
             ],
             selectedData: ''
         }
@@ -53,11 +54,30 @@ class Orders extends Component {
         });
     }
 
+    oppenOrderInformation() {
+        console.log('Open order detail');
+    }
+
     renderMainView() {
         const renderItem = ({item}) => {
             return(
-                <View>
-                    <Text>{item.name}</Text>
+                <View
+                    style = {styles.productInformationDetailWrapper}
+                >
+                    <View style={styles.productInformationDetailTitle}>
+                        <Image
+                            source = {deliveryIcon}
+                            style = {styles.iconStyle}
+                        ></Image>
+                        <Text style={styles.appFontSize}>{item.id}</Text>
+                        <TouchableOpacity
+                            onPress = {() => {
+                                this.oppenOrderInformation(item.id)
+                            }}
+                        >
+
+                        </TouchableOpacity>
+                    </View>
                 </View>
             );
         }
@@ -115,7 +135,7 @@ class Orders extends Component {
                     keyExtractor = {(item) => item.id}
                     renderItem = {renderItem}
                     extraData = {this.state.selectedData}
-                    contentContainerStyle = {{padding: 10, marginTop: 15}}
+                    contentContainerStyle = {{padding: 10, marginTop: 0}}
                     ListEmptyComponent = {renderEmptyFavoriteProducts}
                 />
             </View>
@@ -209,6 +229,26 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         justifyContent: 'center'
+    },
+    productInformationDetailWrapper: {
+        width: '95%',
+        backgroundColor: '#FFF',
+        marginTop: 5,
+        alignSelf: 'center',
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 5
+    },
+    productInformationDetailTitle: {
+        flexDirection: 'row'
+    },  
+    iconStyle: {
+        height: 20,
+        width: 20,
+        marginRight: 10
+    },
+    appFontSize: {
+        fontSize: appFontSize
     }
 });
 
