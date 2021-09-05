@@ -6,7 +6,7 @@ import {
     SafeAreaView,
     FlatList,
     TouchableOpacity,
-    Image
+    Image,
 } from "react-native";
 import {
     headerFontSize,
@@ -17,8 +17,10 @@ import {
     plusIcon,
     deliveryIcon,
     bycicleIcon,
-    rightArrowIcon
+    rightArrowIcon,
+    xIcon
 } from '../contants';
+import Modal from "react-native-modal";
 
 class Orders extends Component {
     constructor(props) {
@@ -38,7 +40,10 @@ class Orders extends Component {
                     id: 'UW8993DQ98'
                 }
             ],
-            selectedData: ''
+            selectedData: '',
+
+            // Modal
+            isVisible: false
         }
     }
 
@@ -65,7 +70,64 @@ class Orders extends Component {
     }
 
     handleAddStatus() {
-        
+        this.toggleModal();
+    }
+
+    toggleModal() {
+        this.setState({
+            isVisible: !this.state.isVisible
+        });
+        console.log(this.state.isVisible);
+    }
+
+    renderModal() {
+        return(
+            <Modal isVisible={this.state.isVisible}>
+                <View style={{
+                    flexDirection: 'column',
+                    height: 400,
+                    backgroundColor: '#FFF',
+                    // alignItems: 'center',
+                    padding: 10
+                }}>
+                    <View style = {{
+                        flexDirection: 'row',
+                        // justifyContent: 'space-between',
+                        alignItems: 'center'
+                    }}>
+                        <TouchableOpacity
+                            onPress = {() => {
+                                this.props.navigation.goBack();
+                            }}
+                        >
+                            <Image
+                                source = {xIcon}
+                                style={styles.xIconStyle}
+                            ></Image>
+                        </TouchableOpacity>
+                        <View style={{
+                            flex: 1,
+                            paddingLeft: 80
+                        }}>
+                            <Text style={styles.userInformationText}>GỬI YÊU CẦU</Text>
+                        </View>
+                    </View>
+                    <View>
+                        
+                    </View>
+                    <TouchableOpacity
+                        style = {{
+                            backgroundColor: '#FFF'
+                        }}
+                        onPress = {() => {
+                            this.toggleModal();
+                        }}
+                    >
+                        <Text>Hide</Text>
+                    </TouchableOpacity>
+                </View>
+            </Modal>
+        );
     }
 
     renderMainView() {
@@ -185,6 +247,7 @@ class Orders extends Component {
     render() {
         return(
             <SafeAreaView style={{flex: 1}}>
+                {this.renderModal()}
                 {this.renderHeader()}
                 {this.renderMainView()}
             </SafeAreaView>
@@ -325,6 +388,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: orangeColor,
         borderRadius: 10
+    },
+    xIconStyle: {
+        height: 20,
+        width: 20
     }
 });
 
