@@ -32,6 +32,10 @@ class Orders extends Component {
                 {
                     name: 'Two',
                     id: 'UW8973DQ98'
+                },
+                {
+                    name: 'Two',
+                    id: 'UW8993DQ98'
                 }
             ],
             selectedData: ''
@@ -58,6 +62,10 @@ class Orders extends Component {
 
     oppenOrderInformation() {
         console.log('Open order detail');
+    }
+
+    handleAddStatus() {
+        
     }
 
     renderMainView() {
@@ -87,11 +95,29 @@ class Orders extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style = {styles.productInformationDetail}>
-                        <Text>Tên: Huỳnh Quan Nhật Hào/ 0932843656</Text>
-                        <Text>Đại chỉ: Quản Trọng Hoàng, Hưng Lợi, Ninh Kiều, Cần Thơ</Text>
-                        <Text>Thu hộ: 200000 đ</Text>
-                        <Text>Ghi chú: Hàng dễ vỡ, vui lòng nhẹ tay</Text>
+                        <Text style={styles.appFontSize}>Tên: Huỳnh Quan Nhật Hào/ 0932843656</Text>
+                        <Text style={styles.appFontSize}>Đại chỉ: Quản Trọng Hoàng, Hưng Lợi, Ninh Kiều, Cần Thơ</Text>
+                        <Text style={styles.appFontSize}>Thu hộ: 200000 đ</Text>
+                        <Text style={styles.appFontSize}>Ghi chú: Hàng dễ vỡ, vui lòng nhẹ tay</Text>
                     </View>
+                    <View style = {styles.orderStatusWrapper}>
+                        <View style = {styles.orderStatusTitle}>
+                            <Text style={styles.highlightText}>Trạng thái: </Text>
+                            <Text style={styles.highlightText}>Đã tiếp nhận</Text>
+                        </View>
+                    </View>
+                    <TouchableOpacity
+                        style = {styles.buttonAddRequest}
+                        onPress = {() => {
+                            this.handleAddStatus(item.id);
+                        }}
+                    >
+                        <Text style = {{
+                            fontSize: appFontSize, 
+                            alignSelf: 'center',
+                        }}
+                        >Gửi yêu cầu</Text>
+                    </TouchableOpacity>
                 </View>
             );
         }
@@ -114,7 +140,7 @@ class Orders extends Component {
         }
 
         return(
-            <View>
+            <View style={{flex: 1}}>
                 <View style={styles.addNewOrderWrapper}>
                     <View style={styles.sizeChooseWrapper}>
                         <TouchableOpacity
@@ -158,7 +184,7 @@ class Orders extends Component {
 
     render() {
         return(
-            <SafeAreaView>
+            <SafeAreaView style={{flex: 1}}>
                 {this.renderHeader()}
                 {this.renderMainView()}
             </SafeAreaView>
@@ -215,6 +241,10 @@ const styles = StyleSheet.create({
     textSize: {
         fontSize: appFontSize
     },
+    highlightText: {
+        fontSize: appFontSize,
+        fontWeight: 'bold'
+    },  
     buttonAddNewOrder: {
         flexDirection: 'column',
         justifyContent: 'center',
@@ -253,7 +283,7 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         paddingTop: 5,
         paddingBottom: 10,
-        borderRadius: 8
+        borderRadius: 8,
     },
     productInformationDetailTitle: {
         flexDirection: 'row'
@@ -271,7 +301,30 @@ const styles = StyleSheet.create({
         width: 20,
     },
     productInformationDetail: {
-
+        borderBottomWidth: 0.5,
+        borderBottomColor: greyColor,
+        paddingBottom: 5,
+        marginBottom: 5
+    },
+    orderStatusWrapper: {
+        flexDirection: 'column',
+        borderBottomColor: greyColor,
+        borderBottomWidth: 0.5,
+        paddingBottom: 5,
+        marginBottom: 5
+        // justifyContent: 'space-between'
+    },
+    orderStatusTitle: {
+        flexDirection: 'row',
+        // justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    buttonAddRequest: {
+        height: 30,
+        width: '100%',
+        justifyContent: 'center',
+        backgroundColor: orangeColor,
+        borderRadius: 10
     }
 });
 
