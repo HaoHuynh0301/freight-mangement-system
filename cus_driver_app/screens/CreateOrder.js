@@ -17,7 +17,8 @@ import {
     callIcon, 
     homeIcon,
     accountIcon,
-    locationIcon
+    locationIcon,
+    orangeColor
 } from '../contants';
 import {Picker} from '@react-native-picker/picker';
 
@@ -27,29 +28,38 @@ class CreateOrder extends Component {
         this.state = {
             orderSize: this.props.route.params.status,
 
-            //order size
+            // order size
             orderSizeSelected: '',
             orderSizes: [
                 {
-                    name: 'Giao hàng nhanh',
+                    name: 'Siêu rẻ',
                     id: 1
                 },
                 {
-                    name: 'Hàng vừa',
+                    name: 'Hàng nhỏ (<20kg)',
                     id: 2
                 },
                 {
-                    name: 'Hàng lớn',
+                    name: 'Hàng lớn (>20kg)',
                     id: 3
                 }
-            ]
+            ],
+
+            // quantity
+            quantitySelected: 1,
+
+            // product information
+            productName: '',
+            quantity: 1,
+            weight: 1,
         }
     }
 
     componentDidMount() {
-        // this.setState({
-        //     orderSizeSelected: this.props.route.params.status
-        // })
+        this.setState({
+            orderSizeSelected: this.props.route.params.status
+        });
+        console.log(this.state.orderSizeSelected);
     }
 
     renderHeader() {
@@ -70,6 +80,10 @@ class CreateOrder extends Component {
                 </View>
             </View>
         );
+    }
+
+    handleAddProductImage() {
+        console.log('Add image for product')
     }
 
     renderMainView() {
@@ -126,18 +140,77 @@ class CreateOrder extends Component {
                             style = {styles.banksPicker}
                             selectedValue = {this.state.orderSizeSelected}
                             onValueChange = {(itemValue, itemIndex) => {
-                                console.log(itemValue)
                                 this.setState({
                                     orderSizeSelected: itemValue,
                                 });
                             }}
                         >
-                            {this.state.orderSizes.map((item) => {
+                            {this.state.orderSizes.map((item, key) => {
                                 return(
-                                    <Picker.Item label = {item.name} value = {item.name} />
+                                    <Picker.Item key = {key} label = {item.name} value = {item.name} />
                                 );
                             })}
                         </Picker>
+                    </View>
+                    <View style={styles.productInformationDetail}>
+                        <View style={styles.productTitleInformationDetail}>
+                            <Text style={styles.titleFontSize}>Sản phẩm</Text>
+                            <TouchableOpacity
+                                style={styles.buttonAddProduct}
+                                onPress = {() => {
+                                    this.handleAddProductImage()
+                                }}
+                            >
+                                <Text style={styles.appFontSize}>Thêm hình ảnh</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{
+                            // flexDirection: 'row',
+                            // paddingLeft: 10,
+                            // paddingRight: 10
+                        }}>
+                            <View style={styles.locationInforDetail}>
+                                <TextInput
+                                    placeholder = '1. Nhập tên sản phẩm'
+                                    style={styles.productInputStyle}
+                                    value = {this.state.productName}
+                                    onChangeText = {(text) => {
+                                        this.setState({
+                                            productName: text
+                                        })
+                                    }}
+                                ></TextInput>
+                            </View>
+                            <View style={styles.locationInforDetail}>
+                                <TextInput
+                                    placeholder = '2. Khối lượng'
+                                    style={styles.productInputStyle}
+                                    value = {this.state.productName}
+                                    onChangeText = {(text) => {
+                                        this.setState({
+                                            weight: text
+                                        })
+                                    }}
+                                ></TextInput>
+                            </View>
+                            <View style={styles.locationInforDetail}>
+                                <TextInput
+                                    placeholder = '3. Số lượng'
+                                    style={styles.productInputStyle}
+                                    value = {this.state.productName}
+                                    onChangeText = {(text) => {
+                                        this.setState({
+                                            quantity: text
+                                        })
+                                    }}
+                                ></TextInput>
+                            </View>
+                            <TouchableOpacity
+                                style={styles.buttonCreateOrder}
+                            >
+                                <Text style={styles.appFontSize}>Tạo đơn hàng</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </ScrollView>
@@ -229,8 +302,34 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
         borderBottomColor: greyColor,
     },
-    banksPicker: {
-    
+    productInformationDetail: {
+        marginTop: 20
+    },
+    productTitleInformationDetail: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    buttonAddProduct: {
+        borderWidth: 0.5,
+        padding: 5,
+        borderColor: orangeColor,
+        borderRadius: 10
+    },
+    productInputStyle: {
+        borderBottomWidth: 0.5,
+        borderBottomColor: greyColor,
+        width: '100%',
+        fontSize: appFontSize
+    },
+    buttonCreateOrder:  {
+        width: '100%',
+        marginTop: 10,
+        borderWidth: 0.5,
+        height: 45,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        backgroundColor: orangeColor
     }
 });
 
