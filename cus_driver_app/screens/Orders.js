@@ -21,6 +21,7 @@ import {
     xIcon
 } from '../contants';
 import Modal from "react-native-modal";
+import { Picker } from "@react-native-picker/picker";
 
 class Orders extends Component {
     constructor(props) {
@@ -43,7 +44,22 @@ class Orders extends Component {
             selectedData: '',
 
             // Modal
-            isVisible: false
+            isVisible: false,
+            actionRequestSelected: '',
+            actions: [
+                {
+                    name: 'Giục lấy',
+                    id: 1
+                },
+                {
+                    name: 'Giao',
+                    id: 2
+                },
+                {
+                    name: 'Trả hàng',
+                    id: 3
+                }
+            ]
         }
     }
 
@@ -80,12 +96,16 @@ class Orders extends Component {
         console.log(this.state.isVisible);
     }
 
+    handleKhieuNaiPress() {
+        
+    }
+
     renderModal() {
         return(
             <Modal isVisible={this.state.isVisible}>
                 <View style={{
                     flexDirection: 'column',
-                    height: 400,
+                    height: 240,
                     backgroundColor: '#FFF',
                     // alignItems: 'center',
                     padding: 10
@@ -97,7 +117,7 @@ class Orders extends Component {
                     }}>
                         <TouchableOpacity
                             onPress = {() => {
-                                this.props.navigation.goBack();
+                                this.toggleModal();
                             }}
                         >
                             <Image
@@ -112,18 +132,48 @@ class Orders extends Component {
                             <Text style={styles.userInformationText}>GỬI YÊU CẦU</Text>
                         </View>
                     </View>
-                    <View>
-                        
-                    </View>
-                    <TouchableOpacity
+                    <View
                         style = {{
-                            backgroundColor: '#FFF'
-                        }}
-                        onPress = {() => {
-                            this.toggleModal();
+                            flex: 1,
+                            flexDirection: 'column',
+                            marginTop: 10,
                         }}
                     >
-                        <Text>Hide</Text>
+                        <View style = {styles.statusDetailWrapper}>
+                            <TouchableOpacity>
+                                <Text style = {styles.appFontSize}>Sửa đổi thông tin khách hàng</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style = {styles.statusDetailWrapper}>
+                            <Picker
+                                selectedValue = {this.state.actionRequestSelected}
+                                onValueChange = {(itemValue, itemIndex) => {
+                                    this.setState({
+                                        actionRequestSelected: itemValue
+                                    });
+                                }}
+                            >
+                                {this.state.actions.map((item) => {
+                                    return(
+                                        <Picker.Item 
+                                            value = {item.name}
+                                            label = {item.name}
+                                        />
+                                    );
+                                })}
+                            </Picker>
+                        </View>
+                    </View>
+                    <TouchableOpacity
+                        style= {{
+                            height: 40,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            backgroundColor: orangeColor,
+                            borderRadius: 10
+                        }}
+                    >
+                        <Text style = {styles.appFontSize}>Gửi yêu cầu</Text>
                     </TouchableOpacity>
                 </View>
             </Modal>
@@ -392,6 +442,12 @@ const styles = StyleSheet.create({
     xIconStyle: {
         height: 20,
         width: 20
+    },
+    statusDetailWrapper: {
+        borderBottomColor: greyColor,
+        borderBottomWidth: 0.5,
+        paddingBottom: 10,
+        paddingTop: 10
     }
 });
 
