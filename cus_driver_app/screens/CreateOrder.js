@@ -120,9 +120,24 @@ class CreateOrder extends Component {
                             style={styles.iconLocationInfor}
                         ></Image>
                     </View>
-                    <View style={styles.sizeChooseWrapper}>
-                        <Text style={styles.titleFontSize}>Lấy và giao tận nơi</Text>
-                        
+                    <View style={styles.chooseSizeWrapper}>
+                        <Text style={styles.titleFontSize}>Lấy vào giao hàng tận nơi</Text>
+                        <Picker
+                            style = {styles.banksPicker}
+                            selectedValue = {this.state.orderSizeSelected}
+                            onValueChange = {(itemValue, itemIndex) => {
+                                console.log(itemValue)
+                                this.setState({
+                                    orderSizeSelected: itemValue,
+                                });
+                            }}
+                        >
+                            {this.state.orderSizes.map((item) => {
+                                return(
+                                    <Picker.Item label = {item.name} value = {item.name} />
+                                );
+                            })}
+                        </Picker>
                     </View>
                 </View>
             </ScrollView>
@@ -209,14 +224,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10
     },
-    sizeChooseWrapper: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 20
+    chooseSizeWrapper: {
+        marginTop: 10,
+        borderBottomWidth: 0.5,
+        borderBottomColor: greyColor,
     },
-    orderSizePiker: {
-        borderWidth: 0.3,
-        borderColor: greyColor,
+    banksPicker: {
+    
     }
 });
 
