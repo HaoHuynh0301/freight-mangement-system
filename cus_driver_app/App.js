@@ -29,7 +29,8 @@ import {
     AppInformation,
     Register,
     EditInformation,
-    CreateOrder
+    CreateOrder,
+    OrderDetail
 } from './screens';
 import Tabs from './navigation/tab.js';
 const Stack = createNativeStackNavigator();
@@ -61,6 +62,11 @@ const App = () => {
                 <Stack.Screen
                     name = 'CreateOrder'
                     component = {CreateOrder}
+                    options={{header: () => null}}
+                ></Stack.Screen>
+                <Stack.Screen
+                    name = 'OrderDetail'
+                    component = {OrderDetail}
                     options={{header: () => null}}
                 ></Stack.Screen>
             </Stack.Navigator>

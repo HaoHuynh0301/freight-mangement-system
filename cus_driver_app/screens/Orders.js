@@ -82,7 +82,9 @@ class Orders extends Component {
     }
 
     oppenOrderInformation() {
-        console.log('Open order detail');
+        this.props.navigation.navigate('OrderDetail', {
+            
+        });
     }
 
     handleAddStatus() {
@@ -96,8 +98,8 @@ class Orders extends Component {
         console.log(this.state.isVisible);
     }
 
-    handleKhieuNaiPress() {
-        
+    handleSendRequest() {
+        console.log('Send request');
     }
 
     renderModal() {
@@ -105,7 +107,7 @@ class Orders extends Component {
             <Modal isVisible={this.state.isVisible}>
                 <View style={{
                     flexDirection: 'column',
-                    height: 240,
+                    height: 190,
                     backgroundColor: '#FFF',
                     // alignItems: 'center',
                     padding: 10
@@ -140,11 +142,6 @@ class Orders extends Component {
                         }}
                     >
                         <View style = {styles.statusDetailWrapper}>
-                            <TouchableOpacity>
-                                <Text style = {styles.appFontSize}>Sửa đổi thông tin khách hàng</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style = {styles.statusDetailWrapper}>
                             <Picker
                                 selectedValue = {this.state.actionRequestSelected}
                                 onValueChange = {(itemValue, itemIndex) => {
@@ -153,9 +150,10 @@ class Orders extends Component {
                                     });
                                 }}
                             >
-                                {this.state.actions.map((item) => {
+                                {this.state.actions.map((item, key) => {
                                     return(
-                                        <Picker.Item 
+                                        <Picker.Item
+                                             key = {key}
                                             value = {item.name}
                                             label = {item.name}
                                         />
@@ -171,6 +169,9 @@ class Orders extends Component {
                             justifyContent: 'center',
                             backgroundColor: orangeColor,
                             borderRadius: 10
+                        }}
+                        onPress = {() => {
+                            this.handleSendRequest()
                         }}
                     >
                         <Text style = {styles.appFontSize}>Gửi yêu cầu</Text>

@@ -4,7 +4,14 @@ import {
     Text,
     StyleSheet,
     SafeAreaView,
+    Image,
+    TouchableOpacity
 } from "react-native";
+import {
+    headerFontSize,
+    backIcon,
+    appFontSize
+} from '../contants';
 
 class MonenyFlow extends Component {
     constructor(props) {
@@ -13,28 +20,22 @@ class MonenyFlow extends Component {
 
     renderHeader() {
         return(
-            <View>
-                <View style={styles.container}>
-                    <Text style={styles.userInformationText}>Tài khoản</Text>
-                </View>
-                <View style = {{
-                    marginTop: 20,
-                    paddingLeft: 10,
-                    flexDirection: 'row',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center'
-                }}>
-                    <Image
-                        source = {accountIcon}
-                        style = {{height: 60, width: 60}}
-                    ></Image>
-                    <View style = {{
-                        marginLeft: 15,
-                    }}>
-                        <Text style = {styles.norText}>IHT</Text>
-                        <Text style = {styles.norText}>S321312</Text>
-                    </View>
-                </View>
+            <View style={styles.headerContainer}>
+                <Text style={styles.userInformationText}>Dòng tiền</Text>
+                <TouchableOpacity
+                    onPress = {() => {
+                        //Sửa thông tin ngân hàng
+                        this.props.navigation.navigate('EditInformation', {
+                            status: 'Sửa thông tin ngân hàng'
+                        });
+                        
+                    }}
+                    style = {{left: 230}}
+                >
+                    <Text style = {{
+                        fontSize: appFontSize,
+                    }}>Cài đặt</Text>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -42,14 +43,29 @@ class MonenyFlow extends Component {
     render() {
         return(
             <SafeAreaView>
-                <Text>MoneyFlow</Text>
+                {this.renderHeader()}
             </SafeAreaView>
         );
     }
 }
 
 const styles = StyleSheet.create({
-
+    headerContainer: {
+        height: 70,
+        width: '100%',
+        flexDirection: 'row',
+        backgroundColor: '#ff7733',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
+    userInformationText: {
+        fontSize: headerFontSize,
+        fontWeight: 'bold',
+        marginLeft: 10
+    },
+    appFontSize: {
+        fontSize: appFontSize
+    }
 });
 
 export default MonenyFlow;

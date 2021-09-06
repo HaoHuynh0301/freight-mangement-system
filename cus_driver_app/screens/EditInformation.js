@@ -309,9 +309,9 @@ class EditInformation extends Component {
                                     });
                                 }}
                             >
-                                {this.state.provinces.map((item) => {
+                                {this.state.provinces.map((item, key) => {
                                     return(
-                                        <Picker.Item label = {item.name} value = {item.name} />
+                                        <Picker.Item key = {key} label = {item.name} value = {item.name} />
                                     );
                                 })}
                             </Picker>
