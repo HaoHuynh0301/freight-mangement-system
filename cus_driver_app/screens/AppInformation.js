@@ -53,9 +53,15 @@ class AppInformation extends Component {
     renderDieuKhoanSuDung() {
         return(
             <View style={styles.dieuKhoanWrapper}>
-                <Text style={styles.textInformation}>Công ty cổ phần Huỳnh Quan Nhật Hào: là một công ty công nghệ hoạt động kinh doanh trong lĩnh vực bưu chính</Text>
-                <Text style={styles.textInformation}>Tên doanh nghiệp: CÔNG TY CỔ PHẦN GIAO HÀNG HUỲNH QUAN NHẬT HÀO</Text>
-                <Text style={styles.textInformation}>Email: haob1809687@student.ctu.edu.vn</Text>
+                <View style = {styles.dieuKhoanDetail}>
+                    <Text style={styles.textInformation}>Công ty cổ phần Huỳnh Quan Nhật Hào: là một công ty công nghệ hoạt động kinh doanh trong lĩnh vực bưu chính</Text>
+                </View>
+                <View style = {styles.dieuKhoanDetail}>
+                    <Text style={styles.textInformation}>Tên doanh nghiệp: CÔNG TY CỔ PHẦN GIAO HÀNG HUỲNH QUAN NHẬT HÀO</Text>
+                </View>
+                <View style = {styles.dieuKhoanDetail}>
+                    <Text style={styles.textInformation}>Email: haob1809687@student.ctu.edu.vn</Text>
+                </View>
             </View>
         );
     }
@@ -196,7 +202,14 @@ const styles = StyleSheet.create({
     },
     questionTitleText: {
         fontSize: appFontSize,
-
+    },
+    dieuKhoanDetail: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        paddingBottom: 10,
+        paddingTop: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: greyColor
     }
 });
 
