@@ -6,19 +6,11 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
 
-class Sex(models.Model):
-    name = models.CharField(max_length = 255, unique = True, null = False)
-    
-    def __str__(self):
-        return self.name
-    
-
 class MyUserManager(BaseUserManager):
     def create_user(self, 
                     email, 
                     customer_name, 
                     date_of_birth, 
-                    sex, 
                     phone_numner, 
                     address, 
                     province, 
@@ -35,7 +27,6 @@ class MyUserManager(BaseUserManager):
             email = self.normalize_email(email),
             customer_name = customer_name,
             date_of_birth = date_of_birth,
-            sex = sex,
             phone_numner = phone_numner,
             address = address,
             province = province,
@@ -54,7 +45,6 @@ class MyUserManager(BaseUserManager):
                             email, 
                             customer_name, 
                             date_of_birth, 
-                            sex, 
                             phone_numner, 
                             address, 
                             province, 
@@ -68,7 +58,6 @@ class MyUserManager(BaseUserManager):
             email = email,
             customer_name = customer_name,
             date_of_birth = date_of_birth,
-            sex = sex,
             phone_numner = phone_numner,
             address = address,
             province = province,
@@ -93,7 +82,6 @@ class Customer(AbstractBaseUser):
     )
     customer_name = models.CharField(max_length = 255, unique = True, null = True)
     date_of_birth = models.CharField(max_length = 20)
-    sex = models.ForeignKey(Sex, related_name = 'customers_sex', on_delete = models.CASCADE)
     phone_numner = models.IntegerField()
     address = models.CharField(max_length = 255, null = False)
     province = models.CharField(max_length = 255, null = False)
@@ -112,7 +100,6 @@ class Customer(AbstractBaseUser):
     REQUIRED_FIELDS = [
                         'customer_name', 
                         'date_of_birth', 
-                        'sex', 
                         'phone_numner', 
                         'address',
                         'province',
