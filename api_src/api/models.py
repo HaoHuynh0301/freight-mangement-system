@@ -14,7 +14,75 @@ class Sex(models.Model):
     
 
 class MyUserManager(BaseUserManager):
-    pass
+    def create_user(self, 
+                    email, 
+                    customer_name, 
+                    date_of_birth, 
+                    sex, 
+                    phone_numner, 
+                    address, 
+                    province, 
+                    district, 
+                    ward, 
+                    bank_name, 
+                    bank_number, 
+                    bank_provine, 
+                    password = None):
+        if not email:
+            raise ValueError('Users must have an email address')
+
+        user = self.model(
+            email = self.normalize_email(email),
+            customer_name = customer_name,
+            date_of_birth = date_of_birth,
+            sex = sex,
+            phone_numner = phone_numner,
+            address = address,
+            province = province,
+            district = district, 
+            ward = ward, 
+            bank_name = bank_name, 
+            bank_number = bank_number, 
+            bank_provine = bank_provine,
+        )
+
+        user.set_password(password)
+        user.save()
+        return user
+    
+    def create_superuser(self, 
+                            email, 
+                            customer_name, 
+                            date_of_birth, 
+                            sex, 
+                            phone_numner, 
+                            address, 
+                            province, 
+                            district, 
+                            ward, 
+                            bank_name, 
+                            bank_number, 
+                            bank_provine, 
+                            password = None):
+        user = self.create_user(
+            email = email,
+            customer_name = customer_name,
+            date_of_birth = date_of_birth,
+            sex = sex,
+            phone_numner = phone_numner,
+            address = address,
+            province = province,
+            district = district, 
+            ward = ward, 
+            bank_name = bank_name, 
+            bank_number = bank_number, 
+            bank_provine = bank_provine,
+            password = password
+        )
+        user.is_admin = True
+        user.is_superuser = True
+        user.save()
+        return user
 
 
 class Customer(AbstractBaseUser):
