@@ -10,7 +10,9 @@ import {
 import {
     headerFontSize,
     backIcon,
-    appFontSize
+    appFontSize,
+    greyColor,
+    rightArrowIcon
 } from '../contants';
 
 class MonenyFlow extends Component {
@@ -40,10 +42,57 @@ class MonenyFlow extends Component {
         );
     }
 
+    renderMainView() {
+        return(
+            <View style = {styles.mainViewWrapper}>
+                <View style = {styles.flowMoneyDetail}>
+                    <Text style = {styles.textAppFontSize}>Tiền CoD: </Text>
+                    <Text style = {styles.textHighlight}>0đ</Text>
+                </View>
+                <View style = {styles.flowMoneyDetail}>
+                    <Text style = {styles.textAppFontSize}>Phí giao hàng: </Text>
+                    <Text style = {styles.textHighlight}>0đ</Text>
+                </View>
+                <View style = {styles.flowMoneyDetail}>
+                    <Text style = {styles.textAppFontSize}>Phí hoàn hàng: </Text>
+                    <Text style = {styles.textHighlight}>0đ</Text>
+                </View>
+                <View style = {styles.flowMoneyDetail}>
+                    <Text style = {styles.textAppFontSize}>Tiền chưa đối soát: </Text>
+                    <Text style = {styles.textHighlight}>0đ</Text>
+                </View>
+                <View style = {styles.flowMoneyDetail}>
+                    <Text style = {styles.textAppFontSize}>Tiền đã đối soát: </Text>
+                    <Text style = {styles.textHighlight}>0đ</Text>
+                </View>
+                <TouchableOpacity
+                    style = {{
+                        marginTop: 10,
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        borderBottomColor: greyColor,
+                        borderBottomWidth: 1,
+                        paddingBottom: 10
+                    }}
+                >
+                    <Text style = {styles.textHighlight}>Quản lý hóa đơn VAT</Text>
+                    <Image
+                        source = {rightArrowIcon}
+                        style = {{
+                            height: 20,
+                            width: 20
+                        }}
+                    ></Image>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
     render() {
         return(
             <SafeAreaView>
                 {this.renderHeader()}
+                {this.renderMainView()}
             </SafeAreaView>
         );
     }
@@ -65,6 +114,32 @@ const styles = StyleSheet.create({
     },
     appFontSize: {
         fontSize: appFontSize
+    },
+    mainViewWrapper: {
+        flexDirection: 'column',
+        // flex: 1,
+        paddingLeft: 10,
+        paddingRight: 10
+    },
+    flowMoneyDetail: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: 50,
+        borderBottomWidth: 1,
+        borderBottomColor: greyColor
+    },
+    textHighlight: {
+        fontSize: appFontSize,
+        fontWeight: 'bold'
+    },
+    textAppFontSize: {
+        fontSize: appFontSize
+    },
+    totalMoney: {
+        marginTop: 20,
+        backgroundColor: '#FFF',
+        flexDirection: 'column'
     }
 });
 

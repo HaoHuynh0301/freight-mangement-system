@@ -303,7 +303,6 @@ class EditInformation extends Component {
                                 style = {styles.banksPicker}
                                 selectedValue = {this.state.provinceSelectedValue}
                                 onValueChange = {(itemValue, itemIndex) => {
-                                    console.log(itemValue)
                                     this.setState({
                                         provinceSelectedValue: itemValue,
                                     });
