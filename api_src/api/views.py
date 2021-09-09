@@ -20,3 +20,27 @@ class MiddleWare(APIView):
     
     def get(self, request, format = None):
         return Response(request.user.email, status = status.HTTP_200_OK)
+    
+
+class SignInView(APIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = serializers.SignInSerializer
+    
+    def post(self, request, format = None):
+        serializer = self.serializer_class(data = request.data)
+        if serializer.is_valid():
+            User = authenticate(
+                request,
+                email = serializer.validated_data['email'],
+                password = serializer.validated_data['passoword']
+            )
+            if User:
+                refreshToken = TokenObtainPairSerializer.get_token(User)
+                data = {
+                    'refresh_token': str(refreshToken),
+                    'access_token': str(refreshToken.access_token),
+                    'email': str(User.email)
+                }
+                return Response(data, status = status.HTTP_200_OK)
+            return Response({'error': 'No user found!'}, status = status.HTTP_404_NOT_FOUND)
+        return Response({'error': 'Password or email is invalid!'}, status = status.HTTP_400_BAD_REQUEST)
