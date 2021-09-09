@@ -44,3 +44,16 @@ class SignInView(APIView):
                 return Response(data, status = status.HTTP_200_OK)
             return Response({'error': 'No user found!'}, status = status.HTTP_404_NOT_FOUND)
         return Response({'error': 'Password or email is invalid!'}, status = status.HTTP_400_BAD_REQUEST)
+    
+    
+class RegisterView(APIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = serializers.CustomerSerializer
+    
+    def post(self, request, format = None):
+        serializer = self.serializer_class(request.data)
+        if serializer.is_valid():
+            serializer.validated_data['password'] = make_password(serializer.validated_data['passoword'])
+            serializer.save()
+            return Response({'status': 'CREATED'}, status = status.HTTP_201_CREATED)
+        return Response({'error': 'Password or email is invalid!'}, status = status.HTTP_400_BAD_REQUEST)
