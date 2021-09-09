@@ -11,3 +11,12 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
+
+
+# Authentication classes
+
+class MiddleWare(APIView):
+    permission_classes = [permissions.permissions.IsAuthenticated]
+    
+    def get(self, request, format = None):
+        return Response(request.user.email, status = status.HTTP_200_OK)
