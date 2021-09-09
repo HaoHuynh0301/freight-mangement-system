@@ -27,7 +27,11 @@ const impText = 27;
 const greyColor = '#DCDCDC';
 const orangeColor = '#ff7733';
 
+// IP Address
+const ipAddress = 'http://192.168.1.3:8000';
+
 export {
+    ipAddress,
     bycicleIcon,
     deliveryIcon,
     xIcon,

@@ -7,7 +7,8 @@ import {
     TextInput,
     ScrollView,
     TouchableOpacity,
-    Image
+    Image,
+    Alert
 } from "react-native";
 import {
     impText,
@@ -21,29 +22,79 @@ import {
     cartIcon,
     bankIcon,
     locationIcon,
-    moneyIcon
+    moneyIcon,
+    ipAddress
 } from '../contants';
 import {
     Header
 } from '../components';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const axios = require('axios');
+
+const displayAlert = (message) => {
+    Alert.alert(
+        "Notification",
+        message,
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+        ])
+}
 
 class User extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isAuth: false,
-            username: '',
+            email: '',
             password: ''
         }
     }
 
-    handleSignInPressed() {
-        this.setState({
-            username: '',
-            password: ''
+    async middleWare() {
+        const token = await AsyncStorage.getItem('token');
+        axios.get(`${ipAddress}/api/middleware/`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
         })
-        this.props.navigation.navigate('Register', {
+            .then((response) => {
+                this.setState({
+                    isAuth: true
+                });
+            })
+            .catch((error) => {
+                this.setState({
+                    isAuth: false
+                });
+            });
+    }
 
+    componentDidMount() {
+        this.middleWare();
+    }
+
+    handleSignInPressed() {
+        console.log(this.state.email + this.state.password);
+        axios.post(`${ipAddress}/api/sign-in/`, {
+            email: this.state.email,
+            password: this.state.password
+        })
+        .then(async (response) => {
+            await AsyncStorage.setItem('token', response.data.access_token);
+            this.setState({
+                isAuth: true,
+                email: '',
+                password: ''
+            });
+        })
+        .catch((error) => {
+            displayAlert('Email or password is invalid!');
         });
     }
 
@@ -251,13 +302,13 @@ class User extends Component {
                     <View style={styles.inputDetailWrapper}>
                         <TextInput
                             style={styles.textInput}
-                            placeholder = 'Tên đăng nhập'
+                            placeholder = 'Email'
                             onChangeText = {(text) => {
                                 this.setState({
-                                    username: text
+                                    email: text
                                 });
                             }}
-                            value = {this.state.username}
+                            value = {this.state.email}
                         ></TextInput>
                     </View>
                     <View style={styles.inputDetailWrapper}>
@@ -295,7 +346,7 @@ class User extends Component {
     }
 
     renderMainView() {
-        if(!this.state.isAuth) {
+        if(this.state.isAuth) {
             return(
                 this.renderUserPage()
             );
@@ -308,7 +359,7 @@ class User extends Component {
 
     render() {
         return(
-            <SafeAreaView>
+            <SafeAreaView style = {{flex: 1}}>
                 {this.renderMainView()}
             </SafeAreaView>
         );
@@ -341,7 +392,8 @@ const styles = StyleSheet.create({
         width: 250,
         height: 40,
         borderRadius: 10,
-        fontSize: 16
+        fontSize: 16,
+        paddingLeft: 10
     },
     buttonLogin: {
         backgroundColor: '#ff7733',

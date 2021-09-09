@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from . import models
 
 class SignInSerializer(serializers.Serializer):
-    email = serializers.EmailField(max_length = 255, require = True)
+    email = serializers.EmailField(max_length = 255, required = True)
     password = serializers.CharField()
     
     

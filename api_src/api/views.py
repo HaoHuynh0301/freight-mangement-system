@@ -16,7 +16,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 # Authentication classes
 
 class MiddleWare(APIView):
-    permission_classes = [permissions.permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     
     def get(self, request, format = None):
         return Response(request.user.email, status = status.HTTP_200_OK)
@@ -32,7 +32,7 @@ class SignInView(APIView):
             User = authenticate(
                 request,
                 email = serializer.validated_data['email'],
-                password = serializer.validated_data['passoword']
+                password = serializer.validated_data['password']
             )
             if User:
                 refreshToken = TokenObtainPairSerializer.get_token(User)
