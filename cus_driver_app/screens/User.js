@@ -51,7 +51,11 @@ class User extends Component {
         this.state = {
             isAuth: false,
             email: '',
-            password: ''
+            password: '',
+
+            // User information
+            emailValid: '',
+            passwordValid: '',
         }
     }
 
@@ -90,7 +94,8 @@ class User extends Component {
             this.setState({
                 isAuth: true,
                 email: '',
-                password: ''
+                password: '',
+                emailValid: response.data.email
             });
         })
         .catch((error) => {
@@ -104,8 +109,11 @@ class User extends Component {
         });
     }
 
-    signOutButtonPressed() {
-        console.log('Sign out');
+    async signOutButtonPressed() {
+        await AsyncStorage.setItem('token', '');
+        this.setState({
+            isAuth: false
+        });
     }
 
     editButtonPressed(status) {
@@ -178,7 +186,7 @@ class User extends Component {
                             source = {messageIcon}
                             style={styles.basicInforImage}
                         ></Image>
-                        <Text style={styles.basicInforText}>hao152903@gmail.com</Text>
+                        <Text style={styles.basicInforText}>{this.state.emailValid}</Text>
                     </View>
                     <View style={styles.basicInforDetail}>
                         <Image
