@@ -14,13 +14,60 @@ import {
 import {
     headerFontSize,
     backIcon,
-    appFontSize
+    appFontSize,
+    greyColor
 } from '../contants';
-import RadioGroup from 'react-native-radio-buttons-group';
+import { Picker } from "@react-native-picker/picker";
+const axios = require('axios');
 
 class Register extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            // Bank picker
+            selectedProvine: '',
+            selectedBank: '',
+            banks: [],
+            provinces: [],
+
+            // Register information
+            customerName: '',
+            phoneNumber: '',
+            email: '',
+            password: '',
+            address: '',
+            bankUsername: '',
+            bankNumber: '',
+        }
+    }
+
+    getListOfBankds() {
+        axios.get(`https://api.vietqr.io/v1/banks/`)
+            .then((response) => {
+                this.setState({
+                    banks: response.data.data
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    getListOfProvinces() {
+        axios.get('https://provinces.open-api.vn/api/')
+            .then((response) => {
+                this.setState({
+                    provinces: response.data
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    componentDidMount() {
+        this.getListOfBankds();
+        this.getListOfProvinces();
     }
 
     renderHeader() {
@@ -54,26 +101,52 @@ class Register extends Component {
                     <TextInput
                         style={styles.textInput}
                         placeholder = 'Tên cửa hàng/shop'
+                        onChangeText = {(text) => {
+                            this.setState({
+                                customerName: text
+                            });
+                        }}
+                        value = {this.state.customerName}
                     ></TextInput>
                     <TextInput
                         style={styles.textInput}
                         placeholder = 'Điện thoại liên hệ'
+                        onChangeText = {(text) => {
+                            this.setState({
+                                phoneNumber: text
+                            });
+                        }}
+                        value = {this.state.phoneNumber}
                     ></TextInput>
                     <TextInput
                         style={styles.textInput}
                         placeholder = 'Email'
+                        onChangeText = {(text) => {
+                            this.setState({
+                                email: text
+                            });
+                        }}
+                        value = {this.state.email}
                     ></TextInput>
                     <TextInput
                         style={styles.textInput}
                         placeholder = 'Mật khẩu'
-                    ></TextInput>
-                    <TextInput
-                        style={styles.textInput}
-                        placeholder = 'Xác nhận mật khẩu'
+                        onChangeText = {(text) => {
+                            this.setState({
+                                password: text
+                            });
+                        }}
+                        value = {this.state.password}
                     ></TextInput>
                     <TextInput
                         style={styles.textInput}
                         placeholder = 'Số nhà, hẻm, ngỏ, ngách, tòa nhà'
+                        onChangeText = {(text) => {
+                            this.setState({
+                                address: text
+                            });
+                        }}
+                        value = {this.state.address}
                     ></TextInput>
                 </View>
                 <View style={styles.paymentInforWrapper}>
@@ -83,11 +156,73 @@ class Register extends Component {
                     <TextInput
                         style={styles.textInput}
                         placeholder = 'Chủ tài khoản ngân hàng'
+                        onChangeText = {(text) => {
+                            this.setState({
+                                bankUsername: text
+                            });
+                        }}
+                        value = {this.state.bankUsername}
                     ></TextInput>
                     <TextInput
                         style={styles.textInput}
                         placeholder = 'Số tài khoản ngân hàng'
+                        onChangeText = {(text) => {
+                            this.setState({
+                                bankNumber: text
+                            });
+                        }}
+                        value = {this.state.bankUsername}
                     ></TextInput>
+                </View>
+                <View style={styles.editBakingDetailWrapper}>
+                    <Text style = {{fontSize: 17}}>Bấm để chọn ngân hàng</Text>
+                    <View style = {{
+                        borderWidth: 1,
+                        borderColor: greyColor,
+                        marginTop: 5,
+                        borderRadius: 10,
+                    }}>
+                        <Picker
+                            style = {styles.banksPicker}
+                            selectedValue = {this.state.selectedBank}
+                            onValueChange = {(itemValue, itemIndex) => {
+                                this.setState({
+                                    selectedBank: itemValue,
+                                });
+                            }}
+                        >
+                            {this.state.banks.map((item, key) => {
+                                return(
+                                    <Picker.Item key = {key} label = {item.name} value = {item.name} />
+                                );
+                            })}
+                        </Picker>
+                    </View>
+                </View>
+                <View style={styles.editBakingDetailWrapper}>
+                    <Text style = {{fontSize: 17}}>Bấm để chọn chi nhánh</Text>
+                    <View style = {{
+                        borderWidth: 1,
+                        borderColor: greyColor,
+                        marginTop: 5,
+                        borderRadius: 10
+                    }}>
+                        <Picker
+                            style = {styles.banksPicker}
+                            selectedValue = {this.state.selectedProvine}
+                            onValueChange = {(itemValue, itemIndex) => {
+                                this.setState({
+                                    selectedProvine: itemValue,
+                                });
+                            }}
+                        >
+                            {this.state.provinces.map((item, key) => {
+                                return(
+                                    <Picker.Item key = {key} label = {item.name} value = {item.name} />
+                                );
+                            })}
+                        </Picker>
+                    </View>
                 </View>
                 <View style={styles.confirmationWrapper}>
                     {/* <RadioGroup 
@@ -96,7 +231,6 @@ class Register extends Component {
                             console.log(key[0])
                         }}
                     /> */}
-                    <Text>Tôi đã đọc và đồng ý với điều khoản</Text>
                 </View>
                 <View style={{alignItems: 'center'}}>
                     <TouchableOpacity 
@@ -168,16 +302,17 @@ const styles = StyleSheet.create({
         borderWidth: 0.8,
         borderRadius: 10,
         width: 350,
-        height: 36,
+        height: 40,
         marginTop: 8,
         paddingLeft: 10,
+        fontSize: appFontSize
     },
     inputsWrapper: {
         flexDirection: 'column',
         alignItems: 'center'
     },
     paymentInforWrapper: {
-        marginTop: 20,
+        marginTop: 10,
         marginLeft: 10
     },
     confirmationWrapper: {
@@ -194,6 +329,14 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    editBakingDetailWrapper: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        paddingLeft: 30,
+        paddingRight: 10,
+        paddingTop: 10,
+        width: 390,
     },
 });
 

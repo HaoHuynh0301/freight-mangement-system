@@ -79,6 +79,12 @@ class User extends Component {
             });
     }
 
+    async getItemFromAsyncStorage(name) {
+        const item = await AsyncStorage.getItem('customer_name', '')
+        console.log(await AsyncStorage.getItem('customer_name', ''));
+        return item;
+    }
+
     componentDidMount() {
         this.middleWare();
     }
@@ -97,10 +103,16 @@ class User extends Component {
                 password: '',
                 userInformation: response.data.user
             });
-            console.log(this.state.userInformation)
+            await AsyncStorage.setItem('customer_name', this.state.userInformation['customer_name']);
+            await AsyncStorage.setItem('phone_number', String(this.state.userInformation['phone_numner']));
+            await AsyncStorage.setItem('email', this.state.userInformation['email']);
+            await AsyncStorage.setItem('address', this.state.userInformation['address']);
+            await AsyncStorage.setItem('bank_name', this.state.userInformation['bank_name']);
+            await AsyncStorage.setItem('bank_number', String(this.state.userInformation['bank_number']));
+            await AsyncStorage.setItem('bank_provine', this.state.userInformation['bank_provine']);
         })
         .catch((error) => {
-            displayAlert('Email or password is invalid!');
+            displayAlert('Your email or passwor is invalid!');
         });
     }
 
@@ -143,7 +155,7 @@ class User extends Component {
                     <View style = {{
                         marginLeft: 15,
                     }}>
-                        <Text style = {styles.norText}>{this.state.userInformation['customer_name']}</Text>
+                        <Text style = {styles.norText}></Text>
                         <Text style = {styles.norText}>S321312</Text>
                     </View>
                 </View>
@@ -180,7 +192,7 @@ class User extends Component {
                             source = {callIcon}
                             style={styles.basicInforImage}
                         ></Image>
-                        <Text style={styles.basicInforText}>{this.state.userInformation['phone_numner']}</Text>
+                        <Text style={styles.basicInforText}>{this.state.userInformation['phone_number']}</Text>
                     </View>
                     <View style={styles.basicInforDetail}>
                         <Image
