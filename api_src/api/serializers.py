@@ -17,5 +17,6 @@ class CustomerSerializer(serializers.ModelSerializer):
                     'bank_number',
                     'bank_provine',
                     'email',
-                    'bank_username'
+                    'bank_username',
+                    'password'
                 ]

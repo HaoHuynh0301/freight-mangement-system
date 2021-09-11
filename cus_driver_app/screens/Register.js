@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     Image,
     TextInput,
+    Alert
 } from 'react-native';
 import {
     Header
@@ -20,6 +21,20 @@ import {
 } from '../contants';
 import { Picker } from "@react-native-picker/picker";
 const axios = require('axios');
+
+const displayAlert = (message) => {
+    Alert.alert(
+        "Notification",
+        message,
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+        ])
+}
 
 class Register extends Component {
     constructor(props) {
@@ -67,7 +82,23 @@ class Register extends Component {
     }
 
     handleRegisterButtomPressed() {
-        axios.post(`${ipAddress}/api/`)
+        axios.post(`${ipAddress}/api/register/`, {
+            customer_name: this.state.customerName, 
+            phone_numner: this.state.phoneNumber, 
+            address: this.state.address,
+            bank_name: this.state.selectedBank,
+            bank_number: this.state.bankNumber,
+            bank_provine: this.state.selectedProvine,
+            bank_username: this.state.bankUsername,
+            password: this.state.password,
+            email: this.state.email
+        })
+        .then((response) => {
+            displayAlert('Created new account successfully!');
+        })
+        .catch((error) => {
+            displayAlert(error);
+        });
     }
 
     componentDidMount() {
@@ -176,7 +207,7 @@ class Register extends Component {
                                 bankNumber: text
                             });
                         }}
-                        value = {this.state.bankUsername}
+                        value = {this.state.bankNumber}
                     ></TextInput>
                 </View>
                 <View style={styles.editBakingDetailWrapper}>

@@ -53,12 +53,14 @@ class RegisterView(APIView):
     serializer_class = serializers.CustomerSerializer
     
     def post(self, request, format = None):
-        serializer = self.serializer_class(request.data)
+        serializer = self.serializer_class(data = request.data)
+        print(request.data)
         if serializer.is_valid():
-            serializer.validated_data['password'] = make_password(serializer.validated_data['passoword'])
+            serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
+            print('OK')
             serializer.save()
             return Response({'status': 'CREATED'}, status = status.HTTP_201_CREATED)
-        return Response({'error': 'Password or email is invalid!'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'error': serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     
 class UpdatePasswordView(APIView):
