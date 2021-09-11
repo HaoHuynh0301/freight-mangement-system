@@ -11,14 +11,11 @@ class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Customer
         fields = [  'customer_name', 
-                    'date_of_birth', 
                     'phone_numner', 
                     'address',
-                    'province',
-                    'district',
-                    'ward',
                     'bank_name',
                     'bank_number',
                     'bank_provine',
-                    'email'
+                    'email',
+                    'bank_username'
                 ]

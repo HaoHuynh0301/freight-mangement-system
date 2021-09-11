@@ -88,6 +88,7 @@ class Customer(AbstractBaseUser):
     district = models.CharField(max_length = 255, null = False)
     ward = models.CharField(max_length = 255, null = False)
     bank_name = models.CharField(max_length = 255, unique = True, null = True)
+    bank_username = models.CharField(max_length = 255, unique = True, null = True)
     bank_number = models.IntegerField()
     bank_provine = models.CharField(max_length = 255, null = False)
     is_active = models.BooleanField(default = True)
@@ -108,6 +109,7 @@ class Customer(AbstractBaseUser):
                         'bank_name',
                         'bank_number',
                         'bank_provine',
+                        'bank_username'
                         ]
     
     def __str__(self):

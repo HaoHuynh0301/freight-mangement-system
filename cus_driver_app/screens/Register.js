@@ -15,7 +15,8 @@ import {
     headerFontSize,
     backIcon,
     appFontSize,
-    greyColor
+    greyColor,
+    ipAddress
 } from '../contants';
 import { Picker } from "@react-native-picker/picker";
 const axios = require('axios');
@@ -63,6 +64,10 @@ class Register extends Component {
             .catch((error) => {
                 console.log(error);
             });
+    }
+
+    handleRegisterButtomPressed() {
+        axios.post(`${ipAddress}/api/`)
     }
 
     componentDidMount() {
@@ -236,7 +241,7 @@ class Register extends Component {
                     <TouchableOpacity 
                         style = {styles.buttonRegister}
                         onPress = {() => {
-                            console.log('ok');
+                            this.handleRegisterButtomPressed();
                         }}
                     >
                         <Text style = {{fontSize: 20, fontWeight: 'bold'}}>Đăng ký</Text>

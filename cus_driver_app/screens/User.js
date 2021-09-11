@@ -97,19 +97,20 @@ class User extends Component {
         })
         .then(async (response) => {
             await AsyncStorage.setItem('token', response.data.access_token);
+            console.log(response.data.user);
             this.setState({
                 isAuth: true,
                 email: '',
                 password: '',
                 userInformation: response.data.user
             });
-            await AsyncStorage.setItem('customer_name', this.state.userInformation['customer_name']);
-            await AsyncStorage.setItem('phone_number', String(this.state.userInformation['phone_numner']));
-            await AsyncStorage.setItem('email', this.state.userInformation['email']);
-            await AsyncStorage.setItem('address', this.state.userInformation['address']);
-            await AsyncStorage.setItem('bank_name', this.state.userInformation['bank_name']);
-            await AsyncStorage.setItem('bank_number', String(this.state.userInformation['bank_number']));
-            await AsyncStorage.setItem('bank_provine', this.state.userInformation['bank_provine']);
+            // await AsyncStorage.setItem('customer_name', this.state.userInformation['customer_name']);
+            // await AsyncStorage.setItem('phone_number', String(this.state.userInformation['phone_numner']));
+            // await AsyncStorage.setItem('email', this.state.userInformation['email']);
+            // await AsyncStorage.setItem('address', this.state.userInformation['address']);
+            // await AsyncStorage.setItem('bank_name', this.state.userInformation['bank_name']);
+            // await AsyncStorage.setItem('bank_number', String(this.state.userInformation['bank_number']));
+            // await AsyncStorage.setItem('bank_provine', this.state.userInformation['bank_provine']);
         })
         .catch((error) => {
             displayAlert('Your email or passwor is invalid!');
@@ -192,7 +193,7 @@ class User extends Component {
                             source = {callIcon}
                             style={styles.basicInforImage}
                         ></Image>
-                        <Text style={styles.basicInforText}>{this.state.userInformation['phone_number']}</Text>
+                        <Text style={styles.basicInforText}>{this.state.userInformation['phone_numner']}</Text>
                     </View>
                     <View style={styles.basicInforDetail}>
                         <Image
@@ -235,7 +236,7 @@ class User extends Component {
                             source = {homeIcon}
                             style={styles.basicInforImage}
                         ></Image>
-                        <Text style={styles.basicInforText}>HUYNH QUAN NHAT HAO</Text>
+                        <Text style={styles.basicInforText}>{this.state.userInformation['bank_username']}</Text>
                     </View>
                     <View style={styles.basicInforDetail}>
                         <Image
