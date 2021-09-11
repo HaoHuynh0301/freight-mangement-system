@@ -54,7 +54,7 @@ class User extends Component {
             password: '',
 
             // User information
-            emailValid: '',
+            userInformation: '',
             passwordValid: '',
         }
     }
@@ -95,8 +95,9 @@ class User extends Component {
                 isAuth: true,
                 email: '',
                 password: '',
-                emailValid: response.data.email
+                userInformation: response.data.user
             });
+            console.log(this.state.userInformation)
         })
         .catch((error) => {
             displayAlert('Email or password is invalid!');
@@ -142,7 +143,7 @@ class User extends Component {
                     <View style = {{
                         marginLeft: 15,
                     }}>
-                        <Text style = {styles.norText}>IHT</Text>
+                        <Text style = {styles.norText}>{this.state.userInformation['customer_name']}</Text>
                         <Text style = {styles.norText}>S321312</Text>
                     </View>
                 </View>
@@ -172,21 +173,21 @@ class User extends Component {
                             source = {homeIcon}
                             style={styles.basicInforImage}
                         ></Image>
-                        <Text style={styles.basicInforText}>ITH</Text>
+                        <Text style={styles.basicInforText}>{this.state.userInformation['customer_name']}</Text>
                     </View>
                     <View style={styles.basicInforDetail}>
                         <Image
                             source = {callIcon}
                             style={styles.basicInforImage}
                         ></Image>
-                        <Text style={styles.basicInforText}>0932843656</Text>
+                        <Text style={styles.basicInforText}>{this.state.userInformation['phone_numner']}</Text>
                     </View>
                     <View style={styles.basicInforDetail}>
                         <Image
                             source = {messageIcon}
                             style={styles.basicInforImage}
                         ></Image>
-                        <Text style={styles.basicInforText}>{this.state.emailValid}</Text>
+                        <Text style={styles.basicInforText}>{this.state.userInformation['email']}</Text>
                     </View>
                     <View style={styles.basicInforDetail}>
                         <Image
@@ -229,21 +230,21 @@ class User extends Component {
                             source = {cartIcon}
                             style={styles.basicInforImage}
                         ></Image>
-                        <Text style={styles.basicInforText}>070110470515</Text>
+                        <Text style={styles.basicInforText}>{this.state.userInformation['bank_number']}</Text>
                     </View>
                     <View style={styles.basicInforDetail}>
                         <Image
                             source = {bankIcon}
                             style={styles.basicInforImage}
                         ></Image>
-                        <Text style={styles.basicInforText}>STB - NGAN HANG TMCP</Text>
+                        <Text style={styles.basicInforText}>{this.state.userInformation['bank_name']}</Text>
                     </View>
                     <View style={styles.basicInforDetail}>
                         <Image
                             source = {locationIcon}
                             style={styles.basicInforImage}
                         ></Image>
-                        <Text style={styles.basicInforText}>SACOMBANK CAN THO</Text>
+                        <Text style={styles.basicInforText}>{this.state.userInformation['bank_provine']}</Text>
                     </View>
                     <View style={styles.basicInforDetail}>
                         <Image
@@ -275,10 +276,10 @@ class User extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.basicInforDetail}>
-                        <Text style={styles.basicInforText}>Hào / 0932843656</Text>
+                        <Text style={styles.basicInforText}>{this.state.userInformation['customer_name']} / {this.state.userInformation['phone_numner']}</Text>
                     </View>
                     <View style={styles.basicInforDetail}>
-                        <Text style={styles.basicInforText}>Số 59/31</Text>
+                        <Text style={styles.basicInforText}>{this.state.userInformation['address']}</Text>
                     </View>
                 </View>
                 <View style= {{

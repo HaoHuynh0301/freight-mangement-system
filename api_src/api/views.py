@@ -36,11 +36,13 @@ class SignInView(APIView):
             )
             if User:
                 refreshToken = TokenObtainPairSerializer.get_token(User)
+                userSerializer = serializers.CustomerSerializer(User)
                 data = {
                     'refresh_token': str(refreshToken),
                     'access_token': str(refreshToken.access_token),
-                    'email': str(User.email)
+                    'user': userSerializer.data
                 }
+                print(data)
                 return Response(data, status = status.HTTP_200_OK)
             return Response({'error': 'No user found!'}, status = status.HTTP_404_NOT_FOUND)
         return Response({'error': 'Password or email is invalid!'}, status = status.HTTP_400_BAD_REQUEST)
