@@ -20,3 +20,14 @@ class CustomerSerializer(serializers.ModelSerializer):
                     'bank_username',
                     'password'
                 ]
+        
+        
+class BasicCustomerInformation(serializers.ModelSerializer):
+    class Meta:
+        model = models.Customer
+        fields = [  'customer_name', 
+                    'phone_numner', 
+                    'email',
+                    'password'
+                ]
+        

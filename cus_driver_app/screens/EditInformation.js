@@ -133,7 +133,7 @@ class EditInformation extends Component {
     }
 
     bankingSaveButtonPressed() {
-        console.log('Bank save');
+        
     }
 
     renderHeader() {

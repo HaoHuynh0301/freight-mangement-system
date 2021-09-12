@@ -19,6 +19,7 @@ class MyUserManager(BaseUserManager):
                     bank_name, 
                     bank_number, 
                     bank_provine, 
+                    bank_username,
                     password = None):
         if not email:
             raise ValueError('Users must have an email address')
@@ -35,6 +36,7 @@ class MyUserManager(BaseUserManager):
             bank_name = bank_name, 
             bank_number = bank_number, 
             bank_provine = bank_provine,
+            bank_username = bank_username
         )
 
         user.set_password(password)
@@ -53,6 +55,7 @@ class MyUserManager(BaseUserManager):
                             bank_name, 
                             bank_number, 
                             bank_provine, 
+                            bank_username,
                             password = None):
         user = self.create_user(
             email = email,
@@ -66,6 +69,7 @@ class MyUserManager(BaseUserManager):
             bank_name = bank_name, 
             bank_number = bank_number, 
             bank_provine = bank_provine,
+            bank_username = bank_username,
             password = password
         )
         user.is_admin = True
