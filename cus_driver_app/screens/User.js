@@ -113,7 +113,7 @@ class User extends Component {
             // await AsyncStorage.setItem('bank_provine', this.state.userInformation['bank_provine']);
         })
         .catch((error) => {
-            displayAlert('Your email or passwor is invalid!');
+            displayAlert(error);
         });
     }
 
@@ -156,7 +156,7 @@ class User extends Component {
                     <View style = {{
                         marginLeft: 15,
                     }}>
-                        <Text style = {styles.norText}></Text>
+                        <Text style = {styles.norText}>{this.state.userInformation['customer_name']}</Text>
                         <Text style = {styles.norText}>S321312</Text>
                     </View>
                 </View>

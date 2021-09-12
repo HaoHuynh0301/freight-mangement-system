@@ -30,10 +30,23 @@ import {
     Register,
     EditInformation,
     CreateOrder,
-    OrderDetail
+    OrderDetail,
+    User
 } from './screens';
 import Tabs from './navigation/tab.js';
 const Stack = createNativeStackNavigator();
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const axios = require('axios');
+
+const middleWare = async () => {
+    const token = await AsyncStorage.getItem('token')
+    console.log(token)
+    if(token !== null){
+        return true
+    } ;
+    return false;
+}
 
 const App = () => {
     return(

@@ -95,9 +95,23 @@ class Register extends Component {
         })
         .then((response) => {
             displayAlert('Created new account successfully!');
+            this.setState({
+                customer_name: '', 
+                phone_numner: '', 
+                address: '',
+                bank_name: '',
+                bank_number: '',
+                bank_provine: '',
+                bank_username: '',
+                password: '',
+                email: ''
+            })
+            this.props.navigation.navigate('User', {
+
+            });
         })
         .catch((error) => {
-            displayAlert(error);
+            displayAlert("Account information is invalid! Try again!");
         });
     }
 

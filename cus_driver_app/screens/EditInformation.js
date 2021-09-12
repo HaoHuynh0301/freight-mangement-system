@@ -24,7 +24,8 @@ import {
     callIcon,
     keyIcon,
     appFontSize,
-    greyColor
+    greyColor,
+    ipAddress
 } from '../contants';
 const axios = require('axios');
 
@@ -81,6 +82,10 @@ class EditInformation extends Component {
             .catch((error) => {
                 console.log(error);
             });
+    }
+
+    getUserInformation() {
+        axios.get(`${ipAddress}`)
     }
 
     componentDidMount() {

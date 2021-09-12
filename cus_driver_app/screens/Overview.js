@@ -16,6 +16,9 @@ import {
 class OverView extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            isAuth: false
+        }
     }
 
     handleGetAppInformation(title) {
@@ -23,6 +26,26 @@ class OverView extends Component {
             title: title
         });
     }
+
+    async middleWare() {
+        const token = await AsyncStorage.getItem('token');
+        axios.get(`${ipAddress}/api/middleware/`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((response) => {
+                this.setState({
+                    isAuth: true
+                });
+            })
+            .catch((error) => {
+                this.setState({
+                    isAuth: false
+                });
+            });
+    }    
 
     renderAppInformation() {
         return(

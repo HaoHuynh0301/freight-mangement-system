@@ -12,6 +12,8 @@ from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from api_src import api
+
 
 # Authentication classes
 
@@ -75,3 +77,17 @@ class UpdatePasswordView(APIView):
             return Response({'mes': 'Your password was updated!'}, status = status.HTTP_200_OK)
         except:
             return Response({'error': 'We are having some errors, please try later!'}, status = status.HTTP_400_BAD_REQUEST)
+        
+
+# dqw
+
+class UserInformationView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.CustomerSerializer
+    
+    def get(self, request, format = None):
+        userInstance = request.user
+        serializer = self.serializer_class(data = userInstance)
+        if serializer.is_valid():
+            return Response(serializer.data, status = status.HTTP_200_OK)
+        return Response({'error': 'We have some errors!'}, status = status.HTTP_400_BAD_REQUEST)
