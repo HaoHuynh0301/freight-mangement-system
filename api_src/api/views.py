@@ -90,9 +90,9 @@ class UserInformationView(APIView):
     
     def post(self, request, format = None):
         userInstance = request.user
+        request.data['password'] = make_password(request.data['password']) 
         serializer = serializers.BasicCustomerInformation(userInstance, data = request.data)
         if serializer.is_valid():
-            userInstance.set_password(request.data['password'])
             serializer.save()
             return Response('Update', status = status.HTTP_200_OK)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
