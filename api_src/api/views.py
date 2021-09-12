@@ -12,9 +12,6 @@ from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from api_src import api
-
-
 # Authentication classes
 
 class MiddleWare(APIView):
@@ -87,7 +84,6 @@ class UserInformationView(APIView):
     
     def get(self, request, format = None):
         userInstance = request.user
-        serializer = self.serializer_class(data = userInstance)
-        if serializer.is_valid():
-            return Response(serializer.data, status = status.HTTP_200_OK)
-        return Response({'error': 'We have some errors!'}, status = status.HTTP_400_BAD_REQUEST)
+        print(userInstance)
+        serializer = self.serializer_class(userInstance)
+        return Response(serializer.data, status = status.HTTP_200_OK)

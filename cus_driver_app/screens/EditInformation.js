@@ -9,6 +9,7 @@ import {
     Image,
     ScrollView,
     TextInput,
+    Alert
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {
@@ -27,7 +28,22 @@ import {
     greyColor,
     ipAddress
 } from '../contants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const axios = require('axios');
+
+const displayAlert = (message) => {
+    Alert.alert(
+        "Notification",
+        message,
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+        ])
+}
 
 class EditInformation extends Component {
     constructor(props) {
@@ -54,7 +70,10 @@ class EditInformation extends Component {
             bankSelectedIndex: '',
 
             // Provinces Pick
-            provinceSelectedValue: ''
+            provinceSelectedValue: '',
+
+            // axios information
+            userInformation: {}
         }
     }
 
@@ -84,13 +103,29 @@ class EditInformation extends Component {
             });
     }
 
-    getUserInformation() {
-        axios.get(`${ipAddress}`)
+    async getUserInformation() {
+        const token = await AsyncStorage.getItem('token');
+        axios.get(`${ipAddress}/api/user-information/`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => response.data)
+        .then((data) => {
+            this.setState({
+                userInformation: data
+            });
+        })
+        .catch((error) => {
+            displayAlert(error);
+        })
     }
 
     componentDidMount() {
         this.getListOfBankds();
         this.getListOfProvinces();
+        this.getUserInformation();
     }
 
     saveButtonPressed() {
@@ -150,7 +185,7 @@ class EditInformation extends Component {
                                     });
                                 }}
                                 value = {this.state.shopName}
-                                placeholder = 'ITH'
+                                placeholder = {this.state.userInformation['customer_name']}
                                 style={styles.inputText}
                             ></TextInput>
                         </View>
@@ -166,7 +201,7 @@ class EditInformation extends Component {
                                     });
                                 }}
                                 value = {this.state.phoneNumber}
-                                placeholder = '0932843656'
+                                placeholder = {String(this.state.userInformation['phone_numner'])}
                                 style={styles.inputText}
                             ></TextInput>
                         </View>
@@ -182,7 +217,7 @@ class EditInformation extends Component {
                                     });
                                 }}
                                 value = {this.state.email}
-                                placeholder = 'hao152903@gmail.com'
+                                placeholder = {this.state.userInformation['email']}
                                 style={styles.inputText}
                             ></TextInput>
                         </View>
