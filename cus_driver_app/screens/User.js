@@ -56,6 +56,8 @@ class User extends Component {
             // User information
             userInformation: '',
             passwordValid: '',
+
+            updated: false
         }
     }
 
@@ -77,6 +79,14 @@ class User extends Component {
                     isAuth: false
                 });
             });
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        console.log(props.route.params)
+        if(props.route.params != null) {
+            state.updated = true;
+        }
+        return true;
     }
 
     async getItemFromAsyncStorage(name) {

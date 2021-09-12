@@ -73,7 +73,9 @@ class EditInformation extends Component {
             provinceSelectedValue: '',
 
             // axios information
-            userInformation: {}
+            userInformation: {},
+
+            updated: false
         }
     }
 
@@ -128,8 +130,28 @@ class EditInformation extends Component {
         this.getUserInformation();
     }
 
-    saveButtonPressed() {
-        console.log('Save');
+    async saveButtonPressed() {
+        const token = await AsyncStorage.getItem('token');
+        axios.post(`${ipAddress}/api/user-information/`,{
+            customer_name: this.state.shopName, 
+            phone_numner: this.state.phoneNumber, 
+            password: this.state.password,
+            email: this.state.email
+        } ,{
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            displayAlert('Update user information successfully!');
+            this.props.navigation.navigate('User', {
+                updated: true
+            });
+        })
+        .catch((error) => {
+            displayAlert('We have some errors! Please try again later!');
+        })
     }
 
     bankingSaveButtonPressed() {
