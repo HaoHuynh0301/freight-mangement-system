@@ -129,3 +129,33 @@ class Customer(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True   
+    
+    
+class ShipOptions(models.Model):
+    name = models.CharField(max_length = 255, unique = True, blank = True)
+    
+    def __str__(self):
+        return str(self.name)    
+    
+
+class OrderStatus(models.Model):
+    name = models.CharField(max_length = 255, unique = True, blank = True)
+    
+    def __str__(self):
+        return str(self.name) 
+    
+
+class Order(models.Model):
+    customer_phonenumber = models.CharField(max_length = 15, null = False)
+    customer_name = models.CharField(max_length = 255, null = False, blank = True)
+    detail_address = models.CharField(max_length = 255, null = False, blank = True)
+    ship_option = models.ForeignKey(ShipOptions, on_delete = models.SET_NULL, null = True)
+    product_name = models.CharField(max_length = 255, blank = True)
+    product_weight = models.DecimalField(max_digits = 8, decimal_places = 2)
+    product_quantity = models.IntegerField()
+    status = models.ForeignKey(OrderStatus, on_delete = models.CASCADE, related_name = 'order_status')
+    
+    def __str__(self):
+        return str(self.customer_name)
+    
+    
