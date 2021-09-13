@@ -345,9 +345,9 @@ class EditInformation extends Component {
                                     console.log(this.state.bankSelectedValue);
                                 }}
                             >
-                                {this.state.banks.map((item) => {
+                                {this.state.banks.map((item, key) => {
                                     return(
-                                        <Picker.Item label = {item.name} value = {item.name} />
+                                        <Picker.Item key = {key} label = {item.name} value = {item.name} />
                                     );
                                 })}
                             </Picker>

@@ -22,6 +22,8 @@ import {
 } from '../contants';
 import Modal from "react-native-modal";
 import { Picker } from "@react-native-picker/picker";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const axios = require('axios');
 
 class Orders extends Component {
     constructor(props) {
@@ -59,8 +61,31 @@ class Orders extends Component {
                     name: 'Trả hàng',
                     id: 3
                 }
-            ]
+            ],
+
+            // Authentication
+            isAuth: false
         }
+    }
+
+    async middleWare() {
+        const token = await AsyncStorage.getItem('token');
+        axios.get(`${ipAddress}/api/middleware/`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((response) => {
+                this.setState({
+                    isAuth: true
+                });
+            })
+            .catch((error) => {
+                this.setState({
+                    isAuth: false
+                });
+            });
     }
 
     renderHeader() {
@@ -100,6 +125,14 @@ class Orders extends Component {
 
     handleSendRequest() {
         console.log('Send request');
+    }
+
+    componentDidMount(){
+        if(!this.state.isAuth) {
+            this.props.navigation.navigate('User', {
+
+            })
+        }
     }
 
     renderModal() {

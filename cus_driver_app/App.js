@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -47,6 +47,7 @@ const middleWare = async () => {
     } ;
     return false;
 }
+
 
 const App = () => {
     return(

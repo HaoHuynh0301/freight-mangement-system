@@ -29,6 +29,7 @@ import {
     Header
 } from '../components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Tabs from '../navigation/tab.js';
 const axios = require('axios');
 
 const displayAlert = (message) => {
@@ -123,7 +124,7 @@ class User extends Component {
             // await AsyncStorage.setItem('bank_provine', this.state.userInformation['bank_provine']);
         })
         .catch((error) => {
-            displayAlert(error);
+            displayAlert("Email or password is invalid!");
         });
     }
 
