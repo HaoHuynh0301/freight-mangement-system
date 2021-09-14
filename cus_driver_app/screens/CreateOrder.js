@@ -52,6 +52,12 @@ class CreateOrder extends Component {
             productName: '',
             quantity: 1,
             weight: 1,
+
+            // customer information
+            cus_phone_number: '',
+            cus_name: '',
+            cus_address: '',
+            order_size: ''
         }
     }
 
@@ -105,6 +111,12 @@ class CreateOrder extends Component {
                             <TextInput
                                 placeholder = 'Nhập số điện thoại khách hàng'
                                 style={styles.inputStyle}
+                                value = {this.state.cus_phone_number}
+                                onChangeText = {(text) => {
+                                    this.setState({
+                                        cus_phone_number: text
+                                    });
+                                }}
                             ></TextInput>
                         </View>
                         <View style={styles.locationInforDetail}>
@@ -115,6 +127,12 @@ class CreateOrder extends Component {
                             <TextInput
                                 placeholder = 'Tên khách hàng'
                                 style={styles.inputStyle}
+                                value = {this.state.cus_name}
+                                onChangeText = {(text) => {
+                                    this.setState({
+                                        cus_name: text
+                                    });
+                                }}
                             ></TextInput>
                         </View>
                         <View style={styles.locationInforDetail}>
@@ -125,6 +143,12 @@ class CreateOrder extends Component {
                             <TextInput
                                 placeholder = 'Địa chỉ chi tiết (nhà/ngõ/ngách)'
                                 style={styles.inputStyle}
+                                value = {this.state.cus_address}
+                                onChangeText = {(text) => {
+                                    this.setState({
+                                        cus_address: text
+                                    });
+                                }}
                             ></TextInput>
                         </View>
                     </View>
