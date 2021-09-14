@@ -46,8 +46,8 @@ class Orders extends Component {
         super(props);
         this.state = {
             orders: [
-                
             ],
+            orderId: '',
             selectedData: '',
 
             // Modal
@@ -83,7 +83,6 @@ class Orders extends Component {
             this.setState({
                 orders: resposne.data
             })
-            console.log(this.state.orders);
         })
         .catch((error) => {
             displayAlert(error);
@@ -99,7 +98,8 @@ class Orders extends Component {
     }
 
     handleRefreshOrders() {
-        console.log('Refresh')
+        console.log('Refresh');
+        this.getOrderInformation();
     }
 
     handleCreateOrderPressed(status) {
@@ -114,7 +114,10 @@ class Orders extends Component {
         });
     }
 
-    handleAddStatus() {
+    async handleAddStatus(orderId) {
+        await this.setState({
+            orderId: orderId
+        });
         this.toggleModal();
     }
 
@@ -125,8 +128,22 @@ class Orders extends Component {
         console.log(this.state.isVisible);
     }
 
-    handleSendRequest() {
-        console.log('Send request');
+    async handleSendRequest() {
+        const token = await AsyncStorage.getItem('token');
+        console.log(token)
+        axios.get(`${ipAddress}/api/request?orderId=${this.state.orderId}&rqId=${this.state.actionRequestSelected}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            displayAlert('Request was sent!');
+            this.toggleModal();
+        })
+        .catch((error) => {
+            displayAlert('Order or request option is invalid!');
+        });
     }
 
     componentDidMount(){
@@ -140,12 +157,10 @@ class Orders extends Component {
                     flexDirection: 'column',
                     height: 190,
                     backgroundColor: '#FFF',
-                    // alignItems: 'center',
                     padding: 10
                 }}>
                     <View style = {{
                         flexDirection: 'row',
-                        // justifyContent: 'space-between',
                         alignItems: 'center'
                     }}>
                         <TouchableOpacity
@@ -175,17 +190,18 @@ class Orders extends Component {
                         <View style = {styles.statusDetailWrapper}>
                             <Picker
                                 selectedValue = {this.state.actionRequestSelected}
-                                onValueChange = {(itemValue, itemIndex) => {
-                                    this.setState({
+                                onValueChange = {async (itemValue, itemIndex) => {
+                                    await this.setState({
                                         actionRequestSelected: itemValue
                                     });
+                                    console.log(this.state.actionRequestSelected);
                                 }}
                             >
                                 {this.state.actions.map((item, key) => {
                                     return(
                                         <Picker.Item
                                              key = {key}
-                                            value = {item.name}
+                                            value = {item.id}
                                             label = {item.name}
                                         />
                                     );
@@ -321,6 +337,7 @@ class Orders extends Component {
                     extraData = {this.state.selectedData}
                     contentContainerStyle = {{padding: 10, marginTop: 0}}
                     ListEmptyComponent = {renderEmptyFavoriteProducts}
+                    // onRefresh = {this.handleRefreshOrders()}
                 />
             </View>
         );
