@@ -7,8 +7,10 @@ import Register from "./Register";
 import EditInformation from "./EditInformation";
 import CreateOrder from './CreateOrder';
 import OrderDetail from "./OrderDetail";
+import SignIn from './SignIn';
 
 export {
+    SignIn,
     MonenyFlow,
     Orders,
     OverView,

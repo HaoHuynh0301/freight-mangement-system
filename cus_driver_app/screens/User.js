@@ -29,8 +29,8 @@ import {
     Header
 } from '../components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Tabs from '../navigation/tab.js';
 const axios = require('axios');
+import App from '../App';
 
 const displayAlert = (message) => {
     Alert.alert(
@@ -138,6 +138,9 @@ class User extends Component {
         await AsyncStorage.setItem('token', '');
         this.setState({
             isAuth: false
+        });
+        this.props.navigation.navigate('SignIn', {
+
         });
     }
 
@@ -379,15 +382,9 @@ class User extends Component {
     }
 
     renderMainView() {
-        if(this.state.isAuth) {
-            return(
-                this.renderUserPage()
-            );
-        } else {
-            return(
-                this.renderSignInPage()
-            );
-        }
+        return(
+            this.renderUserPage()
+        );
     }
 
     render() {
