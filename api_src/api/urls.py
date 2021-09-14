@@ -9,5 +9,6 @@ urlpatterns = [
     # ============= #
     
     path('user-information/', views.UserInformationView.as_view(), name = 'user-information'),
-    path('order-information/', views.OrderView.as_view(), name = 'order-information')
+    path('order-information/', views.OrderView.as_view(), name = 'order-information'),
+    path('request/', views.RequestView.as_view(), name = 'request')
 ]
