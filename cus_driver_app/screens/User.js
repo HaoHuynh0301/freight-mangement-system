@@ -14,7 +14,6 @@ import {
     impText,
     appFontSize,
     headerFontSize,
-    settingIcon,
     accountIcon,
     homeIcon,
     messageIcon,
@@ -30,7 +29,6 @@ import {
 } from '../components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const axios = require('axios');
-import App from '../App';
 
 const displayAlert = (message) => {
     Alert.alert(
@@ -62,24 +60,22 @@ class User extends Component {
         }
     }
 
-    async middleWare() {
+    async getUserInformation() {
         const token = await AsyncStorage.getItem('token');
-        axios.get(`${ipAddress}/api/middleware/`, {
+        axios.get(`${ipAddress}/api/user-information/`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
             }
         })
-            .then((response) => {
-                this.setState({
-                    isAuth: true
-                });
-            })
-            .catch((error) => {
-                this.setState({
-                    isAuth: false
-                });
+        .then((response) => {
+            this.setState({
+                userInformation: response.data
             });
+        })
+        .catch((error) => {
+            displayAlert('We have some error! Please try again later!');
+        })
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -97,42 +93,9 @@ class User extends Component {
     }
 
     componentDidMount() {
-        this.middleWare();
+        this.getUserInformation();
     }
 
-    handleSignInPressed() {
-        console.log(this.state.email + this.state.password);
-        axios.post(`${ipAddress}/api/sign-in/`, {
-            email: this.state.email,
-            password: this.state.password
-        })
-        .then(async (response) => {
-            await AsyncStorage.setItem('token', response.data.access_token);
-            console.log(response.data.user);
-            this.setState({
-                isAuth: true,
-                email: '',
-                password: '',
-                userInformation: response.data.user
-            });
-            // await AsyncStorage.setItem('customer_name', this.state.userInformation['customer_name']);
-            // await AsyncStorage.setItem('phone_number', String(this.state.userInformation['phone_numner']));
-            // await AsyncStorage.setItem('email', this.state.userInformation['email']);
-            // await AsyncStorage.setItem('address', this.state.userInformation['address']);
-            // await AsyncStorage.setItem('bank_name', this.state.userInformation['bank_name']);
-            // await AsyncStorage.setItem('bank_number', String(this.state.userInformation['bank_number']));
-            // await AsyncStorage.setItem('bank_provine', this.state.userInformation['bank_provine']);
-        })
-        .catch((error) => {
-            displayAlert("Email or password is invalid!");
-        });
-    }
-
-    handleRegisterPressed() {
-        this.props.navigation.navigate('Register', {
-
-        });
-    }
 
     async signOutButtonPressed() {
         await AsyncStorage.setItem('token', '');
@@ -330,56 +293,7 @@ class User extends Component {
         
     }
 
-    renderSignInPage() {
-        return(
-            <View style={styles.signInWrapper}>
-                <Text style={styles.impText}>Vui lòng đăng nhập</Text>
-                <View style={styles.inputWrapper}>
-                    <View style={styles.inputDetailWrapper}>
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder = 'Email'
-                            onChangeText = {(text) => {
-                                this.setState({
-                                    email: text
-                                });
-                            }}
-                            value = {this.state.email}
-                        ></TextInput>
-                    </View>
-                    <View style={styles.inputDetailWrapper}>
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder = 'Mật khẩu'
-                            secureTextEntry = {true}
-                            onChangeText = {(text) => {
-                                this.setState({
-                                    password: text
-                                });
-                            }}
-                            value = {this.state.password}
-                        ></TextInput>
-                    </View>
-                </View>
-                <TouchableOpacity 
-                    style = {styles.buttonLogin}
-                    onPress = {() => {
-                        this.handleSignInPressed()
-                    }}
-                >
-                    <Text style = {{fontSize: 20, fontWeight: 'bold'}}>Sign in</Text>
-                </TouchableOpacity>
-                <View style = {styles.registerWrapper}>
-                    <Text style = {styles.registerText}>Don't have any accounts ? </Text>
-                    <TouchableOpacity
-                        onPress = {() => {this.handleRegisterPressed()}}
-                    >
-                        <Text style = {styles.registerText}>Register an account</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        );
-    }
+
 
     renderMainView() {
         return(

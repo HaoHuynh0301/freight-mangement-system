@@ -82,7 +82,9 @@ class SignIn extends Component {
                 password: '',
                 userInformation: response.data.user
             });
-            this.props.navigation.navigate('Tabs')
+            this.props.navigation.navigate('Tabs', {
+                userInformation: this.state.userInformation
+            });
         })
         .catch((error) => {
             displayAlert("Email or password is invalid!");
