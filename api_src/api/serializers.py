@@ -35,6 +35,4 @@ class BasicCustomerInformation(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Order
-        fieldss = [
-            '__all__'
-        ]
+        fields = '__all__'

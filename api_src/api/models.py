@@ -146,6 +146,7 @@ class OrderStatus(models.Model):
     
 
 class Order(models.Model):
+    account = models.ForeignKey(Customer, on_delete = models.CASCADE, related_name = 'account_order')
     customer_phonenumber = models.CharField(max_length = 15, null = False)
     customer_name = models.CharField(max_length = 255, null = False, blank = True)
     detail_address = models.CharField(max_length = 255, null = False, blank = True)

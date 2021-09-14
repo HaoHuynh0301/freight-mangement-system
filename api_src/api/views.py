@@ -111,3 +111,9 @@ class OrderView(APIView):
             return Response({'status': 'CREATED'}, status = status.HTTP_200_OK)
         return Response({'error': serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
+    def get(self, request, format = None):
+        userInstance = request.user
+        accountOrders = userInstance.account_order.all()
+        serializers = self.serializer_class(accountOrders, many = True)
+        return Response(serializers.data, status = status.HTTP_200_OK)
+    
