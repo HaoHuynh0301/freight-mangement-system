@@ -1,7 +1,7 @@
 from rest_framework.serializers import Serializer
 from . import models, serializers
 from django.shortcuts import render, get_object_or_404
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import action
@@ -97,3 +97,17 @@ class UserInformationView(APIView):
             return Response('Update', status = status.HTTP_200_OK)
         print(serializer.errors)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    
+    
+class OrderView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.OrderSerializer
+    
+    def post(self, request, format = None):
+        createdData = request.data
+        serializer = self.serializer_class(data = createdData)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'status': 'CREATED'}, status = status.HTTP_200_OK)
+        return Response({'error': serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
+    

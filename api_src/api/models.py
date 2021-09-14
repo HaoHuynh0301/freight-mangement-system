@@ -154,17 +154,17 @@ class Order(models.Model):
     product_weight = models.DecimalField(max_digits = 8, decimal_places = 2)
     product_quantity = models.IntegerField()
     status = models.ForeignKey(OrderStatus, on_delete = models.CASCADE, related_name = 'order_status')
-    product_image = models.ImageField(null = True, blank = True, upload_to = 'images/')
+    # product_image = models.ImageField(null = True, blank = True, upload_to = 'images/')
     
     def __str__(self):
         return str(self.customer_name)
     
-    @property
-    def imageURL(self):
-        try:
-            url = self.imgUrl.url
-        except:
-            url = ''
-        return url
+    # @property
+    # def imageURL(self):
+    #     try:
+    #         url = self.product_image.url
+    #     except:
+    #         url = ''
+    #     return url
     
     

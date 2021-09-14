@@ -31,3 +31,10 @@ class BasicCustomerInformation(serializers.ModelSerializer):
                     'password'
                 ]
         
+        
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Order
+        fieldss = [
+            '__all__'
+        ]

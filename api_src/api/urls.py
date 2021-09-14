@@ -6,7 +6,8 @@ urlpatterns = [
     path('middleware/', views.MiddleWare.as_view(), name = 'middleware'),
     path('register/', views.RegisterView.as_view(), name = 'register'),
     
-    # =============
+    # ============= #
     
-    path('user-information/', views.UserInformationView.as_view(), name = 'user-information')
+    path('user-information/', views.UserInformationView.as_view(), name = 'user-information'),
+    path('order-information/', views.OrderView.as_view(), name = 'order-information')
 ]
