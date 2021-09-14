@@ -229,7 +229,7 @@ class Orders extends Component {
                                 this.oppenOrderInformation(item.id)
                             }}
                             style = {{
-                                paddingLeft: 190
+                                paddingLeft: 280
                             }}
                         >
                             <Image
@@ -239,15 +239,15 @@ class Orders extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style = {styles.productInformationDetail}>
-                        <Text style={styles.appFontSize}>Tên: Huỳnh Quan Nhật Hào/ 0932843656</Text>
-                        <Text style={styles.appFontSize}>Đại chỉ: Quản Trọng Hoàng, Hưng Lợi, Ninh Kiều, Cần Thơ</Text>
-                        <Text style={styles.appFontSize}>Thu hộ: 200000 đ</Text>
-                        <Text style={styles.appFontSize}>Ghi chú: Hàng dễ vỡ, vui lòng nhẹ tay</Text>
+                        <Text style={styles.appFontSize}>Tên: {item.customer_name}/ {item.customer_phonenumber}</Text>
+                        <Text style={styles.appFontSize}>Đại chỉ: {item.detail_address}</Text>
+                        <Text style={styles.appFontSize}>Thu hộ: {item.cast} đ</Text>
+                        <Text style={styles.appFontSize}>Ghi chú: {item.note}</Text>
                     </View>
                     <View style = {styles.orderStatusWrapper}>
                         <View style = {styles.orderStatusTitle}>
                             <Text style={styles.highlightText}>Trạng thái: </Text>
-                            <Text style={styles.highlightText}>Đã tiếp nhận</Text>
+                            <Text style={styles.highlightText}>{item.status.name}</Text>
                         </View>
                     </View>
                     <TouchableOpacity

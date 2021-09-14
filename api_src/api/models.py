@@ -155,6 +155,8 @@ class Order(models.Model):
     product_weight = models.DecimalField(max_digits = 8, decimal_places = 2)
     product_quantity = models.IntegerField()
     status = models.ForeignKey(OrderStatus, on_delete = models.CASCADE, related_name = 'order_status')
+    cast = models.IntegerField()
+    note = models.TextField()
     # product_image = models.ImageField(null = True, blank = True, upload_to = 'images/')
     
     def __str__(self):
@@ -169,3 +171,16 @@ class Order(models.Model):
     #     return url
     
     
+class RequestOption(models.Model):
+    name = models.CharField(max_length = 255, blank = True)
+    
+    def __str__(self):
+        return str(self.name)
+    
+    
+class Request(models.Model):
+    order = models.ForeignKey(Order, on_delete = models.CASCADE)
+    request_option = models.ForeignKey(RequestOption, on_delete = models.SET_NULL, null = True)
+    
+    def __str__(self):
+        return str(self.order.customer_name)
