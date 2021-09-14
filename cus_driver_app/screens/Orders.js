@@ -7,6 +7,7 @@ import {
     FlatList,
     TouchableOpacity,
     Image,
+    Alert
 } from "react-native";
 import {
     headerFontSize,
@@ -18,30 +19,34 @@ import {
     deliveryIcon,
     bycicleIcon,
     rightArrowIcon,
-    xIcon
+    xIcon,
+    ipAddress
 } from '../contants';
 import Modal from "react-native-modal";
 import { Picker } from "@react-native-picker/picker";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const axios = require('axios');
 
+const displayAlert = (message) => {
+    Alert.alert(
+        "Notification",
+        message,
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+        ])
+}
+
 class Orders extends Component {
     constructor(props) {
         super(props);
         this.state = {
             orders: [
-                {
-                    name: 'One',
-                    id: 'WE213DSA89'
-                },
-                {
-                    name: 'Two',
-                    id: 'UW8973DQ98'
-                },
-                {
-                    name: 'Two',
-                    id: 'UW8993DQ98'
-                }
+                
             ],
             selectedData: '',
 
@@ -63,29 +68,26 @@ class Orders extends Component {
                 }
             ],
 
-            // Authentication
-            isAuth: false
         }
     }
 
-    async middleWare() {
+    async getOrderInformation() {
         const token = await AsyncStorage.getItem('token');
-        axios.get(`${ipAddress}/api/middleware/`, {
+        axios.get(`${ipAddress}/api/order-information/`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
             }
-        })
-            .then((response) => {
-                this.setState({
-                    isAuth: true
-                });
+        }).
+        then((resposne) => {
+            this.setState({
+                orders: resposne.data
             })
-            .catch((error) => {
-                this.setState({
-                    isAuth: false
-                });
-            });
+            console.log(this.state.orders);
+        })
+        .catch((error) => {
+            displayAlert(error);
+        });
     }
 
     renderHeader() {
@@ -128,11 +130,7 @@ class Orders extends Component {
     }
 
     componentDidMount(){
-        if(!this.state.isAuth) {
-            this.props.navigation.navigate('User', {
-
-            })
-        }
+        this.getOrderInformation();
     }
 
     renderModal() {
