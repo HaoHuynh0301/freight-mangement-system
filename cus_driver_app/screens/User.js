@@ -79,10 +79,8 @@ class User extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        console.log(props.route.params)
-        if(props.route.params != null) {
-            state.updated = true;
-        }
+        console.log(props.route.params);
+        state.updated = true;
         return true;
     }
 

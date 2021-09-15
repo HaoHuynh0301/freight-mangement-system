@@ -77,7 +77,8 @@ class UpdatePasswordView(APIView):
             return Response({'error': 'We are having some errors, please try later!'}, status = status.HTTP_400_BAD_REQUEST)
         
 
-# dqw
+# ================================================================ #
+
 
 class UserInformationView(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -98,6 +99,20 @@ class UserInformationView(APIView):
             return Response('Update', status = status.HTTP_200_OK)
         print(serializer.errors)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    
+    
+class BankingInformation(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.BankCustomerSerializer
+    
+    def post(self, request, format = None):
+        userInstance = request.user
+        serializer = self.serializer_class(userInstance, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Updated'}, status = status.HTTP_200_OK)
+        print(serializer.errors)
+        return Response({'error': serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     
 class OrderView(APIView):

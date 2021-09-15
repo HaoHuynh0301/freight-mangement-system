@@ -69,21 +69,15 @@ class SignIn extends Component {
     }
 
     handleSignInPressed() {
+        console.log('OK')
         axios.post(`${ipAddress}/api/sign-in/`, {
             email: this.state.email,
             password: this.state.password
         })
         .then(async (response) => {
             await AsyncStorage.setItem('token', response.data.access_token);
-            console.log(response.data.user);
-            this.setState({
-                isSignedIn: true,
-                email: '',
-                password: '',
-                userInformation: response.data.user
-            });
             this.props.navigation.navigate('Tabs', {
-                userInformation: this.state.userInformation
+                
             });
         })
         .catch((error) => {

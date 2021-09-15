@@ -114,8 +114,8 @@ class EditInformation extends Component {
             }
         })
         .then((response) => response.data)
-        .then((data) => {
-            this.setState({
+        .then(async (data) => {
+            await this.setState({
                 userInformation: data
             });
         })
@@ -154,8 +154,31 @@ class EditInformation extends Component {
         })
     }
 
-    bankingSaveButtonPressed() {
-        
+    async bankingSaveButtonPressed() {
+        const token = await AsyncStorage.getItem('token');
+        axios.post(`${ipAddress}/api/bank-information/`, {
+            bank_username: this.state.accountName,
+            bank_number: this.state.stk,
+            bank_name: this.state.bankSelectedValue,
+            bank_provine: this.state.provinceSelectedValue,
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(async (response) => {
+            this.getUserInformation();
+            await this.setState({
+                bank_username: '',
+                bank_number: '',
+                bank_name: '',
+            });
+            displayAlert('Your information was updated!');
+        })
+        .catch((error) => {
+            displayAlert('Your input information is invalid! Please try again!');
+        });
     }
 
     renderHeader() {
@@ -308,7 +331,7 @@ class EditInformation extends Component {
                                 });
                             }}
                             value = {this.state.accountName}
-                            placeholder = 'HUYNH QUAN NHAT HAO'
+                            placeholder = {this.state.userInformation['bank_username']}
                             style={styles.bankingEditInput}
                         ></TextInput>
                     </View>
@@ -321,7 +344,7 @@ class EditInformation extends Component {
                                 });
                             }}
                             value = {this.state.stk}
-                            placeholder = '0701219318'
+                            placeholder = {String(this.state.userInformation['bank_number'])}
                             style={styles.bankingEditInput}
                         ></TextInput>
                     </View>
