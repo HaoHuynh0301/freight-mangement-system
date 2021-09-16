@@ -83,8 +83,9 @@ class EditInformation extends Component {
             // Modal
             isVisible: false,
             locaProvince: '',
-            locaProvinceCode: '',
-            localDistrict: ''
+            localDistrict: '',
+            districts: [],
+            wards: []
         }
     }
 
@@ -115,13 +116,12 @@ class EditInformation extends Component {
     }
 
     getListOfDistrict() {
-        console.log(this.state.locaProvince);
         axios.get(`https://vapi.vnappmob.com/api/province/district/${this.state.locaProvince}`)
-            .then((response) => {
-                // this.setState({
-                //     provinces: response.data
-                // });
-                console.log(response.data);
+            .then(async (response) => {
+                await this.setState({
+                    districts: response.data.results
+                });
+                // console.log(response.data.results);
             })
             .catch((error) => {
                 console.log(error);
@@ -138,6 +138,18 @@ class EditInformation extends Component {
         .catch((error) => {
             displayAlert(error);
         })
+    }
+
+    getListOfWard() {
+        axios.get(`https://vapi.vnappmob.com/api/province/ward/${this.state.localDistrict}`)
+            .then(async (response) => {
+                await this.setState({
+                    wards: response.data.results
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     async getUserInformation() {
@@ -306,6 +318,38 @@ class EditInformation extends Component {
                                 {this.state.provinces.map((item, key) => {
                                     return(
                                         <Picker.Item key = {key} label = {item.name} value = {item.code} />
+                                    );
+                                })}
+                            </Picker>
+                            <Picker
+                                style = {styles.banksPicker}
+                                selectedValue = {this.state.localDistrict}
+                                onValueChange = {async (itemValue, itemIndex) => {
+                                    await this.setState({
+                                        localDistrict: itemValue,
+                                    });
+                                    this.getListOfWard();
+                                }}
+                            >
+                                {this.state.districts.map((item, key) => {
+                                    return(
+                                        <Picker.Item key = {key} label = {item.district_name} value = {item.district_id} />
+                                    );
+                                })}
+                            </Picker>
+                            <Picker
+                                style = {styles.banksPicker}
+                                selectedValue = {this.state.localDistrict}
+                                onValueChange = {async (itemValue, itemIndex) => {
+                                    // await this.setState({
+                                    //     localDistrict: itemValue,
+                                    // });
+                                    // this.getListOfDistrict();
+                                }}
+                            >
+                                {this.state.wards.map((item, key) => {
+                                    return(
+                                        <Picker.Item key = {key} label = {item.ward_name} value = {item.ward_id} />
                                     );
                                 })}
                             </Picker>
