@@ -26,9 +26,11 @@ import {
     keyIcon,
     appFontSize,
     greyColor,
-    ipAddress
+    ipAddress,
+    xIcon
 } from '../contants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Modal from "react-native-modal";
 const axios = require('axios');
 
 const displayAlert = (message) => {
@@ -58,6 +60,7 @@ class EditInformation extends Component {
             // array got from API
             banks: [],
             provinces: [],
+            provincesDetail: [],
 
             // Banking information
             accountName: '',
@@ -75,7 +78,10 @@ class EditInformation extends Component {
             // axios information
             userInformation: {},
 
-            updated: false
+            updated: false,
+
+            // Modal
+            isVisible: false,
         }
     }
 
@@ -104,6 +110,16 @@ class EditInformation extends Component {
                 console.log(error);
             });
     }
+    
+    getListOfProvincesDetail() {
+        axios.get(`https://provinces.open-api.vn/api/?depth=2`)
+        .then((response) => {
+            console.log(response.data)
+        })
+        .catch((error) => {
+            displayAlert(error);
+        })
+    }
 
     async getUserInformation() {
         const token = await AsyncStorage.getItem('token');
@@ -128,6 +144,7 @@ class EditInformation extends Component {
         this.getListOfBankds();
         this.getListOfProvinces();
         this.getUserInformation();
+        this.getListOfProvincesDetail();
     }
 
     async saveButtonPressed() {
@@ -198,6 +215,41 @@ class EditInformation extends Component {
                     <Text style = {styles.nameWrapper}>{this.props.route.params.status}</Text>
                 </View>
             </View>
+        );
+    }
+
+    toggleModal() {
+        this.setState({
+            isVisible: !this.state.isVisible
+        });
+        console.log(this.state.isVisible);
+    }
+
+    edtiLocation() {
+        this.toggleModal();
+    }
+
+    renderModal() {
+        return(
+            <Modal isVisible={this.state.isVisible}>
+                <View style={{
+                    flexDirection: 'column',
+                    height: 190,
+                    backgroundColor: '#FFF',
+                    padding: 10
+                }}>
+                    <TouchableOpacity
+                        onPress = {() => {
+                            this.toggleModal();
+                        }}
+                    >
+                        <Image
+                            source = {xIcon}
+                            style={styles.xIconStyle}
+                        ></Image>
+                    </TouchableOpacity>
+                </View>
+            </Modal>
         );
     }
 
@@ -426,8 +478,91 @@ class EditInformation extends Component {
 
     renderLocationEditView() {
         return(
-            <View>
-                <Text>Location</Text>
+            <View style = {{
+                flexDirection: 'column',
+                alignItems: 'center',
+                marginLeft: 10,
+                marginTop: 10,
+                marginRight: 10,
+                borderWidth: 0.8,
+                borderColor: greyColor,
+                borderRadius: 10,
+                height: 245
+            }}>
+                <View style = {{
+                    backgroundColor: greyColor,
+                    flexDirection: 'row',
+                    width: '100%',
+                    justifyContent: 'flex-start',
+                    // alignItems: 'center',
+                    height: 45,
+                    padding: 10
+                }}>
+                    <Text style = {{
+                        fontSize: appFontSize
+                    }}>Địa chỉ</Text>
+                </View>
+                <View style = {{
+                    flexDirection: 'column',
+                    justifyContent: 'center'
+                }}>
+                    <View style = {styles.khoDoInforDetail}>
+                        <Image
+                            source = {accountIcon}
+                            style = {styles.basicInforImage}
+                        ></Image>
+                        <Text style = {{
+                            marginLeft: 10,
+                            fontSize: appFontSize
+                        }}>ITH</Text>
+                    </View>
+                    <View style = {styles.khoDoInforDetail}>
+                        <Image
+                            source = {callIcon}
+                            style = {styles.basicInforImage}
+                        ></Image>
+                        <Text style = {{
+                            marginLeft: 10,
+                            fontSize: appFontSize
+                        }}>0932843656</Text>
+                    </View>
+                    <View style = {styles.khoDoInforDetail}>
+                        <TouchableOpacity style = {{
+                            flexDirection: 'row'
+                        }}
+                            onPress = {() => {
+                                this.edtiLocation()
+                            }}
+                        >
+                            <Image
+                                source = {locationIcon}
+                                style = {styles.basicInforImage}
+                            ></Image>
+                            <Text style = {{
+                                marginLeft: 10,
+                                fontSize: appFontSize
+                            }}>Hưng Lợi, Ninh Kiều, Cần Thơ</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style = {styles.khoDoInforDetail}>
+                        <TouchableOpacity style = {{
+                            flexDirection: 'row'
+                        }}
+                            onPress = {() => {
+                                this.edtiLocation()
+                            }}
+                        >
+                            <Image
+                                source = {locationIcon}
+                                style = {styles.basicInforImage}
+                            ></Image>
+                            <Text style = {{
+                                marginLeft: 10,
+                                fontSize: appFontSize
+                            }}>59/31, Bến Hoa Viên</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </View>
         );
     }
@@ -454,6 +589,7 @@ class EditInformation extends Component {
             <SafeAreaView>
                 {this.renderHeader()}
                 {this.renderMainEditInformation()}
+                {this.renderModal()}
             </SafeAreaView>
         );
     }
@@ -546,7 +682,31 @@ const styles = StyleSheet.create({
     banksPicker: {
         borderWidth: 0.3,
         borderColor: greyColor,
-    }
+    },
+    khoDoInforDetail: {
+        height: 50,
+        padding: 10,
+        borderBottomWidth: 0.8,
+        borderBottomColor: greyColor,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width: 385
+    },
+    locationEditWrapper: {
+        height: 80,
+        padding: 10,
+        borderBottomWidth: 0.8,
+        borderBottomColor: greyColor,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width: 385
+    },
+    xIconStyle: {
+        height: 20,
+        width: 20
+    },
 });
 
 export default EditInformation;
