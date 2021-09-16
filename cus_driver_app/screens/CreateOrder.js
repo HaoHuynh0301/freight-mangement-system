@@ -8,6 +8,7 @@ import {
     StyleSheet,
     TextInput,
     ScrollView,
+    Alert
 } from 'react-native';
 import {
     greyColor,
@@ -18,9 +19,26 @@ import {
     homeIcon,
     accountIcon,
     locationIcon,
-    orangeColor
+    orangeColor,
+    ipAddress
 } from '../contants';
 import {Picker} from '@react-native-picker/picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+
+const displayAlert = (message) => {
+    Alert.alert(
+        "Notification",
+        message,
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+        ])
+}
 
 class CreateOrder extends Component {
     constructor(props) {
@@ -29,19 +47,22 @@ class CreateOrder extends Component {
             orderSize: this.props.route.params.status,
 
             // order size
-            orderSizeSelected: '',
+            orderSizeSelected: 1,
             orderSizes: [
                 {
                     name: 'Siêu rẻ',
-                    id: 1
+                    id: 1,
+                    fee: 10000
                 },
                 {
                     name: 'Hàng nhỏ (<20kg)',
-                    id: 2
+                    id: 2,
+                    fee: 20000
                 },
                 {
                     name: 'Hàng lớn (>20kg)',
-                    id: 3
+                    id: 3,
+                    fee: 30000
                 }
             ],
 
@@ -50,22 +71,23 @@ class CreateOrder extends Component {
 
             // product information
             productName: '',
-            quantity: 1,
-            weight: 1,
+            quantity: '',
+            weight: '',
+            cast: '',
+            shippingFee: '',
+            totalCast: '',
 
             // customer information
             cus_phone_number: '',
             cus_name: '',
             cus_address: '',
-            order_size: ''
+            order_size: '',
+            note: 'Không có ghi chú'
         }
     }
 
     componentDidMount() {
-        this.setState({
-            orderSizeSelected: this.props.route.params.status
-        });
-        console.log(this.state.orderSizeSelected);
+        
     }
 
     renderHeader() {
@@ -90,6 +112,35 @@ class CreateOrder extends Component {
 
     handleAddProductImage() {
         console.log('Add image for product')
+    }
+
+    async handleCreateOrder() {
+        console.log(this.state.orderSizes[this.state.orderSizeSelected].fee);
+        const token = await AsyncStorage.getItem('token');
+        axios.post(`${ipAddress}/api/order-information/`, {
+            cus_phonenumber: this.state.cus_phone_number,
+            cus_name: this.state.cus_name,
+            detail_address: this.state.cus_address,
+            product_name: this.state.productName,
+            product_weight: Number(this.state.weight),
+            product_quantity: Number(this.state.quantity),
+            shipOptionId: this.state.orderSizeSelected,
+            statusId: 1,
+            cast: this.state.totalCast,
+            note: this.state.note
+        },
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            displayAlert('Created new order successfully!');
+        })
+        .catch((error) => {
+            displayAlert('Your information is invalid! Please try again!');
+        });
     }
 
     renderMainView() {
@@ -163,18 +214,35 @@ class CreateOrder extends Component {
                         <Picker
                             style = {styles.banksPicker}
                             selectedValue = {this.state.orderSizeSelected}
-                            onValueChange = {(itemValue, itemIndex) => {
-                                this.setState({
+                            onValueChange = {async (itemValue, itemIndex) => {
+                                await this.setState({
                                     orderSizeSelected: itemValue,
+                                    totalCast: Number(this.state.cast) + (this.state.orderSizes[this.state.orderSizeSelected-1].fee)
                                 });
+                                console.log(this.state.orderSizeSelected);
                             }}
                         >
                             {this.state.orderSizes.map((item, key) => {
                                 return(
-                                    <Picker.Item key = {key} label = {item.name} value = {item.name} />
+                                    <Picker.Item key = {key} label = {item.name} value = {item.id} />
                                 );
                             })}
                         </Picker>
+                    </View>
+                    <View style={styles.locationInforDetail}>
+                        <Text
+                            style = {{
+                                flex: 1,
+                                alignItems: 'flex-start',
+                                fontSize: appFontSize,
+                                marginTop: 10,
+                                borderBottomWidth: 0.6,
+                                borderBottomColor: greyColor,
+                                paddingBottom: 10
+                            }}
+                        >
+                            Phí ship: {this.state.orderSizes[this.state.orderSizeSelected-1].fee}đ
+                        </Text>
                     </View>
                     <View style={styles.productInformationDetail}>
                         <View style={styles.productTitleInformationDetail}>
@@ -209,7 +277,7 @@ class CreateOrder extends Component {
                                 <TextInput
                                     placeholder = '2. Khối lượng'
                                     style={styles.productInputStyle}
-                                    value = {this.state.productName}
+                                    value = {String(this.state.weight)}
                                     onChangeText = {(text) => {
                                         this.setState({
                                             weight: text
@@ -221,7 +289,7 @@ class CreateOrder extends Component {
                                 <TextInput
                                     placeholder = '3. Số lượng'
                                     style={styles.productInputStyle}
-                                    value = {this.state.productName}
+                                    value = {String(this.state.quantity)}
                                     onChangeText = {(text) => {
                                         this.setState({
                                             quantity: text
@@ -229,8 +297,42 @@ class CreateOrder extends Component {
                                     }}
                                 ></TextInput>
                             </View>
+                            <View style={styles.locationInforDetail}>
+                                <TextInput
+                                    placeholder = '4. Tiền thu hộ'
+                                    style={styles.productInputStyle}
+                                    value = {String(this.state.cast)}
+                                    onChangeText = {async (text) => {
+                                        await this.setState({
+                                            cast: text
+                                        });
+
+                                        await this.setState({
+                                            totalCast: Number(this.state.cast) + (this.state.orderSizes[this.state.orderSizeSelected-1].fee)
+                                        });
+                                    }}
+                                ></TextInput>
+                            </View>
+                            <View style={styles.locationInforDetail}>
+                                <Text
+                                    style = {{
+                                        flex: 1,
+                                        alignItems: 'flex-start',
+                                        fontSize: appFontSize,
+                                        marginTop: 10,
+                                        borderBottomWidth: 0.6,
+                                        borderBottomColor: greyColor,
+                                        paddingBottom: 10
+                                    }}
+                                >
+                                    Tổng tiền: {this.state.totalCast} đ
+                                </Text>
+                            </View>
                             <TouchableOpacity
                                 style={styles.buttonCreateOrder}
+                                onPress = {() => {
+                                    this.handleCreateOrder();
+                                }}
                             >
                                 <Text style={styles.appFontSize}>Tạo đơn hàng</Text>
                             </TouchableOpacity>
@@ -243,7 +345,7 @@ class CreateOrder extends Component {
 
     render() {
         return(
-            <SafeAreaView>
+            <SafeAreaView style = {{flex: 1}}>
                 {this.renderHeader()}
                 {this.renderMainView()}
             </SafeAreaView>

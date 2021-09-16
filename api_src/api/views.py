@@ -120,12 +120,23 @@ class OrderView(APIView):
     serializer_class = serializers.OrderSerializer
     
     def post(self, request, format = None):
-        createdData = request.data
-        serializer = self.serializer_class(data = createdData)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'status': 'CREATED'}, status = status.HTTP_200_OK)
-        return Response({'error': serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
+        userInstance = request.user
+        shipOption = models.ShipOptions.objects.get(id = request.data.get('shipOptionId'))
+        statusInstance = models.OrderStatus.objects.get(id = request.data['statusId'])
+        newOrder = models.Order.objects.create (
+                                                    account = userInstance,
+                                                    ship_option = shipOption,
+                                                    status = statusInstance,
+                                                    customer_phonenumber = request.data.get('cus_phonenumber'),
+                                                    customer_name = request.data.get('cus_name'),
+                                                    detail_address = request.data.get('detail_address'),
+                                                    product_name = request.data.get('product_name'),
+                                                    product_weight = request.data.get('product_weight'),
+                                                    product_quantity = request.data.get('product_quantity'),
+                                                    cast = request.data.get('cast'),
+                                                    note = request.data.get('note'),
+                                                )
+        return Response('OK', status = status.HTTP_200_OK)
     
     def get(self, request, format = None):
         userInstance = request.user
