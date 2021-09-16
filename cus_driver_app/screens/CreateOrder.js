@@ -115,7 +115,6 @@ class CreateOrder extends Component {
     }
 
     async handleCreateOrder() {
-        console.log(this.state.orderSizes[this.state.orderSizeSelected].fee);
         const token = await AsyncStorage.getItem('token');
         axios.post(`${ipAddress}/api/order-information/`, {
             cus_phonenumber: this.state.cus_phone_number,
@@ -137,6 +136,7 @@ class CreateOrder extends Component {
         })
         .then((response) => {
             displayAlert('Created new order successfully!');
+            this.props.navigation.goBack();
         })
         .catch((error) => {
             displayAlert('Your information is invalid! Please try again!');
@@ -217,9 +217,10 @@ class CreateOrder extends Component {
                             onValueChange = {async (itemValue, itemIndex) => {
                                 await this.setState({
                                     orderSizeSelected: itemValue,
+                                });
+                                await this.setState({
                                     totalCast: Number(this.state.cast) + (this.state.orderSizes[this.state.orderSizeSelected-1].fee)
                                 });
-                                console.log(this.state.orderSizeSelected);
                             }}
                         >
                             {this.state.orderSizes.map((item, key) => {
@@ -306,7 +307,6 @@ class CreateOrder extends Component {
                                         await this.setState({
                                             cast: text
                                         });
-
                                         await this.setState({
                                             totalCast: Number(this.state.cast) + (this.state.orderSizes[this.state.orderSizeSelected-1].fee)
                                         });
