@@ -82,7 +82,9 @@ class EditInformation extends Component {
 
             // Modal
             isVisible: false,
-            locaProvince: ''
+            locaProvince: '',
+            locaProvinceCode: '',
+            localDistrict: ''
         }
     }
 
@@ -106,6 +108,20 @@ class EditInformation extends Component {
                     provinces: response.data
                 });
                 // console.log(this.state.provinces);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    getListOfDistrict() {
+        console.log(this.state.locaProvince);
+        axios.get(`https://vapi.vnappmob.com/api/province/district/${this.state.locaProvince}`)
+            .then((response) => {
+                // this.setState({
+                //     provinces: response.data
+                // });
+                console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -144,10 +160,12 @@ class EditInformation extends Component {
     }
 
     componentDidMount() {
+        console.log('Comp');
         this.getListOfBankds();
         this.getListOfProvinces();
         this.getUserInformation();
         this.getListOfProvincesDetail();
+        // this.getListOfDistrict();
     }
 
     async saveButtonPressed() {
@@ -225,7 +243,6 @@ class EditInformation extends Component {
         this.setState({
             isVisible: !this.state.isVisible
         });
-        console.log(this.state.isVisible);
     }
 
     edtiLocation() {
@@ -279,15 +296,16 @@ class EditInformation extends Component {
                             <Picker
                                 style = {styles.banksPicker}
                                 selectedValue = {this.state.locaProvince}
-                                onValueChange = {(itemValue, itemIndex) => {
-                                    this.setState({
+                                onValueChange = {async (itemValue, itemIndex) => {
+                                    await this.setState({
                                         locaProvince: itemValue,
                                     });
+                                    this.getListOfDistrict();
                                 }}
                             >
                                 {this.state.provinces.map((item, key) => {
                                     return(
-                                        <Picker.Item key = {key} label = {item.name} value = {item.name} />
+                                        <Picker.Item key = {key} label = {item.name} value = {item.code} />
                                     );
                                 })}
                             </Picker>
@@ -613,7 +631,6 @@ class EditInformation extends Component {
     }
 
     renderMainEditInformation() {
-        console.log(this.props.route.params.status);
         const status = this.props.route.params.status;
         if(status === 'Sửa thông tin cơ bản') {
             return(
