@@ -83,7 +83,10 @@ class EditInformation extends Component {
             // Modal
             isVisible: false,
             locaProvince: '',
+            locaProvinceCode: '',
             localDistrict: '',
+            localDistrictCode: '',
+            localWard: '',
             districts: [],
             wards: []
         }
@@ -108,7 +111,6 @@ class EditInformation extends Component {
                 this.setState({
                     provinces: response.data
                 });
-                // console.log(this.state.provinces);
             })
             .catch((error) => {
                 console.log(error);
@@ -116,12 +118,12 @@ class EditInformation extends Component {
     }
 
     getListOfDistrict() {
-        axios.get(`https://vapi.vnappmob.com/api/province/district/${this.state.locaProvince}`)
+        axios.get(`https://vapi.vnappmob.com/api/province/district/${this.state.locaProvinceCode}`)
             .then(async (response) => {
                 await this.setState({
                     districts: response.data.results
                 });
-                // console.log(response.data.results);
+                console.log(response.data.results);
             })
             .catch((error) => {
                 console.log(error);
@@ -141,7 +143,7 @@ class EditInformation extends Component {
     }
 
     getListOfWard() {
-        axios.get(`https://vapi.vnappmob.com/api/province/ward/${this.state.localDistrict}`)
+        axios.get(`https://vapi.vnappmob.com/api/province/ward/${this.state.localDistrictCode}`)
             .then(async (response) => {
                 await this.setState({
                     wards: response.data.results
@@ -172,7 +174,6 @@ class EditInformation extends Component {
     }
 
     componentDidMount() {
-        console.log('Comp');
         this.getListOfBankds();
         this.getListOfProvinces();
         this.getUserInformation();
@@ -311,13 +312,15 @@ class EditInformation extends Component {
                                 onValueChange = {async (itemValue, itemIndex) => {
                                     await this.setState({
                                         locaProvince: itemValue,
+                                        locaProvinceCode: this.state.provinces[itemIndex].code
                                     });
+                                    console.log(this.state.provinces[itemIndex].code + 'daasdasd ' + itemValue);
                                     this.getListOfDistrict();
                                 }}
                             >
                                 {this.state.provinces.map((item, key) => {
                                     return(
-                                        <Picker.Item key = {key} label = {item.name} value = {item.code} />
+                                        <Picker.Item key = {key} label = {item.name} value = {item.name} />
                                     );
                                 })}
                             </Picker>
@@ -327,13 +330,15 @@ class EditInformation extends Component {
                                 onValueChange = {async (itemValue, itemIndex) => {
                                     await this.setState({
                                         localDistrict: itemValue,
+                                        localDistrictCode: this.state.districts[itemIndex].district_id
                                     });
+                                    console.log(this.state.localDistrictCode);
                                     this.getListOfWard();
                                 }}
                             >
                                 {this.state.districts.map((item, key) => {
                                     return(
-                                        <Picker.Item key = {key} label = {item.district_name} value = {item.district_id} />
+                                        <Picker.Item key = {key} label = {item.district_name} value = {item.district_name} />
                                     );
                                 })}
                             </Picker>
@@ -341,19 +346,36 @@ class EditInformation extends Component {
                                 style = {styles.banksPicker}
                                 selectedValue = {this.state.localDistrict}
                                 onValueChange = {async (itemValue, itemIndex) => {
-                                    // await this.setState({
-                                    //     localDistrict: itemValue,
-                                    // });
-                                    // this.getListOfDistrict();
+                                    await this.setState({
+                                        localWard: itemValue,
+                                    });
                                 }}
                             >
                                 {this.state.wards.map((item, key) => {
                                     return(
-                                        <Picker.Item key = {key} label = {item.ward_name} value = {item.ward_id} />
+                                        <Picker.Item key = {key} label = {item.ward_name} value = {item.ward_name} />
                                     );
                                 })}
                             </Picker>
                         </View>
+                        <TouchableOpacity
+                        style={{
+                            width: '92%',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            alignSelf: 'center',
+                            height: 40,
+                            backgroundColor: '#ff7733',
+                            marginTop: 10,
+                            borderRadius: 10
+                        }}
+                        // onPress = {() => {
+                        //     this.saveButtonPressed()
+                        // }}
+                    >
+                        <Text style={{fontSize: appFontSize}}>Lưu</Text>
+                    </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
