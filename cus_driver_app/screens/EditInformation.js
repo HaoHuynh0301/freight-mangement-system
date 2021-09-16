@@ -82,6 +82,7 @@ class EditInformation extends Component {
 
             // Modal
             isVisible: false,
+            locaProvince: ''
         }
     }
 
@@ -113,8 +114,10 @@ class EditInformation extends Component {
     
     getListOfProvincesDetail() {
         axios.get(`https://provinces.open-api.vn/api/?depth=2`)
-        .then((response) => {
-            console.log(response.data)
+        .then(async (response) => {
+            await this.setState({
+                provincesDetail: response.data
+            });
         })
         .catch((error) => {
             displayAlert(error);
@@ -234,20 +237,62 @@ class EditInformation extends Component {
             <Modal isVisible={this.state.isVisible}>
                 <View style={{
                     flexDirection: 'column',
-                    height: 190,
+                    
                     backgroundColor: '#FFF',
                     padding: 10
                 }}>
-                    <TouchableOpacity
-                        onPress = {() => {
-                            this.toggleModal();
-                        }}
-                    >
-                        <Image
-                            source = {xIcon}
-                            style={styles.xIconStyle}
-                        ></Image>
-                    </TouchableOpacity>
+                    <View style = {{
+                        flexDirection: 'row',
+                        
+                    }}>
+                        <TouchableOpacity
+                            onPress = {() => {
+                                this.toggleModal();
+                            }}
+                        >
+                            <Image
+                                source = {xIcon}
+                                style={styles.xIconStyle}
+                            ></Image>
+                        </TouchableOpacity>
+                        <Text style = {{
+                            left: 90,
+                            fontSize: appFontSize
+                        }}>Cập nhật địa chỉ</Text>
+                    </View>
+                    <View>
+                        <View style = {styles.modalLocationEditDetailWrapper}>
+                            <TextInput
+                                // placeholder = 'Hello'
+                                style = {styles.inputText}
+                                value = {this.state.userInformation['customer_name']}
+                            ></TextInput>
+                        </View>
+                        <View style = {styles.modalLocationEditDetailWrapper}>
+                            <TextInput
+                                // placeholder = 'Hello'
+                                style = {styles.inputText}
+                                value = {String(this.state.userInformation['phone_numner'])}
+                            ></TextInput>
+                        </View>
+                        <View>
+                            <Picker
+                                style = {styles.banksPicker}
+                                selectedValue = {this.state.locaProvince}
+                                onValueChange = {(itemValue, itemIndex) => {
+                                    this.setState({
+                                        locaProvince: itemValue,
+                                    });
+                                }}
+                            >
+                                {this.state.provinces.map((item, key) => {
+                                    return(
+                                        <Picker.Item key = {key} label = {item.name} value = {item.name} />
+                                    );
+                                })}
+                            </Picker>
+                        </View>
+                    </View>
                 </View>
             </Modal>
         );
@@ -707,6 +752,13 @@ const styles = StyleSheet.create({
         height: 20,
         width: 20
     },
+    modalLocationEditDetailWrapper: {
+        width: '90%',
+        borderBottomWidth: 0.8,
+        borderBottomColor: greyColor,
+        flexDirection: 'row',
+        alignSelf: 'center'
+    }
 });
 
 export default EditInformation;
