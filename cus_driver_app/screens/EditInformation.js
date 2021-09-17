@@ -88,7 +88,10 @@ class EditInformation extends Component {
             localDistrictCode: '',
             localWard: '',
             districts: [],
-            wards: []
+            wards: [],
+            new_name: '',
+            new_phonenumber: '',
+            new_address: ''
         }
     }
 
@@ -234,6 +237,34 @@ class EditInformation extends Component {
 
     async saveLocation() {
         const token = await AsyncStorage.getItem('token');
+        axios.post(`${ipAddress}/api/location-information/`, {
+            customer_name: this.state.new_name,
+            phone_numner: Number(this.state.new_phonenumber),
+            address: this.state.new_address,
+            province: this.state.locaProvince,
+            district: this.state.localDistrict,
+            ward: this.state.localWard
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            displayAlert('Updated location information successfully!');
+            this.setState({
+                new_name: '',
+                new_phonenumber: '',
+                new_address: '',
+                locaProvince: '',
+                localDistrict: '',
+                localWard: ''
+            });
+            this.toggleModal();
+        })
+        .catch((error) => {
+            displayAlert(error);
+        });
     }
 
     renderHeader() {
@@ -271,13 +302,11 @@ class EditInformation extends Component {
             <Modal isVisible={this.state.isVisible}>
                 <View style={{
                     flexDirection: 'column',
-                    
                     backgroundColor: '#FFF',
                     padding: 10
                 }}>
                     <View style = {{
                         flexDirection: 'row',
-                        
                     }}>
                         <TouchableOpacity
                             onPress = {() => {
@@ -297,16 +326,38 @@ class EditInformation extends Component {
                     <View>
                         <View style = {styles.modalLocationEditDetailWrapper}>
                             <TextInput
-                                // placeholder = 'Hello'
+                                placeholder = {this.state.userInformation['customer_name']}
                                 style = {styles.inputText}
-                                value = {this.state.userInformation['customer_name']}
+                                value = {this.state.new_name}
+                                onChangeText = {(text) => {
+                                    this.setState({
+                                        new_name: text
+                                    });
+                                }}
                             ></TextInput>
                         </View>
                         <View style = {styles.modalLocationEditDetailWrapper}>
                             <TextInput
-                                // placeholder = 'Hello'
+                                placeholder = {String(this.state.userInformation['phone_numner'])}
                                 style = {styles.inputText}
-                                value = {String(this.state.userInformation['phone_numner'])}
+                                value = {String(this.state.new_phonenumber)}
+                                onChangeText = {(text) => {
+                                    this.setState({
+                                        new_phonenumber: text
+                                    });
+                                }}
+                            ></TextInput>
+                        </View>
+                        <View style = {styles.modalLocationEditDetailWrapper}>
+                            <TextInput
+                                placeholder = {String(this.state.userInformation['address'])}
+                                style = {styles.inputText}
+                                value = {String(this.state.new_address)}
+                                onChangeText = {(text) => {
+                                    this.setState({
+                                        new_address: text
+                                    });
+                                }}
                             ></TextInput>
                         </View>
                         <View>
@@ -620,7 +671,7 @@ class EditInformation extends Component {
                 borderWidth: 0.8,
                 borderColor: greyColor,
                 borderRadius: 10,
-                height: 245
+                // height: 245
             }}>
                 <View style = {{
                     backgroundColor: greyColor,
@@ -659,7 +710,15 @@ class EditInformation extends Component {
                             fontSize: appFontSize
                         }}>0932843656</Text>
                     </View>
-                    <View style = {styles.khoDoInforDetail}>
+                    <View style = {{
+                        padding: 10,
+                        borderBottomWidth: 0.8,
+                        borderBottomColor: greyColor,
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        width: 385
+                    }}>
                         <TouchableOpacity style = {{
                             flexDirection: 'row'
                         }}
