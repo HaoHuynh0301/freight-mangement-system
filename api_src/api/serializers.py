@@ -1,3 +1,4 @@
+from django.db.models import fields
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from . import models
@@ -18,7 +19,10 @@ class CustomerSerializer(serializers.ModelSerializer):
                     'bank_provine',
                     'email',
                     'bank_username',
-                    'password'
+                    'password',
+                    'province',
+                    'district',
+                    'ward'
                 ]
         
         
@@ -31,6 +35,19 @@ class BankCustomerSerializer(serializers.ModelSerializer):
                     'bank_provine',
                     'bank_username',
                 ]
+        
+        
+class LocationCustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Customer
+        fields = [
+            'customer_name',
+            'phone_numner',
+            'address',
+            'province',
+            'district',
+            'ward'
+        ]
         
         
 class BasicCustomerInformation(serializers.ModelSerializer):

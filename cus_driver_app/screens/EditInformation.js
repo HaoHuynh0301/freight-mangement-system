@@ -232,6 +232,10 @@ class EditInformation extends Component {
         });
     }
 
+    async saveLocation() {
+        const token = await AsyncStorage.getItem('token');
+    }
+
     renderHeader() {
         return(
             <View style={styles.container}>
@@ -370,9 +374,9 @@ class EditInformation extends Component {
                             marginTop: 10,
                             borderRadius: 10
                         }}
-                        // onPress = {() => {
-                        //     this.saveButtonPressed()
-                        // }}
+                        onPress = {() => {
+                            this.saveLocation()
+                        }}
                     >
                         <Text style={{fontSize: appFontSize}}>Lưu</Text>
                     </TouchableOpacity>
@@ -670,7 +674,7 @@ class EditInformation extends Component {
                             <Text style = {{
                                 marginLeft: 10,
                                 fontSize: appFontSize
-                            }}>Hưng Lợi, Ninh Kiều, Cần Thơ</Text>
+                            }}>{this.state.userInformation['province']} / {this.state.userInformation['district']} / {this.state.userInformation['ward']}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style = {styles.khoDoInforDetail}>
@@ -688,7 +692,7 @@ class EditInformation extends Component {
                             <Text style = {{
                                 marginLeft: 10,
                                 fontSize: appFontSize
-                            }}>59/31, Bến Hoa Viên</Text>
+                            }}>{this.state.userInformation['address']}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

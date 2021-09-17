@@ -72,6 +72,7 @@ class User extends Component {
             this.setState({
                 userInformation: response.data
             });
+            console.log(response.data);
         })
         .catch((error) => {
             displayAlert('We have some error! Please try again later!');
@@ -267,7 +268,7 @@ class User extends Component {
                         <Text style={styles.basicInforText}>{this.state.userInformation['customer_name']} / {this.state.userInformation['phone_numner']}</Text>
                     </View>
                     <View style={styles.basicInforDetail}>
-                        <Text style={styles.basicInforText}>{this.state.userInformation['address']}</Text>
+                        <Text style={styles.basicInforText}>{this.state.userInformation['address']} / {this.state.userInformation['province']} / {this.state.userInformation['district']}</Text>
                     </View>
                 </View>
                 <View style= {{

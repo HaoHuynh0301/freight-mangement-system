@@ -115,6 +115,20 @@ class BankingInformation(APIView):
         return Response({'error': serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
     
     
+class LocationInformation(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.LocationCustomerSerializer
+    
+    def post(self, request, format = None):
+        userInstance = request.user
+        serializer = self.serializer_class(userInstance, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Updated'}, status = status.HTTP_200_OK)
+        print(serializer.errors)
+        return Response({'error': serializer.errors}, status = status.HTTP_400_BAD_REQUEST)
+    
+    
 class OrderView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = serializers.OrderSerializer
