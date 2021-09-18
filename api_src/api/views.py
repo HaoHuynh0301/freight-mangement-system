@@ -149,6 +149,10 @@ class OrderView(APIView):
                                                     product_quantity = request.data.get('product_quantity'),
                                                     cast = request.data.get('cast'),
                                                     note = request.data.get('note'),
+                                                    province = request.data.get('province'),
+                                                    district = request.data.get('district'),
+                                                    ward = request.data.get('ward'),
+                                                    address = request.data.get('address')
                                                 )
         return Response('OK', status = status.HTTP_200_OK)
     

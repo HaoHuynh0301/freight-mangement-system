@@ -82,12 +82,85 @@ class CreateOrder extends Component {
             cus_name: '',
             cus_address: '',
             order_size: '',
-            note: 'Không có ghi chú'
+            note: 'Không có ghi chú',
+
+            // array got from API
+            provinces: [],
+            provincesDetail: [],
+
+            // Provinces Pick
+            provinceSelectedValue: '',
+
+            // Modal
+            isVisible: false,
+            locaProvince: '',
+            locaProvinceCode: '',
+            localDistrict: '',
+            localDistrictCode: '',
+            localWard: '',
+            districts: [],
+            wards: [],
+            new_name: '',
+            new_phonenumber: '',
+            new_address: ''
         }
     }
 
+    getListOfProvinces() {
+        console.log('OK')
+        axios.get('https://provinces.open-api.vn/api/')
+            .then(async (response) => {
+                await this.setState({
+                    provinces: response.data
+                });
+                // console.log(this.state.provinces);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    getListOfDistrict() {
+        axios.get(`https://vapi.vnappmob.com/api/province/district/${this.state.locaProvinceCode}`)
+            .then(async (response) => {
+                await this.setState({
+                    districts: response.data.results
+                });
+                // console.log(response.data.results);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+    
+    getListOfProvincesDetail() {
+        axios.get(`https://provinces.open-api.vn/api/?depth=2`)
+        .then(async (response) => {
+            await this.setState({
+                provincesDetail: response.data
+            });
+        })
+        .catch((error) => {
+            displayAlert(error);
+        })
+    }
+
+    getListOfWard() {
+        axios.get(`https://vapi.vnappmob.com/api/province/ward/${this.state.localDistrictCode}`)
+            .then(async (response) => {
+                await this.setState({
+                    wards: response.data.results
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
     componentDidMount() {
-        
+        this.getListOfProvinces();
+        // this.getUserInformation();
+        this.getListOfProvincesDetail();
     }
 
     renderHeader() {
@@ -203,11 +276,64 @@ class CreateOrder extends Component {
                             ></TextInput>
                         </View>
                     </View>
-                    <View style={styles.locationPickerWrapper}>
-                        <Image
+                    <View>
+                        {/* <Image
                             source = {locationIcon}
                             style={styles.iconLocationInfor}
-                        ></Image>
+                        ></Image> */}
+                        <View style = {{
+                        }}>
+                            <Picker
+                                style = {styles.banksPicker}
+                                selectedValue = {this.state.locaProvince}
+                                onValueChange = {async (itemValue, itemIndex) => {
+                                    await this.setState({
+                                        locaProvince: itemValue,
+                                        locaProvinceCode: this.state.provinces[itemIndex].code
+                                    });
+                                    this.getListOfDistrict();
+                                }}
+                            >
+                                {this.state.provinces.map((item, key) => {
+                                    return(
+                                        <Picker.Item key = {key} label = {item.name} value = {item.name} />
+                                    );
+                                })}
+                            </Picker>
+                            <Picker
+                                style = {styles.banksPicker}
+                                selectedValue = {this.state.localDistrict}
+                                onValueChange = {async (itemValue, itemIndex) => {
+                                    await this.setState({
+                                        localDistrict: itemValue,
+                                        localDistrictCode: this.state.districts[itemIndex].district_id
+                                    });
+                                    this.getListOfWard();
+                                }}
+                            >
+                                {this.state.districts.map((item, key) => {
+                                    console.log(item.name);
+                                    return(
+                                        <Picker.Item key = {key} label = {item.district_name} value = {item.district_name} />
+                                    );
+                                })}
+                            </Picker>
+                            <Picker
+                                style = {styles.banksPicker}
+                                selectedValue = {this.state.localDistrict}
+                                onValueChange = {async (itemValue, itemIndex) => {
+                                    await this.setState({
+                                        localWard: itemValue,
+                                    });
+                                }}
+                            >
+                                {this.state.wards.map((item, key) => {
+                                    return(
+                                        <Picker.Item key = {key} label = {item.ward_name} value = {item.ward_name} />
+                                    );
+                                })}
+                            </Picker>
+                        </View>
                     </View>
                     <View style={styles.chooseSizeWrapper}>
                         <Text style={styles.titleFontSize}>Lấy vào giao hàng tận nơi</Text>
@@ -456,7 +582,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
         backgroundColor: orangeColor
-    }
+    },
+    banksPicker: {
+        borderWidth: 0.3,
+        borderColor: greyColor,
+    },
 });
 
 export default CreateOrder;
