@@ -151,6 +151,7 @@ class CreateOrder extends Component {
                 await this.setState({
                     wards: response.data.results
                 });
+                console.log(this.state.wards);
             })
             .catch((error) => {
                 console.log(error);
@@ -192,7 +193,6 @@ class CreateOrder extends Component {
         axios.post(`${ipAddress}/api/order-information/`, {
             cus_phonenumber: this.state.cus_phone_number,
             cus_name: this.state.cus_name,
-            detail_address: this.state.cus_address,
             product_name: this.state.productName,
             product_weight: Number(this.state.weight),
             product_quantity: Number(this.state.quantity),
@@ -295,6 +295,7 @@ class CreateOrder extends Component {
                                         locaProvince: itemValue,
                                         locaProvinceCode: this.state.provinces[itemIndex].code
                                     });
+                                    console.log(this.state.locaProvinceCode);
                                     this.getListOfDistrict();
                                 }}
                             >

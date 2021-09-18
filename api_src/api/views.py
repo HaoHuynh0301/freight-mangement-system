@@ -143,7 +143,7 @@ class OrderView(APIView):
                                                     status = statusInstance,
                                                     customer_phonenumber = request.data.get('cus_phonenumber'),
                                                     customer_name = request.data.get('cus_name'),
-                                                    detail_address = request.data.get('detail_address'),
+                                                    detail_address = request.data.get('address'),
                                                     product_name = request.data.get('product_name'),
                                                     product_weight = request.data.get('product_weight'),
                                                     product_quantity = request.data.get('product_quantity'),
@@ -152,7 +152,6 @@ class OrderView(APIView):
                                                     province = request.data.get('province'),
                                                     district = request.data.get('district'),
                                                     ward = request.data.get('ward'),
-                                                    address = request.data.get('address')
                                                 )
         return Response('OK', status = status.HTTP_200_OK)
     
