@@ -199,7 +199,11 @@ class CreateOrder extends Component {
             shipOptionId: this.state.orderSizeSelected,
             statusId: 1,
             cast: this.state.totalCast,
-            note: this.state.note
+            note: this.state.note,
+            province: this.state.locaProvince,
+            district: this.state.localDistrict,
+            ward: this.state.localWard,
+            address: this.state.cus_address
         },
         {
             headers: {
