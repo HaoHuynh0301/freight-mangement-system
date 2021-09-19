@@ -218,9 +218,20 @@ class TotalOrderView(APIView):
     def get(self, request, format = None):
         userInstance = request.user
         orders = userInstance.account_order.all()
+        totalOrdersStatus = request.query_params.get('order-status');
         totalOrders = 0
-        for order in orders:
-            if order.status.id == 4:
-                totalOrders += 1
+        
+        # 1 is number of delivered orders
+        if totalOrders == str(1):
+            for order in orders:
+                if order.status.id == 4:
+                    totalOrders += 1
+                    
+        # 2 is number of undelivered orders
+        elif totalOrders == str(2):
+            for order in orders:
+                if order.status.id == 6:
+                    totalOrders += 1
+                    
         return Response({'total': totalOrders}, status = status.HTTP_200_OK)
         

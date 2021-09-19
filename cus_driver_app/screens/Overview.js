@@ -39,14 +39,17 @@ class OverView extends Component {
         this.state = {
             isAuth: false,
 
-            // Number of delivered order
-            totalOrders: 0
+            // Number of delivered orders
+            totalOrders: 0,
+
+            // Number of undelivered orders
+            totalUndeliveredOrders: 0
         }
     }
 
     async getNumberOfOrders() {
         const token = await AsyncStorage.getItem('token');
-        axios.get(`${ipAddress}/api/total-order/`, {
+        axios.get(`${ipAddress}/api/total-order?order-status=1`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
@@ -55,6 +58,24 @@ class OverView extends Component {
         .then(async (response) => {
             await this.setState({
                 totalOrders: response.data.total
+            });
+        })
+        .catch((error) => {
+            displayAlert('We have some errors! Please try again later!');
+        });
+    }
+
+    async getNumberOfUnDeliveredOrders() {
+        const token = await AsyncStorage.getItem('token');
+        axios.get(`${ipAddress}/api/total-order?order-status=2`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(async (response) => {
+            await this.setState({
+                totalUndeliveredOrders: response.data.total
             });
         })
         .catch((error) => {
@@ -90,6 +111,7 @@ class OverView extends Component {
 
     componentDidMount() {
         this.getNumberOfOrders();
+        this.getNumberOfUnDeliveredOrders();
     }
 
     renderAppInformation() {
@@ -171,7 +193,7 @@ class OverView extends Component {
                 </View>
                 <View style={styles.appInforDetailWrapper}>
                     <Text style={styles.appInforDetail}>Không giao được/ Lưu kho</Text>
-                    <Text style={styles.numberOfOrderText}>0-ĐH</Text>
+                    <Text style={styles.numberOfOrderText}>{this.state.totalUndeliveredOrders}-ĐH</Text>
                 </View>
                 <View style={styles.appInforDetailWrapper}>
                     <Text style={styles.appInforDetail}>Đơn hàng đổi trả</Text>
