@@ -5,20 +5,61 @@ import {
     StyleSheet,
     SafeAreaView,
     TouchableOpacity,
-    Image
+    Image,
+    Alert
 } from "react-native";
 import { Header } from "../components";
 import {
     appFontSize,
-    rightArrowIcon
+    rightArrowIcon,
+    ipAddress
 } from '../contants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Modal from "react-native-modal";
+const axios = require('axios');
+
+
+const displayAlert = (message) => {
+    Alert.alert(
+        "Notification",
+        message,
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+        ])
+}
 
 class OverView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAuth: false
+            isAuth: false,
+
+            // Number of delivered order
+            totalOrders: 0
         }
+    }
+
+    async getNumberOfOrders() {
+        const token = await AsyncStorage.getItem('token');
+        axios.get(`${ipAddress}/api/total-order/`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(async (response) => {
+            await this.setState({
+                totalOrders: response.data.total
+            });
+        })
+        .catch((error) => {
+            displayAlert('We have some errors! Please try again later!');
+        });
     }
 
     handleGetAppInformation(title) {
@@ -46,6 +87,10 @@ class OverView extends Component {
                 });
             });
     }    
+
+    componentDidMount() {
+        this.getNumberOfOrders();
+    }
 
     renderAppInformation() {
         return(
@@ -122,7 +167,7 @@ class OverView extends Component {
                 </View>
                 <View style={styles.appInforDetailWrapper}>
                     <Text style={styles.appInforDetail}>Giao thành công</Text>
-                    <Text style={styles.numberOfOrderText}>0-ĐH</Text>
+                    <Text style={styles.numberOfOrderText}>{this.state.totalOrders}-ĐH</Text>
                 </View>
                 <View style={styles.appInforDetailWrapper}>
                     <Text style={styles.appInforDetail}>Không giao được/ Lưu kho</Text>
