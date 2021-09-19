@@ -43,7 +43,10 @@ class MonenyFlow extends Component {
             paidMoney: 0.0,
 
             // Un-Paid money
-            unPaidMoney: 0.0
+            unPaidMoney: 0.0,
+
+            // Shipping money
+            shippingMoney: 0.0
         }
     }
 
@@ -85,9 +88,28 @@ class MonenyFlow extends Component {
         });
     }
 
+    async getShippingMoney() {
+        const token = await AsyncStorage.getItem('token');
+        axios.get(`${ipAddress}/api/paidmoney?money-status=3`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(async (response) => {
+            await this.setState({
+                shippingMoney: response.data.paid_money
+            });
+        })
+        .catch((error) => {
+            displayAlert('We have some errors! Please try agai!');
+        });
+    }
+
     componentDidMount() {
         this.getPaidMoney();
         this.getUnPaidMoney();
+        this.getShippingMoney();
     }
 
     renderHeader() {
@@ -117,7 +139,7 @@ class MonenyFlow extends Component {
             <View style = {styles.mainViewWrapper}>
                 <View style = {styles.flowMoneyDetail}>
                     <Text style = {styles.textAppFontSize}>Phí giao hàng: </Text>
-                    <Text style = {styles.textHighlight}>0đ</Text>
+                    <Text style = {styles.textHighlight}>{this.state.shippingMoney} đ</Text>
                 </View>
                 <View style = {styles.flowMoneyDetail}>
                     <Text style = {styles.textAppFontSize}>Tiền chưa đối soát: </Text>

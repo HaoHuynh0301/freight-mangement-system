@@ -190,6 +190,7 @@ class PaidMoneyView(APIView):
         orders = userInstance.account_order.all()
         moneyStatus = request.query_params.get('money-status');
         totalMoney = 0.0 
+        
         # 1 is paid-money
         if moneyStatus == str(1):
             for order in orders:
@@ -198,13 +199,15 @@ class PaidMoneyView(APIView):
                     
         # 2 is un-paid-money
         if moneyStatus == str(2):
-            print('OKKKKKKKKKK')
             for order in orders:
-                print(order.status.id)
                 if order.status.id == 1:
                     totalMoney += order.cast
-                    
-                    
+        
+        # 3 is shipping-money
+        if moneyStatus == str(3):
+            for order in orders:
+                totalMoney += order.ship_option.fee
+                
         print(totalMoney)
         return Response({'paid_money': totalMoney}, status = status.HTTP_200_OK)
         
