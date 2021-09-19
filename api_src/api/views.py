@@ -210,4 +210,17 @@ class PaidMoneyView(APIView):
                 
         print(totalMoney)
         return Response({'paid_money': totalMoney}, status = status.HTTP_200_OK)
+    
+    
+class TotalOrderView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request, format = None):
+        userInstance = request.user
+        orders = userInstance.account_order.all()
+        totalOrders = 0
+        for order in orders:
+            if order.status.id == 4:
+                totalOrders += 1
+        return Response({'total': totalOrders}, status = status.HTTP_200_OK)
         

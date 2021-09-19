@@ -16,5 +16,6 @@ urlpatterns = [
     
     # ============= #
     
-    path('paidmoney/', views.PaidMoneyView.as_view(), name = 'paid-money')
+    path('paidmoney/', views.PaidMoneyView.as_view(), name = 'paid-money'),
+    path('total-order/', views.TotalOrderView.as_view(), name = 'total-orders')
 ]
