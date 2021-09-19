@@ -188,8 +188,23 @@ class PaidMoneyView(APIView):
     def get(self, request, format = None):
         userInstance = request.user
         orders = userInstance.account_order.all()
+        moneyStatus = request.query_params.get('money-status');
         totalMoney = 0.0 
-        for order in orders:
-            if order.status.id == 5:
-               totalMoney += order.cast
+        # 1 is paid-money
+        if moneyStatus == str(1):
+            for order in orders:
+                if order.status.id == 5:
+                    totalMoney += order.cast
+                    
+        # 2 is un-paid-money
+        if moneyStatus == str(2):
+            print('OKKKKKKKKKK')
+            for order in orders:
+                print(order.status.id)
+                if order.status.id == 1:
+                    totalMoney += order.cast
+                    
+                    
+        print(totalMoney)
         return Response({'paid_money': totalMoney}, status = status.HTTP_200_OK)
+        

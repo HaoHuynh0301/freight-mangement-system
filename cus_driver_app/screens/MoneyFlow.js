@@ -5,19 +5,89 @@ import {
     StyleSheet,
     SafeAreaView,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } from "react-native";
 import {
     headerFontSize,
     backIcon,
     appFontSize,
     greyColor,
-    rightArrowIcon
+    rightArrowIcon,
+    ipAddress
 } from '../contants';
+import {Picker} from '@react-native-picker/picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+
+const displayAlert = (message) => {
+    Alert.alert(
+        "Notification",
+        message,
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+        ])
+}
 
 class MonenyFlow extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            // Paid money
+            paidMoney: 0.0,
+
+            // Un-Paid money
+            unPaidMoney: 0.0
+        }
+    }
+
+    async getPaidMoney() {
+        const token = await AsyncStorage.getItem('token');
+        axios.get(`${ipAddress}/api/paidmoney?money-status=1`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(async (response) => {
+            await this.setState({
+                paidMoney: response.data.paid_money
+            });
+            console.log(response.data.paid_money);
+        })
+        .catch((error) => {
+            displayAlert('We have some errors! Please try again!');
+        });
+    }
+
+    async getUnPaidMoney() {
+        const token = await AsyncStorage.getItem('token');
+        axios.get(`${ipAddress}/api/paidmoney?money-status=2`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(async (response) => {
+            await this.setState({
+                unPaidMoney: response.data.paid_money
+            });
+            console.log(this.state.unPaidMoney);
+        })
+        .catch((error) => {
+            displayAlert('We have some errors! Please try agai!');
+        });
+    }
+
+    componentDidMount() {
+        this.getPaidMoney();
+        this.getUnPaidMoney();
     }
 
     renderHeader() {
@@ -46,24 +116,16 @@ class MonenyFlow extends Component {
         return(
             <View style = {styles.mainViewWrapper}>
                 <View style = {styles.flowMoneyDetail}>
-                    <Text style = {styles.textAppFontSize}>Tiền CoD: </Text>
-                    <Text style = {styles.textHighlight}>0đ</Text>
-                </View>
-                <View style = {styles.flowMoneyDetail}>
                     <Text style = {styles.textAppFontSize}>Phí giao hàng: </Text>
                     <Text style = {styles.textHighlight}>0đ</Text>
                 </View>
                 <View style = {styles.flowMoneyDetail}>
-                    <Text style = {styles.textAppFontSize}>Phí hoàn hàng: </Text>
-                    <Text style = {styles.textHighlight}>0đ</Text>
-                </View>
-                <View style = {styles.flowMoneyDetail}>
                     <Text style = {styles.textAppFontSize}>Tiền chưa đối soát: </Text>
-                    <Text style = {styles.textHighlight}>0đ</Text>
+                    <Text style = {styles.textHighlight}>{this.state.unPaidMoney} đ</Text>
                 </View>
                 <View style = {styles.flowMoneyDetail}>
                     <Text style = {styles.textAppFontSize}>Tiền đã đối soát: </Text>
-                    <Text style = {styles.textHighlight}>0đ</Text>
+                    <Text style = {styles.textHighlight}>{this.state.paidMoney} đ</Text>
                 </View>
                 <TouchableOpacity
                     style = {{
