@@ -180,3 +180,16 @@ class RequestView(APIView):
             newRequest = models.Request.objects.create(order = orderInstance, request_option = requestOptionInstance)
             return Response({'status': 'New request was created!'}, status = status.HTTP_201_CREATED)
         return Response({'error': 'Order or request option is invalid!'}, status = status.HTTP_400_BAD_REQUEST)
+    
+    
+class PaidMoneyView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request, format = None):
+        userInstance = request.user
+        orders = userInstance.account_order.all()
+        totalMoney = 0.0 
+        for order in orders:
+            if order.status.id == 5:
+               totalMoney += order.cast
+        return Response({'paid_money': totalMoney}, status = status.HTTP_200_OK)

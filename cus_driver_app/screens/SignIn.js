@@ -76,6 +76,10 @@ class SignIn extends Component {
         })
         .then(async (response) => {
             await AsyncStorage.setItem('token', response.data.access_token);
+            this.setState({
+                email: '',
+                password: ''
+            })
             this.props.navigation.navigate('Tabs', {
                 
             });

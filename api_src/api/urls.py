@@ -12,5 +12,9 @@ urlpatterns = [
     path('order-information/', views.OrderView.as_view(), name = 'order-information'),
     path('bank-information/', views.BankingInformation.as_view(), name = 'bank-information'),
     path('location-information/', views.LocationInformation.as_view(), name = 'location-information'),
-    path('request/', views.RequestView.as_view(), name = 'request')
+    path('request/', views.RequestView.as_view(), name = 'request'),
+    
+    # ============= #
+    
+    path('paidmoney/', views.PaidMoneyView.as_view(), name = 'paid-money')
 ]
