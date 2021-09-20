@@ -222,16 +222,27 @@ class TotalOrderView(APIView):
         totalOrders = 0
         
         # 1 is number of delivered orders
-        if totalOrders == str(1):
+        if totalOrdersStatus == str(1):
             for order in orders:
-                if order.status.id == 4:
+                if order.status.id >= 4 and order.status.id != 6:
                     totalOrders += 1
                     
         # 2 is number of undelivered orders
-        elif totalOrders == str(2):
+        elif totalOrdersStatus == str(2):
             for order in orders:
                 if order.status.id == 6:
                     totalOrders += 1
                     
+        # 2 is number of doi tra yeu cau
+        elif totalOrdersStatus == str(3):
+            for order in orders:
+                requests = order.request_set.all()
+                if len(requests) != 0:
+                    for requestt in requests:
+                        if requestt.request_option.id == 3:
+                            totalOrders += 1
+                            break
+                    
+        print(totalOrders)
         return Response({'total': totalOrders}, status = status.HTTP_200_OK)
         
