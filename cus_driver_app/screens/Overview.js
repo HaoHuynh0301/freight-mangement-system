@@ -6,7 +6,8 @@ import {
     SafeAreaView,
     TouchableOpacity,
     Image,
-    Alert
+    Alert,
+    FlatList
 } from "react-native";
 import { Header } from "../components";
 import {
@@ -46,7 +47,9 @@ class OverView extends Component {
             totalUndeliveredOrders: 0,
 
             // Tong so yeu cau doi tra
-            totalDoiTraOrders: 0
+            totalDoiTraOrders: 0,
+
+            isFetching: false
         }
     }
 
@@ -136,6 +139,23 @@ class OverView extends Component {
         this.getNumberOfRequestOrders();
     }
 
+    onRefresh() {
+        this.setState({
+            isFetching: true
+        }, () => {
+            console.log('Here');
+            this.getNumberOfOrders();
+            console.log('Here');
+            this.getNumberOfUnDeliveredOrders();
+            console.log('Here');
+            this.getNumberOfRequestOrders();
+            console.log('Done')
+        });
+        this.setState({
+            isFetching: false
+        })
+    }
+
     renderAppInformation() {
         return(
             <View style={styles.appInforWapper}>
@@ -186,42 +206,56 @@ class OverView extends Component {
     }
 
     renderOrderInformation() {
+        const item = () => {
+            return(
+                <View style={styles.orderInformationWrapper}>
+                    <View style={styles.orderInforTitleWapper}>
+                        <Text style={styles.appInforDetail}>Thông tin đơn hàng</Text>
+                    </View>
+                    <View style={styles.appInforDetailWrapper}>
+                        <Text style={styles.appInforDetail}>Phát sinh và đã lấy</Text>
+                        <TouchableOpacity>
+                            <Image
+                                source={rightArrowIcon}
+                                style={styles.rightIcon}
+                            ></Image>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.appInforDetailWrapper}>
+                        <Text style={styles.appInforDetail}>Delay và hủy lấy</Text>
+                        <TouchableOpacity>
+                            <Image
+                                source={rightArrowIcon}
+                                style={styles.rightIcon}
+                            ></Image>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.appInforDetailWrapper}>
+                        <Text style={styles.appInforDetail}>Giao thành công</Text>
+                        <Text style={styles.numberOfOrderText}>{this.state.totalOrders}-ĐH</Text>
+                    </View>
+                    <View style={styles.appInforDetailWrapper}>
+                        <Text style={styles.appInforDetail}>Không giao được/ Lưu kho</Text>
+                        <Text style={styles.numberOfOrderText}>{this.state.totalUndeliveredOrders}-ĐH</Text>
+                    </View>
+                    <View style={styles.appInforDetailWrapper}>
+                        <Text style={styles.appInforDetail}>Yêu cầu đổi trả</Text>
+                        <Text style={styles.numberOfOrderText}>{this.state.totalDoiTraOrders}-ĐH</Text>
+                    </View>
+                </View>
+            );
+        }
         return(
-            <View style={styles.orderInformationWrapper}>
-                <View style={styles.orderInforTitleWapper}>
-                    <Text style={styles.appInforDetail}>Thông tin đơn hàng</Text>
-                </View>
-                <View style={styles.appInforDetailWrapper}>
-                    <Text style={styles.appInforDetail}>Phát sinh và đã lấy</Text>
-                    <TouchableOpacity>
-                        <Image
-                            source={rightArrowIcon}
-                            style={styles.rightIcon}
-                        ></Image>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.appInforDetailWrapper}>
-                    <Text style={styles.appInforDetail}>Delay và hủy lấy</Text>
-                    <TouchableOpacity>
-                        <Image
-                            source={rightArrowIcon}
-                            style={styles.rightIcon}
-                        ></Image>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.appInforDetailWrapper}>
-                    <Text style={styles.appInforDetail}>Giao thành công</Text>
-                    <Text style={styles.numberOfOrderText}>{this.state.totalOrders}-ĐH</Text>
-                </View>
-                <View style={styles.appInforDetailWrapper}>
-                    <Text style={styles.appInforDetail}>Không giao được/ Lưu kho</Text>
-                    <Text style={styles.numberOfOrderText}>{this.state.totalUndeliveredOrders}-ĐH</Text>
-                </View>
-                <View style={styles.appInforDetailWrapper}>
-                    <Text style={styles.appInforDetail}>Yêu cầu đổi trả</Text>
-                    <Text style={styles.numberOfOrderText}>{this.state.totalDoiTraOrders}-ĐH</Text>
-                </View>
-            </View>
+            <FlatList
+                data = {[{id: 1}]}
+                showsHorizontalScrollIndicator = {false}
+                keyExtractor = {(item) => item.id}
+                renderItem = {item}
+                onRefresh = {() => {
+                    this.onRefresh()
+                }}
+                refreshing = {this.state.isFetching}
+            ></FlatList>
         );
     }
 

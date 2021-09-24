@@ -27,14 +27,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const axios = require('axios');
 const Tab = createBottomTabNavigator();
 
-const middleWare = async () => {
-    const token = await AsyncStorage.getItem('token');
-    console.log(token);
-    if(token) return true;
-    else return false;
-}
-
-
 const Tabs = () => {
     return(
         <Tab.Navigator
