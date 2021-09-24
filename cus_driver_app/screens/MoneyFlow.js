@@ -6,7 +6,8 @@ import {
     SafeAreaView,
     Image,
     TouchableOpacity,
-    Alert
+    Alert,
+    FlatList
 } from "react-native";
 import {
     headerFontSize,
@@ -46,7 +47,9 @@ class MonenyFlow extends Component {
             unPaidMoney: 0.0,
 
             // Shipping money
-            shippingMoney: 0.0
+            shippingMoney: 0.0,
+
+            isFetching: false
         }
     }
 
@@ -112,6 +115,18 @@ class MonenyFlow extends Component {
         this.getShippingMoney();
     }
 
+    onRefresh() {
+        this.setState({
+            isFetching: true
+        });
+        this.getPaidMoney();
+        this.getUnPaidMoney();
+        this.getShippingMoney();
+        this.setState({
+            isFetching: false
+        });
+    }
+
     renderHeader() {
         return(
             <View style={styles.headerContainer}>
@@ -135,40 +150,54 @@ class MonenyFlow extends Component {
     }
 
     renderMainView() {
-        return(
-            <View style = {styles.mainViewWrapper}>
-                <View style = {styles.flowMoneyDetail}>
-                    <Text style = {styles.textAppFontSize}>Phí giao hàng: </Text>
-                    <Text style = {styles.textHighlight}>{this.state.shippingMoney} đ</Text>
-                </View>
-                <View style = {styles.flowMoneyDetail}>
-                    <Text style = {styles.textAppFontSize}>Tiền chưa đối soát: </Text>
-                    <Text style = {styles.textHighlight}>{this.state.unPaidMoney} đ</Text>
-                </View>
-                <View style = {styles.flowMoneyDetail}>
-                    <Text style = {styles.textAppFontSize}>Tiền đã đối soát: </Text>
-                    <Text style = {styles.textHighlight}>{this.state.paidMoney} đ</Text>
-                </View>
-                <TouchableOpacity
-                    style = {{
-                        marginTop: 10,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        borderBottomColor: greyColor,
-                        borderBottomWidth: 1,
-                        paddingBottom: 10
-                    }}
-                >
-                    <Text style = {styles.textHighlight}>Quản lý hóa đơn VAT</Text>
-                    <Image
-                        source = {rightArrowIcon}
+        const item = () => {
+            return(
+                <View style = {styles.mainViewWrapper}>
+                    <View style = {styles.flowMoneyDetail}>
+                        <Text style = {styles.textAppFontSize}>Phí giao hàng: </Text>
+                        <Text style = {styles.textHighlight}>{this.state.shippingMoney} đ</Text>
+                    </View>
+                    <View style = {styles.flowMoneyDetail}>
+                        <Text style = {styles.textAppFontSize}>Tiền chưa đối soát: </Text>
+                        <Text style = {styles.textHighlight}>{this.state.unPaidMoney} đ</Text>
+                    </View>
+                    <View style = {styles.flowMoneyDetail}>
+                        <Text style = {styles.textAppFontSize}>Tiền đã đối soát: </Text>
+                        <Text style = {styles.textHighlight}>{this.state.paidMoney} đ</Text>
+                    </View>
+                    <TouchableOpacity
                         style = {{
-                            height: 20,
-                            width: 20
+                            marginTop: 10,
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            borderBottomColor: greyColor,
+                            borderBottomWidth: 1,
+                            paddingBottom: 10
                         }}
-                    ></Image>
-                </TouchableOpacity>
-            </View>
+                    >
+                        <Text style = {styles.textHighlight}>Quản lý hóa đơn VAT</Text>
+                        <Image
+                            source = {rightArrowIcon}
+                            style = {{
+                                height: 20,
+                                width: 20
+                            }}
+                        ></Image>
+                    </TouchableOpacity>
+                </View>
+            );
+        }
+        return(
+            <FlatList
+                data = {[{id: 1}]}
+                showsHorizontalScrollIndicator = {false}
+                keyExtractor = {(item) => item.id}
+                renderItem = {item}
+                onRefresh = {() => {
+                    this.onRefresh()
+                }}
+                refreshing = {this.state.isFetching}
+            ></FlatList>
         );
     }
 

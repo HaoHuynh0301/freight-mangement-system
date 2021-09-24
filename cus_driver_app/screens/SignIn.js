@@ -107,7 +107,6 @@ class SignIn extends Component {
                             style={styles.textInput}
                             placeholder = 'Email'
                             onChangeText = {(text) => {
-                                console.log(this.state.email)
                                 this.setState({
                                     email: text
                                 });

@@ -143,17 +143,13 @@ class OverView extends Component {
         this.setState({
             isFetching: true
         }, () => {
-            console.log('Here');
             this.getNumberOfOrders();
-            console.log('Here');
             this.getNumberOfUnDeliveredOrders();
-            console.log('Here');
             this.getNumberOfRequestOrders();
-            console.log('Done')
         });
         this.setState({
             isFetching: false
-        })
+        });
     }
 
     renderAppInformation() {
