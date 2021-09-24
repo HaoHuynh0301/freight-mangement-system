@@ -7,7 +7,7 @@ import {
     FlatList,
     TouchableOpacity,
     Image,
-    Alert
+    Alert,
 } from "react-native";
 import {
     headerFontSize,
@@ -68,6 +68,7 @@ class Orders extends Component {
                 }
             ],
 
+            isFetching: false
         }
     }
 
@@ -148,6 +149,16 @@ class Orders extends Component {
 
     componentDidMount(){
         this.getOrderInformation();
+    }
+
+    onRefresh() {
+        this.setState({
+            isFetching: true
+        });
+        this.getOrderInformation();
+        this.setState({
+            isFetching: false
+        });
     }
 
     renderModal() {
@@ -337,7 +348,10 @@ class Orders extends Component {
                     extraData = {this.state.selectedData}
                     contentContainerStyle = {{padding: 10, marginTop: 0}}
                     ListEmptyComponent = {renderEmptyFavoriteProducts}
-                    // onRefresh = {this.handleRefreshOrders()}
+                    onRefresh = {() => {
+                        this.onRefresh()
+                    }}
+                    refreshing = {this.state.isFetching}
                 />
             </View>
         );
