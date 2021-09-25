@@ -8,7 +8,7 @@ import {
     StyleSheet,
     TextInput,
     ScrollView,
-    Alert
+    Alert,
 } from 'react-native';
 import {
     greyColor,
@@ -47,13 +47,18 @@ class OrderDetail extends Component {
         } else if(id == String(6)) {
             statusName = 'Không giao được';
         }
+        this.setState({
+            status: statusName
+        });
+        console.log(this.state.status)
     }
 
     componentDidMount() {
         this.setState({
             id: this.props.route.params.id
         });
-        this.setStatusName();
+        console.log(this.state.id)
+        this.setStatusName(this.state.id);
     }
 
     renderHeader() {
@@ -76,10 +81,21 @@ class OrderDetail extends Component {
         );
     }
 
+    renderMainView() {
+        return(
+            <View style = {styles.mainViewStyle}>
+                <View style = {styles.basicInforWrapper}>
+                    <Text>Trạng thái: {this.state.status}</Text>
+                </View>
+            </View>
+        );
+    }
+
     render() {
         return(
             <SafeAreaView>
                 {this.renderHeader()}
+                {this.renderMainView()}
             </SafeAreaView>
         );
     }
@@ -110,6 +126,14 @@ const styles = StyleSheet.create({
     titleWrapper: {
         paddingLeft: 70
     },
+    mainViewStyle: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    basicInforWrapper: {
+        width: '90%'
+    }
 });
 
 export default OrderDetail;
