@@ -80,7 +80,6 @@ class User extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        console.log('Update');
         state.updated = true;
         return true;
     }

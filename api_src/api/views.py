@@ -245,4 +245,23 @@ class TotalOrderView(APIView):
                     
         print(totalOrders)
         return Response({'total': totalOrders}, status = status.HTTP_200_OK)
-        
+    
+    
+class SpecificOrderView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request, format = None):
+        requestStatus = request.query_params.get('status')
+        userInstance = request.user
+        orders = userInstance.account_order.all()
+        speOrders = []
+        if requestStatus == str(1):
+            for order in orders:
+                if order.status.id >= 4:
+                   speOrders.append(order)
+        elif requestStatus == str(2) :
+            for order in orders:
+                if order.status.id == 6:
+                   speOrders.append(order)
+        speOrders = serializers.OrderSerializer(speOrders, many = True)
+        return Response(speOrders.data, status = status.HTTP_200_OK)        

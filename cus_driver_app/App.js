@@ -7,7 +7,8 @@ import {
     EditInformation,
     CreateOrder,
     OrderDetail,
-    SignIn
+    SignIn,
+    OverViewOrder
 } from './screens';
 import {
     ipAddress
@@ -87,6 +88,11 @@ class App extends Component {
                         <Stack.Screen
                             name = 'SignIn'
                             component = {SignIn}
+                            options={{header: () => null}}
+                        ></Stack.Screen>
+                        <Stack.Screen
+                            name = 'OverViewOrder'
+                            component = {OverViewOrder}
                             options={{header: () => null}}
                         ></Stack.Screen>
                     </Stack.Navigator>

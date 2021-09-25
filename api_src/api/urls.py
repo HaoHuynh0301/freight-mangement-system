@@ -13,6 +13,7 @@ urlpatterns = [
     path('bank-information/', views.BankingInformation.as_view(), name = 'bank-information'),
     path('location-information/', views.LocationInformation.as_view(), name = 'location-information'),
     path('request/', views.RequestView.as_view(), name = 'request'),
+    path('specific-order/', views.SpecificOrderView.as_view(), name = 'specific-orders'),
     
     # ============= #
     

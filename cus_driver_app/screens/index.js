@@ -8,6 +8,7 @@ import EditInformation from "./EditInformation";
 import CreateOrder from './CreateOrder';
 import OrderDetail from "./OrderDetail";
 import SignIn from './SignIn';
+import OverViewOrder from './OverViewOrder';
 
 export {
     SignIn,
@@ -19,5 +20,6 @@ export {
     Register,
     EditInformation,
     CreateOrder,
-    OrderDetail
+    OrderDetail,
+    OverViewOrder
 }

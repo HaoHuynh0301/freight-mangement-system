@@ -139,6 +139,22 @@ class OverView extends Component {
         this.getNumberOfRequestOrders();
     }
 
+    handlerOrderPress(status) {
+        var title = 'Giao thành công';
+        var id = 1;
+        if(status == 2) {
+            title = 'Không giao được/ Lưu kho';
+            id = 2;
+        } else if (status == 3) {
+            title = 'Yêu cầu';
+            id = 3;
+        }
+        this.props.navigation.navigate('OverViewOrder', {
+            title: title,
+            id: id
+        });
+    }
+
     onRefresh() {
         this.setState({
             isFetching: true
@@ -208,36 +224,26 @@ class OverView extends Component {
                     <View style={styles.orderInforTitleWapper}>
                         <Text style={styles.appInforDetail}>Thông tin đơn hàng</Text>
                     </View>
-                    <View style={styles.appInforDetailWrapper}>
-                        <Text style={styles.appInforDetail}>Phát sinh và đã lấy</Text>
-                        <TouchableOpacity>
-                            <Image
-                                source={rightArrowIcon}
-                                style={styles.rightIcon}
-                            ></Image>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.appInforDetailWrapper}>
-                        <Text style={styles.appInforDetail}>Delay và hủy lấy</Text>
-                        <TouchableOpacity>
-                            <Image
-                                source={rightArrowIcon}
-                                style={styles.rightIcon}
-                            ></Image>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.appInforDetailWrapper}>
-                        <Text style={styles.appInforDetail}>Giao thành công</Text>
-                        <Text style={styles.numberOfOrderText}>{this.state.totalOrders}-ĐH</Text>
-                    </View>
-                    <View style={styles.appInforDetailWrapper}>
-                        <Text style={styles.appInforDetail}>Không giao được/ Lưu kho</Text>
-                        <Text style={styles.numberOfOrderText}>{this.state.totalUndeliveredOrders}-ĐH</Text>
-                    </View>
-                    <View style={styles.appInforDetailWrapper}>
-                        <Text style={styles.appInforDetail}>Yêu cầu đổi trả</Text>
-                        <Text style={styles.numberOfOrderText}>{this.state.totalDoiTraOrders}-ĐH</Text>
-                    </View>
+                    <TouchableOpacity
+                        onPress = {() => {
+                            this.handlerOrderPress(1);
+                        }}
+                    >
+                        <View style={styles.appInforDetailWrapper}>
+                            <Text style={styles.appInforDetail}>Giao thành công</Text>
+                            <Text style={styles.numberOfOrderText}>{this.state.totalOrders}-ĐH</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress = {() => {
+                            this.handlerOrderPress(2);
+                        }}
+                    >
+                        <View style={styles.appInforDetailWrapper}>
+                            <Text style={styles.appInforDetail}>Không giao được/ Lưu kho</Text>
+                            <Text style={styles.numberOfOrderText}>{this.state.totalUndeliveredOrders}-ĐH</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             );
         }
