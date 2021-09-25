@@ -25,6 +25,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Modal from "react-native-modal";
 const axios = require('axios');
+import { Picker } from "@react-native-picker/picker";
 
 const displayAlert = (message) => {
     Alert.alert(
@@ -46,7 +47,23 @@ class OverViewOrder extends Component {
         this.state = {
             status: 1,
             orders: [],
-            isFetching: false
+            isFetching: false,
+            isVisible: false,
+            actions: [
+                {
+                    name: 'Giục lấy',
+                    id: 1
+                },
+                {
+                    name: 'Giao',
+                    id: 2
+                },
+                {
+                    name: 'Trả hàng',
+                    id: 3
+                }
+            ],
+            actionRequestSelected: ''
         }
     }
 
@@ -58,8 +75,46 @@ class OverViewOrder extends Component {
         );
     }
 
-    handleRefreshOrders() {
+    onRefresh() {
+        
+    }
 
+    oppenOrderInformation() {
+        this.props.navigation.navigate('OrderDetail', {
+            
+        });
+    }
+
+    async handleSendRequest() {
+        const token = await AsyncStorage.getItem('token');
+        console.log(token)
+        axios.get(`${ipAddress}/api/request?orderId=${this.state.orderId}&rqId=${this.state.actionRequestSelected}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            displayAlert('Request was sent!');
+            this.toggleModal();
+        })
+        .catch((error) => {
+            displayAlert('Order or request option is invalid!');
+        });
+    }
+
+    async handleAddStatus(orderId) {
+        await this.setState({
+            orderId: orderId
+        });
+        this.toggleModal();
+    }
+
+    toggleModal() {
+        this.setState({
+            isVisible: !this.state.isVisible
+        });
+        console.log(this.state.isVisible);
     }
 
     renderMainView() {
@@ -110,12 +165,6 @@ class OverViewOrder extends Component {
                         <Text style={styles.appFontSize}>Đại chỉ: {item.detail_address}</Text>
                         <Text style={styles.appFontSize}>Thu hộ: {item.cast} đ</Text>
                         <Text style={styles.appFontSize}>Ghi chú: {item.note}</Text>
-                    </View>
-                    <View style = {styles.orderStatusWrapper}>
-                        <View style = {styles.orderStatusTitle}>
-                            <Text style={styles.highlightText}>Trạng thái: </Text>
-                            <Text style={styles.highlightText}>{item.status.name}</Text>
-                        </View>
                     </View>
                     <TouchableOpacity
                         style = {styles.buttonAddRequest}
@@ -168,6 +217,83 @@ class OverViewOrder extends Component {
         });
     }
 
+    renderModal() {
+        return(
+            <Modal isVisible={this.state.isVisible}>
+                <View style={{
+                    flexDirection: 'column',
+                    height: 190,
+                    backgroundColor: '#FFF',
+                    padding: 10
+                }}>
+                    <View style = {{
+                        flexDirection: 'row',
+                        alignItems: 'center'
+                    }}>
+                        <TouchableOpacity
+                            onPress = {() => {
+                                this.toggleModal();
+                            }}
+                        >
+                            <Image
+                                source = {xIcon}
+                                style={styles.xIconStyle}
+                            ></Image>
+                        </TouchableOpacity>
+                        <View style={{
+                            flex: 1,
+                            paddingLeft: 80
+                        }}>
+                            <Text style={styles.userInformationText}>GỬI YÊU CẦU</Text>
+                        </View>
+                    </View>
+                    <View
+                        style = {{
+                            flex: 1,
+                            flexDirection: 'column',
+                            marginTop: 10,
+                        }}
+                    >
+                        <View style = {styles.statusDetailWrapper}>
+                            <Picker
+                                selectedValue = {this.state.actionRequestSelected}
+                                onValueChange = {async (itemValue, itemIndex) => {
+                                    await this.setState({
+                                        actionRequestSelected: itemValue
+                                    });
+                                }}
+                            >
+                                {this.state.actions.map((item, key) => {
+                                    return(
+                                        <Picker.Item
+                                            key = {key}
+                                            value = {item.id}
+                                            label = {item.name}
+                                        />
+                                    );
+                                })}
+                            </Picker>
+                        </View>
+                    </View>
+                    <TouchableOpacity
+                        style= {{
+                            height: 40,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            backgroundColor: orangeColor,
+                            borderRadius: 10
+                        }}
+                        onPress = {() => {
+                            this.handleSendRequest()
+                        }}
+                    >
+                        <Text style = {styles.appFontSize}>Gửi yêu cầu</Text>
+                    </TouchableOpacity>
+                </View>
+            </Modal>
+        );
+    }
+
     componentDidMount() {
         this.setState({
             status: this.props.route.params.id
@@ -180,6 +306,7 @@ class OverViewOrder extends Component {
             <SafeAreaView>
                 {this.renderHeader()}
                 {this.renderMainView()}
+                {this.renderModal()}
             </SafeAreaView>
         );
     }
