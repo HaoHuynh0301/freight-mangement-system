@@ -188,3 +188,12 @@ class Request(models.Model):
     
     def __str__(self):
         return str(self.order.customer_name)
+    
+    
+class StatusUpdate(models.Model):
+    order = models.ForeignKey(Order, on_delete = models.CASCADE)
+    status = models.ForeignKey(OrderStatus, on_delete = models.CASCADE)
+    time = models.DateTimeField(auto_now_add = True)
+    
+    def __str__(self):
+        return str(self.order.customer_name)
