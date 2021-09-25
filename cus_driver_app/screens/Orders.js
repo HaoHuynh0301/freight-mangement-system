@@ -109,9 +109,9 @@ class Orders extends Component {
         });
     }
 
-    oppenOrderInformation() {
+    oppenOrderInformation(id) {
         this.props.navigation.navigate('OrderDetail', {
-            
+            'id': id
         });
     }
 
