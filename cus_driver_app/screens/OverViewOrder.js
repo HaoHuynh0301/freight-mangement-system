@@ -76,7 +76,7 @@ class OverViewOrder extends Component {
     }
 
     onRefresh() {
-        
+        this.getListOrders();
     }
 
     oppenOrderInformation() {
@@ -125,7 +125,7 @@ class OverViewOrder extends Component {
                     <View style={styles.butonEmptyRefreshWrapper}>
                         <TouchableOpacity 
                             onPress = {() => {
-                                this.handleRefreshOrders();
+                                this.onRefresh();
                             }}
                         >
                             <Text style={{alignSelf: 'center'}}>Bấm để thử lại</Text>
@@ -284,7 +284,7 @@ class OverViewOrder extends Component {
                             borderRadius: 10
                         }}
                         onPress = {() => {
-                            this.handleSendRequest()
+                            this.onRefresh();
                         }}
                     >
                         <Text style = {styles.appFontSize}>Gửi yêu cầu</Text>
