@@ -21,11 +21,26 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Modal from "react-native-modal";
 const axios = require('axios');
 
+const displayAlert = (message) => {
+    Alert.alert(
+        "Notification",
+        message,
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+        ])
+}
+
 class OverViewOrder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            status: 1
+            status: 1,
+            orders: []
         }
     }
 
@@ -42,7 +57,21 @@ class OverViewOrder extends Component {
     }
 
     async getListOrders() {
-
+        const token = await AsyncStorage.getItem('token');
+        axios.get(`${ipAddress}/api/specific-order?status=${this.state.status}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            this.setState({
+                orders: response.data
+            });
+        })
+        .catch((error) => {
+            displayAlert('There are some errors! Please try again later!');
+        });
     }
 
     componentDidMount() {
