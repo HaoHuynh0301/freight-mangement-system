@@ -109,9 +109,10 @@ class Orders extends Component {
         });
     }
 
-    oppenOrderInformation(id) {
+    oppenOrderInformation(id, order) {
         this.props.navigation.navigate('OrderDetail', {
-            'id': id
+            'id': id,
+            'order': order
         });
     }
 
@@ -253,7 +254,7 @@ class Orders extends Component {
                         <Text style={styles.appFontSize}>{item.id}</Text>
                         <TouchableOpacity
                             onPress = {() => {
-                                this.oppenOrderInformation(item.id)
+                                this.oppenOrderInformation(item.status, item)
                             }}
                             style = {{
                                 paddingLeft: 280

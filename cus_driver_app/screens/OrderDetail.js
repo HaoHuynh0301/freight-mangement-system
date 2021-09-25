@@ -28,37 +28,45 @@ class OrderDetail extends Component {
         super(props);
         this.state = {
             id: '',
-            status: ''
+            status: '',
+            item: {}
         }
     }
 
-    setStatusName() {
+    async setStatusName(id) {
+        console.log(id)
         var statusName = '';
-        if(id == String(1)) {
+        if(id == 1) {
             statusName = 'Đang xử lý';
-        } else if(id == String(2)) {
+        } else if(id == 2) {
             statusName = 'Đã tiếp nhận';
-        } else if(id == String(3)) {
+        } else if(id == 3) {
             statusName = 'Đang giao';
-        } else if(id == String(4)) {
+        } else if(id == 4) {
             statusName = 'Đã giao, đang đối soát';
-        } else if(id == String(5)) {
+        } else if(id == 5) {
             statusName = 'Đã đối soát';
-        } else if(id == String(6)) {
+        } else if(id == 6) {
             statusName = 'Không giao được';
         }
-        this.setState({
+        console.log(statusName)
+        await this.setState({
             status: statusName
         });
-        console.log(this.state.status)
+    }
+
+    async setItem() {
+        await this.setState({
+            item: this.props.route.params.order
+        });
     }
 
     componentDidMount() {
         this.setState({
-            id: this.props.route.params.id
+            id: this.props.route.params.id,
         });
-        console.log(this.state.id)
-        this.setStatusName(this.state.id);
+        this.setItem();
+        this.setStatusName(this.props.route.params.id);
     }
 
     renderHeader() {
@@ -83,11 +91,24 @@ class OrderDetail extends Component {
 
     renderMainView() {
         return(
-            <View style = {styles.mainViewStyle}>
-                <View style = {styles.basicInforWrapper}>
-                    <Text>Trạng thái: {this.state.status}</Text>
+            <ScrollView>
+                <View style = {styles.mainViewStyle}>
+                    <View style = {styles.basicInforWrapper}>
+                        <Text style = {styles.fontSize}>Trạng thái: {this.state.status}</Text>
+                        <Text style = {styles.fontSize}>Ghi chú: {this.state.item.note}</Text>
+                        <Text style = {styles.fontSize}>Sản phẩm: {this.state.item.note}</Text>
+                    </View>
+                    <View style = {styles.basicInforWrapper}>
+                        <Text style = {{
+                            fontSize: appFontSize,
+                            color: orangeColor
+                        }}>Cập nhật</Text>
+                    </View>
+                    <View style = {styles.statusDetailWrapper}>
+
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 
@@ -106,7 +127,7 @@ const styles = StyleSheet.create({
         height: 60,
         width: '100%',
         flexDirection: 'row',
-        backgroundColor: '#FFF',
+        backgroundColor: orangeColor,
         justifyContent: 'flex-start',
         alignItems: 'center',
         borderBottomWidth: 0.5,
@@ -129,10 +150,20 @@ const styles = StyleSheet.create({
     mainViewStyle: {
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     basicInforWrapper: {
-        width: '90%'
+        width: '90%',
+        marginTop: 10,
+        borderBottomWidth: 0.5,
+        borderBottomColor: greyColor,
+        paddingBottom: 10
+    },
+    fontSize: {
+        fontSize: appFontSize
+    },
+    titleWrapper: {
+        
     }
 });
 
