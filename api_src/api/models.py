@@ -195,5 +195,8 @@ class StatusUpdate(models.Model):
     status = models.ForeignKey(OrderStatus, on_delete = models.CASCADE)
     time = models.DateTimeField(auto_now_add = True)
     
+    class Meta:
+        ordering = ['time']
+    
     def __str__(self):
         return str(self.order.customer_name)

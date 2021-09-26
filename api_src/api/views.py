@@ -282,5 +282,13 @@ class StatusUpdate(APIView):
         return Response({'status': 'errors'}, status = status.HTTP_400_BAD_REQUEST)
     
     def post(self, request, format = None):
-        pass
+        statusId = request.data['status_id']
+        orderId = request.data['order_id']
+        userInstance = request.user
+        orders = userInstance.account_order.filter(id = orderId)
+        statusInstance = models.OrderStatus.objects.get(id = statusId)
+        if len(orders) > 0:
+            models.StatusUpdate.objects.create(order = orders[0], status = statusInstance)
+            return Response({'status': 'Created'}, status = status.HTTP_201_CREATED)
+        return Response({'status': 'errors'}, status = status.HTTP_400_BAD_REQUEST)
      
