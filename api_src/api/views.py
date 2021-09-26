@@ -264,4 +264,23 @@ class SpecificOrderView(APIView):
                 if order.status.id == 6:
                    speOrders.append(order)
         speOrders = serializers.OrderSerializer(speOrders, many = True)
-        return Response(speOrders.data, status = status.HTTP_200_OK)        
+        return Response(speOrders.data, status = status.HTTP_200_OK)      
+    
+    
+class StatusUpdate(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.StatusUpdateSerializer
+    
+    def get(self, request, format = None):
+        orderId = request.query_params.get('order_id')
+        userInstance = request.user
+        orders = userInstance.account_order.filter(id = orderId)
+        if len(orders) > 0:
+            updateStatus = orders[0].statusupdate_set.all()
+            serializers = self.serializer_class(updateStatus, many = True)
+            return Response(serializers.data, status = status.HTTP_200_OK)
+        return Response({'status': 'errors'}, status = status.HTTP_400_BAD_REQUEST)
+    
+    def post(self, request, format = None):
+        pass
+     

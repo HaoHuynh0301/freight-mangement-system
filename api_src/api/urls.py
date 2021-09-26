@@ -14,6 +14,7 @@ urlpatterns = [
     path('location-information/', views.LocationInformation.as_view(), name = 'location-information'),
     path('request/', views.RequestView.as_view(), name = 'request'),
     path('specific-order/', views.SpecificOrderView.as_view(), name = 'specific-orders'),
+    path('status-update/', views.StatusUpdate.as_view(), name = 'status-update'),
     
     # ============= #
     
