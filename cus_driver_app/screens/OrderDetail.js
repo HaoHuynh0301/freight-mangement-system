@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 import React, { Component } from 'react';
 import {
     SafeAreaView,
@@ -9,6 +11,7 @@ import {
     TextInput,
     ScrollView,
     Alert,
+    FlatList,
 } from 'react-native';
 import {
     greyColor,
@@ -23,13 +26,28 @@ import {
     ipAddress
 } from '../contants';
 
+const displayAlert = (message) => {
+    Alert.alert(
+        "Notification",
+        message,
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+        ])
+}
+
 class OrderDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
             id: '',
             status: '',
-            item: {}
+            item: {},
+            updateStatus: [{id: 1}]
         }
     }
 
@@ -53,6 +71,26 @@ class OrderDetail extends Component {
         await this.setState({
             status: statusName
         });
+    }
+
+    async getStatusUpdate() {
+        const token = await AsyncStorage.getItem('token')
+        console.log(this.state.item.id)
+        axios.get(`${ipAddress}/api/status-update/?order_id=${this.state.item.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then( (response) => {
+            // await this.setState({
+            //     updateStatus: [...response.data, this.state.updateStatus]
+            // });
+        })
+        .catch((error) => {
+            displayAlert('Error');
+        });
+        
     }
 
     async setItem() {
@@ -90,13 +128,19 @@ class OrderDetail extends Component {
     }
 
     renderMainView() {
+        this.getStatusUpdate();
+        const item = ({item}) => {
+            return(
+                <Text></Text>
+            );
+        }
         return(
             <ScrollView>
                 <View style = {styles.mainViewStyle}>
                     <View style = {styles.basicInforWrapper}>
                         <Text style = {styles.fontSize}>Trạng thái: {this.state.status}</Text>
                         <Text style = {styles.fontSize}>Ghi chú: {this.state.item.note}</Text>
-                        <Text style = {styles.fontSize}>Sản phẩm: {this.state.item.note}</Text>
+                        <Text style = {styles.fontSize}>Sản phẩm: {this.state.item.product_name}</Text>
                     </View>
                     <View style = {styles.basicInforWrapper}>
                         <Text style = {{
@@ -104,8 +148,20 @@ class OrderDetail extends Component {
                             color: orangeColor
                         }}>Cập nhật</Text>
                     </View>
-                    <View style = {styles.statusDetailWrapper}>
+                    <ScrollView>
+                        <FlatList
+                            data = {[{id: 1}]}
+                            showsHorizontalScrollIndicator = {false}
+                            keyExtractor = {(item) => item.id}
+                            renderItem = {item}
+                            // onRefresh = {() => {
+                            //     this.onRefresh()
+                            // }}
+                            // refreshing = {this.state.isFetching}
+                        ></FlatList>
+                    </ScrollView>
 
+                    <View style = {styles.statusDetailWrapper}>
                     </View>
                 </View>
             </ScrollView>
