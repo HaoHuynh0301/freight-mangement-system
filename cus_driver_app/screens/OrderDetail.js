@@ -211,7 +211,7 @@ class OrderDetail extends Component {
                     alignItems: 'flex-start',
                     justifyContent: 'center'
                 }}>
-                    <Text style = {{fontSize: appFontSize}}>{item.request_option}</Text>
+                    <Text style = {{fontSize: appFontSize}}>{item.time}: {item.request_option}</Text>
                 </View>
             );
         }
