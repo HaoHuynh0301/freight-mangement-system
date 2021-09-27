@@ -289,6 +289,8 @@ class StatusUpdate(APIView):
         statusInstance = models.OrderStatus.objects.get(id = statusId)
         if len(orders) > 0:
             models.StatusUpdate.objects.create(order = orders[0], status = statusInstance)
+            orders[0].status = statusInstance
+            orders[0].save()
             return Response({'status': 'Created'}, status = status.HTTP_201_CREATED)
         return Response({'status': 'errors'}, status = status.HTTP_400_BAD_REQUEST)
      

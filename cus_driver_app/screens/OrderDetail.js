@@ -47,7 +47,9 @@ class OrderDetail extends Component {
             id: '',
             status: '',
             item: {},
-            updateStatus: [{id: 1}]
+            updateStatus: [],
+            selectedFlatlist: 1,
+            isFetchingStatus: false,
         }
     }
 
@@ -67,7 +69,6 @@ class OrderDetail extends Component {
         } else if(id == 6) {
             statusName = 'Không giao được';
         }
-        console.log(statusName)
         await this.setState({
             status: statusName
         });
@@ -82,10 +83,32 @@ class OrderDetail extends Component {
                 Authorization: `Bearer ${token}`
             }
         })
-        .then( (response) => {
-            // await this.setState({
-            //     updateStatus: [...response.data, this.state.updateStatus]
-            // });
+        .then(async (response) => {
+            await this.setState({
+                updateStatus: response.data
+            });
+            var tmpList = []
+            tmpList = this.state.updateStatus;
+            for(let i=0; i<tmpList.length; i++) {
+                var statusName = '';
+                if(tmpList[i].status == 1) {
+                    statusName = 'Đang xử lý';
+                } else if(tmpList[i].status == 2) {
+                    statusName = 'Đã tiếp nhận';
+                } else if(tmpList[i].status == 3) {
+                    statusName = 'Đang giao';
+                } else if(tmpList[i].status == 4) {
+                    statusName = 'Đã giao, đang đối soát';
+                } else if(tmpList[i].status == 5) {
+                    statusName = 'Đã đối soát';
+                } else if(tmpList[i].status == 6) {
+                    statusName = 'Không giao được';
+                }
+                tmpList[i].status = statusName;
+            }
+            await this.setState({
+                updateStatus: tmpList
+            });
         })
         .catch((error) => {
             displayAlert('Error');
@@ -105,6 +128,7 @@ class OrderDetail extends Component {
         });
         this.setItem();
         this.setStatusName(this.props.route.params.id);
+        this.getStatusUpdate();
     }
 
     renderHeader() {
@@ -127,50 +151,57 @@ class OrderDetail extends Component {
         );
     }
 
-    renderMainView() {
+    onRefreshStatus() {
+        this.setStatusName(this.props.route.params.id);
         this.getStatusUpdate();
+    }
+
+    renderMainView() {
         const item = ({item}) => {
             return(
-                <Text></Text>
+                <View style = {{
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                    justifyContent: 'center'
+                }}>
+                    <Text style = {{fontSize: appFontSize}}>{item.time}: {item.status}</Text>
+                </View>
             );
         }
         return(
-            <ScrollView>
-                <View style = {styles.mainViewStyle}>
-                    <View style = {styles.basicInforWrapper}>
-                        <Text style = {styles.fontSize}>Trạng thái: {this.state.status}</Text>
-                        <Text style = {styles.fontSize}>Ghi chú: {this.state.item.note}</Text>
-                        <Text style = {styles.fontSize}>Sản phẩm: {this.state.item.product_name}</Text>
-                    </View>
-                    <View style = {styles.basicInforWrapper}>
-                        <Text style = {{
-                            fontSize: appFontSize,
-                            color: orangeColor
-                        }}>Cập nhật</Text>
-                    </View>
-                    <ScrollView>
-                        <FlatList
-                            data = {[{id: 1}]}
-                            showsHorizontalScrollIndicator = {false}
-                            keyExtractor = {(item) => item.id}
-                            renderItem = {item}
-                            // onRefresh = {() => {
-                            //     this.onRefresh()
-                            // }}
-                            // refreshing = {this.state.isFetching}
-                        ></FlatList>
-                    </ScrollView>
-
-                    <View style = {styles.statusDetailWrapper}>
-                    </View>
+            <View style = {styles.mainViewStyle}>
+                <View style = {styles.basicInforWrapper}>
+                    <Text style = {styles.fontSize}>Trạng thái: {this.state.status}</Text>
+                    <Text style = {styles.fontSize}>Ghi chú: {this.state.item.note}</Text>
+                    <Text style = {styles.fontSize}>Sản phẩm: {this.state.item.product_name}</Text>
                 </View>
-            </ScrollView>
+                <View style = {styles.basicInforWrapper}>
+                    <Text style = {{
+                        fontSize: appFontSize,
+                        color: orangeColor
+                    }}>Cập nhật</Text>
+                </View>
+                <View style = {styles.statusDetailWrapper}>
+                    <FlatList
+                        data = {this.state.updateStatus}
+                        showsHorizontalScrollIndicator = {false}
+                        keyExtractor = {(item) => item.id}
+                        extraData = {this.state.selectedFlatlist}
+                        renderItem = {item}
+                        style = {{paddingTop: 5}}
+                        onRefresh = {() => {
+                            this.onRefreshStatus()
+                        }}
+                        refreshing = {this.state.isFetchingStatus}
+                    ></FlatList>
+                </View>
+            </View>
         );
     }
 
     render() {
         return(
-            <SafeAreaView>
+            <SafeAreaView style = {{flex: 1}}>
                 {this.renderHeader()}
                 {this.renderMainView()}
             </SafeAreaView>
@@ -207,6 +238,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        // marginTop: 65
     },
     basicInforWrapper: {
         width: '90%',
@@ -220,6 +252,9 @@ const styles = StyleSheet.create({
     },
     titleWrapper: {
         
+    },
+    statusDetailWrapper: {
+        width: '90%'
     }
 });
 
