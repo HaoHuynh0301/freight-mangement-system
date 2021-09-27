@@ -15,6 +15,7 @@ urlpatterns = [
     path('request/', views.RequestView.as_view(), name = 'request'),
     path('specific-order/', views.SpecificOrderView.as_view(), name = 'specific-orders'),
     path('status-update/', views.StatusUpdate.as_view(), name = 'status-update'),
+    path('list-request/', views.ListRequestView.as_view(), name = 'list-request'),
     
     # ============= #
     

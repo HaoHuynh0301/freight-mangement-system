@@ -70,3 +70,9 @@ class StatusUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.StatusUpdate
         fields = '__all__'
+        
+        
+class RequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Request
+        fields = '__all__'

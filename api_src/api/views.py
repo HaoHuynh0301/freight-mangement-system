@@ -182,6 +182,21 @@ class RequestView(APIView):
         return Response({'error': 'Order or request option is invalid!'}, status = status.HTTP_400_BAD_REQUEST)
     
     
+class ListRequestView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.RequestSerializer
+    
+    def get_order_object(self, id = None):
+        return get_object_or_404(models.Order, id = id)
+    
+    def get(self, request, format = None):
+        orderId = request.query_params.get('orderId')
+        orderInstance = self.get_order_object(orderId)
+        if orderInstance is not None:
+            serializer = self.serializer_class(orderInstance.request_set.all(), many = True)
+            return Response(serializer.data, status = status.HTTP_200_OK)
+        return Response({'error': 'Order or request option is invalid!'}, status = status.HTTP_400_BAD_REQUEST)
+    
 class PaidMoneyView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     
