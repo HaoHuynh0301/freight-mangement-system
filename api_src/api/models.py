@@ -185,6 +185,7 @@ class RequestOption(models.Model):
 class Request(models.Model):
     order = models.ForeignKey(Order, on_delete = models.CASCADE)
     request_option = models.ForeignKey(RequestOption, on_delete = models.SET_NULL, null = True)
+    time = models.DateTimeField(auto_now_add = True)
     
     def __str__(self):
         return str(self.order.customer_name)
