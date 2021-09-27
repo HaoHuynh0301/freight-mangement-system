@@ -54,7 +54,6 @@ class OrderDetail extends Component {
     }
 
     async setStatusName(id) {
-        console.log(id)
         var statusName = '';
         if(id == 1) {
             statusName = 'Đang xử lý';
@@ -76,7 +75,6 @@ class OrderDetail extends Component {
 
     async getStatusUpdate() {
         const token = await AsyncStorage.getItem('token')
-        console.log(this.state.item.id)
         axios.get(`${ipAddress}/api/status-update/?order_id=${this.state.item.id}`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -195,6 +193,12 @@ class OrderDetail extends Component {
                         refreshing = {this.state.isFetchingStatus}
                     ></FlatList>
                 </View>
+                <View style = {styles.basicInforWrapper}>
+                    <Text style = {{
+                        fontSize: appFontSize,
+                        color: orangeColor
+                    }}>Danh sách yêu cầu</Text>
+                </View>
             </View>
         );
     }
@@ -254,7 +258,10 @@ const styles = StyleSheet.create({
         
     },
     statusDetailWrapper: {
-        width: '90%'
+        width: '90%',
+        borderBottomWidth: 0.5,
+        borderBottomColor: greyColor,
+        paddingBottom: 10
     }
 });
 

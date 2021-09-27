@@ -146,19 +146,6 @@ class OverViewOrder extends Component {
                             style = {styles.iconStyle}
                         ></Image>
                         <Text style={styles.appFontSize}>{item.id}</Text>
-                        <TouchableOpacity
-                            onPress = {() => {
-                                this.oppenOrderInformation(item.id)
-                            }}
-                            style = {{
-                                paddingLeft: 280
-                            }}
-                        >
-                            <Image
-                                source = {rightArrowIcon}
-                                style = {styles.rightArrowIconStyle}
-                            ></Image>
-                        </TouchableOpacity>
                     </View>
                     <View style = {styles.productInformationDetail}>
                         <Text style={styles.appFontSize}>Tên: {item.customer_name}/ {item.customer_phonenumber}</Text>
