@@ -9,6 +9,7 @@ import CreateOrder from './CreateOrder';
 import OrderDetail from "./OrderDetail";
 import SignIn from './SignIn';
 import OverViewOrder from './OverViewOrder';
+import OrderMap from './OrderMap';
 
 export {
     SignIn,
@@ -21,5 +22,6 @@ export {
     EditInformation,
     CreateOrder,
     OrderDetail,
-    OverViewOrder
+    OverViewOrder,
+    OrderMap
 }

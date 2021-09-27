@@ -18,12 +18,9 @@ import {
     headerFontSize,
     xIcon,
     appFontSize,
-    callIcon, 
-    homeIcon,
-    accountIcon,
-    locationIcon,
     orangeColor,
-    ipAddress
+    ipAddress,
+    mapIcon
 } from '../contants';
 
 const displayAlert = (message) => {
@@ -156,6 +153,12 @@ class OrderDetail extends Component {
         });
     }
 
+    oppenOrderMap() {
+        this.props.navigation.navigate('OrderMap', {
+
+        });
+    }
+
     componentDidMount() {
         this.setState({
             id: this.props.route.params.id,
@@ -182,6 +185,17 @@ class OrderDetail extends Component {
                 <View style={styles.titleWrapper}>
                     <Text style={styles.userInformationText}>CHÍ TIẾT ĐƠN HÀNG</Text>
                 </View>
+                <TouchableOpacity
+                    onPress = {() => {
+                        this.oppenOrderMap()
+                    }}
+                >
+                    <Image style = {{
+                        marginLeft: 120,
+                        height: 25,
+                        width: 25
+                    }} source = {mapIcon}></Image>
+                </TouchableOpacity>
             </View>
         );
     }

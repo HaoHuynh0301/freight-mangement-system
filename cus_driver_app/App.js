@@ -8,7 +8,8 @@ import {
     CreateOrder,
     OrderDetail,
     SignIn,
-    OverViewOrder
+    OverViewOrder,
+    OrderMap
 } from './screens';
 import {
     ipAddress
@@ -95,6 +96,11 @@ class App extends Component {
                             component = {OverViewOrder}
                             options={{header: () => null}}
                         ></Stack.Screen>
+                        <Stack.Screen
+                            name = 'OrderMap'
+                            component = {OrderMap}
+                            options={{header: () => null}}
+                        ></Stack.Screen>
                     </Stack.Navigator>
                 </NavigationContainer>
             );
@@ -135,6 +141,11 @@ class App extends Component {
                         <Stack.Screen
                             name = 'OrderDetail'
                             component = {OrderDetail}
+                            options={{header: () => null}}
+                        ></Stack.Screen>
+                        <Stack.Screen
+                            name = 'OrderMap'
+                            component = {OrderMap}
                             options={{header: () => null}}
                         ></Stack.Screen>
                     </Stack.Navigator>

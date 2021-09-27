@@ -17,6 +17,7 @@ const plusIcon = require('../assets/plus-icon.png');
 const xIcon = require('../assets/x-icon.png');
 const deliveryIcon = require('../assets/delivery-icon.png');
 const bycicleIcon = require('../assets/bycicle-icon.png');
+const mapIcon = require('../assets/map-icon.png');
 
 // Font size
 const headerFontSize = 22;
@@ -55,5 +56,6 @@ export {
     locationIcon,
     newIcon,
     greyColor,
-    plusIcon
+    plusIcon,
+    mapIcon
 }
