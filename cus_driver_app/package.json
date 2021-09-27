@@ -19,6 +19,7 @@
     "axios": "^0.21.4",
     "react": "17.0.2",
     "react-native": "0.65.1",
+    "react-native-maps": "0.29.3",
     "react-native-modal": "^13.0.0",
     "react-native-radio-buttons-group": "^2.2.5",
     "react-native-safe-area-context": "^3.3.0",

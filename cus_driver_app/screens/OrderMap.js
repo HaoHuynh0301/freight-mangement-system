@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     titleWrapper: {
-        paddingLeft: 70
+        paddingLeft: 120
     },
 });
 
