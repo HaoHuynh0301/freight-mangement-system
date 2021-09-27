@@ -48,7 +48,9 @@ class OrderDetail extends Component {
             status: '',
             item: {},
             updateStatus: [],
+            requests: [],
             selectedFlatlist: 1,
+            selectedFlatlist2: 1,
             isFetchingStatus: false,
         }
     }
@@ -120,6 +122,40 @@ class OrderDetail extends Component {
         });
     }
 
+    async getRequest() {
+        const token = await AsyncStorage.getItem('token')
+        axios.get(`${ipAddress}/api/list-request?orderId=${this.state.item.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }).
+        then(async (response) => {
+            await this.setState({
+                requests: response.data
+            });
+            var tmpList = []
+            tmpList = this.state.requests;
+            for(let i=0; i<tmpList.length; i++) {
+                var requestName = '';
+                if(tmpList[i].request_option == 1) {
+                    requestName = 'Giục lấy'
+                } else if(tmpList[i].request_option == 2) {
+                    requestName = 'Giao';
+                } else if(tmpList[i].request_option == 3) {
+                    requestName = 'Trả hàng';
+                }
+                tmpList[i].request_option = requestName;
+            }
+            await this.setState({
+                requests: tmpList
+            });
+        })
+        .catch((error) => {
+            displayAlert('There are some errors! Please try again');
+        });
+    }
+
     componentDidMount() {
         this.setState({
             id: this.props.route.params.id,
@@ -127,6 +163,7 @@ class OrderDetail extends Component {
         this.setItem();
         this.setStatusName(this.props.route.params.id);
         this.getStatusUpdate();
+        this.getRequest();
     }
 
     renderHeader() {
@@ -166,6 +203,18 @@ class OrderDetail extends Component {
                 </View>
             );
         }
+
+        const itemRequest = ({item}) => {
+            return(
+                <View style = {{
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                    justifyContent: 'center'
+                }}>
+                    <Text style = {{fontSize: appFontSize}}>{item.request_option}</Text>
+                </View>
+            );
+        }
         return(
             <View style = {styles.mainViewStyle}>
                 <View style = {styles.basicInforWrapper}>
@@ -198,6 +247,20 @@ class OrderDetail extends Component {
                         fontSize: appFontSize,
                         color: orangeColor
                     }}>Danh sách yêu cầu</Text>
+                </View>
+                <View style = {styles.statusDetailWrapper}>
+                    <FlatList
+                        data = {this.state.requests}
+                        showsHorizontalScrollIndicator = {false}
+                        keyExtractor = {(item) => item.id}
+                        extraData = {this.state.selectedFlatlist2}
+                        renderItem = {itemRequest}
+                        style = {{paddingTop: 5}}
+                        onRefresh = {() => {
+                            this.onRefreshStatus()
+                        }}
+                        refreshing = {this.state.isFetchingStatus}
+                    ></FlatList>
                 </View>
             </View>
         );
