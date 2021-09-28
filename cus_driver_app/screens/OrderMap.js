@@ -22,6 +22,7 @@ import {
     ipAddress,
     mapIcon
 } from '../contants';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 
 const displayAlert = (message) => {
     Alert.alert(
@@ -62,11 +63,33 @@ class OrderMap extends Component {
         );
     }
 
+    renderMainView() {
+        return(
+            <View>
+                <MapView
+                    style={{flex: 1}}
+                    region={{
+                      latitude: 42.882004,
+                      longitude: 74.582748,
+                      latitudeDelta: 0.0922,
+                      longitudeDelta: 0.0421
+                    }}
+                    showsUserLocation={true}
+                ></MapView>
+            </View>
+        );
+    }
+
     render() {
         return(
-            <SafeAreaView>
-                {this.renderHeader()}
-            </SafeAreaView>
+            <View style = {{flex: 1}}>
+                <MapView
+                    style={{flex:1}}
+                    provider = {PROVIDER_GOOGLE}
+                >
+                    
+                </MapView>
+            </View>
         );
     }
 }
@@ -96,6 +119,9 @@ const styles = StyleSheet.create({
     titleWrapper: {
         paddingLeft: 120
     },
+    // map: {
+    //     ...StyleSheet.absoluteFillObject,
+    // },
 });
 
 export default OrderMap;
