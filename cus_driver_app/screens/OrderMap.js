@@ -41,6 +41,14 @@ const displayAlert = (message) => {
 class OrderMap extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            region: {
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            }
+        }
     }
 
     renderHeader() {
@@ -80,15 +88,33 @@ class OrderMap extends Component {
         );
     }
 
+    
     render() {
         return(
             <View style = {{flex: 1}}>
+                {this.renderHeader()}
                 <MapView
-                    style={{flex:1}}
+                    style = {{flex:1}}
                     provider = {PROVIDER_GOOGLE}
+                    // showsUserLocation
+                    region = {{
+                        latitude: 52.5200066,
+                        longitude: 13.404954,
+                        latitudeDelta: 0.005,
+                        longitudeDelta: 0.005,
+                    }}
                 >
-                    
+                    <Marker
+                        coordinate = {{
+                            latitude: 52.5200066,
+                            longitude: 13.404954,
+                        }}
+                        // image = {xIcon}
+                        title = 'Test title'
+                        description = 'This is a description'
+                    ></Marker>
                 </MapView>
+                
             </View>
         );
     }
@@ -99,7 +125,7 @@ const styles = StyleSheet.create({
         height: 60,
         width: '100%',
         flexDirection: 'row',
-        backgroundColor: orangeColor,
+        backgroundColor: greyColor,
         justifyContent: 'flex-start',
         alignItems: 'center',
         borderBottomWidth: 0.5,
