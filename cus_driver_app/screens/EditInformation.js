@@ -95,17 +95,19 @@ class EditInformation extends Component {
         }
     }
 
-    getListOfBankds() {
-        axios.get(`https://api.vietqr.io/v1/banks/`)
-            .then((response) => {
-                // console.log(response.data);
-                this.setState({
+    async getListOfBankds() {
+        console.log('GET')
+        await axios.get(`https://api.vietqr.io/v1/banks/`)
+            .then(async (response) => {
+                console.log(response.data);
+                await this.setState({
                     banks: response.data.data
                 });
             })
             .catch((error) => {
                 console.log(error);
             });
+        console.log('DONE')
     }
 
     getListOfProvinces() {

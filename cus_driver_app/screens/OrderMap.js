@@ -43,10 +43,7 @@ class OrderMap extends Component {
         super(props);
         this.state = {
             region: {
-                latitude: 37.78825,
-                longitude: -122.4324,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+
             }
         }
     }
@@ -98,21 +95,21 @@ class OrderMap extends Component {
                     provider = {PROVIDER_GOOGLE}
                     // showsUserLocation
                     region = {{
-                        latitude: 52.5200066,
-                        longitude: 13.404954,
-                        latitudeDelta: 0.005,
-                        longitudeDelta: 0.005,
+                        latitude: 10.03711,
+                        longitude: 105.78825,
+                        latitudeDelta: 0.004,
+                        longitudeDelta: 0.004
                     }}
                 >
-                    <Marker
+                    {/* <Marker
                         coordinate = {{
-                            latitude: 52.5200066,
-                            longitude: 13.404954,
+                            latitude: 10.03333,
+                            longitude: 105.78333,
                         }}
                         // image = {xIcon}
                         title = 'Test title'
                         description = 'This is a description'
-                    ></Marker>
+                    ></Marker> */}
                 </MapView>
                 
             </View>
