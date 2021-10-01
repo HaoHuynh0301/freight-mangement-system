@@ -134,14 +134,14 @@ class SignIn extends Component {
                         this.handleSignInPressed()
                     }}
                 >
-                    <Text style = {{fontSize: 20, fontWeight: 'bold'}}>Sign in</Text>
+                    <Text style = {{fontSize: 20, fontWeight: 'bold'}}>Đăng nhập</Text>
                 </TouchableOpacity>
                 <View style = {styles.registerWrapper}>
-                    <Text style = {styles.registerText}>Don't have any accounts ? </Text>
+                    <Text style = {styles.registerText}>Bạn chưa có tài khoản ? </Text>
                     <TouchableOpacity
                         onPress = {() => {this.handleRegisterPressed()}}
                     >
-                        <Text style = {styles.registerText}>Register an account</Text>
+                        <Text style = {styles.registerText}>Đăng ký tài khoản</Text>
                     </TouchableOpacity>
                 </View>
             </View>
