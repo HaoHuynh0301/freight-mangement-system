@@ -160,7 +160,7 @@ class OrderDetail extends Component {
 
     oppenOrderMap() {
         this.props.navigation.navigate('OrderMap', {
-
+            id: this.props.route.params.order.id
         });
     }
 

@@ -49,17 +49,39 @@ class OrderMap extends Component {
 
             },
             latitudeDelta: 0,
-            longitudeDelta: 0
+            longitudeDelta: 0,
+            orderId: ''
         }
+    }
+    
+    async getInstanceAddress() {
+        const token = await AsyncStorage.getItem('token');
+        console.log(this.props.route.params.id)
+        axios.get(`${ipAddress}/api/instance-address?order_id=${this.props.route.params.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(async (response) => {
+            console.log(response.data);
+        })
+        .catch((error) => {
+            displayAlert('There are some errors! Please try again later!');
+        });
     }
 
     componentDidMount() {
-        
+        // this.setState({
+        //     orderId: this.props.route.params.id
+        // });
+        // console.log(this.state.orderId)
+        this.getInstanceAddress();
     }
 
     getCoordinate(directionName) {
 
-    }   
+    }  
 
     renderHeader() {
         return(
