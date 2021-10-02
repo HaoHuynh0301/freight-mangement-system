@@ -50,21 +50,39 @@ class OrderMap extends Component {
             },
             latitudeDelta: 0,
             longitudeDelta: 0,
-            orderId: ''
+            orderId: '',
+
+            // Instance Address
+            instanceProvince: '',
+            insLatitude: '',
+            insLongitude: ''
         }
     }
     
     async getInstanceAddress() {
+        console.log('1')
         const token = await AsyncStorage.getItem('token');
-        console.log(this.props.route.params.id)
         axios.get(`${ipAddress}/api/instance-address?order_id=${this.props.route.params.id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
             }
         })
-        .then(async (response) => {
-            console.log(response.data);
+        .then((response) => {
+            console.log('2')
+            axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
+            .then((response) => {
+                console.log('3')
+                var datas = response.data.data
+                console.log(datas[0])
+                this.setState({
+                    insLatitude: datas[0].latitude,
+                    insLongitude: datas[0].longitude
+                });
+            })
+            .catch((error) => {
+                displayAlert('There are some errors! Please try again later!');
+            });
         })
         .catch((error) => {
             displayAlert('There are some errors! Please try again later!');
@@ -72,16 +90,8 @@ class OrderMap extends Component {
     }
 
     componentDidMount() {
-        // this.setState({
-        //     orderId: this.props.route.params.id
-        // });
-        // console.log(this.state.orderId)
         this.getInstanceAddress();
     }
-
-    getCoordinate(directionName) {
-
-    }  
 
     renderHeader() {
         return(
@@ -128,10 +138,10 @@ class OrderMap extends Component {
                         title = 'Test title'
                         description = 'This is a description'
                     ></Marker>
-                    <Marker
+                    {/* <Marker
                         coordinate = {{
-                            latitude: 20.45,
-                            longitude: 106.33333,
+                            latitude: Number(this.state.insLatitude),
+                            longitude: Number(this.state.insLongitude),
                         }}
                         anchor = {{x: 0.5, y: 0.5}}
                         flat = {true}
@@ -143,7 +153,7 @@ class OrderMap extends Component {
                                 width: 50
                             }}
                         ></Image>
-                    </Marker>
+                    </Marker> */}
                 </MapView>
                 
             </View>
