@@ -76,3 +76,9 @@ class RequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Request
         fields = '__all__'
+        
+        
+class InstanceAddressSerilizer(serializers.ModelSerializer):
+    class Meta:
+        model = models.InstanceAddress
+        fields = '__all__'
