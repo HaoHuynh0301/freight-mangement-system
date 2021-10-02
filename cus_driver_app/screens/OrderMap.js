@@ -20,9 +20,12 @@ import {
     appFontSize,
     orangeColor,
     ipAddress,
-    mapIcon
+    mapIcon,
+    carIcon
 } from '../contants';
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
+// import Routing from 'react-native-leaflet-routing';
 
 const displayAlert = (message) => {
     Alert.alert(
@@ -44,9 +47,19 @@ class OrderMap extends Component {
         this.state = {
             region: {
 
-            }
+            },
+            latitudeDelta: 0,
+            longitudeDelta: 0
         }
     }
+
+    componentDidMount() {
+        
+    }
+
+    getCoordinate(directionName) {
+
+    }   
 
     renderHeader() {
         return(
@@ -68,23 +81,6 @@ class OrderMap extends Component {
         );
     }
 
-    renderMainView() {
-        return(
-            <View>
-                <MapView
-                    style={{flex: 1}}
-                    region={{
-                      latitude: 42.882004,
-                      longitude: 74.582748,
-                      latitudeDelta: 0.0922,
-                      longitudeDelta: 0.0421
-                    }}
-                    showsUserLocation={true}
-                ></MapView>
-            </View>
-        );
-    }
-
     
     render() {
         return(
@@ -93,23 +89,39 @@ class OrderMap extends Component {
                 <MapView
                     style = {{flex:1}}
                     provider = {PROVIDER_GOOGLE}
-                    // showsUserLocation
+                    showsUserLocation
                     region = {{
-                        latitude: 10.03711,
-                        longitude: 105.78825,
-                        latitudeDelta: 0.004,
-                        longitudeDelta: 0.004
+                        latitude: 21.732568,
+                        longitude: 105.396672,
+                        latitudeDelta: 1,
+                        longitudeDelta: 1
                     }}
                 >
-                    {/* <Marker
+                    <Marker
                         coordinate = {{
-                            latitude: 10.03333,
-                            longitude: 105.78333,
+                            latitude: 21.0245,
+                            longitude: 105.84117,
                         }}
                         // image = {xIcon}
                         title = 'Test title'
                         description = 'This is a description'
-                    ></Marker> */}
+                    ></Marker>
+                    <Marker
+                        coordinate = {{
+                            latitude: 20.45,
+                            longitude: 106.33333,
+                        }}
+                        anchor = {{x: 0.5, y: 0.5}}
+                        flat = {true}
+                    >
+                        <Image
+                            source = {carIcon}
+                            style = {{
+                                height: 50,
+                                width: 50
+                            }}
+                        ></Image>
+                    </Marker>
                 </MapView>
                 
             </View>

@@ -174,6 +174,15 @@ class Order(models.Model):
     #         url = ''
     #     return url
     
+
+class InstanceAddress(models.Model):
+    order = models.ForeignKey(Order, on_delete = models.CASCADE)
+    detail_address = models.CharField(max_length = 255, null = False, blank = True)
+    province = models.CharField(max_length = 255)
+    
+    def __str__(self):
+        return str(self.id)
+    
     
 class RequestOption(models.Model):
     name = models.CharField(max_length = 255, blank = True)

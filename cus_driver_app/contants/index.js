@@ -18,6 +18,7 @@ const xIcon = require('../assets/x-icon.png');
 const deliveryIcon = require('../assets/delivery-icon.png');
 const bycicleIcon = require('../assets/bycicle-icon.png');
 const mapIcon = require('../assets/map-icon.png');
+const carIcon = require('../assets/car-icon.png');
 
 // Font size
 const headerFontSize = 22;
@@ -32,6 +33,7 @@ const orangeColor = '#ff7733';
 const ipAddress = 'http://192.168.1.2:8000';
 
 export {
+    carIcon,
     ipAddress,
     bycicleIcon,
     deliveryIcon,

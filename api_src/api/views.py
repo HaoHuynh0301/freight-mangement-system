@@ -239,7 +239,7 @@ class TotalOrderView(APIView):
         # 1 is number of delivered orders
         if totalOrdersStatus == str(1):
             for order in orders:
-                if order.status.id >= 4 and order.status.id != 6:
+                if order.status.id >= 4 and order.status.id != 6 and order.status.id != 7:
                     totalOrders += 1
                     
         # 2 is number of undelivered orders
@@ -309,3 +309,14 @@ class StatusUpdate(APIView):
             return Response({'status': 'Created'}, status = status.HTTP_201_CREATED)
         return Response({'status': 'errors'}, status = status.HTTP_400_BAD_REQUEST)
      
+
+class InstanceAddressView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request, format = None):
+        userInstance = request.user
+        orderId = request.data['order_id']
+        orders = userInstance.account_order.filter(id = orderId)
+        if len(orders) > 0:
+            pass
+        return Response({'error': 'There are some errors! Please try again!'}, status = status.HTTP_400_BAD_REQUEST)

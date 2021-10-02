@@ -66,6 +66,8 @@ class OrderDetail extends Component {
             statusName = 'Đã đối soát';
         } else if(id == 6) {
             statusName = 'Không giao được';
+        } else if(id == 7) {
+            statusName = 'Đang vận chuyển';
         }
         await this.setState({
             status: statusName
@@ -100,6 +102,9 @@ class OrderDetail extends Component {
                     statusName = 'Đã đối soát';
                 } else if(tmpList[i].status == 6) {
                     statusName = 'Không giao được';
+                }
+                else if(tmpList[i].status == 7) {
+                    statusName = 'Đang vận chuyển';
                 }
                 tmpList[i].status = statusName;
             }
