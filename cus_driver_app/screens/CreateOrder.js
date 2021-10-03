@@ -46,7 +46,7 @@ class CreateOrder extends Component {
         this.state = {
             orderSize: this.props.route.params.status,
 
-            orders: [],
+            cusInfor: [],
 
             // order size
             orderSizeSelected: 1,
@@ -123,9 +123,9 @@ class CreateOrder extends Component {
         return R * c; // in metres
     }
 
-    async getOrderInformation() {
+    async getCustomerInformation() {
         const token = await AsyncStorage.getItem('token');
-        axios.get(`${ipAddress}/api/order-information/`, {
+        axios.get(`${ipAddress}/api/user-information/`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
@@ -133,8 +133,8 @@ class CreateOrder extends Component {
         }).
         then((resposne) => {
             this.setState({
-                orders: resposne.data
-            })
+                cusInfor: resposne.data
+            });
         })
         .catch((error) => {
             displayAlert(error);
@@ -145,9 +145,15 @@ class CreateOrder extends Component {
     async getCoordinate(provinceName) {
         console.log(provinceName);
         await axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${provinceName}`)
-        .then((response) => {
+        .then(async (response) => {
             var data = response.data.data[0];
-            
+            await axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${this.state.cusInfor['province']}`)
+            .then((response) => {
+                console.log(response.data.data[0]);
+            })
+            .catch((error) => {
+                displayAlert('There are some errors! Please try again later!');
+            });
         })
         .catch((error) => {
             displayAlert('There are some errors! Please try again later!');
@@ -212,7 +218,7 @@ class CreateOrder extends Component {
 
     componentDidMount() {
         this.getListOfProvinces();
-        // this.getUserInformation();
+        this.getCustomerInformation();
         this.getListOfProvincesDetail();
     }
 
