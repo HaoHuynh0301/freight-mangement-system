@@ -139,8 +139,8 @@ class OrderMap extends Component {
                     region = {{
                         latitude: 21.732568,
                         longitude: 105.396672,
-                        latitudeDelta: 10,
-                        longitudeDelta: 10
+                        latitudeDelta: 12,
+                        longitudeDelta: 6
                     }}
                 >
                     <Marker

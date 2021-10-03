@@ -243,6 +243,23 @@ class Orders extends Component {
 
     renderMainView() {
         const renderItem = ({item}) => {
+            var statusName = '';
+            if(item.status == 1) {
+                statusName = 'Đang xử lý';
+            } else if(item.status == 2) {
+                statusName = 'Đã tiếp nhận';
+            } else if(item.status == 3) {
+                statusName = 'Đang giao';
+            } else if(item.status == 4) {
+                statusName = 'Đã giao, đang đối soát';
+            } else if(item.status == 5) {
+                statusName = 'Đã đối soát';
+            } else if(item.status == 6) {
+                statusName = 'Không giao được';
+            }
+            else if(item.status == 7) {
+                statusName = 'Đang vận chuyển';
+            }
             return(
                 <View
                     style = {styles.productInformationDetailWrapper}
@@ -271,12 +288,12 @@ class Orders extends Component {
                         <Text style={styles.appFontSize}>Tên: {item.customer_name}/ {item.customer_phonenumber}</Text>
                         <Text style={styles.appFontSize}>Đại chỉ: {item.detail_address}</Text>
                         <Text style={styles.appFontSize}>Thu hộ: {item.cast} đ</Text>
-                        <Text style={styles.appFontSize}>Ghi chú: {item.note}</Text>
+                        
                     </View>
                     <View style = {styles.orderStatusWrapper}>
                         <View style = {styles.orderStatusTitle}>
                             <Text style={styles.highlightText}>Trạng thái: </Text>
-                            <Text style={styles.highlightText}>{item.status.name}</Text>
+                            <Text style={styles.highlightText}>{statusName}</Text>
                         </View>
                     </View>
                     <TouchableOpacity
