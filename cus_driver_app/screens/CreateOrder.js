@@ -409,7 +409,7 @@ class CreateOrder extends Component {
                             </Picker>
                             <Picker
                                 style = {styles.banksPicker}
-                                selectedValue = {this.state.localDistrict}
+                                selectedValue = {this.state.localWard}
                                 onValueChange = {async (itemValue, itemIndex) => {
                                     await this.setState({
                                         localWard: itemValue,
@@ -523,7 +523,7 @@ class CreateOrder extends Component {
                                             cast: text
                                         });
                                         await this.setState({
-                                            totalCast: Number(this.state.cast) + (this.state.orderSizes[this.state.orderSizeSelected-1].fee)
+                                            totalCast: Number(this.state.cast) + (this.state.orderSizes[this.state.orderSizeSelected-1].fee) + this.state.dis_fee
                                         });
                                     }}
                                 ></TextInput>
