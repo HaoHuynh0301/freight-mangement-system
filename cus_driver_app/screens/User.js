@@ -291,8 +291,6 @@ class User extends Component {
         
     }
 
-
-
     renderMainView() {
         return(
             this.renderUserPage()
