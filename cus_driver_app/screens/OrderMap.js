@@ -169,7 +169,6 @@ class OrderMap extends Component {
                         ></Image>
                     </Marker>
                 </MapView>
-                
             </View>
         );
     }

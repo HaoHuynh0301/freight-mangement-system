@@ -46,6 +46,7 @@ class OrderDetail extends Component {
             item: {},
             updateStatus: [],
             requests: [],
+            instanceAddress: {},
             selectedFlatlist: 1,
             selectedFlatlist2: 1,
             isFetchingStatus: false,
@@ -158,6 +159,25 @@ class OrderDetail extends Component {
         });
     }
 
+    async getInstanceAddress() {
+        const token = await AsyncStorage.getItem('token');
+        axios.get(`${ipAddress}/api/instance-address?order_id=${this.props.route.params.order.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            this.setState({
+                instanceAddress: response.data
+            });
+            console.log(this.state.instanceAddress);
+        })
+        .catch((error) => {
+            displayAlert('There are some errors! Please try again later!');
+        });
+    }
+
     oppenOrderMap() {
         this.props.navigation.navigate('OrderMap', {
             id: this.props.route.params.order.id,
@@ -174,6 +194,7 @@ class OrderDetail extends Component {
         this.setStatusName(this.props.route.params.id);
         this.getStatusUpdate();
         this.getRequest();
+        this.getInstanceAddress();
     }
 
     renderHeader() {
@@ -242,6 +263,7 @@ class OrderDetail extends Component {
                     <Text style = {styles.fontSize}>Trạng thái: {this.state.status}</Text>
                     <Text style = {styles.fontSize}>Ghi chú: {this.state.item.note}</Text>
                     <Text style = {styles.fontSize}>Sản phẩm: {this.state.item.product_name}</Text>
+                    <Text style = {styles.fontSize}>Đơn hàng đang được giao tới: {this.state.instanceAddress.province}</Text>
                 </View>
                 <View style = {styles.basicInforWrapper}>
                     <Text style = {{
