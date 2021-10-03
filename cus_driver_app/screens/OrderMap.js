@@ -55,12 +55,15 @@ class OrderMap extends Component {
             // Instance Address
             instanceProvince: '',
             insLatitude: '',
-            insLongitude: ''
+            insLongitude: '',
+
+            // Delivered Address
+            deliveredLatitude: '',
+            deliveredLongitude: ''
         }
     }
     
     async getInstanceAddress() {
-        console.log('1')
         const token = await AsyncStorage.getItem('token');
         axios.get(`${ipAddress}/api/instance-address?order_id=${this.props.route.params.id}`, {
             headers: {
@@ -68,16 +71,27 @@ class OrderMap extends Component {
                 Authorization: `Bearer ${token}`
             }
         })
-        .then((response) => {
-            console.log('2')
-            axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
-            .then((response) => {
-                console.log('3')
+        .then(async (response) => {
+            await axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
+            .then(async (response) => {
                 var datas = response.data.data
-                console.log(datas[0])
                 this.setState({
                     insLatitude: datas[0].latitude,
                     insLongitude: datas[0].longitude
+                });
+                console.log('Here')
+                await axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${this.props.route.params.district}`)
+                .then((response) => {
+                    var datas = response.data.data
+                    console.log(datas[0]);
+                    this.setState({
+                        deliveredLatitude: datas[0].latitude,
+                        deliveredLongitude: datas[0].longitude
+                    });
+                    
+                })
+                .catch((error) => {
+                    displayAlert('There are some errors! Please try again later!');
                 });
             })
             .catch((error) => {
@@ -125,26 +139,26 @@ class OrderMap extends Component {
                     region = {{
                         latitude: 21.732568,
                         longitude: 105.396672,
-                        latitudeDelta: 1,
-                        longitudeDelta: 1
+                        latitudeDelta: 10,
+                        longitudeDelta: 10
                     }}
                 >
                     <Marker
                         coordinate = {{
-                            latitude: 21.0245,
-                            longitude: 105.84117,
+                            latitude: Number(this.state.deliveredLatitude),
+                            longitude: Number(this.state.deliveredLongitude),
                         }}
                         // image = {xIcon}
-                        title = 'Test title'
-                        description = 'This is a description'
+                        title = 'Địa chỉ đơn hàng được giao đến'
                     ></Marker>
-                    {/* <Marker
+                    <Marker
                         coordinate = {{
                             latitude: Number(this.state.insLatitude),
                             longitude: Number(this.state.insLongitude),
                         }}
                         anchor = {{x: 0.5, y: 0.5}}
                         flat = {true}
+                        title = 'Địa chỉ vận chuyển lần cuối của đơn hàng'
                     >
                         <Image
                             source = {carIcon}
@@ -153,7 +167,7 @@ class OrderMap extends Component {
                                 width: 50
                             }}
                         ></Image>
-                    </Marker> */}
+                    </Marker>
                 </MapView>
                 
             </View>
