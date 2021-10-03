@@ -17,3 +17,8 @@ https://www.instamobile.io/react-native-tutorials/react-native-draw-directions-m
 https://www.npmjs.com/package/react-native-leaflet-routing
 https://stackoverflow.com/questions/64644995/how-to-get-the-length-in-km-of-a-polyline-from-react-native-maps
 https://www.movable-type.co.uk/scripts/latlong.html
+
+# Distance-fee
+< 10km: 10000
+>= 10km && < 100: 20000
+>= 100: 30000
