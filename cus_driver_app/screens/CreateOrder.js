@@ -104,7 +104,9 @@ class CreateOrder extends Component {
             wards: [],
             new_name: '',
             new_phonenumber: '',
-            new_address: ''
+            new_address: '',
+
+            dis_fee: 0
         }
     }
 
@@ -158,7 +160,22 @@ class CreateOrder extends Component {
                     lon: dataDelivered.longitude
                 }
                 var distance = this.haversine(instanceContext, deliveredContext);
-                console.log(distance/1000);
+                if(distance/1000 < 10) {
+                    this.setState({
+                        dis_fee: 10000
+                    })
+                }
+                else if(distance/1000 >= 10 && distance/1000 < 100) {
+                    this.setState({
+                        dis_fee: 20000
+                    });
+                }
+                else if(distance/1000 > 100) {
+                    this.setState({
+                        dis_fee: 30000
+                    });
+                }
+                console.log(this.state.dis_fee);
             })
             .catch((error) => {
                 displayAlert('There are some errors! Please try again later!');
@@ -440,7 +457,7 @@ class CreateOrder extends Component {
                                 paddingBottom: 10
                             }}
                         >
-                            Phí ship: {this.state.orderSizes[this.state.orderSizeSelected-1].fee}đ
+                            Phí ship: {this.state.orderSizes[this.state.orderSizeSelected-1].fee + this.state.dis_fee}đ
                         </Text>
                     </View>
                     <View style={styles.productInformationDetail}>
