@@ -143,13 +143,22 @@ class CreateOrder extends Component {
 
 
     async getCoordinate(provinceName) {
-        console.log(provinceName);
         await axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${provinceName}`)
         .then(async (response) => {
-            var data = response.data.data[0];
+            var dataInstance = response.data.data[0];
             await axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${this.state.cusInfor['province']}`)
             .then((response) => {
-                console.log(response.data.data[0]);
+                var dataDelivered = response.data.data[0];
+                var instanceContext = {
+                    lat: dataInstance.latitude,
+                    lon: dataInstance.longitude
+                }
+                var deliveredContext = {
+                    lat: dataDelivered.latitude,
+                    lon: dataDelivered.longitude
+                }
+                var distance = this.haversine(instanceContext, deliveredContext);
+                console.log(distance/1000);
             })
             .catch((error) => {
                 displayAlert('There are some errors! Please try again later!');
