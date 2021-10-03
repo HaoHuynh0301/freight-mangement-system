@@ -15,3 +15,5 @@ https://github.com/bramus/react-native-maps-directions
 https://npm.io/package/react-native-webview-leaflet
 https://www.instamobile.io/react-native-tutorials/react-native-draw-directions-map/
 https://www.npmjs.com/package/react-native-leaflet-routing
+https://stackoverflow.com/questions/64644995/how-to-get-the-length-in-km-of-a-polyline-from-react-native-maps
+https://www.movable-type.co.uk/scripts/latlong.html

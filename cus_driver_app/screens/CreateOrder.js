@@ -46,6 +46,8 @@ class CreateOrder extends Component {
         this.state = {
             orderSize: this.props.route.params.status,
 
+            orders: [],
+
             // order size
             orderSizeSelected: 1,
             orderSizes: [
@@ -104,6 +106,56 @@ class CreateOrder extends Component {
             new_phonenumber: '',
             new_address: ''
         }
+    }
+
+    haversine(coords1, coords2) {
+        const R = 6371e3; // metres
+        const φ1 = coords1.lat * Math.PI/180; // φ, λ in radians
+        const φ2 = coords2.lat * Math.PI/180;
+        const Δφ = (coords2.lat-coords1.lat) * Math.PI/180;
+        const Δλ = (coords2.lon-coords1.lon) * Math.PI/180;
+      
+        const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                Math.cos(φ1) * Math.cos(φ2) *
+                Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      
+        return R * c; // in metres
+    }
+
+    async getOrderInformation() {
+        const token = await AsyncStorage.getItem('token');
+        axios.get(`${ipAddress}/api/order-information/`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }).
+        then((resposne) => {
+            this.setState({
+                orders: resposne.data
+            })
+        })
+        .catch((error) => {
+            displayAlert(error);
+        });
+    }
+
+
+    async getCoordinate(provinceName) {
+        console.log(provinceName);
+        await axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${provinceName}`)
+        .then((response) => {
+            var data = response.data.data[0];
+            
+        })
+        .catch((error) => {
+            displayAlert('There are some errors! Please try again later!');
+        });
+    }
+
+    getTotalDistance(loca1, loca2) {
+        pass
     }
 
     getListOfProvinces() {
@@ -295,8 +347,8 @@ class CreateOrder extends Component {
                                         locaProvince: itemValue,
                                         locaProvinceCode: this.state.provinces[itemIndex].code
                                     });
-                                    console.log(this.state.locaProvinceCode);
                                     this.getListOfDistrict();
+                                    this.getCoordinate(itemValue);
                                 }}
                             >
                                 {this.state.provinces.map((item, key) => {
