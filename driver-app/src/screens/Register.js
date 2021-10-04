@@ -3,6 +3,9 @@ import {
     fontSize,
     orangeColor
 } from '../contants';
+import {
+    Link
+} from "react-router-dom";
 import './css/registerStyle.css';
 
 class Register extends Component {
@@ -277,9 +280,15 @@ class Register extends Component {
                         justifyContent: "center",
                         justifyContent: "center"
                     }}>
-                        <p>Bạn chưa đã tài khoản ? <a style = {{
-                            color: orangeColor
-                        }}>Bắt đầu cuộc hành trình ngày bây giờ</a></p>
+                        <p>Bạn chưa đã tài khoản ? 
+                            <Link
+                                to = '/sign-in'
+                                style = {{
+                                    color: orangeColor,
+                                    marginLeft: 10
+                                }}
+                            >Bắt đầu giao hàng ngay bây giờ</Link>
+                        </p>
                     </div>
                 </div>
             </div>

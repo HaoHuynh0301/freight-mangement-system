@@ -6,6 +6,9 @@ import './css/signinStyle.css';
 import {
     orangeColor
 } from '../contants';
+import {
+    Link
+  } from "react-router-dom";
 
 class Sigin extends Component {
     constructor(props) {
@@ -51,7 +54,7 @@ class Sigin extends Component {
                                 }}
                             ></input>
                         </div>
-                        <input type = 'submit' value = 'Đăng nhập' className = 'submitBtn'></input>
+                        <input type = 'submit' value = 'Đăng nhập' className = 'submitSignInBtn'></input>
                     </form>
                     <div style = {{
                         display: "flex", 
@@ -59,9 +62,15 @@ class Sigin extends Component {
                         justifyContent: "center",
                         justifyContent: "center"
                     }}>
-                        <p>Bạn chưa có tài khoản ? <a style = {{
-                            color: orangeColor
-                        }}>Đăng ký để trở thành tài xế ngay bây giờ</a></p>
+                        <p>Bạn chưa có tài khoản ? 
+                            <Link
+                                to = '/register'
+                                style = {{
+                                    color: orangeColor,
+                                    marginLeft: 10
+                                }}
+                            >Đăng ký ngay bây giờ</Link>
+                        </p>
                     </div>
                 </div>
             </div>

@@ -19,5 +19,10 @@
 
 .submitBtn {
     height: 40px;
-    width: 520px;
+    width: 530px;
+    background-color: #ff7733;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 7px;
+    border-width: 0.5px;
 }
