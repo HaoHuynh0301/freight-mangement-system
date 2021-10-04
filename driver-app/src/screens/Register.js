@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {
-    fontSize
+    fontSize,
+    orangeColor
 } from '../contants';
 import './css/registerStyle.css';
 
@@ -15,8 +16,17 @@ class Register extends Component {
             email: '',
             cmnd: '',
             driverLicense: '',
-            age: 18
+            age: 18,
+            username: '',
+            pass1: '',
+            pass2: ''
         }
+        this.handleRegister = this.handleRegister.bind(this);
+    }
+
+    handleRegister(event) {
+        console.log('Register');
+        event.preventDefault();
     }
 
     render() {
@@ -24,7 +34,7 @@ class Register extends Component {
             <div className = 'Container'>
                 <div className = 'mainContent'>
                     <h1 style = {{marginBottom: '40px'}}>Đăng ký để trở thành tài xế</h1>
-                    <form>
+                    <form onSubmit = {this.handleRegister}>
                         <div style = {{
                             display: "flex",
                             flexDirection: "row",
@@ -36,7 +46,7 @@ class Register extends Component {
                                 flexDirection: "row",
                                 justifyContent: "flex-start",
                                 alignItems: "center",
-                                width: '150px',
+                                width: '180px',
                                 fontSize: fontSize,
                             }}>
                                 Họ và tên
@@ -62,7 +72,7 @@ class Register extends Component {
                                 flexDirection: "row",
                                 justifyContent: "flex-start",
                                 alignItems: "center",
-                                width: '150px',
+                                width: '180px',
                                 fontSize: fontSize
                             }}>
                                 Số điện thoại
@@ -88,7 +98,7 @@ class Register extends Component {
                                 flexDirection: "row",
                                 justifyContent: "flex-start",
                                 alignItems: "center",
-                                width: '150px',
+                                width: '180px',
                                 fontSize: fontSize
                             }}>
                                 Email
@@ -114,7 +124,7 @@ class Register extends Component {
                                 flexDirection: "row",
                                 justifyContent: "flex-start",
                                 alignItems: "center",
-                                width: '150px',
+                                width: '180px',
                                 fontSize: fontSize
                             }}>
                                 CMND/Hộ chiếu
@@ -140,7 +150,7 @@ class Register extends Component {
                                 flexDirection: "row",
                                 justifyContent: "flex-start",
                                 alignItems: "center",
-                                width: '150px',
+                                width: '180px',
                                 fontSize: fontSize
                             }}>
                                 Tuổi
@@ -166,7 +176,7 @@ class Register extends Component {
                                 flexDirection: "row",
                                 justifyContent: "flex-start",
                                 alignItems: "center",
-                                width: '150px',
+                                width: '180px',
                                 fontSize: fontSize
                             }}>
                                 Bằng lái xe
@@ -181,7 +191,96 @@ class Register extends Component {
                                 }}
                             ></input>
                         </div>
+                        <div style = {{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            marginBottom: '10px'
+                        }}>
+                            <div style = {{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                width: '180px',
+                                fontSize: fontSize
+                            }}>
+                                Tên đăng nhập
+                            </div>
+                            <input
+                                className = 'inputType'
+                                value = {this.state.username}
+                                onChange = {(event) => {
+                                    this.setState({
+                                        username: event.target.value
+                                    });
+                                }}
+                            ></input>
+                        </div>   
+                        <div style = {{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            marginBottom: '10px'
+                        }}>
+                            <div style = {{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                width: '180px',
+                                fontSize: fontSize
+                            }}>
+                                Mật khẩu
+                            </div>
+                            <input
+                                className = 'inputType'
+                                value = {this.state.pass1}
+                                onChange = {(event) => {
+                                    this.setState({
+                                        pass1: event.target.value
+                                    });
+                                }}
+                            ></input>
+                        </div>   
+                        <div style = {{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            marginBottom: '10px'
+                        }}>
+                            <div style = {{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                width: '180px',
+                                fontSize: fontSize
+                            }}>
+                                Xác nhận mật khẩu
+                            </div>
+                            <input
+                                className = 'inputType'
+                                value = {this.state.pass2}
+                                onChange = {(event) => {
+                                    this.setState({
+                                        pass2: event.target.value
+                                    });
+                                }}
+                            ></input>
+                        </div>
+                        <input className = 'submitBtn' type = 'submit' value = 'Đăng ký'></input>
                     </form>
+                    <div style = {{
+                        display: "flex", 
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        justifyContent: "center"
+                    }}>
+                        <p>Bạn chưa đã tài khoản ? <a style = {{
+                            color: orangeColor
+                        }}>Bắt đầu cuộc hành trình ngày bây giờ</a></p>
+                    </div>
                 </div>
             </div>
         );
