@@ -38,7 +38,6 @@ const displayAlert = (message) => {
 class MonenyFlow extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             // Paid money
             paidMoney: 0.0,
