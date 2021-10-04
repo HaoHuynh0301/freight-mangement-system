@@ -14,6 +14,13 @@ class Sigin extends Component {
             email: '',
             password: ''
         }
+
+        this.handleSignIn = this.handleSignIn.bind(this);
+    }
+
+    handleSignIn(event) {
+        console.log(this.state.email);
+        event.preventDefault();
     }
 
     render() {
@@ -21,7 +28,7 @@ class Sigin extends Component {
             <div className = 'Container'>
                 <div className = 'mainContent'>
                     <h1>Đăng nhập</h1>
-                    <form>
+                    <form onSubmit = {this.handleSignIn}>
                         <div class = 'inputWrapper'>
                             <h2 style = {{marginRight: 42}}>Email</h2>
                             <input type = 'text' className = 'inputStyle' 
@@ -54,7 +61,7 @@ class Sigin extends Component {
                     }}>
                         <p>Bạn chưa có tài khoản ? <a style = {{
                             color: orangeColor
-                        }}>Đăng ký ngay bây giờ</a></p>
+                        }}>Đăng ký để trở thành tài xế ngay bây giờ</a></p>
                     </div>
                 </div>
             </div>
