@@ -17,6 +17,8 @@ https://www.instamobile.io/react-native-tutorials/react-native-draw-directions-m
 https://www.npmjs.com/package/react-native-leaflet-routing
 https://stackoverflow.com/questions/64644995/how-to-get-the-length-in-km-of-a-polyline-from-react-native-maps
 https://www.movable-type.co.uk/scripts/latlong.html
+https://viblo.asia/p/4-cach-de-style-react-components-OeVKB4w2lkW
+https://viblo.asia/p/can-giua-phan-tu-trong-css-JlkRymBxRZW
 
 # Distance-fee
 < 10km: 10000

@@ -1,0 +1,38 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.mainContent {
+    margin-top: 200px;
+}
+
+.emailInput {
+    margin-left: 50px;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; 
+}
+
+.inputStyle {
+    margin-left: 10px;
+    height: 28px;
+    width: 300px;
+}
+
+.submitBtn {
+    margin-top: 20px;
+    height: 30px;
+    width: 425px;
+    background-color: #ff7733;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 7px;
+    border-width: 0.5px;
+}
