@@ -1,0 +1,18 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.mainContent {
+    margin-top: 200px;
+}
+
+.inputType {
+    margin-left: 30px;
+    height: 28px;
+    width: 300px;
+    font-size: 18px;
+    border-radius: 5px;
+}

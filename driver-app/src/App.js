@@ -6,7 +6,9 @@ import {
 } from "react-router-dom";
 
 import {
-    Sigin
+    Sigin,
+    Register,
+    Home
 } from './screens';
 
 function App() {
@@ -14,8 +16,14 @@ function App() {
         <Router>
             <div>
                 <Switch>
-                    <Route path = '/'>
+                    <Route path = '/sign-in'>
                         <Sigin />
+                    </Route>
+                    <Route path = '/register'>
+                        <Register />
+                    </Route>
+                    <Route path = '/'>
+                        <Home />
                     </Route>
                 </Switch>
             </div>
