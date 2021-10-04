@@ -11,7 +11,8 @@ class Sigin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            email: '',
+            password: ''
         }
     }
 
@@ -23,11 +24,25 @@ class Sigin extends Component {
                     <form>
                         <div class = 'inputWrapper'>
                             <h2 style = {{marginRight: 42}}>Email</h2>
-                            <input type = 'text' className = 'inputStyle'></input>
+                            <input type = 'text' className = 'inputStyle' 
+                                value = {this.state.email}
+                                onChange = {(event) => {
+                                    this.setState({
+                                        email: event.target.value
+                                    });
+                                }}
+                            ></input>
                         </div>
                         <div class = 'inputWrapper'>
                             <h2>Mật khẩu</h2>
-                            <input type = 'password' className = 'inputStyle'></input>
+                            <input type = 'password' className = 'inputStyle'
+                                value = {this.state.password}
+                                onChange = {(event) => {
+                                    this.setState({
+                                        password: event.target.value
+                                    });
+                                }}
+                            ></input>
                         </div>
                         <input type = 'submit' value = 'Đăng nhập' className = 'submitBtn'></input>
                     </form>
