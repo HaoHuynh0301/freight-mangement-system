@@ -4,11 +4,11 @@ import {
     Route,
     Link
 } from "react-router-dom";
-
 import {
     Sigin,
     Register,
-    Home
+    Home,
+    User
 } from './screens';
 
 function App() {
@@ -16,6 +16,9 @@ function App() {
         <Router>
             <div>
                 <Switch>
+                    <Route path = '/user-infor'>
+                        <User />
+                    </Route>
                     <Route path = '/sign-in'>
                         <Sigin />
                     </Route>

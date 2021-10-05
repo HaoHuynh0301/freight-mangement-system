@@ -4,3 +4,13 @@
     justify-content: center;
     text-align: center;
 }
+
+.yourOrderWrapper {
+    border-width: 5px;
+    border-color: grey;
+}
+
+.titleStyle {
+    font-size: 20px;
+    font-weight: bold;
+}

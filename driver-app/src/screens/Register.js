@@ -280,7 +280,7 @@ class Register extends Component {
                         justifyContent: "center",
                         justifyContent: "center"
                     }}>
-                        <p>Bạn chưa đã tài khoản ? 
+                        <p>Bạn đã có tài khoản ? 
                             <Link
                                 to = '/sign-in'
                                 style = {{
