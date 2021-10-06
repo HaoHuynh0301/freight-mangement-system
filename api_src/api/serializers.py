@@ -9,6 +9,10 @@ class SignInSerializer(serializers.Serializer):
     email = serializers.EmailField(max_length = 255, required = True)
     password = serializers.CharField()
     
+class DriverSignInSerializer(serializers.Serializer):
+    username = serializers.EmailField(max_length = 255, required = True)
+    password = serializers.CharField()
+    
     
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:

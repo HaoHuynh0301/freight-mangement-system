@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from . import driver_view
 
 urlpatterns = [
     path('sign-in/', views.SignInView.as_view(), name = 'sign-in'),
@@ -21,5 +22,10 @@ urlpatterns = [
     # ============= #
     
     path('paidmoney/', views.PaidMoneyView.as_view(), name = 'paid-money'),
-    path('total-order/', views.TotalOrderView.as_view(), name = 'total-orders')
+    path('total-order/', views.TotalOrderView.as_view(), name = 'total-orders'),
+        
+    # ============= #
+    
+    path('driver-register/', driver_view.DriverView.as_view(), name = 'driver'),
+    path('driver-signin/', driver_view.SignInView.as_view(), name = 'driver-sign-in')
 ]
