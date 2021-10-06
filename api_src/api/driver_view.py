@@ -43,8 +43,8 @@ class DriverView(APIView):
     serializer_class = serializers.DriverSerializer
     
     def post(self, request, format = None):
+        print(request.data)
         serializer = self.serializer_class(data = request.data)
-        print(serializer.data)
         if serializer.is_valid():
            serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
            serializer.save()
