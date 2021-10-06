@@ -29,12 +29,6 @@ function App() {
                     <Route path = '/register'>
                         <Register />
                     </Route>
-                    <Route path = '/my-orders'>
-                        <MyOrders />
-                    </Route>
-                    <Route path = '/orders'>
-                        <Orders />
-                    </Route>
                     <Route path = '/'>
                         <Home />
                     </Route>

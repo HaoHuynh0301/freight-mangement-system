@@ -4,7 +4,8 @@ import *  as ReactBoostrap from 'react-bootstrap';
 import {
     backgroundImage,
     whiteColor,
-    blackColor
+    blackColor,
+    orangeColor
 } from '../../contants';
 
 import {
@@ -24,7 +25,7 @@ class DoubleNavigationPage extends React.Component {
 
     render() {
         return(
-            <ReactBoostrap.Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+            <ReactBoostrap.Navbar collapseOnSelect expand="lg" bg={orangeColor} variant="light" style = {{backgroundColor: orangeColor}}>
                 <ReactBoostrap.Container>
                     <ReactBoostrap.Navbar.Brand><Link style = {{textDecoration: "none", color: blackColor}} to = '/'>2HDelivery for driver</Link></ReactBoostrap.Navbar.Brand>
                     <ReactBoostrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -34,7 +35,7 @@ class DoubleNavigationPage extends React.Component {
                         <ReactBoostrap.Nav.Link href="#pricing"></ReactBoostrap.Nav.Link>
                         <ReactBoostrap.NavDropdown title="Đơn hàng" id="collasible-nav-dropdown">
                             <ReactBoostrap.NavDropdown.Item><Link style = {{textDecoration: "none", color: blackColor}} to = '/my-orders'>Đơn hàng của bạn</Link></ReactBoostrap.NavDropdown.Item>
-                            <ReactBoostrap.NavDropdown.Item><Link style = {{textDecoration: "none", color: blackColor}} to = '/orders'>Đơn hàng của bạn</Link></ReactBoostrap.NavDropdown.Item>
+                            <ReactBoostrap.NavDropdown.Item><Link style = {{textDecoration: "none", color: blackColor}} to = '/orders'>Đơn hàng hiện có</Link></ReactBoostrap.NavDropdown.Item>
                         </ReactBoostrap.NavDropdown>
                         </ReactBoostrap.Nav>
                         <ReactBoostrap.Nav>
