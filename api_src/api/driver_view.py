@@ -17,4 +17,10 @@ class DriverView(APIView):
     serializer_class = serializers.DriverSerializer
     
     def post(self, request, format = None):
-        pass
+        serializer = self.serializer_class(data = request.data)
+        print(serializer.data)
+        if serializer.is_valid():
+           serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
+           serializer.save()
+           return Response({'status': 'Created'}, status = status.HTTP_201_CREATED)
+        return Response({'error': 'There are some errors! Please try again later!'}, status = status.HTTP_400_BAD_REQUEST)

@@ -95,5 +95,7 @@ class DriverSerializer(serializers.ModelSerializer):
             'email',
             'cmnd',
             'age',
-            
+            'driverLicense',
+            'username',
+            'password'
         ]
