@@ -2,11 +2,22 @@ import React, { Component } from "react";
 import './css/homeStyle.css';
 import {
     backgroundImage,
-    orangeColor
+    orangeColor,
+    whiteColor
 } from '../contants';
 import {
-    DoubleNavigationPage
+    DoubleNavigationPage,
+    Orders,
+    MyOrders
 } from './components';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import *  as ReactBoostrap from 'react-bootstrap';
 
 class Home extends Component {
     constructor(props) {
@@ -39,10 +50,10 @@ class Home extends Component {
                             <p className = 'titleStyle'>ĐƠN HÀNG CỦA BẠN</p>
                             <p>Tổng số đơn hàng hiện tại của bạn: {this.state.totalUrOrders}</p>
                         </div>
-
                     </div>
                 </div>
             </div>
+            
         );
     }
 }

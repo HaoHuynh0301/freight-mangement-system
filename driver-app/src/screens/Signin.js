@@ -8,7 +8,7 @@ import {
 } from '../contants';
 import {
     Link
-  } from "react-router-dom";
+} from "react-router-dom";
 
 class Sigin extends Component {
     constructor(props) {
@@ -30,10 +30,15 @@ class Sigin extends Component {
         return(
             <div className = 'Container'>
                 <div className = 'mainContent'>
-                    <h1>Đăng nhập</h1>
+                    <div className  = 'signInTitleWrapper'>
+                        <h1>Đăng nhập để trở thành tài xế</h1>
+                        <h1 style = {{
+                           
+                        }}>của 2HDelivery</h1>
+                    </div>
                     <form onSubmit = {this.handleSignIn}>
                         <div class = 'inputWrapper'>
-                            <h2 style = {{marginRight: 42}}>Email</h2>
+                            <h2 style = {{marginRight: 60}}>Email</h2>
                             <input type = 'text' className = 'inputStyle' 
                                 value = {this.state.email}
                                 onChange = {(event) => {

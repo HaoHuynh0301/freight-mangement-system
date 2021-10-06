@@ -10,6 +10,10 @@ import {
     Home,
     User
 } from './screens';
+import {
+    MyOrders,
+    Orders
+} from './screens/components'
 
 function App() {
     return (
@@ -24,6 +28,12 @@ function App() {
                     </Route>
                     <Route path = '/register'>
                         <Register />
+                    </Route>
+                    <Route path = '/my-orders'>
+                        <MyOrders />
+                    </Route>
+                    <Route path = '/orders'>
+                        <Orders />
                     </Route>
                     <Route path = '/'>
                         <Home />
