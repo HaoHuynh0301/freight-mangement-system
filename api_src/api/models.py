@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
+from . import driver_model
 
 class MyUserManager(BaseUserManager):
     def create_user(self, 
@@ -161,6 +162,7 @@ class Order(models.Model):
     status = models.ForeignKey(OrderStatus, on_delete = models.CASCADE, related_name = 'order_status')
     cast = models.IntegerField()
     note = models.TextField()
+    driver = models.ForeignKey(driver_model.Driver, on_delete = models.SET_NULL, null = True)
     # product_image = models.ImageField(null = True, blank = True, upload_to = 'images/')
     
     def __str__(self):

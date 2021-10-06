@@ -4,16 +4,24 @@ class Orders extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            orders: []
         }
     }
 
     render() {
-        return(
-            <div>
-                <h1>Order</h1>
-            </div>
-        );
+        if(this.state.orders.length != 0) {
+            return(
+                <div>
+                    Not Empty
+                </div>
+            );
+        } else {
+            return(
+                <div>
+                    Is Empty
+                </div>
+            );
+        }
     }
 }
 

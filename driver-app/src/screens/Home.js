@@ -18,19 +18,19 @@ import {
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import *  as ReactBoostrap from 'react-bootstrap';
-import {PullToRefresh} from "react-js-pull-to-refresh";
-import {PullDownContent, ReleaseContent, RefreshContent} from "react-js-pull-to-refresh";
+import PullToRefresh from 'react-simple-pull-to-refresh';
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            totalUrOrders: 0
+            totalUrOrders: 0,
+            instanceOrders: []
         }
         this.onRefresh = this.onRefresh.bind(this);
     }
 
     onRefresh() {
-        console.log('OK');
+        
     }
 
     render() {
@@ -44,30 +44,19 @@ class Home extends Component {
                 }}>
                     <div style = {{
                         width: '100%',
+                        height: '500px'
                     }}>
                         <DoubleNavigationPage />
-                        <PullToRefresh
-                            pullDownContent={<PullDownContent />}
-                            releaseContent={<ReleaseContent />}
-                            refreshContent={<RefreshContent />}
-                            pullDownThreshold={200}
-                            onRefresh={this.onRefresh}
-                            triggerHeight={50}
-                            backgroundColor='white'
-                            startInvisible={true}
-                        >
-                            <div style={{height: '150vh', textAlign: 'center'}}>
-                                <div>PullToRefresh</div>
-                            </div>
-                        </PullToRefresh>
-                        <Switch>
-                            <Route path = '/my-orders'>
-                                <MyOrders />
-                            </Route>
-                            <Route path = '/orders'>
-                                <Orders />
-                            </Route>
-                        </Switch>
+                        <PullToRefresh onRefresh={this.onRefresh}>
+                            <Switch>
+                                <Route path = '/my-orders'>
+                                    <MyOrders />
+                                </Route>
+                                <Route path = '/orders'>
+                                    <Orders />
+                                </Route>
+                            </Switch>
+                        </PullToRefresh>    
                     </div>
                 </div>        
             </Router>

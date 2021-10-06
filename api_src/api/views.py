@@ -1,4 +1,3 @@
-import re
 from rest_framework.serializers import Serializer
 from . import models, serializers
 from django.shortcuts import render, get_object_or_404
