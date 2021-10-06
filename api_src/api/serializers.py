@@ -1,7 +1,9 @@
 from django.db.models import fields
 from rest_framework import serializers
 from django.contrib.auth.models import User
+
 from . import models
+from . import driver_model
 
 class SignInSerializer(serializers.Serializer):
     email = serializers.EmailField(max_length = 255, required = True)
@@ -82,3 +84,16 @@ class InstanceAddressSerilizer(serializers.ModelSerializer):
     class Meta:
         model = models.InstanceAddress
         fields = '__all__'
+        
+        
+class DriverSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = driver_model.Driver
+        fields = [
+            'name',
+            'phone_number',
+            'email',
+            'cmnd',
+            'age',
+            
+        ]

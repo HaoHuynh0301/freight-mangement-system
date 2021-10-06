@@ -14,6 +14,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class DriverView(APIView):
     permission_classes = [permissions.AllowAny]
+    serializer_class = serializers.DriverSerializer
     
     def post(self, request, format = None):
         pass

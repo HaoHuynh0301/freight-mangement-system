@@ -12,7 +12,7 @@ class Driver(models.Model):
     email = models.CharField(max_length = 100, blank = False)
     cmnd = models.CharField(max_length = 12, null = False)
     age = models.IntegerField(default = 18)
-    DriverLicense = models.CharField(max_length = 20, null = False, blank = False)
+    driverLicense = models.CharField(max_length = 20, null = False, blank = False)
     username = models.CharField(max_length = 255, blank = False, null = False)
     password = models.CharField(max_length = 255, blank = False, null = False)
     
