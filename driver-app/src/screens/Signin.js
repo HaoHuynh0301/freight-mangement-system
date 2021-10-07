@@ -4,17 +4,19 @@ import React,
 } from "react";
 import './css/signinStyle.css';
 import {
-    orangeColor
+    orangeColor,
+    ipAddress
 } from '../contants';
 import {
     Link
 } from "react-router-dom";
+const axios = require('axios');
 
 class Sigin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
+            username: '',
             password: ''
         }
 
@@ -22,7 +24,18 @@ class Sigin extends Component {
     }
 
     handleSignIn(event) {
-        console.log(this.state.email);
+        console.log(this.state.username)
+        axios.post(`${ipAddress}/api/driver-signin/`, {
+            username: this.state.username,
+            password: this.state.password
+        })
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log('We have some errors!');
+        });
+
         event.preventDefault();
     }
 
@@ -38,18 +51,18 @@ class Sigin extends Component {
                     </div>
                     <form onSubmit = {this.handleSignIn}>
                         <div class = 'inputWrapper'>
-                            <h2 style = {{marginRight: 60}}>Email</h2>
+                            <h2 style = {{marginRight: 20}}>Tên đăng nhập</h2>
                             <input type = 'text' className = 'inputStyle' 
-                                value = {this.state.email}
+                                value = {this.state.username}
                                 onChange = {(event) => {
                                     this.setState({
-                                        email: event.target.value
+                                        username: event.target.value
                                     });
                                 }}
                             ></input>
                         </div>
                         <div class = 'inputWrapper'>
-                            <h2>Mật khẩu</h2>
+                            <h2 style = {{marginRight: 93}}>Mật khẩu</h2>
                             <input type = 'password' className = 'inputStyle'
                                 value = {this.state.password}
                                 onChange = {(event) => {

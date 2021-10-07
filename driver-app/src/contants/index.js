@@ -7,8 +7,11 @@ const backgroundImage = require('../assets/background-image.jpg');
 
 // Text, color
 const fontSize = '18px';
-const whiteColor = '#FFF'
-const blackColor = '#000000'
+const whiteColor = '#FFF';
+const blackColor = '#000000';
+
+// IP address 
+const ipAddress = 'http://192.168.1.4:8000';
 
 export {
     greyColor,
@@ -16,5 +19,6 @@ export {
     backgroundImage,
     fontSize,
     whiteColor,
-    blackColor
+    blackColor,
+    ipAddress
 }

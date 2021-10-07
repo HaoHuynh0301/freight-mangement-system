@@ -23,6 +23,7 @@ https://reactjs.org/docs/
 https://mobirise.com/bootstrap-template/navbar-template.html
 https://store.enappd.com/product/react-native-taxi-driver-app-template/
 https://www.npmjs.com/package/react-js-pull-to-refresh
+https://www.geeksforgeeks.org/how-to-connect-django-with-reactjs/
 
 # Distance-fee
 < 10km: 10000
