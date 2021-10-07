@@ -8,7 +8,8 @@ import {
     ipAddress
 } from '../contants';
 import {
-    Link
+    Link,
+    Redirect
 } from "react-router-dom";
 
 const axios = require('axios');
@@ -21,11 +22,11 @@ class Sigin extends Component {
             username: '',
             password: ''
         }
-
         this.handleSignIn = this.handleSignIn.bind(this);
     }
 
     handleSignIn(event) {
+        event.preventDefault();
         console.log(this.state.username)
         axios.post(`${ipAddress}/api/driver-signin/`, {
             username: this.state.username,
@@ -39,12 +40,11 @@ class Sigin extends Component {
                 username: '',
                 password: ''
             });
+            return <Redirect to="/" />;
         })
         .catch((error) => {
             alert('We have some errors!');
         });
-
-        event.preventDefault();
     }
 
     render() {
@@ -52,14 +52,17 @@ class Sigin extends Component {
             <div className = 'Container'>
                 <div className = 'mainContent'>
                     <div className  = 'signInTitleWrapper'>
-                        <h1>Đăng nhập để trở thành tài xế</h1>
-                        <h1 style = {{
-                           
-                        }}>của 2HDelivery</h1>
+                        <h1>Đăng nhập</h1>
                     </div>
                     <form onSubmit = {this.handleSignIn}>
                         <div class = 'inputWrapper'>
-                            <h2 style = {{marginRight: 20}}>Tên đăng nhập</h2>
+                            <p style = {{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignSelf: "flex-start",
+                                marginLeft: "12px",
+                                fontSize: "20px"
+                            }}>Tên đăng nhập</p>
                             <input type = 'text' className = 'inputStyle' 
                                 value = {this.state.username}
                                 onChange = {(event) => {
@@ -70,7 +73,13 @@ class Sigin extends Component {
                             ></input>
                         </div>
                         <div class = 'inputWrapper'>
-                            <h2 style = {{marginRight: 93}}>Mật khẩu</h2>
+                            <p style = {{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignSelf: "flex-start",
+                                marginLeft: "12px",
+                                fontSize: "20px"
+                            }}>Mật khẩu</p>
                             <input type = 'password' className = 'inputStyle'
                                 value = {this.state.password}
                                 onChange = {(event) => {
