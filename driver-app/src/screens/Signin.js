@@ -10,7 +10,7 @@ import {
 import {
     Link
 } from "react-router-dom";
-import Alert from 'react-bootstrap/Alert'
+
 const axios = require('axios');
 const localStorage = require('local-storage');
 
@@ -34,9 +34,14 @@ class Sigin extends Component {
         .then(async (response) => {
             console.log(response);
             await localStorage.set('token', response.data.access_token);
+            alert('OK');
+            this.setState({
+                username: '',
+                password: ''
+            });
         })
         .catch((error) => {
-            console.log('We have some errors!');
+            alert('We have some errors!');
         });
 
         event.preventDefault();
