@@ -1,6 +1,6 @@
 import React, 
 {
-    Component
+    Component,
 } from "react";
 import './css/signinStyle.css';
 import {
@@ -10,7 +10,9 @@ import {
 import {
     Link
 } from "react-router-dom";
+import Alert from 'react-bootstrap/Alert'
 const axios = require('axios');
+const localStorage = require('local-storage');
 
 class Sigin extends Component {
     constructor(props) {
@@ -29,8 +31,9 @@ class Sigin extends Component {
             username: this.state.username,
             password: this.state.password
         })
-        .then((response) => {
+        .then(async (response) => {
             console.log(response);
+            await localStorage.set('token', response.data.access_token);
         })
         .catch((error) => {
             console.log('We have some errors!');

@@ -7558,6 +7558,11 @@
     "emojis-list" "^2.0.0"
     "json5" "^1.0.1"
 
+"local-storage@^2.0.0":
+  "integrity" "sha512-/0sRoeijw7yr/igbVVygDuq6dlYCmtsuTmmpnweVlVtl/s10pf5BCq8LWBxW/AMyFJ3MhMUuggMZiYlx6qr9tw=="
+  "resolved" "https://registry.npmjs.org/local-storage/-/local-storage-2.0.0.tgz"
+  "version" "2.0.0"
+
 "locate-path@^2.0.0":
   "integrity" "sha1-K1aLJl7slExtnA3pw9u7ygNUzY4="
   "resolved" "https://registry.npmjs.org/locate-path/-/locate-path-2.0.0.tgz"
@@ -9776,6 +9781,19 @@
     "http-errors" "1.7.2"
     "iconv-lite" "0.4.24"
     "unpipe" "1.0.0"
+
+"react-alert-template-basic@^1.0.2":
+  "integrity" "sha512-nJSIknM5xN/GzKdKkb5/X9zdiLxSqctww3mEouyeR891nUGP8guqFpCGD8vCjFYSZtq8z3tGcAKBG1XjtLHFHQ=="
+  "resolved" "https://registry.npmjs.org/react-alert-template-basic/-/react-alert-template-basic-1.0.2.tgz"
+  "version" "1.0.2"
+
+"react-alert@^7.0.3":
+  "integrity" "sha512-cZ2ZhxytECTxljDfBKpQmwWbfJQFzFf2Qf03L/IB5shbEXtWhDD2JjiW60rwmKT1oZoU+GEnUQw5MFM5+f0B6A=="
+  "resolved" "https://registry.npmjs.org/react-alert/-/react-alert-7.0.3.tgz"
+  "version" "7.0.3"
+  dependencies:
+    "prop-types" "^15.7.2"
+    "react-transition-group" "^4.4.1"
 
 "react-app-polyfill@^2.0.0":
   "integrity" "sha512-0sF4ny9v/B7s6aoehwze9vJNWcmCemAUYBVasscVr92+UYiEqDXOxfKjXN685mDaMRNF3WdhHQs76oTODMocFA=="
