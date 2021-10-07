@@ -9,8 +9,9 @@ class SignInSerializer(serializers.Serializer):
     email = serializers.EmailField(max_length = 255, required = True)
     password = serializers.CharField()
     
+    
 class DriverSignInSerializer(serializers.Serializer):
-    username = serializers.EmailField(max_length = 255, required = True)
+    username = serializers.CharField(max_length = 255, required = True)
     password = serializers.CharField()
     
     
@@ -101,5 +102,5 @@ class DriverSerializer(serializers.ModelSerializer):
             'age',
             'driverLicense',
             'username',
-            'password'
+            'password',
         ]

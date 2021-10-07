@@ -1,5 +1,6 @@
 from rest_framework.serializers import Serializer
-from . import models, serializers
+
+from . import models, serializers, driver_model
 from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -11,6 +12,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from django.contrib.auth.hashers import check_password
 
 class SignInView(APIView):
     permission_classes = [permissions.AllowAny]
@@ -19,14 +21,10 @@ class SignInView(APIView):
     def post(self, request, format = None):
         serializer = self.serializer_class(data = request.data)
         if serializer.is_valid():
-            User = authenticate(
-                request,
-                username = serializer.validated_data['username'],
-                password = serializer.validated_data['password']
-            )
-            if User:
-                refreshToken = TokenObtainPairSerializer.get_token(User)
-                driverSerializer = serializers.DriverSerializer(User)
+            instanceDriver = driver_model.Driver.objects.filter(username = serializer.validated_data['username'])
+            if check_password(serializer.validated_data['password'], instanceDriver[0].password):
+                refreshToken = TokenObtainPairSerializer.get_token(instanceDriver[0])
+                driverSerializer = serializers.DriverSerializer(instanceDriver[0])
                 data = {
                     'refresh_token': str(refreshToken),
                     'access_token': str(refreshToken.access_token),

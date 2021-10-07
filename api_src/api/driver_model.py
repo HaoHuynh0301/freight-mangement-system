@@ -6,6 +6,7 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
 
+
 class Driver(models.Model):
     name = models.CharField(max_length = 255, null = False, blank = True)
     phone_number = models.CharField(max_length = 12, null = False, blank = True)
