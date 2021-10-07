@@ -35,8 +35,8 @@ class Register extends Component {
     render() {
         return(
             <div className = 'Container'>
-                <div className = 'mainContent'>
-                    <h1 style = {{marginBottom: '40px'}}>Đăng ký để trở thành tài xế</h1>
+                <div className = 'mainContentRegister'>
+                    <h1 style = {{marginBottom: '40px'}}>Đăng ký</h1>
                     <form onSubmit = {this.handleRegister}>
                         <div style = {{
                             display: "flex",

@@ -95,7 +95,7 @@ class Sigin extends Component {
                         display: "flex", 
                         flexDirection: "row",
                         justifyContent: "center",
-                        justifyContent: "center"
+                        justifyContent: "center",
                     }}>
                         <p>Bạn chưa có tài khoản ? 
                             <Link

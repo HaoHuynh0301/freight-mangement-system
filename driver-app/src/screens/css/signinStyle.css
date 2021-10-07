@@ -1,10 +1,8 @@
 .Container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    text-align: center;
     align-items: center;
-    background-image: linear-gradient(#ff7733, #b3b3b3);
+    background-image: linear-gradient(	#e09952, #b3b3b3);
     height: 100vh;
 }
 
@@ -15,9 +13,9 @@
     border-radius: 30px;
     display: flex;
     flex-direction: column;
-    text-align: center;
     justify-content: center;
     align-items: center;
+    border: solid 1.5em rgba(#000, .03);
 }
 
 .signInTitleWrapper {
@@ -45,7 +43,7 @@
     border-width: 0;
     /* color: #FFF; */
     border-bottom-width: 1px;
-    background-color: #b3b3b3;
+    background-color: aliceblue;
     /* text-decoration-color: grey; */
 }
 
