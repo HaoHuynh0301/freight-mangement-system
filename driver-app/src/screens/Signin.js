@@ -35,12 +35,12 @@ class Sigin extends Component {
         .then(async (response) => {
             console.log(response);
             await localStorage.set('token', response.data.access_token);
+            console.log(localStorage.get('token'));
             alert('OK');
             this.setState({
                 username: '',
                 password: ''
             });
-            return <Redirect to="/" />;
         })
         .catch((error) => {
             alert('We have some errors!');

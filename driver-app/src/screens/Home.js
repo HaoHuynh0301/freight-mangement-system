@@ -8,17 +8,20 @@ import {
 import {
     DoubleNavigationPage,
     Orders,
-    MyOrders
+    MyOrders,
 } from './components';
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    Redirect
 } from "react-router-dom";
+import User from './User';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import *  as ReactBoostrap from 'react-bootstrap';
 import PullToRefresh from 'react-simple-pull-to-refresh';
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -34,6 +37,13 @@ class Home extends Component {
     }
 
     render() {
+        if(!this.props.isAuth) {
+            return (
+                <Route>
+                    <Redirect to = '/sign-in'/>
+                </Route>
+            );
+        } 
         return(
             <Router>
                 <div style = {{
