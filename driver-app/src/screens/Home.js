@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import *  as ReactBoostrap from 'react-bootstrap';
 import './css/homeStyle.css';
 import {
     backgroundImage,
@@ -9,6 +11,7 @@ import {
     DoubleNavigationPage,
     Orders,
     MyOrders,
+    Dashboard
 } from './components';
 import {
     BrowserRouter as Router,
@@ -18,8 +21,6 @@ import {
     Redirect
 } from "react-router-dom";
 import User from './User';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import *  as ReactBoostrap from 'react-bootstrap';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 
 class Home extends Component {
@@ -27,7 +28,8 @@ class Home extends Component {
         super(props);
         this.state = {
             totalUrOrders: 0,
-            instanceOrders: []
+            instanceOrders: [],
+            comp: ''
         }
         this.onRefresh = this.onRefresh.bind(this);
     }
@@ -35,9 +37,44 @@ class Home extends Component {
     onRefresh() {
         
     }
+    
+    componentDidUpdate() {
+        
+    }
+
+    componentDidMount() {
+        this.setState({
+            comp: this.props.comp
+        });
+    }
+
+    mainView = (comp) => {
+        if(comp === 'my-orders') {
+            this.setState({
+                comp: comp
+            });
+            return(
+                <MyOrders />
+            );
+        }
+        else if(comp === 'orders') {
+            this.setState({
+                comp: comp
+            });
+            return(
+                <Orders />
+            );
+        } else if(comp === 'dashboard') {
+            return(
+                <Dashboard />
+            );
+            
+        }
+    }
 
     render() {
-        console.log(this.props.isAuth);
+        console.log(this.state.comp);
+        
         if(!this.props.isAuth) {
             return (
                 <Route>
@@ -59,14 +96,7 @@ class Home extends Component {
                     }}>
                         <DoubleNavigationPage />
                         <PullToRefresh onRefresh={this.onRefresh}>
-                            <Switch>
-                                <Route path = '/my-orders'>
-                                    <MyOrders />
-                                </Route>
-                                <Route path = '/orders'>
-                                    <Orders />
-                                </Route>
-                            </Switch>
+                            {this.mainView(this.state.comp)}
                         </PullToRefresh>    
                     </div>
                 </div>        

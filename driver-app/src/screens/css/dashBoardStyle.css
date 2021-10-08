@@ -1,0 +1,27 @@
+.dashBoardContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dashBoardCol1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashBoardUser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(	#e09952, #b3b3b3);
+    height: 300px;
+    width: 400px;
+    margin: 20px;
+    border-radius: 30px;
+    border: solid 1.5em rgba(#000, .03);
+}
+
+.dashBoardTextStyle {
+    /* font-weight: bold; */
+    color: #FFF;
+}

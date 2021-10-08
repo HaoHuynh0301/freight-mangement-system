@@ -42,6 +42,15 @@ function App() {
                 <Route path = '/register'>
                     <Register />
                 </Route>
+                <Route path = '/my-orders'>
+                    <Home isAuth = {isAuth} comp = 'my-orders'/>
+                </Route>
+                <Route path = '/orders'>
+                    <Home isAuth = {isAuth} comp = 'orders'/>
+                </Route>
+                <Route path = '/dashboard'>
+                    <Home isAuth = {isAuth} comp = 'dashboard'/>
+                </Route>
                 <Route exact path = '/'>
                     <Home isAuth = {isAuth}/>
                 </Route>
