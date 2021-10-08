@@ -9,7 +9,9 @@ import {
 } from '../contants';
 import {
     Link,
-    Redirect
+    Redirect,
+    Route,
+    useHistory 
 } from "react-router-dom";
 
 const axios = require('axios');
@@ -20,7 +22,8 @@ class Sigin extends Component {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            isSigned: false
         }
         this.handleSignIn = this.handleSignIn.bind(this);
     }
@@ -35,12 +38,13 @@ class Sigin extends Component {
         .then(async (response) => {
             console.log(response);
             await localStorage.set('token', response.data.access_token);
-            console.log(localStorage.get('token'));
             alert('OK');
             this.setState({
                 username: '',
-                password: ''
+                password: '',
+                isSigned: true
             });
+            
         })
         .catch((error) => {
             alert('We have some errors!');
@@ -48,6 +52,13 @@ class Sigin extends Component {
     }
 
     render() {
+        if(this.state.isSigned) {
+            return(
+                <Route>
+                    <Redirect to = '/'/>
+                </Route>
+            );
+        }
         return(
             <div className = 'Container'>
                 <div className = 'mainContent'>

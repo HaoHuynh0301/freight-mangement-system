@@ -37,6 +37,7 @@ class Home extends Component {
     }
 
     render() {
+        console.log(this.props.isAuth);
         if(!this.props.isAuth) {
             return (
                 <Route>
