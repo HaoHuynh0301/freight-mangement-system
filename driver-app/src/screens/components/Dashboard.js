@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import '../css/dashBoardStyle.css';
+import userLogo from '../../assets/user-icon.png';
 import {
     backgroundUserImage,
     orangeColor,
-    orangeBlur
+    orangeBlur,
+    userIcon
 } from '../../contants';
 
 class Dashboard extends Component {
@@ -50,7 +52,24 @@ class Dashboard extends Component {
                                 }}>
                                     <p className = 'dashBoardTextStyle'>Huynh Quan Nhat Hao</p>
                                     <p className = 'dashBoardTextStyle'>0932843656</p>
-                                </div> 
+                                </div>
+                                <img src = {userLogo} style = {{
+                                    marginLeft: '50px',
+                                    height: '80px',
+                                    width: '80px'
+                                }}/>
+                            </div>
+                            <div style = {{
+                                display: "flex",
+                                flexDirection: "column",
+                                marginTop: '10px',
+                                border: '0.5px solid grey',
+                                width: '99%',
+                                borderRadius: '20px',
+                                padding: '10px',
+                            }}>
+                                <p className = 'dashBoardTextStyle'>Bằng lái xe: AE12UDS</p>
+                                <p className = 'dashBoardTextStyle'>Username: hao152903</p>
                             </div>
                         </div>
                     </div>
