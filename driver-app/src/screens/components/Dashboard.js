@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import '../css/dashBoardStyle.css';
 import userLogo from '../../assets/user-icon.png';
+import clockLogo from '../../assets/clock-icon.png';
+import locationLogo from '../../assets/location-icon.png';
 import {
     backgroundUserImage,
     orangeColor,
@@ -70,6 +72,27 @@ class Dashboard extends Component {
                             }}>
                                 <p className = 'dashBoardTextStyle'>Bằng lái xe: AE12UDS</p>
                                 <p className = 'dashBoardTextStyle'>Username: hao152903</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className = 'dashBoardLastRide'>
+                        <div style = {{
+                            display: 'flex',
+                            flexDirection: 'row',
+                        }}>
+                            <p style = {{
+                                fontSize: '25px',
+                                fontWeight: 'bold'
+                            }}>Chuyến xe cuối</p>
+                        </div>
+                        <div class = 'dashBoardLastRideItem'>
+                            <img src = {clockLogo}  style = {{
+                                height: '80px',
+                                width: '80px',
+                            }}></img>
+                            <div className = 'dashBoardLastRideLocationWrapper'>
+                                <p className = 'dashBoardTextStyle2'>10:19pm - 11:pm</p>
+                                <img src = {locationLogo}></img>
                             </div>
                         </div>
                     </div>
