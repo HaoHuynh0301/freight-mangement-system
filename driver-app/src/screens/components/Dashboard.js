@@ -7,7 +7,8 @@ import {
     backgroundUserImage,
     orangeColor,
     orangeBlur,
-    userIcon
+    userIcon,
+    greyColor
 } from '../../contants';
 
 class Dashboard extends Component {
@@ -18,7 +19,8 @@ class Dashboard extends Component {
                 '1'
             ],
             instanceOrders: ['1'],
-            requests: ['1']
+            requests: ['1'],
+            avaiOrders: ['1']
         }
     }
 
@@ -65,8 +67,6 @@ class Dashboard extends Component {
             );
         }
     }
-
-    // 
 
     // Màn hình hiển thị khi tồn tại danh sách last ride
     instanceOrderRequets = () => {
@@ -158,6 +158,56 @@ class Dashboard extends Component {
             }}>
                 Không có yêu cầu nào
             </div>
+        }
+    }
+
+    // Màn hình hiển thị danh sách các đơn hàng hiện có
+    availableOrder = () => {
+        if(this.state.avaiOrders.length > 0) {
+            return(
+                <div className = 'dashBoardAvaiOrdersWrapper'>
+                    <p style = {{
+                        fontSize: '20px',
+                        fontWeight: 'bold',
+                    }}>Đơn hàng hiện có</p>
+                    <div className = 'dashBoardAvaiOrdersItem'>
+                        <img src = {userLogo} style = {{
+                            height: '40px',
+                            width: '40px'
+                        }}></img>
+                        <div className = 'dashBoardAvaiOrdersItemInforWrapper'>
+                            <p>Extra Fast</p>
+                            <p style = {{
+                                color: 'grey'
+                            }}>Huynh Quan Nhat Hao</p>
+                        </div>
+                        <p>- 25000VND</p>
+                    </div>
+                    <div className = 'dashBoardAvaiOrdersItem'>
+                        <img src = {userLogo} style = {{
+                            height: '40px',
+                            width: '40px'
+                        }}></img>
+                        <div className = 'dashBoardAvaiOrdersItemInforWrapper'>
+                            <p>Extra Fast</p>
+                            <p style = {{
+                                color: 'grey'
+                            }}>Huynh Quan Nhat Hao</p>
+                        </div>
+                        <p>- 25000VND</p>
+                    </div>
+                </div>
+            );
+        } else {
+            return(
+                <div style = {{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                }}>
+                    Không có đơn hàng nào
+                </div>
+            );
         }
     }
 
@@ -331,6 +381,11 @@ class Dashboard extends Component {
                     <div className = 'dashBoardCol1'>
                         {this.instanceOrder()}
                         {this.instanceOrderRequets()}
+                    </div>
+
+                    {/* Cột thứ ba */}
+                    <div className = 'dashBoardCol1'>
+                        {this.availableOrder()}
                     </div>
                 </div>
             );
