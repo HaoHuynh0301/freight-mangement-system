@@ -14,7 +14,9 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lastRides: []
+            lastRides: [
+                '1'
+            ]
         }
     }
 
@@ -33,7 +35,7 @@ class Dashboard extends Component {
 
     // Màn hình hiển thị khi tồn tại danh sách last ride
     render() {
-        if(this.state.lastRides.length() > 0) {
+        if(this.state.lastRides.length > 0) {
             return(
                 <div className = 'dashBoardContainer'>
                     <div className = 'dashBoardCol1'>

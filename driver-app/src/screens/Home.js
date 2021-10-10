@@ -73,8 +73,6 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.state.comp);
-        
         if(!this.props.isAuth) {
             return (
                 <Route>
@@ -92,7 +90,7 @@ class Home extends Component {
                 }}>
                     <div style = {{
                         width: '100%',
-                        height: '500px'
+                        height: 'auto'
                     }}>
                         <DoubleNavigationPage />
                         <PullToRefresh onRefresh={this.onRefresh}>
