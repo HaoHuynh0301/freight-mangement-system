@@ -26,6 +26,11 @@ class Dashboard extends Component {
 
     }
 
+    // Hàm xử lý sự kiện xử lý request của khách hàng
+    handleRequest = () => {
+        console.log('Handle');
+    }
+
     // Màn hình hiển thị khi danh sách last ride rỗng
     emptyLastRides = () => {
         return(
@@ -74,14 +79,75 @@ class Dashboard extends Component {
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'flex-start',
+                        alignItems: 'center'
                     }}>
-                        <img src = {userLogo} style = {{
-                            height: '40px',
-                            width: '40px',
+                        <div style = {{
+                            height: '42px',
+                            widows: '42px',
+                            border: 'solid 0.5px grey',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyItems: 'center',
+                            borderRadius: '40px',
+                            padding: '1px',
                             marginRight: '20px'
-                        }}></img>
-                        <p style = {{alignSelf: 'center'}}>Hao152903</p>
+                        }}>
+                            <img src = {userLogo} style = {{
+                                height: '40px',
+                                width: '40px',
+                            }}></img>
+                        </div>
+                        <p 
+                            style = {{
+                                alignSelf: 'center',
+                                fontWeight: 'bold',
+                                fontSize: '20px'
+                            }}
+                        >
+                            Hao152903
+                        </p>
                     </div>
+
+                    {/* Request Items Wrapper */}
+                    <div className = 'dashBoardInstanceOrderRequestItemsWrapper'>
+
+                        {/* Item request wrapper */}
+                        <div style = {{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            marginBottom: '20px'
+                        }}>
+                            {/* Phần hiển thị thời gian của request */}
+                            <p className = 'requestTimeFontStyle'>9:32pm</p>
+                            <div className = 'requestMsgWrapper'>
+                                <p className = 'requestMsgFontStyle'>Giao hàng</p>
+                            </div>
+                        </div>
+                        <div style = {{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            marginBottom: '20px'
+                        }}>
+                            {/* Phần hiển thị thời gian của request */}
+                            <p className = 'requestTimeFontStyle'>9:32pm</p>
+                            <div className = 'requestMsgWrapper'>
+                                <p className = 'requestMsgFontStyle'>Giao hàng</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button style = {{
+                        backgroundColor: orangeColor,
+                        borderRadius: '15px',
+                        height: '40px',
+                        border: 'solid 0.5px grey',
+                        fontWeight: 'bold'
+                    }}
+                        onClick = {this.handleRequest}
+                    >Xử lý</button>
                 </div>
             );
         } else {
@@ -120,7 +186,10 @@ class Dashboard extends Component {
                                 padding: '20px',
                                 
                             }}>
-                                <p className = 'dashBoardTextStyle'>Thông tin tài xế</p>
+                                <p style = {{
+                                    color: '#FFF',
+                                    fontWeight: 'bold'
+                                }}>Thông tin tài xế</p>
                                 <div style = {{
                                     display: 'flex',
                                     flexDirection: 'row',
