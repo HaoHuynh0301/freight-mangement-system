@@ -68,7 +68,20 @@ class Dashboard extends Component {
         if(this.state.requests.length > 0) {
             return(
                 <div className = 'dashBoardInstanceOrderRequestWrapper'>
-                    <p>Hello</p>
+
+                    {/* Title Wrapper */}
+                    <div style = {{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                    }}>
+                        <img src = {userLogo} style = {{
+                            height: '40px',
+                            width: '40px',
+                            marginRight: '20px'
+                        }}></img>
+                        <p style = {{alignSelf: 'center'}}>Hao152903</p>
+                    </div>
                 </div>
             );
         } else {

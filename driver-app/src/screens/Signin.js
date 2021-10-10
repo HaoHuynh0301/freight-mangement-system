@@ -30,7 +30,6 @@ class Sigin extends Component {
 
     handleSignIn(event) {
         event.preventDefault();
-        console.log(this.state.username)
         axios.post(`${ipAddress}/api/driver-signin/`, {
             username: this.state.username,
             password: this.state.password
@@ -38,13 +37,11 @@ class Sigin extends Component {
         .then(async (response) => {
             console.log(response);
             await localStorage.set('token', response.data.access_token);
-            alert('OK');
             this.setState({
                 username: '',
                 password: '',
                 isSigned: true
             });
-            
         })
         .catch((error) => {
             alert('We have some errors!');

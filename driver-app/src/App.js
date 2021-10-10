@@ -15,20 +15,35 @@ import {
     MyOrders,
     Orders
 } from './screens/components'
+import {
+    ipAddress
+} from './contants';
 const localStorage = require('local-storage');
+const axios = require('axios');
 
-function privateRoute(props) {
-    if(props.isAuth === true) {
-        return
-    }
+const middleWare = async (token) => {
+    var isAuth = false;
+    await axios.get(`${ipAddress}/api/driver-middleware/`, {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then((response) => {
+        console.log((response.data));
+        isAuth = true;
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+    return isAuth;
 }
 
 function App() {
     const token = localStorage.get('token');
-    console.log(token);
     var isAuth = false;
     if(token !== null) {
-        isAuth = true;
+        isAuth = middleWare(token);
     }
     return (
         <BrowserRouter>
