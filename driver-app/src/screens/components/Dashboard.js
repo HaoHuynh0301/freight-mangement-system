@@ -16,7 +16,8 @@ class Dashboard extends Component {
         this.state = {
             lastRides: [
                 '1'
-            ]
+            ],
+            instanceOrders: ['1']
         }
     }
 
@@ -33,11 +34,35 @@ class Dashboard extends Component {
         );
     }
 
+    // Màn hình hiển thị chuyến xe hiện tại
+    instanceOrder = () => {
+        if(this.state.instanceOrders.length > 0) {
+            return(
+                <div className = 'dashBoardInstanceOrderWrapper'>
+                    
+                </div>
+            );
+        } else {
+            // Hiển thị khi không có đơn hàng nào hiện đang giao
+            return(
+                <div style = {{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                }}>
+                    Không có đơn hàng nào
+                </div>
+            );
+        }
+    }
+
     // Màn hình hiển thị khi tồn tại danh sách last ride
     render() {
         if(this.state.lastRides.length > 0) {
             return(
                 <div className = 'dashBoardContainer'>
+
+                    {/* Cột thứ nhất */}
                     <div className = 'dashBoardCol1'>
                         <div className = 'dashBoardUser'>
                             <div style = {{
@@ -192,6 +217,11 @@ class Dashboard extends Component {
                             </div>
                         </div>
                         
+                    </div>
+
+                    {/* Cột thứ hai */}
+                    <div className = 'dashBoardCol1'>
+                        {this.instanceOrder()}
                     </div>
                 </div>
             );
