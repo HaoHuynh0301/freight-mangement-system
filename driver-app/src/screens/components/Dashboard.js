@@ -14,8 +14,16 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            lastRides: []
         }
+    }
+
+    emptyLastRides = () => {
+        return(
+            <div>
+                
+            </div>
+        );
     }
 
     render() {
@@ -79,6 +87,7 @@ class Dashboard extends Component {
                         <div style = {{
                             display: 'flex',
                             flexDirection: 'row',
+                            marginBottom: '5px'
                         }}>
                             <p style = {{
                                 fontSize: '25px',
@@ -86,16 +95,94 @@ class Dashboard extends Component {
                             }}>Chuyến xe cuối</p>
                         </div>
                         <div class = 'dashBoardLastRideItem'>
-                            <img src = {clockLogo}  style = {{
-                                height: '80px',
-                                width: '80px',
-                            }}></img>
-                            <div className = 'dashBoardLastRideLocationWrapper'>
+                            {/* Danh sách vận chuyển của đơn hàng cuối cùng */}
+                            <div style = {{
+                                height: '63px',
+                                width: '63px',
+                                border: '0.5px solid grey',
+                                borderRadius: '20px',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                marginBottom: '10px'
+                            }}>
+                                <img src = {clockLogo}  style = {{
+                                    height: '60px',
+                                    width: '60px',
+                                }}></img>
+                            </div>
+                            <div style = {{
+                                marginLeft: '30px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                padding: '0'
+                            }}>
                                 <p className = 'dashBoardTextStyle2'>10:19pm - 11:pm</p>
-                                <img src = {locationLogo}></img>
+                                <p>
+                                    <img src = {locationLogo} height = '30px' width = '30px' style = {{marginRight: '10px'}}></img>
+                                    Số 59/31, quận Ô Môn
+                                </p>
                             </div>
                         </div>
+                        <div class = 'dashBoardLastRideItem'>
+                            {/* Danh sách vận chuyển của đơn hàng cuối cùng */}
+                            <div style = {{
+                                height: '63px',
+                                width: '63px',
+                                border: '0.5px solid grey',
+                                borderRadius: '20px',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                marginBottom: '10px'
+                            }}>
+                                <img src = {clockLogo}  style = {{
+                                    height: '60px',
+                                    width: '60px',
+                                }}></img>
+                            </div>
+                            <div style = {{
+                                marginLeft: '30px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                padding: '0'
+                            }}>
+                                <p className = 'dashBoardTextStyle2'>10:19pm - 11:pm</p>
+                                <p>
+                                    <img src = {locationLogo} height = '30px' width = '30px' style = {{marginRight: '10px'}}></img>
+                                    Số 59/31, quận Ô Môn
+                                </p>
+                            </div> 
+                        </div>
+                        <div class = 'dashBoardLastRideItem'>
+                            {/* Danh sách vận chuyển của đơn hàng cuối cùng */}
+                            <div style = {{
+                                height: '63px',
+                                width: '63px',
+                                border: '0.5px solid grey',
+                                borderRadius: '20px',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                marginBottom: '10px'
+                            }}>
+                                <img src = {clockLogo}  style = {{
+                                    height: '60px',
+                                    width: '60px',
+                                }}></img>
+                            </div>
+                            <div style = {{
+                                marginLeft: '30px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                padding: '0'
+                            }}>
+                                <p className = 'dashBoardTextStyle2'>10:19pm - 11:pm</p>
+                                <p>
+                                    <img src = {locationLogo} height = '30px' width = '30px' style = {{marginRight: '10px'}}></img>
+                                    Số 59/31, quận Ô Môn
+                                </p>
+                            </div>   
+                        </div>
                     </div>
+                    
                 </div>
             </div>
         );
