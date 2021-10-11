@@ -13,6 +13,8 @@ import {
     Route,
     useHistory 
 } from "react-router-dom";
+import App from '../App';
+import Home from './Home';
 
 const axios = require('axios');
 const localStorage = require('local-storage');
@@ -35,7 +37,6 @@ class Sigin extends Component {
             password: this.state.password
         })
         .then(async (response) => {
-            console.log(response);
             await localStorage.set('token', response.data.access_token);
             this.setState({
                 username: '',
@@ -50,9 +51,10 @@ class Sigin extends Component {
 
     render() {
         if(this.state.isSigned) {
+            let isAuth = true;
             return(
-                <Route>
-                    <Redirect to = '/'/>
+                <Route to = '/'>
+                    <Home isAuth = {true}/>
                 </Route>
             );
         }

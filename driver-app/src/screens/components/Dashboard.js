@@ -28,6 +28,11 @@ class Dashboard extends Component {
 
     }
 
+    // Hàm lấy thông tin driver
+    getDriverInformation() {
+        
+    }
+
     // Hàm xử lý sự kiện xử lý request của khách hàng
     handleRequest = () => {
         console.log('Handle');

@@ -14,6 +14,8 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth.hashers import check_password
 
+# Authentication Views
+
 class SignInView(APIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = serializers.DriverSignInSerializer
@@ -55,3 +57,15 @@ class MiddleWare(APIView):
 
     def get(self, request, format = None):
         return Response('OK', status = status.HTTP_200_OK)
+    
+    
+# Functional Views
+
+class DriverView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.DriverSerializer
+    
+    def get(self, request, format = None):
+        driver = request.user
+        print(driver)
+        return Response({'status': 'OK'}, status = status.HTTP_200_OK)

@@ -23,24 +23,25 @@ const axios = require('axios');
 
 const middleWare = async (token) => {
     var isAuth = false;
-    await axios.get(`${ipAddress}/api/driver-middleware/`, {
+    axios.get(`${ipAddress}/api/driver-middleware/`, {
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
         }
     })
-    .then((response) => {
-        console.log((response.data));
+    .then(async (response) => {
         isAuth = true;
+        await axios.set('token', response.data.access_token);
     })
-    .catch((error) => {
-        console.log(error);
+    .catch(error => {
+        console.log('Error!');
     });
     return isAuth;
 }
 
 function App() {
     const token = localStorage.get('token');
+    console.log(token)
     var isAuth = false;
     if(token !== null) {
         isAuth = middleWare(token);
@@ -57,17 +58,8 @@ function App() {
                 <Route path = '/register'>
                     <Register />
                 </Route>
-                <Route path = '/my-orders'>
-                    <Home isAuth = {isAuth} comp = 'my-orders'/>
-                </Route>
-                <Route path = '/orders'>
-                    <Home isAuth = {isAuth} comp = 'orders'/>
-                </Route>
-                <Route path = '/dashboard'>
-                    <Home isAuth = {isAuth} comp = 'dashboard'/>
-                </Route>
                 <Route exact path = '/'>
-                    <Home isAuth = {isAuth}/>
+                    <Home isAuth = {isAuth} />
                 </Route>
             </Switch>
         </BrowserRouter>

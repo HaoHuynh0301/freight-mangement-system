@@ -28,5 +28,6 @@ urlpatterns = [
     
     path('driver-register/', driver_view.DriverView.as_view(), name = 'driver'),
     path('driver-signin/', driver_view.SignInView.as_view(), name = 'driver-sign-in'),
-    path('driver-middleware/', driver_view.MiddleWare.as_view(), name = 'middle-ware')
+    path('driver-middleware/', driver_view.MiddleWare.as_view(), name = 'middle-ware'),
+    path('driver-infor/', driver_view.DriverView.as_view(), name = 'driver-infor')
 ]

@@ -20,8 +20,12 @@ import {
     Link,
     Redirect
 } from "react-router-dom";
+import {
+    ipAddress
+} from '../contants';
 import User from './User';
 import PullToRefresh from 'react-simple-pull-to-refresh';
+const axios = require('axios');
 
 class Home extends Component {
     constructor(props) {
@@ -29,7 +33,7 @@ class Home extends Component {
         this.state = {
             totalUrOrders: 0,
             instanceOrders: [],
-            comp: ''
+            comp: '',
         }
         this.onRefresh = this.onRefresh.bind(this);
     }
@@ -37,39 +41,9 @@ class Home extends Component {
     onRefresh() {
         
     }
-    
-    componentDidUpdate() {
-        
-    }
 
     componentDidMount() {
-        this.setState({
-            comp: this.props.comp
-        });
-    }
 
-    mainView = (comp) => {
-        if(comp === 'my-orders') {
-            this.setState({
-                comp: comp
-            });
-            return(
-                <MyOrders />
-            );
-        }
-        else if(comp === 'orders') {
-            this.setState({
-                comp: comp
-            });
-            return(
-                <Orders />
-            );
-        } else if(comp === 'dashboard') {
-            return(
-                <Dashboard />
-            );
-            
-        }
     }
 
     render() {
@@ -79,36 +53,40 @@ class Home extends Component {
                     <Redirect to = '/sign-in'/>
                 </Route>
             );
-        } 
-        return(
-            <Router>
-                <div style = {{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}>
+        } else {
+            return(
+                <Router>
                     <div style = {{
-                        width: '100%',
-                        height: 'auto'
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
                     }}>
-                        <DoubleNavigationPage />
-                        <PullToRefresh onRefresh={this.onRefresh}>
-                            <Route path = '/my-orders'>
-                                <MyOrders />
-                            </Route>
-                            <Route path = '/orders'>
-                                <Orders />
-                            </Route>
-                            <Route path = '/dashboard'>
-                                <Dashboard />
-                            </Route>
-                        </PullToRefresh>    
-                    </div>
-                </div>        
-            </Router>
-            
-        );
+                        <div style = {{
+                            width: '100%',
+                            height: 'auto'
+                        }}>
+                            <DoubleNavigationPage />
+                            <PullToRefresh onRefresh={this.onRefresh}>
+                                <Route path = '/my-orders'>
+                                    <MyOrders />
+                                </Route>
+                                <Route path = '/orders'>
+                                    <Orders />
+                                </Route>
+                                <Route path = '/dashboard'>
+                                    <Dashboard />
+                                </Route>
+                                <Route exact path = '/'>
+                                    <h1>Hello</h1>
+                                </Route>
+                            </PullToRefresh>    
+                        </div>
+                    </div>        
+                </Router>
+                
+            );
+        }
     }
 }
 
