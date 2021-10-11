@@ -102,6 +102,7 @@ class DriverSerializer(serializers.ModelSerializer):
             'driverLicense',
             'username',
             'password',
+            'id'
         ]
         
         

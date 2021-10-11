@@ -19,7 +19,7 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             lastRides: [
-                '1'
+                
             ],
             instanceOrders: ['1'],
             requests: ['1'],
@@ -36,7 +36,6 @@ class Dashboard extends Component {
     // Hàm lấy thông tin driver
     async getDriverInformation() {
         const token = localStorage.get('token');
-        console.log(token);
         axios.get(`${ipAddress}/api/driver-view/`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -44,13 +43,45 @@ class Dashboard extends Component {
             }
         })
         .then((response) => {
-            console.log(response.data);
             this.setState({
                 driverInfor: response.data
+            });
+            axios.get(`${ipAddress}/api/update-location?driver_id=${response.data.id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            .then((response) => {
+                var tmpArr = this.state.lastRides
+                console.log(tmpArr)
+                this.setState({
+                    lastRides: tmpArr
+                });
+                console.log(this.state.lastRides);
+            })
+            .catch((error) => {
+                console.log('Error!');
             });
         }).
         catch((error) => {
             console.log('Error!');
+        });
+    }
+
+    async getLocationUpdate() {
+        const token = localStorage.get('token');
+        axios.get(`${ipAddress}/api/update-location?driver_id=${this.state.driverInfor.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((error) => {
+            console.log('Error');
         });
     }
 
