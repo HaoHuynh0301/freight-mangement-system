@@ -1,3 +1,4 @@
+from django.utils.regex_helper import contains
 from rest_framework.serializers import Serializer
 
 from . import models, serializers, driver_model
@@ -13,6 +14,7 @@ from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth.hashers import check_password
+import jwt
 
 # Authentication Views
 
@@ -51,6 +53,14 @@ class DriverView(APIView):
            return Response({'status': 'Created'}, status = status.HTTP_201_CREATED)
         return Response({'error': 'There are some errors! Please try again later!'}, status = status.HTTP_400_BAD_REQUEST)
     
+    def get(self, request, format = None):
+        token = request.headers['Authorization']
+        payload = jwt.decode(jwt=token[7: len(token)], key=settings.SECRET_KEY, algorithms=['HS256'])
+        instanceDriver = driver_model.Driver.objects.filter(id = payload['user_id'])
+        if len(instanceDriver) > 0:
+            serializer = self.serializer_class(instanceDriver[0])
+        return Response(serializer.data, status = status.HTTP_200_OK)
+    
     
 class MiddleWare(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -60,12 +70,3 @@ class MiddleWare(APIView):
     
     
 # Functional Views
-
-class DriverView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
-    serializer_class = serializers.DriverSerializer
-    
-    def get(self, request, format = None):
-        driver = request.user
-        print(driver)
-        return Response({'status': 'OK'}, status = status.HTTP_200_OK)
