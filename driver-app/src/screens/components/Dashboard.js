@@ -8,8 +8,11 @@ import {
     orangeColor,
     orangeBlur,
     userIcon,
-    greyColor
+    greyColor,
+    ipAddress
 } from '../../contants';
+import axios from "axios";
+const localStorage = require('local-storage');
 
 class Dashboard extends Component {
     constructor(props) {
@@ -20,17 +23,35 @@ class Dashboard extends Component {
             ],
             instanceOrders: ['1'],
             requests: ['1'],
-            avaiOrders: ['1']
+            avaiOrders: ['1'],
+            driverInfor: {}
         }
+        this.getDriverInformation = this.getDriverInformation.bind(this);
     }
 
     componentDidMount() {
-
+        this.getDriverInformation();
     }
 
     // Hàm lấy thông tin driver
-    getDriverInformation() {
-        
+    async getDriverInformation() {
+        const token = localStorage.get('token');
+        console.log(token);
+        axios.get(`${ipAddress}/api/driver-view/`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            console.log(response.data);
+            this.setState({
+                driverInfor: response.data
+            });
+        }).
+        catch((error) => {
+            console.log('Error!');
+        });
     }
 
     // Hàm xử lý sự kiện xử lý request của khách hàng
@@ -257,8 +278,8 @@ class Dashboard extends Component {
                                         display: "flex",
                                         flexDirection: 'column'
                                     }}>
-                                        <p className = 'dashBoardTextStyle'>Huynh Quan Nhat Hao</p>
-                                        <p className = 'dashBoardTextStyle'>0932843656</p>
+                                        <p className = 'dashBoardTextStyle'>{this.state.driverInfor.name}</p>
+                                        <p className = 'dashBoardTextStyle'>{this.state.driverInfor.phone_number}</p>
                                     </div>
                                     <img src = {userLogo} style = {{
                                         marginLeft: '50px',
@@ -275,8 +296,8 @@ class Dashboard extends Component {
                                     borderRadius: '20px',
                                     padding: '10px',
                                 }}>
-                                    <p className = 'dashBoardTextStyle'>Bằng lái xe: AE12UDS</p>
-                                    <p className = 'dashBoardTextStyle'>Username: hao152903</p>
+                                    <p className = 'dashBoardTextStyle'>Bằng lái xe: {this.state.driverInfor.driverLicense}</p>
+                                    <p className = 'dashBoardTextStyle'>Username: {this.state.driverInfor.username}</p>
                                 </div>
                             </div>
                         </div>

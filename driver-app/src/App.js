@@ -31,17 +31,17 @@ const middleWare = async (token) => {
     })
     .then(async (response) => {
         isAuth = true;
-        await axios.set('token', response.data.access_token);
+        localStorage.set('token', response.data.access_token);
     })
     .catch(error => {
         console.log('Error!');
     });
+    console.log(isAuth);
     return isAuth;
 }
 
 function App() {
     const token = localStorage.get('token');
-    console.log(token)
     var isAuth = false;
     if(token !== null) {
         isAuth = middleWare(token);
