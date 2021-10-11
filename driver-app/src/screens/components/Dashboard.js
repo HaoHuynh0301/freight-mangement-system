@@ -279,7 +279,8 @@ class Dashboard extends Component {
                             <div style = {{
                                 display: 'flex',
                                 flexDirection: 'row',
-                                marginBottom: '5px'
+                                marginBottom: '5px',
+                                
                             }}>
                                 <p style = {{
                                     fontSize: '25px',

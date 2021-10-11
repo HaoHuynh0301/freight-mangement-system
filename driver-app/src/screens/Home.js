@@ -94,7 +94,15 @@ class Home extends Component {
                     }}>
                         <DoubleNavigationPage />
                         <PullToRefresh onRefresh={this.onRefresh}>
-                            {this.mainView(this.state.comp)}
+                            <Route path = '/my-orders'>
+                                <MyOrders />
+                            </Route>
+                            <Route path = '/orders'>
+                                <Orders />
+                            </Route>
+                            <Route path = '/dashboard'>
+                                <Dashboard />
+                            </Route>
                         </PullToRefresh>    
                     </div>
                 </div>        
