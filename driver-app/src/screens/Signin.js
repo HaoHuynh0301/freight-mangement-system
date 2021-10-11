@@ -37,7 +37,7 @@ class Sigin extends Component {
             password: this.state.password
         })
         .then(async (response) => {
-            await localStorage.set('token', response.data.access_token);
+            localStorage.set('token', response.data.access_token);
             this.setState({
                 username: '',
                 password: '',

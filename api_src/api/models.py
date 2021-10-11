@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
-from . import driver_model
 
 class MyUserManager(BaseUserManager):
     def create_user(self, 
@@ -146,6 +145,20 @@ class OrderStatus(models.Model):
     def __str__(self):
         return str(self.name) 
     
+    
+class Driver(models.Model):
+    name = models.CharField(max_length = 255, null = False, blank = True)
+    phone_number = models.CharField(max_length = 12, null = False, blank = True)
+    email = models.CharField(max_length = 100, blank = False)
+    cmnd = models.CharField(max_length = 12, null = False)
+    age = models.IntegerField(default = 18)
+    driverLicense = models.CharField(max_length = 20, null = False, blank = False)
+    username = models.CharField(max_length = 255, blank = False, null = False)
+    password = models.CharField(max_length = 255, blank = False, null = False)
+    
+    def __str__(self):
+        return str(self.name)
+    
 
 class Order(models.Model):
     account = models.ForeignKey(Customer, on_delete = models.CASCADE, related_name = 'account_order')
@@ -162,7 +175,7 @@ class Order(models.Model):
     status = models.ForeignKey(OrderStatus, on_delete = models.CASCADE, related_name = 'order_status')
     cast = models.IntegerField()
     note = models.TextField()
-    driver = models.ForeignKey(driver_model.Driver, on_delete = models.SET_NULL, null = True)
+    driver = models.ForeignKey(Driver, on_delete = models.SET_NULL, null = True)
     # product_image = models.ImageField(null = True, blank = True, upload_to = 'images/')
     
     def __str__(self):
@@ -212,3 +225,16 @@ class StatusUpdate(models.Model):
     
     def __str__(self):
         return str(self.order.customer_name)
+    
+    
+#Driver models
+    
+class LocationUpdate(models.Model):
+    order = models.ForeignKey(Order, on_delete = models.CASCADE)
+    city = models.CharField(max_length = 255, null = True, blank = True)
+    province = models.CharField(max_length = 255, null = True, blank = True)
+    ward = models.CharField(max_length = 255, null = True, blank = True)
+    time = models.DateTimeField(auto_now_add = True)
+    
+    def __str__(self):
+        return str(self.id)

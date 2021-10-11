@@ -3,7 +3,6 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 
 from . import models
-from . import driver_model
 
 class SignInSerializer(serializers.Serializer):
     email = serializers.EmailField(max_length = 255, required = True)
@@ -93,7 +92,7 @@ class InstanceAddressSerilizer(serializers.ModelSerializer):
         
 class DriverSerializer(serializers.ModelSerializer):
     class Meta:
-        model = driver_model.Driver
+        model = models.Driver
         fields = [
             'name',
             'phone_number',
@@ -104,3 +103,9 @@ class DriverSerializer(serializers.ModelSerializer):
             'username',
             'password',
         ]
+        
+        
+class LocationUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.LocationUpdate
+        fields = '__all__'
