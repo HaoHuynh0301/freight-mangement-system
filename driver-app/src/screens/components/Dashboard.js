@@ -18,7 +18,7 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lastRides: null,
+            lastRides: [],
             instanceOrders: ['1'],
             requests: ['1'],
             avaiOrders: ['1'],
@@ -50,11 +50,10 @@ class Dashboard extends Component {
                     Authorization: `Bearer ${token}`
                 }
             })
-            .then((response) => {
-                this.setState({
+            .then(async (response) => {
+                await this.setState({
                     lastRides: response.data
                 });
-                console.log(this.state.lastRides);
             })
             .catch((error) => {
                 console.log('Error!');
@@ -62,22 +61,6 @@ class Dashboard extends Component {
         }).
         catch((error) => {
             console.log('Error!');
-        });
-    }
-
-    async getLocationUpdate() {
-        const token = localStorage.get('token');
-        axios.get(`${ipAddress}/api/update-location?driver_id=${this.state.driverInfor.id}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then((response) => {
-            console.log(response.data);
-        })
-        .catch((error) => {
-            console.log('Error');
         });
     }
 
@@ -265,20 +248,10 @@ class Dashboard extends Component {
     }
 
     lastRides = () => {
-        return(
-            <div className = 'dashBoardLastRide'>
-                <div style = {{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    marginBottom: '5px',
-                    
-                }}>
-                    <p style = {{
-                        fontSize: '25px',
-                        fontWeight: 'bold'
-                    }}>Chuyến xe cuối</p>
-                </div>
-                <div class = 'dashBoardLastRideItem'>
+        const listOfLastRides = this.state.lastRides.map((item, index) => {
+            console.log(item);
+            return(
+                <div class = 'dashBoardLastRideItem' key = {index}>
                     {/* Danh sách vận chuyển của đơn hàng cuối cùng */}
                     <div style = {{
                         height: '63px',
@@ -300,14 +273,29 @@ class Dashboard extends Component {
                         flexDirection: 'column',
                         padding: '0'
                     }}>
-                        <p className = 'dashBoardTextStyle2'>10:19pm - 11:pm</p>
+                        <p className = 'dashBoardTextStyle2'>{item.time}</p>
                         <p>
                             <img src = {locationLogo} height = '30px' width = '30px' style = {{marginRight: '10px'}}></img>
-                            Số 59/31, quận Ô Môn
+                            {item.ward}, {item.province}, {item.city}
                         </p>
                     </div> 
                 </div>
-               
+            );
+        })
+        return(
+            <div className = 'dashBoardLastRide'>
+                <div style = {{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    marginBottom: '5px',
+                    
+                }}>
+                    <p style = {{
+                        fontSize: '25px',
+                        fontWeight: 'bold'
+                    }}>Chuyến xe cuối</p>
+                </div>
+                {listOfLastRides}
             </div>
         );
     }
@@ -316,7 +304,6 @@ class Dashboard extends Component {
     render() {
         return(
             <div className = 'dashBoardContainer'>
-
                 {/* Cột thứ nhất */}
                 <div className = 'dashBoardCol1'>
                     <div className = 'dashBoardUser'>
