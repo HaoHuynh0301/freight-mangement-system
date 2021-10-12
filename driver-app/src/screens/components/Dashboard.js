@@ -233,6 +233,23 @@ class Dashboard extends Component {
 
     // Màn hình hiển thị danh sách các đơn hàng hiện có
     availableOrder = () => {
+        const itemView = this.state.avaiOrders.map((item, index) => {
+            return(
+                <div className = 'dashBoardAvaiOrdersItem'>
+                    <img src = {userLogo} style = {{
+                        height: '40px',
+                        width: '40px'
+                    }}></img>
+                    <div className = 'dashBoardAvaiOrdersItemInforWrapper'>
+                        <p>Extra Fast</p>
+                        <p style = {{
+                            color: 'grey'
+                        }}>{item.customer_name}</p>
+                    </div>
+                    <p>- {item.cast}VND</p>
+                </div>
+            );
+        })
         if(this.state.avaiOrders.length > 0) {
             return(
                 <div className = 'dashBoardAvaiOrdersWrapper'>
@@ -240,34 +257,9 @@ class Dashboard extends Component {
                         fontSize: '20px',
                         fontWeight: 'bold',
                     }}>Đơn hàng hiện có</p>
-                    <div className = 'dashBoardAvaiOrdersItem'>
-                        <img src = {userLogo} style = {{
-                            height: '40px',
-                            width: '40px'
-                        }}></img>
-                        <div className = 'dashBoardAvaiOrdersItemInforWrapper'>
-                            <p>Extra Fast</p>
-                            <p style = {{
-                                color: 'grey'
-                            }}>Huynh Quan Nhat Hao</p>
-                        </div>
-                        <p>- 25000VND</p>
-                    </div>
 
                     {/* Item */}
-                    <div className = 'dashBoardAvaiOrdersItem'>
-                        <img src = {userLogo} style = {{
-                            height: '40px',
-                            width: '40px'
-                        }}></img>
-                        <div className = 'dashBoardAvaiOrdersItemInforWrapper'>
-                            <p>Extra Fast</p>
-                            <p style = {{
-                                color: 'grey'
-                            }}>Huynh Quan Nhat Hao</p>
-                        </div>
-                        <p>- 25000VND</p>
-                    </div>
+                    {itemView}
                 </div>
             );
         } else {
