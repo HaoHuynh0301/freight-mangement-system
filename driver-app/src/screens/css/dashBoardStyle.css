@@ -66,6 +66,8 @@
     flex-direction: row;
     align-items: center;
     margin-bottom: 15px;
+    border-width: 0px;
+    background-color: #ffffe6;
     border-bottom: solid 0.5px #d1d1e0;
 }
 

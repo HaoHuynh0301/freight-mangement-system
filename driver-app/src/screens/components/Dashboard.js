@@ -96,6 +96,10 @@ class Dashboard extends Component {
         });
     }
 
+    handleOpenAvailableOrder(orderId) {
+        console.log(orderId);
+    }
+
     getAvailableOrders = () => {
         const token = localStorage.get('token');
         axios.get(`${ipAddress}/api/available-order/`, {
@@ -235,7 +239,7 @@ class Dashboard extends Component {
     availableOrder = () => {
         const itemView = this.state.avaiOrders.map((item, index) => {
             return(
-                <div className = 'dashBoardAvaiOrdersItem'>
+                <button className = 'dashBoardAvaiOrdersItem' onClick = {this.handleOpenAvailableOrder(item.id)}>
                     <img src = {userLogo} style = {{
                         height: '40px',
                         width: '40px'
@@ -247,7 +251,7 @@ class Dashboard extends Component {
                         }}>{item.customer_name}</p>
                     </div>
                     <p>- {item.cast}VND</p>
-                </div>
+                </button>
             );
         })
         if(this.state.avaiOrders.length > 0) {
