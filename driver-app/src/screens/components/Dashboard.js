@@ -18,9 +18,7 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lastRides: [
-                
-            ],
+            lastRides: null,
             instanceOrders: ['1'],
             requests: ['1'],
             avaiOrders: ['1'],
@@ -53,10 +51,8 @@ class Dashboard extends Component {
                 }
             })
             .then((response) => {
-                var tmpArr = this.state.lastRides
-                console.log(tmpArr)
                 this.setState({
-                    lastRides: tmpArr
+                    lastRides: response.data
                 });
                 console.log(this.state.lastRides);
             })
@@ -268,190 +264,132 @@ class Dashboard extends Component {
         }
     }
 
+    lastRides = () => {
+        return(
+            <div className = 'dashBoardLastRide'>
+                <div style = {{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    marginBottom: '5px',
+                    
+                }}>
+                    <p style = {{
+                        fontSize: '25px',
+                        fontWeight: 'bold'
+                    }}>Chuyến xe cuối</p>
+                </div>
+                <div class = 'dashBoardLastRideItem'>
+                    {/* Danh sách vận chuyển của đơn hàng cuối cùng */}
+                    <div style = {{
+                        height: '63px',
+                        width: '63px',
+                        border: '0.5px solid grey',
+                        borderRadius: '20px',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        marginBottom: '10px'
+                    }}>
+                        <img src = {clockLogo}  style = {{
+                            height: '60px',
+                            width: '60px',
+                        }}></img>
+                    </div>
+                    <div style = {{
+                        marginLeft: '30px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        padding: '0'
+                    }}>
+                        <p className = 'dashBoardTextStyle2'>10:19pm - 11:pm</p>
+                        <p>
+                            <img src = {locationLogo} height = '30px' width = '30px' style = {{marginRight: '10px'}}></img>
+                            Số 59/31, quận Ô Môn
+                        </p>
+                    </div> 
+                </div>
+               
+            </div>
+        );
+    }
+
 
     render() {
-        if(this.state.lastRides.length > 0) {
-            return(
-                <div className = 'dashBoardContainer'>
+        return(
+            <div className = 'dashBoardContainer'>
 
-                    {/* Cột thứ nhất */}
-                    <div className = 'dashBoardCol1'>
-                        <div className = 'dashBoardUser'>
-                            <div style = {{
-                                marginTop: '20px',
-                                marginLeft: '10px',
-                                marginRight: '10px',
-                                marginBottom: '20px',
-                                height: '90%',
-                                width: '90%',
-                                borderColor: "black",
-                                borderRadius: '30px',
-                                backgroundColor: 'rgba(0,0,0, 0.4)',
-                                display: "flex",
-                                flexDirection: 'column',
-                                alignItems: 'flex-start',
-                                padding: '20px',
-                                
-                            }}>
-                                <p style = {{
-                                    color: '#FFF',
-                                    fontWeight: 'bold'
-                                }}>Thông tin tài xế</p>
-                                <div style = {{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    border: '0.5px solid grey',
-                                    padding: '10px',
-                                    width: '99%',
-                                    borderRadius: '20px'
-                                }}>
-                                    <div style = {{
-                                        display: "flex",
-                                        flexDirection: 'column'
-                                    }}>
-                                        <p className = 'dashBoardTextStyle'>{this.state.driverInfor.name}</p>
-                                        <p className = 'dashBoardTextStyle'>{this.state.driverInfor.phone_number}</p>
-                                    </div>
-                                    <img src = {userLogo} style = {{
-                                        marginLeft: '50px',
-                                        height: '80px',
-                                        width: '80px'
-                                    }}/>
-                                </div>
-                                <div style = {{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    marginTop: '10px',
-                                    border: '0.5px solid grey',
-                                    width: '99%',
-                                    borderRadius: '20px',
-                                    padding: '10px',
-                                }}>
-                                    <p className = 'dashBoardTextStyle'>Bằng lái xe: {this.state.driverInfor.driverLicense}</p>
-                                    <p className = 'dashBoardTextStyle'>Username: {this.state.driverInfor.username}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className = 'dashBoardLastRide'>
+                {/* Cột thứ nhất */}
+                <div className = 'dashBoardCol1'>
+                    <div className = 'dashBoardUser'>
+                        <div style = {{
+                            marginTop: '20px',
+                            marginLeft: '10px',
+                            marginRight: '10px',
+                            marginBottom: '20px',
+                            height: '90%',
+                            width: '90%',
+                            borderColor: "black",
+                            borderRadius: '30px',
+                            backgroundColor: 'rgba(0,0,0, 0.4)',
+                            display: "flex",
+                            flexDirection: 'column',
+                            alignItems: 'flex-start',
+                            padding: '20px',
+                            
+                        }}>
+                            <p style = {{
+                                color: '#FFF',
+                                fontWeight: 'bold'
+                            }}>Thông tin tài xế</p>
                             <div style = {{
                                 display: 'flex',
                                 flexDirection: 'row',
-                                marginBottom: '5px',
-                                
+                                border: '0.5px solid grey',
+                                padding: '10px',
+                                width: '99%',
+                                borderRadius: '20px'
                             }}>
-                                <p style = {{
-                                    fontSize: '25px',
-                                    fontWeight: 'bold'
-                                }}>Chuyến xe cuối</p>
+                                <div style = {{
+                                    display: "flex",
+                                    flexDirection: 'column'
+                                }}>
+                                    <p className = 'dashBoardTextStyle'>{this.state.driverInfor.name}</p>
+                                    <p className = 'dashBoardTextStyle'>{this.state.driverInfor.phone_number}</p>
+                                </div>
+                                <img src = {userLogo} style = {{
+                                    marginLeft: '50px',
+                                    height: '80px',
+                                    width: '80px'
+                                }}/>
                             </div>
-                            <div class = 'dashBoardLastRideItem'>
-                                {/* Danh sách vận chuyển của đơn hàng cuối cùng */}
-                                <div style = {{
-                                    height: '63px',
-                                    width: '63px',
-                                    border: '0.5px solid grey',
-                                    borderRadius: '20px',
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    marginBottom: '10px'
-                                }}>
-                                    <img src = {clockLogo}  style = {{
-                                        height: '60px',
-                                        width: '60px',
-                                    }}></img>
-                                </div>
-                                <div style = {{
-                                    marginLeft: '30px',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    padding: '0'
-                                }}>
-                                    <p className = 'dashBoardTextStyle2'>10:19pm - 11:pm</p>
-                                    <p>
-                                        <img src = {locationLogo} height = '30px' width = '30px' style = {{marginRight: '10px'}}></img>
-                                        Số 59/31, quận Ô Môn
-                                    </p>
-                                </div>
-                            </div>
-                            <div class = 'dashBoardLastRideItem'>
-                                {/* Danh sách vận chuyển của đơn hàng cuối cùng */}
-                                <div style = {{
-                                    height: '63px',
-                                    width: '63px',
-                                    border: '0.5px solid grey',
-                                    borderRadius: '20px',
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    marginBottom: '10px'
-                                }}>
-                                    <img src = {clockLogo}  style = {{
-                                        height: '60px',
-                                        width: '60px',
-                                    }}></img>
-                                </div>
-                                <div style = {{
-                                    marginLeft: '30px',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    padding: '0'
-                                }}>
-                                    <p className = 'dashBoardTextStyle2'>10:19pm - 11:pm</p>
-                                    <p>
-                                        <img src = {locationLogo} height = '30px' width = '30px' style = {{marginRight: '10px'}}></img>
-                                        Số 59/31, quận Ô Môn
-                                    </p>
-                                </div> 
-                            </div>
-                            <div class = 'dashBoardLastRideItem'>
-                                {/* Danh sách vận chuyển của đơn hàng cuối cùng */}
-                                <div style = {{
-                                    height: '63px',
-                                    width: '63px',
-                                    border: '0.5px solid grey',
-                                    borderRadius: '20px',
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    marginBottom: '10px'
-                                }}>
-                                    <img src = {clockLogo}  style = {{
-                                        height: '60px',
-                                        width: '60px',
-                                    }}></img>
-                                </div>
-                                <div style = {{
-                                    marginLeft: '30px',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    padding: '0'
-                                }}>
-                                    <p className = 'dashBoardTextStyle2'>10:19pm - 11:pm</p>
-                                    <p>
-                                        <img src = {locationLogo} height = '30px' width = '30px' style = {{marginRight: '10px'}}></img>
-                                        Số 59/31, quận Ô Môn
-                                    </p>
-                                </div>   
+                            <div style = {{
+                                display: "flex",
+                                flexDirection: "column",
+                                marginTop: '10px',
+                                border: '0.5px solid grey',
+                                width: '99%',
+                                borderRadius: '20px',
+                                padding: '10px',
+                            }}>
+                                <p className = 'dashBoardTextStyle'>Bằng lái xe: {this.state.driverInfor.driverLicense}</p>
+                                <p className = 'dashBoardTextStyle'>Username: {this.state.driverInfor.username}</p>
                             </div>
                         </div>
-                        
                     </div>
-
-                    {/* Cột thứ hai */}
-                    <div className = 'dashBoardCol1'>
-                        {this.instanceOrder()}
-                        {this.instanceOrderRequets()}
-                    </div>
-
-                    {/* Cột thứ ba */}
-                    <div className = 'dashBoardCol1'>
-                        {this.availableOrder()}
-                    </div>
+                    {this.lastRides()}
                 </div>
-            );
-        } else {
-            return(
-                this.emptyLastRides()
-            );
-        }
+
+                {/* Cột thứ hai */}
+                <div className = 'dashBoardCol1'>
+                    {this.instanceOrder()}
+                    {this.instanceOrderRequets()}
+                </div>
+
+                {/* Cột thứ ba */}
+                <div className = 'dashBoardCol1'>
+                    {this.availableOrder()}
+                </div>
+            </div>
+        );
         
     }
 }

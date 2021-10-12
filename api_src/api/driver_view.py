@@ -82,6 +82,9 @@ class LocationUpdateView(APIView):
             lastestOrder = orders[0]
             updateLocation = lastestOrder.locationupdate_set.all()
             if len(updateLocation) > 0:
-                serializer = self.serializer_class(updateLocation[0])
+                tmpArr = []
+                for item in updateLocation:
+                    tmpArr.append(item)
+                    serializer = self.serializer_class(tmpArr, many = True)
                 return Response(serializer.data, status = status.HTTP_200_OK)
         return Response('Errors!', status = status.HTTP_404_BAD_REQUEST)
