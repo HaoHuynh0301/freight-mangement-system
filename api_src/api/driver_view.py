@@ -102,3 +102,12 @@ class OrderDriver(APIView):
             serializer = self.serializer_class(orders[0].request_set.all(), many = True)
             return Response(serializer.data, status = status.HTTP_200_OK)
         return Response({'error': 'Error'}, status = status.HTTP_400_BAD_REQUEST)
+    
+    
+class InstanceOrdereView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request, format = None):
+        orders = models.Order.objects.filter(paid = False)
+        serializer = serializers.OrderSerializer(orders, many = True)
+        return Response({'status': 'OK'}, status = status.HTTP_200_OK)

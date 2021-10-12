@@ -197,16 +197,6 @@ class Dashboard extends Component {
                         {/* Item request wrapper */}
                         {renderListofRequest}
                     </div>
-
-                    <button style = {{
-                        backgroundColor: orangeColor,
-                        borderRadius: '15px',
-                        height: '40px',
-                        border: 'solid 0.5px grey',
-                        fontWeight: 'bold'
-                    }}
-                        onClick = {this.handleRequest}
-                    >Xử lý</button>
                 </div>
             );
         } else {
@@ -242,6 +232,8 @@ class Dashboard extends Component {
                         </div>
                         <p>- 25000VND</p>
                     </div>
+
+                    {/* Item */}
                     <div className = 'dashBoardAvaiOrdersItem'>
                         <img src = {userLogo} style = {{
                             height: '40px',

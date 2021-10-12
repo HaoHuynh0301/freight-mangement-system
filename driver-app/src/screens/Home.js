@@ -61,6 +61,7 @@ class Home extends Component {
                         flexDirection: "column",
                         justifyContent: "center",
                         alignItems: "center",
+                        backgroundColor: '#ffffe6',
                     }}>
                         <div style = {{
                             width: '100%',
