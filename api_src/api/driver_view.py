@@ -99,6 +99,6 @@ class OrderDriver(APIView):
         instanceDriver = models.Driver.objects.filter(id = driverId)
         if len(instanceDriver) > 0:
             orders = instanceDriver[0].order_set.all().filter(paid = True)
-            serializer = self.serializer_class(orders[0])
+            serializer = self.serializer_class(orders[0].request_set.all(), many = True)
             return Response(serializer.data, status = status.HTTP_200_OK)
         return Response({'error': 'Error'}, status = status.HTTP_400_BAD_REQUEST)

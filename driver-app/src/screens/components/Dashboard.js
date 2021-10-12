@@ -20,19 +20,19 @@ class Dashboard extends Component {
         this.state = {
             lastRides: [],
             instanceOrders: ['1'],
-            requests: ['1'],
+            requests: [],
             avaiOrders: ['1'],
             driverInfor: {}
         }
-        this.getDriverInformation = this.getDriverInformation.bind(this);
+        this.getInformation = this.getInformation.bind(this);
     }
 
     componentDidMount() {
-        this.getDriverInformation();
+        this.getInformation();
     }
 
-    // Hàm lấy thông tin driver
-    async getDriverInformation() {
+    // Hàm lấy thông tin
+    async getInformation() {
         const token = localStorage.get('token');
         axios.get(`${ipAddress}/api/driver-view/`, {
             headers: {
@@ -53,6 +53,36 @@ class Dashboard extends Component {
             .then(async (response) => {
                 await this.setState({
                     lastRides: response.data
+                });
+                axios.get(`${ipAddress}/api/order-drivers?driver_id=${this.state.driverInfor.id}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                .then((response) => {
+                    this.setState({
+                        requests: response.data
+                    });
+                    var tmpList = [];
+                    tmpList = this.state.requests;
+                    for(let i=0; i<tmpList.length; i++) {
+                        var requestName = '';
+                        if(tmpList[i].request_option == 1) {
+                            requestName = 'Giục lấy'
+                        } else if(tmpList[i].request_option == 2) {
+                            requestName = 'Giao';
+                        } else if(tmpList[i].request_option == 3) {
+                            requestName = 'Trả hàng';
+                        }
+                        tmpList[i].request_option = requestName;
+                    }
+                    this.setState({
+                        requests: tmpList
+                    });
+                })
+                .catch((error) => {
+                    console.log('Error');
                 });
             })
             .catch((error) => {
@@ -106,6 +136,22 @@ class Dashboard extends Component {
 
     // Màn hình hiển thị khi tồn tại danh sách last ride
     instanceOrderRequets = () => {
+        const renderListofRequest = this.state.requests.map((item, index) => {
+            return(
+                <div style = {{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    marginBottom: '20px'
+                }}>
+                    {/* Phần hiển thị thời gian của request */}
+                    <p className = 'requestTimeFontStyle'>{item.time}</p>
+                    <div className = 'requestMsgWrapper'>
+                        <p className = 'requestMsgFontStyle'>{item.request_option}</p>
+                    </div>
+                </div>
+            );
+        })
         if(this.state.requests.length > 0) {
             return(
                 <div className = 'dashBoardInstanceOrderRequestWrapper'>
@@ -141,7 +187,7 @@ class Dashboard extends Component {
                                 fontSize: '20px'
                             }}
                         >
-                            Hao152903
+                            Yêu cầu của đơn hàng
                         </p>
                     </div>
 
@@ -149,30 +195,7 @@ class Dashboard extends Component {
                     <div className = 'dashBoardInstanceOrderRequestItemsWrapper'>
 
                         {/* Item request wrapper */}
-                        <div style = {{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            marginBottom: '20px'
-                        }}>
-                            {/* Phần hiển thị thời gian của request */}
-                            <p className = 'requestTimeFontStyle'>9:32pm</p>
-                            <div className = 'requestMsgWrapper'>
-                                <p className = 'requestMsgFontStyle'>Giao hàng</p>
-                            </div>
-                        </div>
-                        <div style = {{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            marginBottom: '20px'
-                        }}>
-                            {/* Phần hiển thị thời gian của request */}
-                            <p className = 'requestTimeFontStyle'>9:32pm</p>
-                            <div className = 'requestMsgWrapper'>
-                                <p className = 'requestMsgFontStyle'>Giao hàng</p>
-                            </div>
-                        </div>
+                        {renderListofRequest}
                     </div>
 
                     <button style = {{
