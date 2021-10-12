@@ -21,14 +21,16 @@ class Dashboard extends Component {
             lastRides: [],
             instanceOrders: ['1'],
             requests: [],
-            avaiOrders: ['1'],
+            avaiOrders: [],
             driverInfor: {}
         }
         this.getInformation = this.getInformation.bind(this);
+        this.getAvailableOrders = this.getAvailableOrders.bind(this);
     }
 
     componentDidMount() {
         this.getInformation();
+        this.getAvailableOrders();
     }
 
     // Hàm lấy thông tin
@@ -91,6 +93,25 @@ class Dashboard extends Component {
         }).
         catch((error) => {
             console.log('Error!');
+        });
+    }
+
+    getAvailableOrders = () => {
+        const token = localStorage.get('token');
+        axios.get(`${ipAddress}/api/available-order/`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            this.setState({
+                avaiOrders: response.data
+            });
+            console.log(this.state.avaiOrders);
+        })
+        .catch((error) => {
+            console.log('Error');
         });
     }
 

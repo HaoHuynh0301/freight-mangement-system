@@ -110,4 +110,4 @@ class InstanceOrdereView(APIView):
     def get(self, request, format = None):
         orders = models.Order.objects.filter(paid = False)
         serializer = serializers.OrderSerializer(orders, many = True)
-        return Response({'status': 'OK'}, status = status.HTTP_200_OK)
+        return Response(serializer.data, status = status.HTTP_200_OK)
