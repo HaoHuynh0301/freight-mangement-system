@@ -249,7 +249,6 @@ class Dashboard extends Component {
 
     lastRides = () => {
         const listOfLastRides = this.state.lastRides.map((item, index) => {
-            console.log(item);
             return(
                 <div class = 'dashBoardLastRideItem' key = {index}>
                     {/* Danh sách vận chuyển của đơn hàng cuối cùng */}
@@ -281,23 +280,30 @@ class Dashboard extends Component {
                     </div> 
                 </div>
             );
-        })
-        return(
-            <div className = 'dashBoardLastRide'>
-                <div style = {{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    marginBottom: '5px',
-                    
-                }}>
-                    <p style = {{
-                        fontSize: '25px',
-                        fontWeight: 'bold'
-                    }}>Chuyến xe cuối</p>
+        });
+        if (this.state.lastRides.length > 0) {
+            return(
+                <div className = 'dashBoardLastRide'>
+                    <div style = {{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        marginBottom: '5px',
+                        
+                    }}>
+                        <p style = {{
+                            fontSize: '25px',
+                            fontWeight: 'bold'
+                        }}>Chuyến xe cuối</p>
+                    </div>
+                    {listOfLastRides}
                 </div>
-                {listOfLastRides}
-            </div>
-        );
+            );
+        } else  {
+            return (
+                this.emptyLastRides()
+            );
+        }
+        
     }
 
 
