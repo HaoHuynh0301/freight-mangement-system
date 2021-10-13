@@ -23,10 +23,12 @@ class User extends Component {
             name: '',
             email: '',
             phonenumber: '',
-            driverLicense: ''
+            driverLicense: '',
+            password: ''
         }
 
         this.getDriverInformation  = this.getDriverInformation.bind(this);
+        this.handleUpdateInformation = this.handleUpdateInformation.bind(this);
     }
 
     getDriverInformation = () => {
@@ -45,6 +47,10 @@ class User extends Component {
         .catch((error) => {
             alert('Error!');
         });
+    }
+
+    handleUpdateInformation = () => {
+        alert('OK');
     }
     
     componentDidMount() {
@@ -158,8 +164,9 @@ class User extends Component {
                                 padding: '5px',
                                 border: 'solid 0.5px grey',
                                 backgroundColor: '#f5f5f0'
-                            }} placeholder = {this.state.driverInformation.driverLicense} 
-                            value = {this.state.driverLicense}
+                            }} 
+                            placeholder = {this.state.driverInformation.driverLicense} 
+                            // value = {this.state.driverLicense}
                             onChange = {(event) => {
                                 this.setState({
                                     driverLicense: event.target.value
@@ -181,24 +188,26 @@ class User extends Component {
                                 border: 'solid 0.5px grey',
                                 backgroundColor: '#f5f5f0'
                             }} 
-                            placeholder = {this.state.driverInformation.driverLicense} 
-                            value = {this.state.driverLicense}
+                            value = {this.state.password}
                             onChange = {(event) => {
                                 this.setState({
-                                    driverLicense: event.target.value
+                                    password: event.target.value
                                 });
                             }}
                         ></input>
                     </div>
-                    <button style = {{
-                        borderRadius: '10px',
-                        border: 'solid 0.2px',
-                        backgroundColor: orangeColor,
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        paddingTop: '5px'
-                    }}>
+                    <button 
+                        style = {{
+                            borderRadius: '10px',
+                            border: 'solid 0.2px',
+                            backgroundColor: orangeColor,
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            paddingTop: '5px'
+                        }}
+                        onClick = {this.handleUpdateInformation}
+                    >
                         <p style = {{
                             fontSize: '20px',
                             fontWeight: 'bold'

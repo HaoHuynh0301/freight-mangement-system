@@ -68,6 +68,9 @@ class DriverView(APIView):
             serializer = self.serializer_class(instanceDriver[0])
         return Response(serializer.data, status = status.HTTP_200_OK)
     
+    def update(self, request, format = None):
+        pass
+    
     
 class LocationUpdateView(APIView):
     permission_classes = [permissions.IsAuthenticated]
