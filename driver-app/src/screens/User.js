@@ -51,7 +51,27 @@ class User extends Component {
     }
 
     handleUpdateInformation = () => {
-        alert('OK');
+        const token = localStorage.get('token');
+        console.log(token);
+        axios.post(`${ipAddress}/api/update-driver/`, {
+            name: this.state.name,
+            phone_number: this.state.phonenumber,
+            email: this.state.email,
+            cmnd: this.state.cmnd,
+            driverLicense: this.state.driverLicense,
+            password: this.state.password
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            alert(response.data);
+        })
+        .catch((error) => {
+            alert('Thông tin không hợp lệ!');
+        })
     }
     
     componentDidMount() {
@@ -167,7 +187,7 @@ class User extends Component {
                                 backgroundColor: '#f5f5f0'
                             }} 
                             placeholder = {this.state.driverInformation.driverLicense} 
-                            // value = {this.state.driverLicense}
+                            value = {this.state.driverLicense}
                             onChange = {(event) => {
                                 this.setState({
                                     driverLicense: event.target.value
