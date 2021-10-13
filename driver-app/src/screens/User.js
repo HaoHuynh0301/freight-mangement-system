@@ -8,7 +8,8 @@ import {
     useHistory 
 } from "react-router-dom";
 import {
-    ipAddress
+    ipAddress,
+    orangeColor
 } from '../contants';
 const localStorage = require('local-storage');
 
@@ -189,8 +190,19 @@ class User extends Component {
                             }}
                         ></input>
                     </div>
-                    <button>
-                        <p>Lưu thông tin</p>
+                    <button style = {{
+                        borderRadius: '10px',
+                        border: 'solid 0.2px',
+                        backgroundColor: orangeColor,
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        paddingTop: '5px'
+                    }}>
+                        <p style = {{
+                            fontSize: '20px',
+                            fontWeight: 'bold'
+                        }}>Lưu thông tin</p>
                     </button>
                 </div>
             </div>
