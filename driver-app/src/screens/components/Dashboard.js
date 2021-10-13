@@ -12,6 +12,12 @@ import {
     ipAddress
 } from '../../contants';
 import axios from "axios";
+import {
+    Link,
+    Redirect,
+    Route,
+    useHistory 
+} from "react-router-dom";
 const localStorage = require('local-storage');
 
 class Dashboard extends Component {
@@ -26,6 +32,7 @@ class Dashboard extends Component {
         }
         this.getInformation = this.getInformation.bind(this);
         this.getAvailableOrders = this.getAvailableOrders.bind(this);
+        this.handleOpenAvailableOrder = this.handleOpenAvailableOrder.bind(this);
     }
 
     componentDidMount() {
@@ -96,8 +103,12 @@ class Dashboard extends Component {
         });
     }
 
-    handleOpenAvailableOrder(orderId) {
-        console.log(orderId);
+    handleOpenAvailableOrder = () => {
+        return (
+            <Route>
+                <Redirect to = '/sign-in'/>
+            </Route>
+        );
     }
 
     getAvailableOrders = () => {
@@ -239,7 +250,7 @@ class Dashboard extends Component {
     availableOrder = () => {
         const itemView = this.state.avaiOrders.map((item, index) => {
             return(
-                <button className = 'dashBoardAvaiOrdersItem' onClick = {this.handleOpenAvailableOrder(item.id)}>
+                <Link style = {{textDecoration: "none"}} className = 'dashBoardAvaiOrdersItem' to = '/orders'>
                     <img src = {userLogo} style = {{
                         height: '40px',
                         width: '40px'
@@ -251,7 +262,7 @@ class Dashboard extends Component {
                         }}>{item.customer_name}</p>
                     </div>
                     <p>- {item.cast}VND</p>
-                </button>
+                </Link>
             );
         })
         if(this.state.avaiOrders.length > 0) {

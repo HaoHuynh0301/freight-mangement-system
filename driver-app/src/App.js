@@ -58,7 +58,7 @@ function App() {
                 <Route path = '/register'>
                     <Register />
                 </Route>
-                <Route exact path = '/'>
+                <Route  path = '/'>
                     <Home isAuth = {isAuth} />
                 </Route>
             </Switch>
