@@ -34,6 +34,7 @@ class Home extends Component {
             totalUrOrders: 0,
             instanceOrders: [],
             comp: '',
+            isAuth: null
         }
         this.onRefresh = this.onRefresh.bind(this);
     }
@@ -43,11 +44,13 @@ class Home extends Component {
     }
 
     componentDidMount() {
-
+        this.setState({
+            isAuth: this.props.isAuth
+        })
     }
 
     render() {
-        if(!this.props.isAuth) {
+        if(!this.state.isAuth) {
             return (
                 <Route>
                     <Redirect to = '/sign-in'/>
@@ -61,7 +64,7 @@ class Home extends Component {
                         flexDirection: "column",
                         justifyContent: "center",
                         alignItems: "center",
-                        backgroundColor: '#ffffe6',
+                        backgroundColor: '#FFF',
                     }}>
                         <div style = {{
                             width: '100%',
@@ -74,6 +77,9 @@ class Home extends Component {
                                 </Route>
                                 <Route exact path = '/orders/:id'>
                                     <Orders /> 
+                                </Route>
+                                <Route exact path = '/user-infor'>
+                                    <User />
                                 </Route>
                                 <Route exact path = '/'>
                                     <Dashboard /> 

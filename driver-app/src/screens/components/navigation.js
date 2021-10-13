@@ -18,10 +18,15 @@ import {
 
 class DoubleNavigationPage extends React.Component {
     constructor(props) {
-      super(props);
-      this.state = {
-        
-      };
+        super(props);
+        this.state = {
+            
+        };
+        this.logoutHandle = this.logoutHandle.bind(this);
+    }
+
+    logoutHandle = () => {
+        alert('Log out');
     }
 
     render() {
@@ -40,9 +45,16 @@ class DoubleNavigationPage extends React.Component {
                         </ReactBoostrap.NavDropdown>
                         </ReactBoostrap.Nav>
                         <ReactBoostrap.Nav>
-                        <ReactBoostrap.Nav.Link href="#deets">
-                            <img src = {userLogo} style = {{height: '40px', width: '40px'}} ></img>
-                        </ReactBoostrap.Nav.Link>
+                        <ReactBoostrap.NavDropdown title="Người dùng" id="collasible-nav-dropdown">
+                            <ReactBoostrap.NavDropdown.Item><Link style = {{textDecoration: "none", color: blackColor}} to = '/user-infor'>Thông tin tài xế</Link></ReactBoostrap.NavDropdown.Item>
+                            <ReactBoostrap.NavDropdown.Item><button style = {{
+                                borderWidth: '0px',
+                                backgroundColor: 'auto',
+                                width: '200px',
+                                borderRadius: '20px',
+                                backgroundColor: orangeColor
+                            }} onClick = {this.logoutHandle}>Đăng xuất</button></ReactBoostrap.NavDropdown.Item>
+                        </ReactBoostrap.NavDropdown>
                         </ReactBoostrap.Nav>
                     </ReactBoostrap.Navbar.Collapse>
                 </ReactBoostrap.Container>

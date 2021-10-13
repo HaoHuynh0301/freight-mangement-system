@@ -37,7 +37,7 @@ class Sigin extends Component {
             password: this.state.password
         })
         .then(async (response) => {
-            localStorage.set('token', response.data.access_token);
+            await localStorage.set('token', response.data.access_token);
             this.setState({
                 username: '',
                 password: '',
@@ -45,13 +45,12 @@ class Sigin extends Component {
             });
         })
         .catch((error) => {
-            alert('We have some errors!');
+            alert('Tài khoản hoặc mật khẩu của bạn không đúng!');
         });
     }
 
     render() {
         if(this.state.isSigned) {
-            let isAuth = true;
             return(
                 <Route to = '/'>
                     <Home isAuth = {true}/>
