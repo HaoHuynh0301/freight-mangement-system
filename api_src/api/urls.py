@@ -31,5 +31,6 @@ urlpatterns = [
     path('driver-middleware/', driver_view.MiddleWare.as_view(), name = 'middle-ware'),
     path('update-location/', driver_view.LocationUpdateView.as_view(), name = 'update-location'),
     path('order-drivers/', driver_view.OrderDriver.as_view(), name = 'order-driver'),
-    path('available-order/', driver_view.InstanceOrdereView.as_view(), name = 'available-orders')
+    path('available-order/', driver_view.InstanceOrdereView.as_view(), name = 'available-orders'),
+    path('update-driver/', driver_view.UpdateDriverInformationView.as_view(), name = 'update-driver-information')
 ]

@@ -88,7 +88,6 @@ class Home extends Component {
                         </div>
                     </div>        
                 </Router>
-                
             );
         }
     }

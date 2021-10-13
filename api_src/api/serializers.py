@@ -106,6 +106,21 @@ class DriverSerializer(serializers.ModelSerializer):
         ]
         
         
+class UpdateDriverSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Driver
+        fields = [
+            'name',
+            'phone_number',
+            'email',
+            'cmnd',
+            'age',
+            'driverLicense',
+            'password',
+            'id'
+        ]
+        
+        
 class LocationUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.LocationUpdate

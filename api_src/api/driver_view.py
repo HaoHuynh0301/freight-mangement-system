@@ -68,12 +68,21 @@ class DriverView(APIView):
             serializer = self.serializer_class(instanceDriver[0])
         return Response(serializer.data, status = status.HTTP_200_OK)
     
-    def put(self, request, format = None):
-        serializer = self.serializer_class(data = request.data)
+    
+class UpdateDriverInformationView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.UpdateDriverSerializer
+    
+    def post(self, request, format = None):
+        token = request.headers['Authorization']
+        payload = jwt.decode(jwt = token[7: len(token)], key = settings.SECRET_KEY, algorithms = ['HS256'])
+        instanceDriver = models.Driver.objects.filter(id = payload['user_id'])
+        request.data['password'] = make_password(request.data['password']) 
+        serializer = serializers.UpdateDriverSerializer(instanceDriver[0], data = request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'status': 'Updated!'}, status = status.HTTP_200_OK)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+            return Response('Update', status = status.HTTP_200_OK)
+        return Response({'error': 'Errors!'}, status = status.HTTP_400_BAD_REQUEST)
     
     
 class LocationUpdateView(APIView):
