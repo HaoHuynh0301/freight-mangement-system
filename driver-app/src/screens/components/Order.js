@@ -8,6 +8,10 @@ class Orders extends React.Component {
         }
     }
 
+    componentDidMount() {
+        console.log(this.props.match);
+    }
+
     render() {
         if(this.state.orders.length != 0) {
             return(
@@ -18,7 +22,6 @@ class Orders extends React.Component {
         } else {
             return(
                 <div>
-                    Is Empty
                 </div>
             );
         }

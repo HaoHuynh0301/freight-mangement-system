@@ -3,6 +3,7 @@ import '../css/dashBoardStyle.css';
 import userLogo from '../../assets/user-icon.png';
 import clockLogo from '../../assets/clock-icon.png';
 import locationLogo from '../../assets/location-icon.png';
+import dotIcon from '../../assets/dot-icon.png';
 import {
     backgroundUserImage,
     orangeColor,
@@ -25,7 +26,7 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             lastRides: [],
-            instanceOrders: ['1'],
+            instanceOrders: [],
             requests: [],
             avaiOrders: [],
             driverInfor: {}
@@ -162,9 +163,19 @@ class Dashboard extends Component {
                 <div style = {{
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '330px',
+                    width: '400px',
+                    margin: '20px',
+                    borderRadius: '30px',
+                    border: 'solid 0.5px grey',
+                    boxShadow: '5px 10px 18px #888888',
                 }}>
-                    Không có đơn hàng nào
+                    <p style = {{
+                        fontSize: '20px',
+                        fontWeight: 'bold'
+                    }}>Bạn chưa tiếp nhận đơn hàng nào</p>
                 </div>
             );
         }
@@ -250,7 +261,7 @@ class Dashboard extends Component {
     availableOrder = () => {
         const itemView = this.state.avaiOrders.map((item, index) => {
             return(
-                <Link style = {{textDecoration: "none"}} className = 'dashBoardAvaiOrdersItem' to = '/orders'>
+                <Link style = {{textDecoration: "none"}} className = 'dashBoardAvaiOrdersItem' to = {'/orders/' + item.id}>
                     <img src = {userLogo} style = {{
                         height: '40px',
                         width: '40px'
@@ -262,6 +273,12 @@ class Dashboard extends Component {
                         }}>{item.customer_name}</p>
                     </div>
                     <p>- {item.cast}VND</p>
+                    <button className = 'dashBoardBtnGetOrder'>
+                        <img style = {{
+                            height: '25px',
+                            width: '25px'
+                        }} src = {dotIcon}></img>
+                    </button>
                 </Link>
             );
         })

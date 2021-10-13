@@ -142,3 +142,10 @@
     align-content: space-between;
     /* margin-left: 100px; */
 }
+
+.dashBoardBtnGetOrder {
+    border-width: 0px;
+    background-color: #ffffe6;
+    margin-left: 20px;
+    margin-bottom: 25px;
+}

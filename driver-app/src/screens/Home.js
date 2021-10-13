@@ -70,55 +70,13 @@ class Home extends Component {
                             <DoubleNavigationPage />
                             <PullToRefresh onRefresh={this.onRefresh}>
                                 <Route path = '/my-orders'>
-                                <div style = {{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    backgroundColor: '#ffffe6',
-                                }}>
-                                    <div style = {{
-                                        width: '100%',
-                                        height: 'auto'
-                                    }}>
-                                        <MyOrders />
-                                    </div>
-                                </div>      
+                                    <MyOrders />    
                                 </Route>
-                                <Route path = '/orders'>
-                                    <div style = {{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        backgroundColor: '#ffffe6',
-                                    }}>
-                                        <div style = {{
-                                            width: '100%',
-                                            height: 'auto'
-                                        }}>
-                                            <Orders />
-                                        </div>
-                                    </div>   
-                                </Route>
-                                <Route path = '/dashboard'>
-                                    <div style = {{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        backgroundColor: '#ffffe6',
-                                    }}>
-                                        <div style = {{
-                                            width: '100%',
-                                            height: 'auto'
-                                        }}>
-                                            <Dashboard />
-                                        </div>
-                                    </div>   
+                                <Route exact path = '/orders/:id'>
+                                    <Orders /> 
                                 </Route>
                                 <Route exact path = '/'>
-                                    <h1>Hello</h1>
+                                    <Dashboard /> 
                                 </Route>
                             </PullToRefresh>    
                         </div>
