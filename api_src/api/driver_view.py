@@ -68,10 +68,12 @@ class DriverView(APIView):
             serializer = self.serializer_class(instanceDriver[0])
         return Response(serializer.data, status = status.HTTP_200_OK)
     
-    def update(self, request, format = None):
+    def put(self, request, format = None):
         serializer = self.serializer_class(data = request.data)
-        serializer.save()
-        return Response({'status': 'Updated!'}, status = status.HTTP_200_OK)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'status': 'Updated!'}, status = status.HTTP_200_OK)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     
     
 class LocationUpdateView(APIView):

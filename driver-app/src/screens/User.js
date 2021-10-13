@@ -24,7 +24,8 @@ class User extends Component {
             email: '',
             phonenumber: '',
             driverLicense: '',
-            password: ''
+            password: '',
+            cmnd: ''
         }
 
         this.getDriverInformation  = this.getDriverInformation.bind(this);
@@ -170,6 +171,28 @@ class User extends Component {
                             onChange = {(event) => {
                                 this.setState({
                                     driverLicense: event.target.value
+                                });
+                            }}
+                        ></input>
+                    </div>
+                    <div style = {{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        marginBottom: '20px'
+                    }}>
+                        <p style = {{fontWeight: 'bold'}}>Chứng minh nhân dân</p>
+                        <input 
+                            style = {{
+                                borderRadius: '10px',
+                                padding: '5px',
+                                border: 'solid 0.5px grey',
+                                backgroundColor: '#f5f5f0'
+                            }} 
+                            placeholder = {this.state.driverInformation.cmnd} 
+                            value = {this.state.cmnd}
+                            onChange = {(event) => {
+                                this.setState({
+                                    cmnd: event.target.value
                                 });
                             }}
                         ></input>
