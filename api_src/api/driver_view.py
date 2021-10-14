@@ -143,8 +143,11 @@ class SetDriverOrderView(APIView):
         orderId = request.data['orderId']
         instanceOrders = models.Order.objects.filter(id = orderId)
         serializer = self.serializer_class(instanceOrders[0], data = {'driver': instanceDriver[0].id, 'isRecieved': True})
+        
+        orders = models.Order.objects.filter(isRecieved = False)
+        resSerializer = serializers.OrderSerializer(orders, many = True)
         if serializer.is_valid():
             serializer.save()
-            return Response({'status': 'update'}, status = status.HTTP_200_OK)
-        print(serializer.errors)
+            print(resSerializer.data)
+            return Response(resSerializer.data, status = status.HTTP_200_OK)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)

@@ -5,6 +5,8 @@ import userLogo from '../../assets/user-icon.png';
 import clockLogo from '../../assets/clock-icon.png';
 import locationLogo from '../../assets/location-icon.png';
 import dotIcon from '../../assets/dot-icon.png';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from "leaflet";
 import { 
     Button,
     Modal
@@ -25,7 +27,6 @@ import {
     useHistory 
 } from "react-router-dom";
 const localStorage = require('local-storage');
-// import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -44,6 +45,32 @@ class Dashboard extends Component {
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleOpenOrder = this.handleOpenOrder.bind(this);
+        this.handleCloseAndGetOrder = this.handleCloseAndGetOrder.bind(this);
+    }
+
+    Map = () => {
+        return(
+            <div style = {{
+                height: '200px',
+                width: '400px'
+            }}>
+                <MapContainer style = {{
+                    height: '200px',
+                    width: '100%'
+                }} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+                    
+                    <TileLayer
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker position={[51.505, -0.09]}>
+                        <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                        </Popup>
+                    </Marker>
+                </MapContainer>
+            </div>
+        );
     }
 
     // Hàm cơ bản hiển thị Modal
@@ -94,12 +121,13 @@ class Dashboard extends Component {
                 Authorization: `Bearer ${token}`
             }
         })
-        .then((response) => {
+        .then(async (response) => {
             alert('Nhận đơn hàng thành công');
+            console.log(response.data)
             this.setState({
                 showModal: false,
-                instanceOrders: this.state.tmpOrders
-            })
+                instanceOrders: response.data
+            });
         })
         .catch((error) => {
             alert('Đã có lỗi xảy ra trong quá trình lấy thông tin, vui lòng thử lại sau!');
@@ -175,7 +203,6 @@ class Dashboard extends Component {
         });
     }
 
-
     getAvailableOrders = () => {
         const token = localStorage.get('token');
         axios.get(`${ipAddress}/api/available-order/`, {
@@ -215,10 +242,15 @@ class Dashboard extends Component {
 
     // Màn hình hiển thị chuyến xe hiện tại
     instanceOrder = () => {
-        if(this.state.instanceOrders != null) {
+        if(this.state.instanceOrders == null) {
             return(
                 <div className = 'dashBoardInstanceOrderWrapper'>
-                    <p>Ok</p>
+                    <div style = {{
+                        
+                    }}>
+                        {this.Map()}
+                    </div>
+                    
                 </div>
             );
         } else {
