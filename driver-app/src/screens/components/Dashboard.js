@@ -36,14 +36,15 @@ class Dashboard extends Component {
             requests: [],
             avaiOrders: [],
             driverInfor: {},
-            showModal: false
+            showModal: false,
+            tmpOrders: {}
         }
         this.getInformation = this.getInformation.bind(this);
         this.getAvailableOrders = this.getAvailableOrders.bind(this);
         this.handleOpenAvailableOrder = this.handleOpenAvailableOrder.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
-        this.handleCloseAndGetOrder = this.handleCloseAndGetOrder.bind(this);
+        this.handleOpenOrder = this.handleOpenOrder.bind(this);
     }
 
     handleShow = () => {
@@ -53,6 +54,20 @@ class Dashboard extends Component {
     }
 
     handleOpenOrder = (id) => {
+        const token = localStorage.get('token');
+        axios.get(`${ipAddress}/api/order-detail?orderId=${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            alert(response.data);
+        })
+        .catch((error) => { 
+            alert('Đã có lỗi xảy ra trong quá trình lấy thông tin, vui lòng thử lại sau!');
+        })
+        
         this.setState({
             showModal: true
         })
@@ -64,12 +79,6 @@ class Dashboard extends Component {
         })
     }
 
-    handleCloseAndGetOrder = () => {
-        alert('Get');
-        this.setState({
-            showModal: true
-        })
-    }
 
     componentDidMount() {
         this.getInformation();
@@ -304,7 +313,7 @@ class Dashboard extends Component {
                     display: 'flex',
                     flexDirection: 'row'
                 }}  className = 'dashBoardAvaiOrdersItem' onClick = {() => {
-                    this.handleCloseAndGetOrder(item.id);
+                    this.handleOpenOrder(item.id);
                 }}>
                     <img src = {userLogo} style = {{
                         height: '40px',

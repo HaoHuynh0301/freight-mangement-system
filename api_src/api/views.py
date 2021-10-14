@@ -172,6 +172,7 @@ class OrderDetailView(APIView):
         orderId = request.query_params.get('orderId')
         orderInstance = self.get_order_object(orderId)
         serializer = self.serializer_class(orderInstance)
+        print(serializer.data)
         return Response(serializer.data, status = status.HTTP_200_OK)
     
     
