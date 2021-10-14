@@ -130,4 +130,4 @@ class LocationUpdateSerializer(serializers.ModelSerializer):
 class UpdateDriverOrderSerilizer(serializers.ModelSerializer):
     class Meta:
         model = models.Order
-        fields = ['driver']
+        fields = ['driver', 'isRecieved']

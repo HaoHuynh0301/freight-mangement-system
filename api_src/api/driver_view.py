@@ -116,7 +116,7 @@ class OrderDriver(APIView):
         driverId = request.query_params.get('driver_id')
         instanceDriver = models.Driver.objects.filter(id = driverId)
         if len(instanceDriver) > 0:
-            orders = instanceDriver[0].order_set.all().filter(isRecieved = True)
+            orders = instanceDriver[0].order_set.all().filter(isRecieved = True, isDone = False)
             serializer = self.serializer_class(orders[0].request_set.all(), many = True)
             return Response(serializer.data, status = status.HTTP_200_OK)
         return Response({'error': 'Error'}, status = status.HTTP_400_BAD_REQUEST)
@@ -139,7 +139,12 @@ class SetDriverOrderView(APIView):
         token = request.headers['Authorization']
         payload = jwt.decode(jwt = token[7: len(token)], key = settings.SECRET_KEY, algorithms = ['HS256'])
         instanceDriver = models.Driver.objects.filter(id = payload['user_id'])
+        print(instanceDriver)
         orderId = request.data['orderId']
         instanceOrders = models.Order.objects.filter(id = orderId)
-        serializer = self.serializer_class(instanceOrders[0], {'driver': instanceDriver})
-        return Response({'status': 'update'}, status = status.HTTP_200_OK)
+        serializer = self.serializer_class(instanceOrders[0], data = {'driver': instanceDriver[0].id, 'isRecieved': True})
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'status': 'update'}, status = status.HTTP_200_OK)
+        print(serializer.errors)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
