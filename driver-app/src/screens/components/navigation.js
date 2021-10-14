@@ -8,27 +8,19 @@ import {
     blackColor,
     orangeColor
 } from '../../contants';
-
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    Redirect,
+    withRouter 
 } from "react-router-dom";
+const localStorage = require('local-storage');
+
+// DoubleNavigationPage
 
 class DoubleNavigationPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            
-        };
-        this.logoutHandle = this.logoutHandle.bind(this);
-    }
-
-    logoutHandle = () => {
-        alert('Log out');
-    }
-
     render() {
         return(
             <ReactBoostrap.Navbar collapseOnSelect expand="lg" bg={orangeColor} variant="light" style = {{backgroundColor: orangeColor}}>
@@ -53,7 +45,9 @@ class DoubleNavigationPage extends React.Component {
                                 width: '200px',
                                 borderRadius: '20px',
                                 backgroundColor: orangeColor
-                            }} onClick = {this.logoutHandle}>Đăng xuất</button></ReactBoostrap.NavDropdown.Item>
+                            }} onClick = {() => {
+                                this.props.history.push('/sign-in')
+                            }}>Đăng xuất</button></ReactBoostrap.NavDropdown.Item>
                         </ReactBoostrap.NavDropdown>
                         </ReactBoostrap.Nav>
                     </ReactBoostrap.Navbar.Collapse>
@@ -67,4 +61,4 @@ const styles = {
 
 }
   
-export default DoubleNavigationPage;
+export default withRouter(DoubleNavigationPage);

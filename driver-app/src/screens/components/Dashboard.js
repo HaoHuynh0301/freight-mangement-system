@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/dashBoardStyle.css';
 import userLogo from '../../assets/user-icon.png';
 import clockLogo from '../../assets/clock-icon.png';
 import locationLogo from '../../assets/location-icon.png';
 import dotIcon from '../../assets/dot-icon.png';
+import { 
+    Button,
+    Modal
+} from 'react-bootstrap';
 import {
     backgroundUserImage,
     orangeColor,
@@ -30,11 +35,40 @@ class Dashboard extends Component {
             instanceOrders: [],
             requests: [],
             avaiOrders: [],
-            driverInfor: {}
+            driverInfor: {},
+            showModal: false
         }
         this.getInformation = this.getInformation.bind(this);
         this.getAvailableOrders = this.getAvailableOrders.bind(this);
         this.handleOpenAvailableOrder = this.handleOpenAvailableOrder.bind(this);
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleCloseAndGetOrder = this.handleCloseAndGetOrder.bind(this);
+    }
+
+    handleShow = () => {
+        this.setState({
+            showModal: true
+        })
+    }
+
+    handleOpenOrder = (id) => {
+        this.setState({
+            showModal: true
+        })
+    }
+
+    handleClose = () => {
+        this.setState({
+            showModal: false
+        })
+    }
+
+    handleCloseAndGetOrder = () => {
+        alert('Get');
+        this.setState({
+            showModal: true
+        })
     }
 
     componentDidMount() {
@@ -262,7 +296,16 @@ class Dashboard extends Component {
     availableOrder = () => {
         const itemView = this.state.avaiOrders.map((item, index) => {
             return(
-                <Link style = {{textDecoration: "none"}} className = 'dashBoardAvaiOrdersItem' to = {'/orders/' + item.id}>
+                <button style = {{
+                    width: '360px',
+                    backgroundColor: '#FFF',
+                    border: 'solid 0.2px grey',
+                    borderRadius: '15px',
+                    display: 'flex',
+                    flexDirection: 'row'
+                }}  className = 'dashBoardAvaiOrdersItem' onClick = {() => {
+                    this.handleCloseAndGetOrder(item.id);
+                }}>
                     <img src = {userLogo} style = {{
                         height: '40px',
                         width: '40px'
@@ -280,7 +323,7 @@ class Dashboard extends Component {
                             width: '25px'
                         }} src = {dotIcon}></img>
                     </button>
-                </Link>
+                </button>
             );
         })
         if(this.state.avaiOrders.length > 0) {
@@ -290,7 +333,6 @@ class Dashboard extends Component {
                         fontSize: '20px',
                         fontWeight: 'bold',
                     }}>Đơn hàng hiện có</p>
-
                     {/* Item */}
                     {itemView}
                 </div>
@@ -371,6 +413,30 @@ class Dashboard extends Component {
     render() {
         return(
             <div className = 'dashBoardContainer'>
+                <Modal style = {{
+                    borderRadius: '20px'
+                }} show={this.state.showModal} onHide={this.handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Thông tin đơn hàng</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Tên khách hàng: Quan Như Tiên</p>
+                        <p>Số điện thoại: 0918026392</p>
+                        <p>Địa chỉ: Số 59/31, Bến Hoa Viên, Châu Văn Liêm, Ô Môn</p>
+                        <p>Tên mặc hàng: Đồng hồ</p>
+                        <p>Số lượng: 1</p>
+                        <p>Đơn giá: 30000VNĐ</p>
+                        <p>Hình thức giao hàng: Small</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={this.handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={this.handleCloseAndGetOrder}>
+                        Save Changes
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
                 {/* Cột thứ nhất */}
                 <div className = 'dashBoardCol1'>
                     <div className = 'dashBoardUser'>

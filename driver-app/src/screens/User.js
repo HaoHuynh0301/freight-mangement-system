@@ -32,6 +32,16 @@ class User extends Component {
         this.handleUpdateInformation = this.handleUpdateInformation.bind(this);
     }
 
+    setDriverState = () => {
+        this.setState({
+            name: this.state.driverInformation.name,
+            email: this.state.driverInformation.email,
+            phone_number: this.state.driverInformation.phone_number,
+            driverLicense: this.state.driverLicense.driverLicense,
+            cmnd: this.state.driverInformation.cmnd
+        })
+    }
+
     getDriverInformation = () => {
         const token = localStorage.get('token');
         axios.get(`${ipAddress}/api/driver-view/`, {
@@ -46,7 +56,7 @@ class User extends Component {
             });
         })
         .catch((error) => {
-            alert('Error!');
+            alert('Đã có lỗi trong quá trình lấy thông tin! Vui lòng thử lại sau!');
         });
     }
 
@@ -70,7 +80,7 @@ class User extends Component {
             alert(response.data);
         })
         .catch((error) => {
-            alert('Thông tin không hợp lệ!');
+            alert('Vui lòng nhập đủ thông tin!');
         })
     }
     

@@ -74,7 +74,7 @@ function App() {
                     <Route path = '/user-infor'>
                         <User />
                     </Route>
-                    <Route path = '/sign-in'>
+                    <Route exact path = '/sign-in'>
                         <Sigin />
                     </Route>
                     <Route path = '/register'>

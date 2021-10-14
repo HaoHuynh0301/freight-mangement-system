@@ -11,7 +11,8 @@ import {
     Link,
     Redirect,
     Route,
-    useHistory 
+    useHistory ,
+    withRouter
 } from "react-router-dom";
 import App from '../App';
 import Home from './Home';
@@ -52,7 +53,7 @@ class Sigin extends Component {
     render() {
         if(this.state.isSigned) {
             return(
-                <Route to = '/'>
+                <Route exact to = '/'>
                     <Home isAuth = {true}/>
                 </Route>
             );
@@ -122,4 +123,4 @@ class Sigin extends Component {
     }
 }
 
-export default Sigin;
+export default withRouter(Sigin);

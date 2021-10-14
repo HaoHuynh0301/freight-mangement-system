@@ -27,6 +27,7 @@ https://www.geeksforgeeks.org/how-to-connect-django-with-reactjs/
 https://reactrouter.com/native/example/auth-workflow
 https://react-leaflet.js.org/docs/
 https://icons8.com/
+https://react-bootstrap.github.io/getting-started/introduction/
 
 # Distance-fee
 < 10km: 10000
