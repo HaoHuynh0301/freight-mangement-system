@@ -125,3 +125,9 @@ class LocationUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.LocationUpdate
         fields = '__all__'
+        
+        
+class UpdateDriverOrderSerilizer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Order
+        fields = ['driver']

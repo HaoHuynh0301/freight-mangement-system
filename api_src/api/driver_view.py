@@ -128,3 +128,17 @@ class InstanceOrdereView(APIView):
         orders = models.Order.objects.filter(paid = False)
         serializer = serializers.OrderSerializer(orders, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
+
+
+class SetDriverOrderView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.UpdateDriverOrderSerilizer
+    
+    def post(self, request, format = None):
+        token = request.headers['Authorization']
+        payload = jwt.decode(jwt = token[7: len(token)], key = settings.SECRET_KEY, algorithms = ['HS256'])
+        instanceDriver = models.Driver.objects.filter(id = payload['user_id'])
+        orderId = request.data.orderId
+        instanceOrders = models.Order.objects.filter(id = orderId)
+        serializer = self.serializer_class(instanceOrders[0], {'driver': instanceDriver})
+        return Response({'status': 'update'}, status = status.HTTP_200_OK)

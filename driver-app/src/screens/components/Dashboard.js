@@ -41,18 +41,19 @@ class Dashboard extends Component {
         }
         this.getInformation = this.getInformation.bind(this);
         this.getAvailableOrders = this.getAvailableOrders.bind(this);
-        this.handleOpenAvailableOrder = this.handleOpenAvailableOrder.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleOpenOrder = this.handleOpenOrder.bind(this);
     }
 
+    // Hàm cơ bản hiển thị Modal
     handleShow = () => {
         this.setState({
             showModal: true
         })
     }
 
+    // Hàm mở Modal và lấy thông tin của order được nhấn vào
     handleOpenOrder = (id) => {
         const token = localStorage.get('token');
         axios.get(`${ipAddress}/api/order-detail?orderId=${id}`, {
@@ -75,10 +76,16 @@ class Dashboard extends Component {
         })
     }
 
+    // Hàm cơ bản ẩn Modal
     handleClose = () => {
         this.setState({
             showModal: false
         })
+    }
+
+    // Hàm nhận Order và ẩn Modal
+    handleCloseAndGetOrder = () => {
+        
     }
 
 
@@ -150,13 +157,6 @@ class Dashboard extends Component {
         });
     }
 
-    handleOpenAvailableOrder = () => {
-        return (
-            <Route>
-                <Redirect to = '/sign-in'/>
-            </Route>
-        );
-    }
 
     getAvailableOrders = () => {
         const token = localStorage.get('token');
@@ -493,10 +493,10 @@ class Dashboard extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={this.handleClose}>
-                        Close
+                        Đóng
                     </Button>
                     <Button variant="primary" onClick={this.handleCloseAndGetOrder}>
-                        Save Changes
+                        Nhận đơn hàng
                     </Button>
                     </Modal.Footer>
                 </Modal>
