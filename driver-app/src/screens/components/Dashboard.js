@@ -32,7 +32,7 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             lastRides: [],
-            instanceOrders: [],
+            instanceOrders: null,
             requests: [],
             avaiOrders: [],
             driverInfor: {},
@@ -100,7 +100,6 @@ class Dashboard extends Component {
                 showModal: false,
                 instanceOrders: this.state.tmpOrders
             })
-            alert(this.state.instanceOrders)
         })
         .catch((error) => {
             alert('Đã có lỗi xảy ra trong quá trình lấy thông tin, vui lòng thử lại sau!');
@@ -216,10 +215,10 @@ class Dashboard extends Component {
 
     // Màn hình hiển thị chuyến xe hiện tại
     instanceOrder = () => {
-        if(this.state.instanceOrders.length > 0) {
+        if(this.state.instanceOrders != null) {
             return(
                 <div className = 'dashBoardInstanceOrderWrapper'>
-                    
+                    <p>Ok</p>
                 </div>
             );
         } else {
@@ -369,12 +368,11 @@ class Dashboard extends Component {
             );
         } else {
             return(
-                <div style = {{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center'
-                }}>
-                    Không có đơn hàng nào
+                <div className = 'dashBoardAvaiOrdersWrapper'>
+                    <p style = {{
+                        fontSize: '20px',
+                        fontWeight: 'bold'
+                    }}>Hệ thống hiện chưa có đơn hàng mới</p>
                 </div>
             );
         }

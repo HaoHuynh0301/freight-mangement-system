@@ -1,3 +1,4 @@
+from django.db.models.fields import NullBooleanField
 from django.utils.regex_helper import contains
 from rest_framework.serializers import Serializer
 
@@ -115,7 +116,7 @@ class OrderDriver(APIView):
         driverId = request.query_params.get('driver_id')
         instanceDriver = models.Driver.objects.filter(id = driverId)
         if len(instanceDriver) > 0:
-            orders = instanceDriver[0].order_set.all().filter(paid = True)
+            orders = instanceDriver[0].order_set.all().filter(isRecieved = True)
             serializer = self.serializer_class(orders[0].request_set.all(), many = True)
             return Response(serializer.data, status = status.HTTP_200_OK)
         return Response({'error': 'Error'}, status = status.HTTP_400_BAD_REQUEST)
@@ -125,7 +126,7 @@ class InstanceOrdereView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     
     def get(self, request, format = None):
-        orders = models.Order.objects.filter(paid = False)
+        orders = models.Order.objects.filter(isRecieved = False)
         serializer = serializers.OrderSerializer(orders, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
 

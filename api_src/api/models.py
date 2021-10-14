@@ -176,7 +176,8 @@ class Order(models.Model):
     cast = models.IntegerField()
     note = models.TextField()
     driver = models.ForeignKey(Driver, on_delete = models.SET_NULL, null = True)
-    paid = models.BooleanField(default = False)
+    isRecieved = models.BooleanField(default = False)
+    isDone = models.BooleanField(default = False)
     # product_image = models.ImageField(null = True, blank = True, upload_to = 'images/')
     
     def __str__(self):
