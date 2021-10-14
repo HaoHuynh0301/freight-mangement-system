@@ -62,7 +62,9 @@ class Dashboard extends Component {
             }
         })
         .then((response) => {
-            alert(response.data);
+            this.setState({
+                tmpOrders: response.data
+            });
         })
         .catch((error) => { 
             alert('Đã có lỗi xảy ra trong quá trình lấy thông tin, vui lòng thử lại sau!');
@@ -429,13 +431,65 @@ class Dashboard extends Component {
                         <Modal.Title>Thông tin đơn hàng</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <p>Tên khách hàng: Quan Như Tiên</p>
-                        <p>Số điện thoại: 0918026392</p>
-                        <p>Địa chỉ: Số 59/31, Bến Hoa Viên, Châu Văn Liêm, Ô Môn</p>
-                        <p>Tên mặc hàng: Đồng hồ</p>
-                        <p>Số lượng: 1</p>
-                        <p>Đơn giá: 30000VNĐ</p>
-                        <p>Hình thức giao hàng: Small</p>
+                        <p>Tên khách hàng: {this.state.tmpOrders.customer_name}</p>
+                        <div
+                            style = {{
+                                height: '0.001px',
+                                border: 'solid 0.05px grey',
+                                marginBottom: '10px'
+                            }}
+                        ></div>
+                        <p>Số điện thoại: {this.state.tmpOrders.customer_phonenumber}</p>
+                        <div
+                            style = {{
+                                height: '0.001px',
+                                border: 'solid 0.05px grey',
+                                marginBottom: '10px'
+                            }}
+                        ></div>
+                        <p>
+                            Địa chỉ: {this.state.tmpOrders.detail_address}, {this.state.tmpOrders.ward}, {this.state.tmpOrders.district}, {this.state.tmpOrders.province}
+                        </p>
+                        <div
+                            style = {{
+                                height: '0.001px',
+                                border: 'solid 0.05px grey',
+                                marginBottom: '10px'
+                            }}
+                        ></div>
+                        <p>Tên mặc hàng: {this.state.tmpOrders.product_name}</p>
+                        <div
+                            style = {{
+                                height: '0.001px',
+                                border: 'solid 0.05px grey',
+                                marginBottom: '10px'
+                            }}
+                        ></div>
+                        <p>Số lượng: {this.state.tmpOrders.product_quantity}</p>
+                        <div
+                            style = {{
+                                height: '0.001px',
+                                border: 'solid 0.05px grey',
+                                marginBottom: '10px'
+                            }}
+                        ></div>
+                        <p>Đơn giá: {this.state.tmpOrders.cast}VNĐ</p>
+                        <div
+                            style = {{
+                                height: '0.001px',
+                                border: 'solid 0.05px grey',
+                                marginBottom: '10px'
+                            }}
+                        ></div>
+                        <p>Hình thức giao hàng: {this.state.tmpOrders.ship_option}</p>
+                        <div
+                            style = {{
+                                height: '0.001px',
+                                border: 'solid 0.05px grey',
+                                marginBottom: '10px'
+                            }}
+                        ></div>
+                        <p>Ghi chú: {this.state.tmpOrders.note}</p>
                     </Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={this.handleClose}>
