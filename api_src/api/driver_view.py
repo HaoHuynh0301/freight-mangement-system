@@ -138,7 +138,7 @@ class SetDriverOrderView(APIView):
         token = request.headers['Authorization']
         payload = jwt.decode(jwt = token[7: len(token)], key = settings.SECRET_KEY, algorithms = ['HS256'])
         instanceDriver = models.Driver.objects.filter(id = payload['user_id'])
-        orderId = request.data.orderId
+        orderId = request.data['orderId']
         instanceOrders = models.Order.objects.filter(id = orderId)
         serializer = self.serializer_class(instanceOrders[0], {'driver': instanceDriver})
         return Response({'status': 'update'}, status = status.HTTP_200_OK)

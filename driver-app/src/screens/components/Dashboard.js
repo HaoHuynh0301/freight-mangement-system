@@ -85,7 +85,26 @@ class Dashboard extends Component {
 
     // Hàm nhận Order và ẩn Modal
     handleCloseAndGetOrder = () => {
-        
+        const token = localStorage.get('token');
+        axios.post(`${ipAddress}/api/recieve-order/`, {
+            orderId: this.state.tmpOrders.id
+        } , {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            alert('Nhận đơn hàng thành công');
+            this.setState({
+                showModal: false,
+                instanceOrders: this.state.tmpOrders
+            })
+            alert(this.state.instanceOrders)
+        })
+        .catch((error) => {
+            alert('Đã có lỗi xảy ra trong quá trình lấy thông tin, vui lòng thử lại sau!');
+        })
     }
 
 
