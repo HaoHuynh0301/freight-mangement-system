@@ -51,21 +51,27 @@ class Dashboard extends Component {
     Map = () => {
         return(
             <div style = {{
-                height: '200px',
-                width: '400px'
+                height: '250px',
+                width: '400px',
+                border: 'solid 0.5px grey'
             }}>
                 <MapContainer style = {{
-                    height: '200px',
-                    width: '100%'
-                }} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+                    height: '250px',
+                    width: '100%',
+                    border: 'solid 0.5px grey'
+                }} center={[14.058324, 108.277199]} zoom={5} scrollWheelZoom={false}>
                     
                     <TileLayer
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <Marker position={[51.505, -0.09]}>
+                    <Marker position={[14.058324, 108.277199]}>
+                        <img src = {locationLogo} style = {{
+                            height: '30px',
+                            width: '30px'
+                        }}></img>
                         <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
+                            Hello
                         </Popup>
                     </Marker>
                 </MapContainer>
@@ -245,12 +251,23 @@ class Dashboard extends Component {
         if(this.state.instanceOrders == null) {
             return(
                 <div className = 'dashBoardInstanceOrderWrapper'>
+                    {this.Map()}
                     <div style = {{
-                        
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        height: '100%',
+                        width: '100%',
+                        padding: '10px',
+                        paddingLeft: '20px'
                     }}>
-                        {this.Map()}
+                        <p style = {{
+                            fontSize: '15px'
+                        }}>Quan Như Tiên - 0918026392 - Màn hình - 10000VNĐ</p>
+                        <p style = {{
+                            fontSize: '15px'
+                        }}>Địa chỉ: số 59/31, Hưng Lợi, Ninh Kiều</p>
                     </div>
-                    
                 </div>
             );
         } else {

@@ -71,7 +71,6 @@ class Home extends Component {
                             height: 'auto'
                         }}>
                             <DoubleNavigationPage />
-                            <PullToRefresh onRefresh={this.onRefresh}>
                                 <Route path = '/my-orders'>
                                     <MyOrders />    
                                 </Route>
@@ -84,7 +83,6 @@ class Home extends Component {
                                 <Route exact path = '/'>
                                     <Dashboard /> 
                                 </Route>
-                            </PullToRefresh>    
                         </div>
                     </div>        
                 </Router>
