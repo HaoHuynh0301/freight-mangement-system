@@ -118,6 +118,7 @@ class OrderDriver(APIView):
         if len(instanceDriver) > 0:
             orders = instanceDriver[0].order_set.all().filter(isRecieved = True, isDone = False)
             serializer = self.serializer_class(orders[0].request_set.all(), many = True)
+            print(serializer.data)
             return Response(serializer.data, status = status.HTTP_200_OK)
         return Response({'error': 'Error'}, status = status.HTTP_400_BAD_REQUEST)
     
@@ -151,3 +152,17 @@ class SetDriverOrderView(APIView):
             print(resSerializer.data)
             return Response(resSerializer.data, status = status.HTTP_200_OK)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+
+class InstanceOrderView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializers_class = serializers.InstanceAddressSerilizer
+    
+    def get(self, request, format = None):
+        orderId = request.query_params.get('order_id')
+        instanceOrder = models.Order.objects.filter(id = orderId)
+        if len(instanceOrder) > 0:
+            instanceAddress = instanceOrder[0].instanceaddress_set.all()
+            serializer = self.serializers_class(instanceAddress[0])
+            return Response(serializer.data, status = status.HTTP_200_OK)
+        return Response({'status': 'Cannot found!'}, status = status.HTTP_404_NOT_FOUND)

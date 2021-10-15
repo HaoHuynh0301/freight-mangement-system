@@ -214,6 +214,7 @@ class Dashboard extends Component {
         });
     }
 
+    // Hàm lấy đơn hàng hiện tại trên hệ thống
     getAvailableOrders = () => {
         const token = localStorage.get('token');
         axios.get(`${ipAddress}/api/available-order/`, {
@@ -231,6 +232,11 @@ class Dashboard extends Component {
         .catch((error) => {
             console.log('Error');
         });
+    }
+
+    // Hàm lấy đơn hàng hiện tại của tài xế
+    getInstanceOrder = () => {
+        
     }
 
     // Hàm xử lý sự kiện xử lý request của khách hàng
