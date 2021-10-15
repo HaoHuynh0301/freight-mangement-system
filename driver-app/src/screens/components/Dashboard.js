@@ -38,7 +38,8 @@ class Dashboard extends Component {
             avaiOrders: [],
             driverInfor: {},
             showModal: false,
-            tmpOrders: {}
+            tmpOrders: {},
+            instanceAddress: null
         }
         this.getInformation = this.getInformation.bind(this);
         this.getAvailableOrders = this.getAvailableOrders.bind(this);
@@ -47,6 +48,7 @@ class Dashboard extends Component {
         this.handleOpenOrder = this.handleOpenOrder.bind(this);
         this.handleCloseAndGetOrder = this.handleCloseAndGetOrder.bind(this);
         this.handleOpenOrderDetail = this.handleOpenOrderDetail.bind(this);
+        this.getInstanceOrder = this.getInstanceOrder.bind(this);
     }
 
     Map = () => {
@@ -149,6 +151,7 @@ class Dashboard extends Component {
     componentDidMount() {
         this.getInformation();
         this.getAvailableOrders();
+        this.getInstanceOrder();
     }
 
     // Hàm lấy thông tin
@@ -236,7 +239,21 @@ class Dashboard extends Component {
 
     // Hàm lấy đơn hàng hiện tại của tài xế
     getInstanceOrder = () => {
-        
+        const token = localStorage.get('token');
+        axios.get(`${ipAddress}/api/instance-order?order_id=17`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            this.setState({
+                instanceAddress: response.data
+            });
+        })
+        .catch((error) => {
+            alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
+        });
     }
 
     // Hàm xử lý sự kiện xử lý request của khách hàng
