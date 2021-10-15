@@ -5,6 +5,7 @@ import userLogo from '../../assets/user-icon.png';
 import clockLogo from '../../assets/clock-icon.png';
 import locationLogo from '../../assets/location-icon.png';
 import dotIcon from '../../assets/dot-icon.png';
+import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { 
     Button,
@@ -39,7 +40,8 @@ class Dashboard extends Component {
             driverInfor: {},
             showModal: false,
             tmpOrders: {},
-            instanceAddress: null
+            instanceAddress: null,
+            instanceOrderId: null
         }
         this.getInformation = this.getInformation.bind(this);
         this.getAvailableOrders = this.getAvailableOrders.bind(this);
@@ -53,7 +55,6 @@ class Dashboard extends Component {
 
     Map = () => {
         if(this.state.instanceAddress != null) {
-            console.log('DEO CU')
             return(
                 <div style = {{
                     height: '250px',
@@ -64,7 +65,7 @@ class Dashboard extends Component {
                         height: '200px',
                         width: '100%',
                         border: 'solid 0.5px grey'
-                    }} center={[14.058324, 108.277199]} zoom={5} scrollWheelZoom={false}>
+                    }} center={[14.058324, 108.277199]} zoom={5} scrollWheelZoom={true}>
                         <TileLayer
                             attribution='Vị trí đơn hàng'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -83,7 +84,6 @@ class Dashboard extends Component {
                 </div>
             );
         } else {
-            console.log('CU')
             return(
                 <div style = {{
                     height: '250px',
@@ -111,7 +111,7 @@ class Dashboard extends Component {
     }
 
     handleOpenOrderDetail = () => {
-        this.props.history.push('/my-orders/17')
+        this.props.history.push(`/my-orders/${this.state.instanceOrderId}`)
     }
 
     // Hàm cơ bản hiển thị Modal
@@ -275,13 +275,15 @@ class Dashboard extends Component {
             }
         })
         .then((response) => {
+            this.setState({
+                instanceOrderId: response.data.id
+            });
             axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
             .then(async (response) => {
                 let tmpArr = response.data.data;
                 await this.setState({
                     instanceAddress: tmpArr[0]
                 });
-                console.log(this.state.instanceAddress.latitude)
             })
             .catch((error) => {
                 alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
@@ -331,14 +333,14 @@ class Dashboard extends Component {
                         <p style = {{
                             fontSize: '15px'
                         }}>Địa chỉ: số 59/31, Hưng Lợi, Ninh Kiều</p>
-                        <button style = {{
+                        <Link style = {{
                             width: '95%',
                             alignSelf: 'center',
                             height: '30px',
                             border: 'solid 0px grey',
                             borderRadius: '15px',
                             backgroundColor: orangeColor
-                        }} onClick = {this.handleOpenOrderDetail}>Xem chi tiết</button>
+                        }} to = {'/my-orders/' + this.state.instanceOrderId + '/'}>Xem chi tiết</Link>
                     </div>
                 </div>
             );

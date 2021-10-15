@@ -71,10 +71,10 @@ class Home extends Component {
                             height: 'auto'
                         }}>
                             <DoubleNavigationPage />
-                                <Route path = '/my-orders'>
+                                <Route path = '/my-orders/:id'>
                                     <MyOrders />    
                                 </Route>
-                                <Route exact path = '/orders/:id'>
+                                <Route path = '/orders/:id'>
                                     <Orders /> 
                                 </Route>
                                 <Route exact path = '/user-infor'>

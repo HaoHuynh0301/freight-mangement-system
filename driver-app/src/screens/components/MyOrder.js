@@ -1,31 +1,69 @@
-import React from "react";
+import { extend } from "leaflet";
+import React, { Component } from "react";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useRouteMatch,
+    useParams
+  } from "react-router-dom";
 
-class MyOrders extends React.Component {
+class MyOrders extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            totalUrOrders: 0
+
         }
+        this.fetchTask = this.fetchTask.bind(this);
+    }
+
+    fetchTask = () => {
+        // console.log(this.props.match.params.id);
+    }
+
+    getOrderInformation = () => {
+        
+    }
+
+    componentDidMount() {
+        this.fetchTask();
+    }
+
+    renderOrderInformation = () => {
+
     }
 
     render() {
         return(
-            <div>
+            <div style = {{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center'
+            }}>
+
+                {/* General View Wrapper */}
                 <div style = {{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    marginTop: '20px',
-                    marginLeft: '320px'
+                    display: 'flex',
+                    flexDirection: 'row',
+                    width: '70%',
+                    height: 'auto',
+                    marginTop: '30px',
+                    padding: '10px'
                 }}>
-                    <div className = 'yourOrderWrapper'>
-                        <p className = 'titleStyle'>ĐƠN HÀNG CỦA BẠN</p>
-                        <p>Tổng số đơn hàng hiện tại của bạn: {this.state.totalUrOrders}</p>
+                    {/* Order information column View Wrapper */}
+                    <div style = {{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        border: 'solid 0.1px grey',
+                        width: '25%'
+                    }}>
+                        
                     </div>
                 </div>
             </div>
         );
     }
-}
+} 
 
 export default MyOrders;
