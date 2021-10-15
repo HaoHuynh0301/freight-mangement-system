@@ -6,7 +6,6 @@ import clockLogo from '../../assets/clock-icon.png';
 import locationLogo from '../../assets/location-icon.png';
 import dotIcon from '../../assets/dot-icon.png';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from "leaflet";
 import { 
     Button,
     Modal
@@ -24,7 +23,8 @@ import {
     Link,
     Redirect,
     Route,
-    useHistory 
+    useHistory ,
+    withRouter 
 } from "react-router-dom";
 const localStorage = require('local-storage');
 
@@ -46,6 +46,7 @@ class Dashboard extends Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleOpenOrder = this.handleOpenOrder.bind(this);
         this.handleCloseAndGetOrder = this.handleCloseAndGetOrder.bind(this);
+        this.handleOpenOrderDetail = this.handleOpenOrderDetail.bind(this);
     }
 
     Map = () => {
@@ -56,27 +57,31 @@ class Dashboard extends Component {
                 border: 'solid 0.5px grey'
             }}>
                 <MapContainer style = {{
-                    height: '250px',
+                    height: '200px',
                     width: '100%',
                     border: 'solid 0.5px grey'
                 }} center={[14.058324, 108.277199]} zoom={5} scrollWheelZoom={false}>
-                    
                     <TileLayer
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        attribution='Vị trí đơn hàng'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <Marker position={[14.058324, 108.277199]}>
-                        <img src = {locationLogo} style = {{
-                            height: '30px',
-                            width: '30px'
-                        }}></img>
+                    <Marker position={[21.0245, 105.84117]}>
                         <Popup>
-                            Hello
+                            Vị trí giao dự kiến
+                        </Popup>
+                    </Marker>
+                    <Marker position={[10.03711, 105.78825]}>
+                        <Popup>
+                            Vị trí hiện tại
                         </Popup>
                     </Marker>
                 </MapContainer>
             </div>
         );
+    }
+
+    handleOpenOrderDetail = () => {
+        this.props.history.push('/my-orders/17')
     }
 
     // Hàm cơ bản hiển thị Modal
@@ -267,6 +272,14 @@ class Dashboard extends Component {
                         <p style = {{
                             fontSize: '15px'
                         }}>Địa chỉ: số 59/31, Hưng Lợi, Ninh Kiều</p>
+                        <button style = {{
+                            width: '95%',
+                            alignSelf: 'center',
+                            height: '30px',
+                            border: 'solid 0px grey',
+                            borderRadius: '15px',
+                            backgroundColor: orangeColor
+                        }} onClick = {this.handleOpenOrderDetail}>Xem chi tiết</button>
                     </div>
                 </div>
             );
@@ -643,4 +656,4 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+export default withRouter(Dashboard) ;

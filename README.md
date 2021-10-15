@@ -29,6 +29,7 @@ https://react-leaflet.js.org/docs/
 https://icons8.com/
 https://react-bootstrap.github.io/getting-started/introduction/
 https://react-leaflet.js.org/docs/example-other-layers/
+https://www.pluralsight.com/guides/how-to-use-geolocation-call-in-reactjs
 
 # Distance-fee
 < 10km: 10000
