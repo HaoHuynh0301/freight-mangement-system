@@ -247,8 +247,15 @@ class Dashboard extends Component {
             }
         })
         .then((response) => {
-            this.setState({
-                instanceAddress: response.data
+            axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
+            .then((response) => {
+                let tmpArr = response.data.data;
+                this.setState({
+                    instanceAddress: tmpArr[0]
+                });
+            })
+            .catch((error) => {
+                alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
             });
         })
         .catch((error) => {
