@@ -48,38 +48,66 @@ class Dashboard extends Component {
         this.handleOpenOrder = this.handleOpenOrder.bind(this);
         this.handleCloseAndGetOrder = this.handleCloseAndGetOrder.bind(this);
         this.handleOpenOrderDetail = this.handleOpenOrderDetail.bind(this);
-        this.getInstanceOrder = this.getInstanceOrder.bind(this);
+        // this.getInstanceOrder = this.getInstanceOrder.bind(this);
     }
 
     Map = () => {
-        return(
-            <div style = {{
-                height: '250px',
-                width: '400px',
-                border: 'solid 0.5px grey'
-            }}>
-                <MapContainer style = {{
-                    height: '200px',
-                    width: '100%',
+        if(this.state.instanceAddress != null) {
+            console.log('DEO CU')
+            return(
+                <div style = {{
+                    height: '250px',
+                    width: '400px',
                     border: 'solid 0.5px grey'
-                }} center={[14.058324, 108.277199]} zoom={5} scrollWheelZoom={false}>
-                    <TileLayer
-                        attribution='Vị trí đơn hàng'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <Marker position={[21.0245, 105.84117]}>
-                        <Popup>
-                            Vị trí giao dự kiến
-                        </Popup>
-                    </Marker>
-                    <Marker position={[10.03711, 105.78825]}>
-                        <Popup>
-                            Vị trí hiện tại
-                        </Popup>
-                    </Marker>
-                </MapContainer>
-            </div>
-        );
+                }}>
+                    <MapContainer style = {{
+                        height: '200px',
+                        width: '100%',
+                        border: 'solid 0.5px grey'
+                    }} center={[14.058324, 108.277199]} zoom={5} scrollWheelZoom={false}>
+                        <TileLayer
+                            attribution='Vị trí đơn hàng'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Marker position={[21.0245, 105.84117]}>
+                            <Popup>
+                                Vị trí giao dự kiến
+                            </Popup>
+                        </Marker>
+                        <Marker position={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]}>
+                            <Popup>
+                                Vị trí hiện tại
+                            </Popup>
+                        </Marker>
+                    </MapContainer>
+                </div>
+            );
+        } else {
+            console.log('CU')
+            return(
+                <div style = {{
+                    height: '250px',
+                    width: '400px',
+                    border: 'solid 0.5px grey'
+                }}>
+                    <MapContainer style = {{
+                        height: '200px',
+                        width: '100%',
+                        border: 'solid 0.5px grey'
+                    }} center={[14.058324, 108.277199]} zoom={5} scrollWheelZoom={false}>
+                        <TileLayer
+                            attribution='Vị trí đơn hàng'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Marker position={[21.0245, 105.84117]}>
+                            <Popup>
+                                Vị trí giao dự kiến
+                            </Popup>
+                        </Marker>
+                    </MapContainer>
+                </div>
+            );
+        }
     }
 
     handleOpenOrderDetail = () => {
@@ -248,11 +276,12 @@ class Dashboard extends Component {
         })
         .then((response) => {
             axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
-            .then((response) => {
+            .then(async (response) => {
                 let tmpArr = response.data.data;
-                this.setState({
+                await this.setState({
                     instanceAddress: tmpArr[0]
                 });
+                console.log(this.state.instanceAddress.latitude)
             })
             .catch((error) => {
                 alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
