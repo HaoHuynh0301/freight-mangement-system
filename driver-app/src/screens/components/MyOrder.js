@@ -1,5 +1,7 @@
 import { extend } from "leaflet";
 import React, { Component } from "react";
+import 'leaflet/dist/leaflet.css';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import {
     backgroundUserImage,
     orangeColor,
@@ -22,15 +24,70 @@ class MyOrders extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            orderInformation: null
+            orderInformation: {},
+            instanceAddress: null,
+            deliveredAddress: null
         }
         this.fetchTask = this.fetchTask.bind(this);
-        // this.getOrderInformation = this.getOrderInformation.bind(this);
         this.renderOrderInformation = this.renderOrderInformation.bind(this);
     }
 
     fetchTask = () => {
         // console.log(this.props.match.params.id);
+    }
+
+    Map = () => {
+        if (this.state.instanceAddress != null) {
+            console.log('Here')
+            return(
+                <div style = {{
+                    height: '100%',
+                    width: '800px',
+                    border: 'solid 0.5px grey',
+                    marginLeft: '20px'
+                }}>
+                    <MapContainer style = {{
+                        height: '100%',
+                        width: '100%',
+                        border: 'solid 0.5px grey'
+                    }} center={[14.058324, 108.277199]} zoom={5} scrollWheelZoom={true}>
+                        <TileLayer
+                            attribution='Vị trí đơn hàng'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Marker position={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]}>
+                            <Popup>
+                                Vị trí giao dự kiến
+                            </Popup>
+                        </Marker>
+                        <Marker position={[14.058324, 108.277199]}>
+                            <Popup>
+                                Vị trí hiện tại
+                            </Popup>
+                        </Marker>
+                    </MapContainer>
+                </div>
+            );
+        }
+        return(
+            <div style = {{
+                height: '100%',
+                width: '800px',
+                border: 'solid 0.5px grey',
+                marginLeft: '20px'
+            }}>
+                <MapContainer style = {{
+                    height: '100%',
+                    width: '100%',
+                    border: 'solid 0.5px grey'
+                }} center={[14.058324, 108.277199]} zoom={5} scrollWheelZoom={true}>
+                    <TileLayer
+                        attribution='Vị trí đơn hàng'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                </MapContainer>
+            </div>
+        );
     }
 
     getOrderInformation = () => {
@@ -55,6 +112,35 @@ class MyOrders extends Component {
     componentDidMount() {
         this.fetchTask();
         this.getOrderInformation();
+        this.getCoordinatesOfOrder();
+        this.getDeliveredCoordinatesOrder();
+    }
+
+    getCoordinatesOfOrder = () => {
+        axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${this.state.orderInformation.province}`)
+            .then(async (response) => {
+                let tmpArr = response.data.data;
+                await this.setState({
+                    deliveredAddress: tmpArr[0]
+                });
+                console.log(this.state.deliveredAddress);
+            })
+            .catch((error) => {
+                alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
+            });
+    }
+
+    getDeliveredCoordinatesOrder = () => {
+        axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${this.state.orderInformation.province}`)
+            .then(async (response) => {
+                let tmpArr = response.data.data;
+                await this.setState({
+                    instanceAddress: tmpArr[0]
+                });
+            })
+            .catch((error) => {
+                alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
+            });
     }
 
     renderOrderInformation = () => {
@@ -141,6 +227,7 @@ class MyOrders extends Component {
                     }}>
                         {this.renderOrderInformation()}
                     </div>
+                    {this.Map()}
                 </div>
             </div>
         );
