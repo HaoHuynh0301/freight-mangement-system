@@ -339,7 +339,10 @@ class Dashboard extends Component {
                             height: '30px',
                             border: 'solid 0px grey',
                             borderRadius: '15px',
-                            backgroundColor: orangeColor
+                            backgroundColor: orangeColor,
+                            textDecoration: "none",
+                            color: 'black',
+                            textAlign: 'center'
                         }} to = {'/my-orders/' + this.state.instanceOrderId + '/'}>Xem chi tiết</Link>
                     </div>
                 </div>
