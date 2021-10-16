@@ -2,6 +2,7 @@ import { extend } from "leaflet";
 import React, { Component } from "react";
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import '../css/myScreenStyle.css';
 import {
     backgroundUserImage,
     orangeColor,
@@ -30,10 +31,27 @@ class MyOrders extends Component {
         }
         this.fetchTask = this.fetchTask.bind(this);
         this.renderOrderInformation = this.renderOrderInformation.bind(this);
+        this.handleupdateOrder = this.handleupdateOrder.bind(this);
+        this.handleupdateStatus = this.handleupdateStatus.bind(this);
+        this.handleupPaid = this.handleupPaid.bind(this);
     }
 
     fetchTask = () => {
         // console.log(this.props.match.params.id);
+    }
+
+    // Handle Update order function
+    handleupdateOrder = () => {
+        alert('Update');
+    }
+
+    // Handle Update request function
+    handleupdateStatus = () => {
+        alert('update request');
+    }
+
+    handleupPaid = () => {
+        alert('Paid');
     }
 
     Map = () => {
@@ -66,6 +84,17 @@ class MyOrders extends Component {
                             </Popup>
                         </Marker>
                     </MapContainer>
+                    <div style = {{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        marginTop: '10px',
+                        justifyContent: 'center'
+                    }}>
+                        <button className = 'myUserBtnStyle' onClick = {this.handleupdateOrder}>Cập nhật vị trí</button>
+                        <button className = 'myUserBtnStyle' onClick = {this.handleupdateStatus}>Cập nhật trạng thái</button>
+                        <button className = 'myUserBtnStyle' onClick = {this.handleupPaid}>Xác nhận thanh toán</button>
+                    </div>
+                    
                 </div>
             );
         }

@@ -1,0 +1,8 @@
+.myUserBtnStyle {
+    padding: 10px;
+    border: solid 0.2px grey;
+    border-radius: 10px;
+    background-color: #ff7733;
+    font-weight: bold;
+    margin-right: 10px;
+}
