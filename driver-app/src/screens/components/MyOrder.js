@@ -37,7 +37,7 @@ class MyOrders extends Component {
     }
 
     Map = () => {
-        if (this.state.instanceAddress != null) {
+        if (this.state.deliveredAddress != null && this.state.instanceAddress != null) {
             console.log('Here')
             return(
                 <div style = {{
@@ -55,12 +55,12 @@ class MyOrders extends Component {
                             attribution='Vị trí đơn hàng'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        <Marker position={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]}>
+                        <Marker position={[this.state.deliveredAddress.latitude, this.state.deliveredAddress.longitude]}>
                             <Popup>
                                 Vị trí giao dự kiến
                             </Popup>
                         </Marker>
-                        <Marker position={[14.058324, 108.277199]}>
+                        <Marker position={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]}>
                             <Popup>
                                 Vị trí hiện tại
                             </Popup>
@@ -102,7 +102,38 @@ class MyOrders extends Component {
             this.setState({
                 orderInformation: response.data
             });
-            console.log(this.state.orderInformation);
+            axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
+                .then(async (response) => {
+                    let tmpArr = response.data.data;
+                    await this.setState({
+                        deliveredAddress: tmpArr[0]
+                    });
+                })
+                .catch((error) => {
+                    alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
+                });
+
+            axios.get(`${ipAddress}/api/instance-order?order_id=${response.data.id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            .then((response) => {
+                axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
+                    .then(async (response) => {
+                        let tmpArr = response.data.data;
+                        await this.setState({
+                            instanceAddress: tmpArr[0]
+                        });
+                    })
+                    .catch((error) => {
+                        alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
+                    });
+            })
+            .catch((error) => {
+                alert('Đã có lỗi xảy ra trong quá trình lấy thông tin, vui lòng thử lại sau');
+            })
         })
         .catch((error) => {
             alert('Đã có lỗi xảy ra trong quá trình lấy thông tin, vui lòng thử lại sau!');
@@ -112,35 +143,6 @@ class MyOrders extends Component {
     componentDidMount() {
         this.fetchTask();
         this.getOrderInformation();
-        this.getCoordinatesOfOrder();
-        this.getDeliveredCoordinatesOrder();
-    }
-
-    getCoordinatesOfOrder = () => {
-        axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${this.state.orderInformation.province}`)
-            .then(async (response) => {
-                let tmpArr = response.data.data;
-                await this.setState({
-                    deliveredAddress: tmpArr[0]
-                });
-                console.log(this.state.deliveredAddress);
-            })
-            .catch((error) => {
-                alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
-            });
-    }
-
-    getDeliveredCoordinatesOrder = () => {
-        axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${this.state.orderInformation.province}`)
-            .then(async (response) => {
-                let tmpArr = response.data.data;
-                await this.setState({
-                    instanceAddress: tmpArr[0]
-                });
-            })
-            .catch((error) => {
-                alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
-            });
     }
 
     renderOrderInformation = () => {
