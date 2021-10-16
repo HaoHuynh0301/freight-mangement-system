@@ -107,6 +107,20 @@ class LocationUpdateView(APIView):
                 return Response(serializer.data, status = status.HTTP_200_OK)
         return Response('Errors!', status = status.HTTP_404_BAD_REQUEST)
     
+    def post(self, request, format = None):
+        orderId = request.data['order_id']
+        detailAddress = request.data['detail_address']
+        province = request.data['province']
+        instanceOrder = models.Order.objects.filter(id = orderId)
+        if len(instanceOrder) > 0:
+            instanceAddress = instanceOrder[0].instanceaddress_set.all()
+            if len(instanceAddress) > 0:
+                serializer = serializers.UpdateInstanceAddressSerializer(instanceAddress[0], {'detail_address': detailAddress, 'province': province})
+                serializer.save()
+                return Response({'status': 'Updated'}, status = status.HTTP_200_OK)
+            return Response({'error': 'Cannot found!'}, status = status.HTTP_404_NOT_FOUND)
+        return Response({'error': 'Cannot found!'}, status = status.HTTP_404_NOT_FOUND)
+    
     
 class OrderDriver(APIView):
     permission_classes = [permissions.IsAuthenticated]
