@@ -67,10 +67,13 @@ class MyOrders extends Component {
                         display: 'flex',
                         flexDirection: 'row',
                         alignItems: 'center',
-                        justifyContent: 'center'
+                        justifyContent: 'flex-start',
+                        marginTop: '5px',
+                        borderBottom: 'solid 0.2px grey',
+                        paddingLeft: '10px'
                     }}> 
                         <p style = {{
-                            fontSize: '20px'
+                            fontSize: '16px',
                         }}>{title}: {value}</p>
                     </div>
                 );
@@ -81,6 +84,28 @@ class MyOrders extends Component {
             return(
                 <div>
                     {renderItem("Tên khách hàng", this.state.orderInformation.customer_name)}
+                    {renderItem("Tên sản phẩm", this.state.orderInformation.product_name)}
+                    {renderItem("Tổng tiền", this.state.orderInformation.cast + 'VNĐ')}
+                    {renderItem("Số điện thoại", this.state.orderInformation.customer_phonenumber)}
+                    {renderItem("Số lượng sản phẩm", this.state.orderInformation.product_quantity)}
+                    {renderItem("Khối lượng sản phẩm", this.state.orderInformation.product_weight)}
+                    {renderItem("Địa chỉ giao hàng", this.state.orderInformation.detail_address)}
+                    {renderItem("Thành phố", this.state.orderInformation.province)}
+                    {renderItem("Quận", this.state.orderInformation.district)}
+                    {renderItem("Phường", this.state.orderInformation.ward)}
+                    {renderItem("Phường", this.state.orderInformation.note)}
+                    <div style = {{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                        marginTop: '5px',
+                        paddingLeft: '10px'
+                    }}> 
+                        <p style = {{
+                            fontSize: '16px',
+                        }}>Ghi chú: {this.state.orderInformation.note}</p>
+                    </div>
                 </div>
             );
         }
@@ -111,7 +136,7 @@ class MyOrders extends Component {
                         display: 'flex',
                         flexDirection: 'column',
                         border: 'solid 0.1px grey',
-                        width: '25%',
+                        width: '30%',
                         borderRadius: '15px'
                     }}>
                         {this.renderOrderInformation()}
