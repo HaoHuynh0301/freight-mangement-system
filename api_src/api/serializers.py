@@ -90,6 +90,12 @@ class InstanceAddressSerilizer(serializers.ModelSerializer):
         fields = '__all__'
         
         
+class UpdateInstanceAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.InstanceAddress
+        fields = ['detail_address', 'province']
+        
+        
 class DriverSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Driver
