@@ -66,23 +66,21 @@ class Home extends Component {
                 );
             } else {
                 return(
-                    <Router>
+                    <div style = {{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        backgroundColor: '#FFF',
+                        width: '100%'
+                    }}>
                         <div style = {{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            backgroundColor: '#FFF',
-                            width: '100%'
+                            width: '100%',
+                            height: 'auto'
                         }}>
-                            <div style = {{
-                                width: '100%',
-                                height: 'auto'
-                            }}>
-                                <Dashboard />
-                            </div>
-                        </div>        
-                    </Router>
+                            <Dashboard />
+                        </div>
+                    </div>        
                 );
             }
         }

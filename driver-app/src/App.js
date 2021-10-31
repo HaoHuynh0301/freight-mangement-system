@@ -67,29 +67,23 @@ class App extends Component {
             return(
                 <BrowserRouter>
                     <Switch>
-                        <Route path = '/user-infor'>
+                        <Route exact path = '/user-infor'>
                             <User />
                         </Route>
                         <Route exact path = '/sign-in'>
                             <Sigin />
                         </Route>
-                        <Route path = '/register'>
+                        <Route exact path = '/register'>
                             <Register />
                         </Route>
-                        <Route  path = '/'>
+                        <Route exact path = '/'>
                             <Home isAuth = {this.state.isAuth} />
                         </Route>
-                        <Route path = '/my-orders/:id'>
+                        <Route exact path = '/my-orders/:id'>
                             <MyOrders />    
                         </Route>
                         <Route path = '/orders/:id'>
                             <Orders /> 
-                        </Route>
-                        <Route exact path = '/user-infor'>
-                            <User />
-                        </Route>
-                        <Route exact path = '/'>
-                            <Dashboard /> 
                         </Route>
                     </Switch>
                 </BrowserRouter>

@@ -329,7 +329,8 @@ class Dashboard extends Component {
                         height: '100%',
                         width: '100%',
                         padding: '10px',
-                        paddingLeft: '20px'
+                        paddingLeft: '20px',
+                        backgroundColor: 'white'
                     }}>
                         <p style = {{
                             fontSize: '15px'
@@ -383,7 +384,7 @@ class Dashboard extends Component {
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
-                    marginBottom: '20px'
+                    marginBottom: '20px',
                 }}>
                     {/* Phần hiển thị thời gian của request */}
                     <p className = 'requestTimeFontStyle'>{item.time}</p>
@@ -461,7 +462,8 @@ class Dashboard extends Component {
                     border: 'solid 0.2px grey',
                     borderRadius: '15px',
                     display: 'flex',
-                    flexDirection: 'row'
+                    flexDirection: 'row',
+                    backgroundColor: 'white'
                 }}  className = 'dashBoardAvaiOrdersItem' onClick = {() => {
                     this.handleOpenOrder(item.id);
                 }}>
@@ -501,7 +503,7 @@ class Dashboard extends Component {
                 <div className = 'dashBoardAvaiOrdersWrapper'>
                     <p style = {{
                         fontSize: '20px',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
                     }}>Hệ thống hiện chưa có đơn hàng mới</p>
                 </div>
             );
@@ -549,6 +551,7 @@ class Dashboard extends Component {
                         display: 'flex',
                         flexDirection: 'row',
                         marginBottom: '5px',
+                        backgroundColor: 'white'
                         
                     }}>
                         <p style = {{
@@ -577,7 +580,7 @@ class Dashboard extends Component {
                     display: 'flex',
                     flexDirection: 'row',
                     paddingLeft: '100px',
-                    width: '100%'
+                    width: '100%',
                 }}>
                     <Modal style = {{
                         borderRadius: '20px'

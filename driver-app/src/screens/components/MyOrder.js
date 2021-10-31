@@ -19,6 +19,7 @@ import {
     useHistory ,
     withRouter 
 } from "react-router-dom";
+import { DoubleNavigationPage } from ".";
 const localStorage = require('local-storage');
 
 class MyOrders extends Component {
@@ -233,34 +234,38 @@ class MyOrders extends Component {
 
     render() {
         return(
-            <div style = {{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center'
-            }}>
-
-                {/* General View Wrapper */}
+            <div>
+                <DoubleNavigationPage />
                 <div style = {{
                     display: 'flex',
                     flexDirection: 'row',
-                    width: '70%',
-                    height: 'auto',
-                    marginTop: '30px',
-                    padding: '10px'
+                    justifyContent: 'center'
                 }}>
-                    {/* Order information column View Wrapper */}
+
+                    {/* General View Wrapper */}
                     <div style = {{
                         display: 'flex',
-                        flexDirection: 'column',
-                        border: 'solid 0.1px grey',
-                        width: '30%',
-                        borderRadius: '15px'
+                        flexDirection: 'row',
+                        width: '70%',
+                        height: 'auto',
+                        marginTop: '30px',
+                        padding: '10px'
                     }}>
-                        {this.renderOrderInformation()}
+                        {/* Order information column View Wrapper */}
+                        <div style = {{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            border: 'solid 0.1px grey',
+                            width: '30%',
+                            borderRadius: '15px'
+                        }}>
+                            {this.renderOrderInformation()}
+                        </div>
+                        {this.Map()}
                     </div>
-                    {this.Map()}
                 </div>
             </div>
+            
         );
     }
 } 

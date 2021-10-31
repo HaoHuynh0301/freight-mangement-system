@@ -6,6 +6,9 @@ import {
 import {
     Link
 } from "react-router-dom";
+import {
+    DoubleNavigationPage
+} from '../screens/components';
 import './css/registerStyle.css';
 
 class Register extends Component {

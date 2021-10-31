@@ -46,80 +46,92 @@ class Sigin extends Component {
             });
         })
         .catch((error) => {
+            this.setState({
+                isSigned: false
+            });
             alert('Tài khoản hoặc mật khẩu của bạn không đúng!');
         });
     }
 
     render() {
-        if(this.state.isSigned) {
+        if(this.state.isSigned === null) {
             return(
-                <Route exact to = '/'>
-                    <Home isAuth = {true}/>
-                </Route>
-            );
-        }
-        return(
-            <div className = 'Container'>
-                <div className = 'mainContent'>
-                    <div className  = 'signInTitleWrapper'>
-                        <h1>Đăng nhập</h1>
-                    </div>
-                    <form onSubmit = {this.handleSignIn}>
-                        <div class = 'inputWrapper'>
-                            <p style = {{
-                                display: "flex",
-                                flexDirection: "row",
-                                alignSelf: "flex-start",
-                                marginLeft: "12px",
-                                fontSize: "20px"
-                            }}>Tên đăng nhập</p>
-                            <input type = 'text' className = 'inputStyle' 
-                                value = {this.state.username}
-                                onChange = {(event) => {
-                                    this.setState({
-                                        username: event.target.value
-                                    });
-                                }}
-                            ></input>
-                        </div>
-                        <div class = 'inputWrapper'>
-                            <p style = {{
-                                display: "flex",
-                                flexDirection: "row",
-                                alignSelf: "flex-start",
-                                marginLeft: "12px",
-                                fontSize: "20px"
-                            }}>Mật khẩu</p>
-                            <input type = 'password' className = 'inputStyle'
-                                value = {this.state.password}
-                                onChange = {(event) => {
-                                    this.setState({
-                                        password: event.target.value
-                                    });
-                                }}
-                            ></input>
-                        </div>
-                        <input type = 'submit' value = 'Đăng nhập' className = 'submitSignInBtn'></input>
-                    </form>
-                    <div style = {{
-                        display: "flex", 
-                        flexDirection: "row",
-                        justifyContent: "center",
-                        justifyContent: "center",
-                    }}>
-                        <p>Bạn chưa có tài khoản ? 
-                            <Link
-                                to = '/register'
-                                style = {{
-                                    color: orangeColor,
-                                    marginLeft: 10
-                                }}
-                            >Đăng ký ngay bây giờ</Link>
-                        </p>
-                    </div>
+                <div>
+                    Loading
                 </div>
-            </div>
-        );
+            );
+        } else {
+            if(this.state.isSigned === true) {
+                return(
+                    <Route exact to = '/'>
+                        <Home isAuth = {true}/>
+                    </Route>
+                );
+            } else {
+                return(
+                    <div className = 'Container'>
+                        <div className = 'mainContent'>
+                            <div className  = 'signInTitleWrapper'>
+                                <h1>Đăng nhập</h1>
+                            </div>
+                            <form onSubmit = {this.handleSignIn}>
+                                <div class = 'inputWrapper'>
+                                    <p style = {{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        alignSelf: "flex-start",
+                                        marginLeft: "12px",
+                                        fontSize: "20px"
+                                    }}>Tên đăng nhập</p>
+                                    <input type = 'text' className = 'inputStyle' 
+                                        value = {this.state.username}
+                                        onChange = {(event) => {
+                                            this.setState({
+                                                username: event.target.value
+                                            });
+                                        }}
+                                    ></input>
+                                </div>
+                                <div class = 'inputWrapper'>
+                                    <p style = {{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        alignSelf: "flex-start",
+                                        marginLeft: "12px",
+                                        fontSize: "20px"
+                                    }}>Mật khẩu</p>
+                                    <input type = 'password' className = 'inputStyle'
+                                        value = {this.state.password}
+                                        onChange = {(event) => {
+                                            this.setState({
+                                                password: event.target.value
+                                            });
+                                        }}
+                                    ></input>
+                                </div>
+                                <input type = 'submit' value = 'Đăng nhập' className = 'submitSignInBtn'></input>
+                            </form>
+                            <div style = {{
+                                display: "flex", 
+                                flexDirection: "row",
+                                justifyContent: "center",
+                                justifyContent: "center",
+                            }}>
+                                <p>Bạn chưa có tài khoản ? 
+                                    <Link
+                                        to = '/register'
+                                        style = {{
+                                            color: orangeColor,
+                                            marginLeft: 10
+                                        }}
+                                    >Đăng ký ngay bây giờ</Link>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+        }
     }
 }
 
