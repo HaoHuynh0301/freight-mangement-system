@@ -25,6 +25,7 @@ import {
 } from '../contants';
 import User from './User';
 import PullToRefresh from 'react-simple-pull-to-refresh';
+import loadingIcon from '../assets/loading.gif';
 const axios = require('axios');
 
 class Home extends Component {
@@ -50,43 +51,40 @@ class Home extends Component {
     }
 
     render() {
-        if(!this.state.isAuth) {
-            return (
-                <Route>
-                    <Redirect to = '/sign-in'/>
-                </Route>
+        if(this.state.isAuth === null) {
+            return(
+                <div>
+                    <img src = {loadingIcon}></img>
+                </div>
             );
         } else {
-            return(
-                <Router>
-                    <div style = {{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        backgroundColor: '#FFF',
-                    }}>
+            if(!this.state.isAuth) {
+                return (
+                    <Route>
+                        <Redirect to = '/sign-in'/>
+                    </Route>
+                );
+            } else {
+                return(
+                    <Router>
                         <div style = {{
-                            width: '100%',
-                            height: 'auto'
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            backgroundColor: '#FFF',
+                            width: '100%'
                         }}>
-                            <DoubleNavigationPage />
-                                <Route path = '/my-orders/:id'>
-                                    <MyOrders />    
-                                </Route>
-                                <Route path = '/orders/:id'>
-                                    <Orders /> 
-                                </Route>
-                                <Route exact path = '/user-infor'>
-                                    <User />
-                                </Route>
-                                <Route exact path = '/'>
-                                    <Dashboard /> 
-                                </Route>
-                        </div>
-                    </div>        
-                </Router>
-            );
+                            <div style = {{
+                                width: '100%',
+                                height: 'auto'
+                            }}>
+                                <Dashboard />
+                            </div>
+                        </div>        
+                    </Router>
+                );
+            }
         }
     }
 }

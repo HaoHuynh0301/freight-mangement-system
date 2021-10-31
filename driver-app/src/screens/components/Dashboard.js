@@ -27,6 +27,10 @@ import {
     useHistory ,
     withRouter 
 } from "react-router-dom";
+import {
+    DoubleNavigationPage 
+} from '../components';
+import background from '../../assets/background.jpg';
 const localStorage = require('local-storage');
 
 class Dashboard extends Component {
@@ -566,155 +570,165 @@ class Dashboard extends Component {
 
     render() {
         return(
-            <div className = 'dashBoardContainer'>
-                <Modal style = {{
-                    borderRadius: '20px'
-                }} show={this.state.showModal} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Thông tin đơn hàng</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <p>Tên khách hàng: {this.state.tmpOrders.customer_name}</p>
-                        <div
-                            style = {{
-                                height: '0.001px',
-                                border: 'solid 0.05px grey',
-                                marginBottom: '10px'
-                            }}
-                        ></div>
-                        <p>Số điện thoại: {this.state.tmpOrders.customer_phonenumber}</p>
-                        <div
-                            style = {{
-                                height: '0.001px',
-                                border: 'solid 0.05px grey',
-                                marginBottom: '10px'
-                            }}
-                        ></div>
-                        <p>
-                            Địa chỉ: {this.state.tmpOrders.detail_address}, {this.state.tmpOrders.ward}, {this.state.tmpOrders.district}, {this.state.tmpOrders.province}
-                        </p>
-                        <div
-                            style = {{
-                                height: '0.001px',
-                                border: 'solid 0.05px grey',
-                                marginBottom: '10px'
-                            }}
-                        ></div>
-                        <p>Tên mặc hàng: {this.state.tmpOrders.product_name}</p>
-                        <div
-                            style = {{
-                                height: '0.001px',
-                                border: 'solid 0.05px grey',
-                                marginBottom: '10px'
-                            }}
-                        ></div>
-                        <p>Số lượng: {this.state.tmpOrders.product_quantity}</p>
-                        <div
-                            style = {{
-                                height: '0.001px',
-                                border: 'solid 0.05px grey',
-                                marginBottom: '10px'
-                            }}
-                        ></div>
-                        <p>Đơn giá: {this.state.tmpOrders.cast}VNĐ</p>
-                        <div
-                            style = {{
-                                height: '0.001px',
-                                border: 'solid 0.05px grey',
-                                marginBottom: '10px'
-                            }}
-                        ></div>
-                        <p>Hình thức giao hàng: {this.state.tmpOrders.ship_option}</p>
-                        <div
-                            style = {{
-                                height: '0.001px',
-                                border: 'solid 0.05px grey',
-                                marginBottom: '10px'
-                            }}
-                        ></div>
-                        <p>Ghi chú: {this.state.tmpOrders.note}</p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                    <Button variant="secondary" onClick={this.handleClose}>
-                        Đóng
-                    </Button>
-                    <Button variant="primary" onClick={this.handleCloseAndGetOrder}>
-                        Nhận đơn hàng
-                    </Button>
-                    </Modal.Footer>
-                </Modal>
-                {/* Cột thứ nhất */}
-                <div className = 'dashBoardCol1'>
-                    <div className = 'dashBoardUser'>
-                        <div style = {{
-                            marginTop: '20px',
-                            marginLeft: '10px',
-                            marginRight: '10px',
-                            marginBottom: '20px',
-                            height: '90%',
-                            width: '90%',
-                            borderColor: "black",
-                            borderRadius: '30px',
-                            backgroundColor: 'rgba(0,0,0, 0.4)',
-                            display: "flex",
-                            flexDirection: 'column',
-                            alignItems: 'flex-start',
-                            padding: '20px',
-                            
-                        }}>
-                            <p style = {{
-                                color: '#FFF',
-                                fontWeight: 'bold'
-                            }}>Thông tin tài xế</p>
+            <div>
+                <DoubleNavigationPage />
+                <div style = {{
+                    backgroundImage: `url(${background})`,
+                    display: 'flex',
+                    flexDirection: 'row',
+                    paddingLeft: '100px',
+                    width: '100%'
+                }}>
+                    <Modal style = {{
+                        borderRadius: '20px'
+                    }} show={this.state.showModal} onHide={this.handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Thông tin đơn hàng</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p>Tên khách hàng: {this.state.tmpOrders.customer_name}</p>
+                            <div
+                                style = {{
+                                    height: '0.001px',
+                                    border: 'solid 0.05px grey',
+                                    marginBottom: '10px'
+                                }}
+                            ></div>
+                            <p>Số điện thoại: {this.state.tmpOrders.customer_phonenumber}</p>
+                            <div
+                                style = {{
+                                    height: '0.001px',
+                                    border: 'solid 0.05px grey',
+                                    marginBottom: '10px'
+                                }}
+                            ></div>
+                            <p>
+                                Địa chỉ: {this.state.tmpOrders.detail_address}, {this.state.tmpOrders.ward}, {this.state.tmpOrders.district}, {this.state.tmpOrders.province}
+                            </p>
+                            <div
+                                style = {{
+                                    height: '0.001px',
+                                    border: 'solid 0.05px grey',
+                                    marginBottom: '10px'
+                                }}
+                            ></div>
+                            <p>Tên mặc hàng: {this.state.tmpOrders.product_name}</p>
+                            <div
+                                style = {{
+                                    height: '0.001px',
+                                    border: 'solid 0.05px grey',
+                                    marginBottom: '10px'
+                                }}
+                            ></div>
+                            <p>Số lượng: {this.state.tmpOrders.product_quantity}</p>
+                            <div
+                                style = {{
+                                    height: '0.001px',
+                                    border: 'solid 0.05px grey',
+                                    marginBottom: '10px'
+                                }}
+                            ></div>
+                            <p>Đơn giá: {this.state.tmpOrders.cast}VNĐ</p>
+                            <div
+                                style = {{
+                                    height: '0.001px',
+                                    border: 'solid 0.05px grey',
+                                    marginBottom: '10px'
+                                }}
+                            ></div>
+                            <p>Hình thức giao hàng: {this.state.tmpOrders.ship_option}</p>
+                            <div
+                                style = {{
+                                    height: '0.001px',
+                                    border: 'solid 0.05px grey',
+                                    marginBottom: '10px'
+                                }}
+                            ></div>
+                            <p>Ghi chú: {this.state.tmpOrders.note}</p>
+                        </Modal.Body>
+                        <Modal.Footer>
+                        <Button variant="secondary" onClick={this.handleClose}>
+                            Đóng
+                        </Button>
+                        <Button variant="primary" onClick={this.handleCloseAndGetOrder}>
+                            Nhận đơn hàng
+                        </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    {/* Cột thứ nhất */}
+                    <div className = 'dashBoardCol1'>
+                        <div className = 'dashBoardUser'>
                             <div style = {{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                border: '0.5px solid grey',
-                                padding: '10px',
-                                width: '99%',
-                                borderRadius: '20px'
+                                marginTop: '20px',
+                                marginLeft: '10px',
+                                marginRight: '10px',
+                                marginBottom: '20px',
+                                height: '90%',
+                                width: '90%',
+                                borderColor: "black",
+                                borderRadius: '30px',
+                                backgroundColor: 'rgba(0,0,0, 0.4)',
+                                display: "flex",
+                                flexDirection: 'column',
+                                alignItems: 'flex-start',
+                                padding: '20px',
+                                
                             }}>
+                                <p style = {{
+                                    color: '#FFF',
+                                    fontWeight: 'bold'
+                                }}>Thông tin tài xế</p>
+                                <div style = {{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    border: '0.5px solid grey',
+                                    padding: '10px',
+                                    width: '99%',
+                                    borderRadius: '20px'
+                                }}>
+                                    <div style = {{
+                                        display: "flex",
+                                        flexDirection: 'column'
+                                    }}>
+                                        <p className = 'dashBoardTextStyle'>{this.state.driverInfor.name}</p>
+                                        <p className = 'dashBoardTextStyle'>{this.state.driverInfor.phone_number}</p>
+                                    </div>
+                                    <img src = {userLogo} style = {{
+                                        marginLeft: '50px',
+                                        height: '80px',
+                                        width: '80px'
+                                    }}/>
+                                </div>
                                 <div style = {{
                                     display: "flex",
-                                    flexDirection: 'column'
+                                    flexDirection: "column",
+                                    marginTop: '10px',
+                                    border: '0.5px solid grey',
+                                    width: '99%',
+                                    borderRadius: '20px',
+                                    padding: '10px',
                                 }}>
-                                    <p className = 'dashBoardTextStyle'>{this.state.driverInfor.name}</p>
-                                    <p className = 'dashBoardTextStyle'>{this.state.driverInfor.phone_number}</p>
+                                    <p className = 'dashBoardTextStyle'>Bằng lái xe: {this.state.driverInfor.driverLicense}</p>
+                                    <p className = 'dashBoardTextStyle'>Username: {this.state.driverInfor.username}</p>
                                 </div>
-                                <img src = {userLogo} style = {{
-                                    marginLeft: '50px',
-                                    height: '80px',
-                                    width: '80px'
-                                }}/>
-                            </div>
-                            <div style = {{
-                                display: "flex",
-                                flexDirection: "column",
-                                marginTop: '10px',
-                                border: '0.5px solid grey',
-                                width: '99%',
-                                borderRadius: '20px',
-                                padding: '10px',
-                            }}>
-                                <p className = 'dashBoardTextStyle'>Bằng lái xe: {this.state.driverInfor.driverLicense}</p>
-                                <p className = 'dashBoardTextStyle'>Username: {this.state.driverInfor.username}</p>
                             </div>
                         </div>
+                        {this.lastRides()}
                     </div>
-                    {this.lastRides()}
-                </div>
 
-                {/* Cột thứ hai */}
-                <div className = 'dashBoardCol1'>
-                    {this.instanceOrder()}
-                    {this.instanceOrderRequets()}
-                </div>
+                    {/* Cột thứ hai */}
+                    <div className = 'dashBoardCol1'>
+                        {this.instanceOrder()}
+                        {this.instanceOrderRequets()}
+                    </div>
 
-                {/* Cột thứ ba */}
-                <div className = 'dashBoardCol1'>
-                    {this.availableOrder()}
+                    {/* Cột thứ ba */}
+                    <div className = 'dashBoardCol1'>
+                        {this.availableOrder()}
+                    </div>
                 </div>
             </div>
+            
         );
         
     }

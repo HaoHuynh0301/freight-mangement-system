@@ -7,5 +7,5 @@ export {
     DoubleNavigationPage,
     Orders,
     MyOrders,
-    Dashboard
+    Dashboard,
 }
