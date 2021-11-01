@@ -1,7 +1,8 @@
 import {
     LandingPage,
     Register,
-    HomePage
+    HomePage,
+    Profile
 } from './screens';
 import {
     BrowserRouter,
@@ -33,6 +34,7 @@ function App() {
                 <Route exact path = '/register' component = {Register}></Route>
                 <ProtectedRoute exact path = '/app' component = {AppView}></ProtectedRoute>
                 <ProtectedRoute exact path = '/home' component = {HomePage}></ProtectedRoute>
+                <ProtectedRoute exact path = '/profile' component = {Profile}></ProtectedRoute>
                 <Route path = "*" component = {() => {
                     return(
                         <div>

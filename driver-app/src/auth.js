@@ -4,25 +4,23 @@ import {
 const axios = require('axios');
 const localStorage = require('local-storage');
 
-let token = localStorage.get('token');
 let isAuth = true;
-if(token !== undefined) {
-    console.log('here')
+setTimeout(() => {
     axios.get(`${ipAddress}/api/driver-middleware/`, {
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${JSON.parse(localStorage.get('token')).name}`
         }
     })
     .then((response) => {
-        console.log('here2')
-        localStorage.set('token', response.data.access_token);
+        
     })
     .catch(error => {
         isAuth = false;
         console.log('Error!');
     });
-}
+}, 500);
+
 
 class Auth {
     constructor() {

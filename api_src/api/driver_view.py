@@ -22,6 +22,7 @@ class MiddleWare(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, format = None):
+        print(request.headers)
         return Response('OK', status = status.HTTP_200_OK)
     
 

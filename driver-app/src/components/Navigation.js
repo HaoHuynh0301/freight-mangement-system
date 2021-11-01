@@ -31,7 +31,7 @@ class DoubleNavigationPage extends React.Component {
                         </ReactBoostrap.Nav>
                         <ReactBoostrap.Nav>
                         <ReactBoostrap.NavDropdown title="Người dùng" id="collasible-nav-dropdown">
-                            <ReactBoostrap.NavDropdown.Item><Link style = {{textDecoration: "none", color: blackColor}} to = '#'>Thông tin tài xế</Link></ReactBoostrap.NavDropdown.Item>
+                            <ReactBoostrap.NavDropdown.Item><Link style = {{textDecoration: "none", color: blackColor}} to = '/profile'>Thông tin tài xế</Link></ReactBoostrap.NavDropdown.Item>
                             <ReactBoostrap.NavDropdown.Item><button style = {{
                                 borderWidth: '0px',
                                 backgroundColor: 'auto',
