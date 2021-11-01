@@ -6,6 +6,7 @@ import {
 import {
     Link
 } from 'react-router-dom';
+import './css/registerStyle.css';
 
 class Register extends Component {
     constructor(props) {
@@ -32,8 +33,24 @@ class Register extends Component {
 
     render() {
         return(
-            <div className = 'Container'>
-                <div className = 'mainContentRegister'>
+            <div style = {{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                width: 'auto'
+            }}>
+                <div style = {{
+                    height: 'auto',
+                    width: '50%',
+                    border: 'solid 0.5px grey',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: '10px'
+                }}>
                     <h1 style = {{marginBottom: '40px'}}>Đăng ký</h1>
                     <form onSubmit = {this.handleRegister}>
                         <div style = {{
@@ -270,7 +287,13 @@ class Register extends Component {
                                 }}
                             ></input>
                         </div>
-                        <input className = 'submitBtn' type = 'submit' value = 'Đăng ký'></input>
+                        <input style = {{
+                            width: '350px',
+                            height: '40px',
+                            fontWeight: 'bold',
+                            backgroundColor: orangeColor,
+                            borderRadius: '5px'
+                        }} type = 'submit' value = 'Đăng ký'></input>
                     </form>
                     <div style = {{
                         display: "flex", 

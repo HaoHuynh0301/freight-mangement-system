@@ -1,0 +1,60 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(	#e09952, #b3b3b3);
+    height: 100vh;
+}
+
+.mainContent {
+    width: 400px;
+    height: 600px;
+    background-color: aliceblue;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 1.5em rgba(#000, .03);
+}
+
+.signInTitleWrapper {
+    margin-bottom: 10px;
+}
+
+.emailInput {
+    margin-left: 50px;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    margin-bottom: 20px;
+}
+
+.inputStyle {
+    margin-left: 10px;
+    height: 35px;
+    width: 300px;
+    font-size: 18px;
+    border-radius: 10px;
+    border-width: 0;
+    /* color: #FFF; */
+    border-bottom-width: 1px;
+    background-color: aliceblue;
+    /* text-decoration-color: grey; */
+}
+
+.submitSignInBtn {
+    margin-top: 20px;
+    height: 50px;
+    width: 90%;
+    background-color: #ff7733;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 30px;
+    border-width: 0px;
+    margin-bottom: 20px;
+}
