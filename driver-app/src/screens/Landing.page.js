@@ -34,7 +34,7 @@ class LandingPage extends Component {
         .then(async (response) => {
             await localStorage.set('token', response.data.access_token);
             auth.login(() => {
-                this.props.history.push('/home');
+                this.props.history.push('/');
             })
             this.setState({
                 username: '',

@@ -12,7 +12,8 @@ import {
     orangeColor
 } from '../contants';
 import {
-    DoubleNavigationPage
+    DoubleNavigationPage,
+    Footer
 } from '../components';
 const localStorage = require('local-storage');
 
@@ -273,6 +274,7 @@ class Profile extends Component {
                         </button>
                     </div>
                 </div>
+                <Footer />  
             </div>
         );
     }

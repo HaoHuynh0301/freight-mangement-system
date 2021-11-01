@@ -9,7 +9,7 @@ setTimeout(() => {
     axios.get(`${ipAddress}/api/driver-middleware/`, {
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${JSON.parse(localStorage.get('token')).name}`
+            Authorization: `Bearer ${localStorage.get('token')}`
         }
     })
     .then((response) => {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import  {
-    DoubleNavigationPage
+    DoubleNavigationPage,
+    Footer
 } from '../components';
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
@@ -20,6 +21,7 @@ import carIcon from '../assets/carIcon.png';
 import locationIcon from '../assets/locationIcon.png';
 import requestIcon from '../assets/requestIcon.png';
 import axios from "axios";
+import background from '../assets/homePageBackground.jpg';
 import {
     Link,
     Redirect,
@@ -581,7 +583,7 @@ class HomePage extends Component {
             <div>
                 <DoubleNavigationPage />
                 <div style = {{
-                    // backgroundImage: `url(${background})`,
+                    backgroundImage: `url(${background})`,
                     display: 'flex',
                     flexDirection: 'row',
                     paddingLeft: '60px',
@@ -735,6 +737,7 @@ class HomePage extends Component {
                         {this.availableOrder()}
                     </div>
                 </div>
+                <Footer />
             </div>
         );
     }
