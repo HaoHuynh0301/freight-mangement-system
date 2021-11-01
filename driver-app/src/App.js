@@ -1,95 +1,46 @@
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    BrowserRouter
-} from "react-router-dom";
-import {
-    Sigin,
-    Register,
-    Home,
-    User,
+    LandingPage,
+    Register
 } from './screens';
 import {
-    MyOrders,
-    Orders,
-    Dashboard
-} from './screens/components'
-import {
-    ipAddress
-} from './contants';
-import loadingIcon from './assets/loading.gif';
-import { Component } from 'react';
-const localStorage = require('local-storage');
-const axios = require('axios');
+    BrowserRouter,
+    Switch,
+    Route
+} from 'react-router-dom';
+import { ProtectedRoute } from './protected.route';
+import auth from './auth';
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isAuth: null
-        }
-    }
+const AppView = (props) => {
+    return(
+        <div>
+            <button onClick = {() => {
+                auth.logout(() => {
+                    props.history.push("/");
+                })
+            }}>
+                Logout
+            </button>
+        </div>
+    );
+}
 
-    componentDidMount() {
-        axios.get(`${ipAddress}/api/driver-middleware/`, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.get('token')}`
-            }
-        })
-        .then((response) => {
-            this.setState({
-                isAuth: true
-            });
-            localStorage.set('token', response.data.access_token);
-        })
-        .catch(error => {
-            this.setState({
-                isAuth: false
-            });
-            console.log('Error!');
-        });
-    }
-
-    render() {
-
-        if(this.state.isAuth === null) {
-            return(
-                <div>
-                    <img src = {loadingIcon}></img>
-                </div>
-            );
-        } else {
-            console.log(this.state.isAuth);
-            return(
-                <BrowserRouter>
-                    <Switch>
-                        <Route exact path = '/user-infor'>
-                            <User />
-                        </Route>
-                        <Route exact path = '/sign-in'>
-                            <Sigin />
-                        </Route>
-                        <Route exact path = '/register'>
-                            <Register />
-                        </Route>
-                        <Route exact path = '/'>
-                            <Home isAuth = {this.state.isAuth} />
-                        </Route>
-                        <Route exact path = '/my-orders/:id'>
-                            <MyOrders />    
-                        </Route>
-                        <Route path = '/orders/:id'>
-                            <Orders /> 
-                        </Route>
-                    </Switch>
-                </BrowserRouter>
-            );   
-        }
-    }
+function App() {
+    return (
+        <BrowserRouter>
+            <Switch>
+                <Route exact path = '/' component = {LandingPage}></Route>
+                <Route exact path = '/register' component = {Register}></Route>
+                <ProtectedRoute exact path = '/app' component = {AppView}></ProtectedRoute>
+                <Route path = "*" component = {() => {
+                    return(
+                        <div>
+                            404
+                        </div>
+                    );
+                }}></Route>
+            </Switch>
+        </BrowserRouter>
+    );
 }
 
 export default App;

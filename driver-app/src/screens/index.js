@@ -1,11 +1,7 @@
-import Sigin from "./Signin";
-import Register from './Register';
-import Home from './Home';
-import User from "./User";
+import LandingPage from "./Landing.page";
+import Register from "./Register.page";
 
 export {
-    Sigin,
-    Register,
-    Home,
-    User
-} 
+    LandingPage,
+    Register
+}
