@@ -4,31 +4,32 @@ import {
 const axios = require('axios');
 const localStorage = require('local-storage');
 
+let token = localStorage.get('token');
+let isAuth = true;
+if(token !== undefined) {
+    console.log('here')
+    axios.get(`${ipAddress}/api/driver-middleware/`, {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then((response) => {
+        console.log('here2')
+        localStorage.set('token', response.data.access_token);
+    })
+    .catch(error => {
+        isAuth = false;
+        console.log('Error!');
+    });
+}
+
 class Auth {
     constructor() {
-        let token = localStorage.get('token');
-        let isAuth = false;
-        if(token !== null) {
-            axios.get(`${ipAddress}/api/driver-middleware/`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            .then((response) => {
-                isAuth = true;
-                localStorage.set('token', response.data.access_token);
-            })
-            .catch(error => {
-                console.log('Error!');
-            });
-        }
-
-        this.authenticate = isAuth;
+        this.authenticate = true;
     }
 
-    login(token, cb) {
-        localStorage.set('token', token);
+    login(cb) {
         this.authenticate = true;
         cb();
     }

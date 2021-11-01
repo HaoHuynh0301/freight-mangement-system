@@ -2,15 +2,19 @@ import React, { Component } from "react";
 import { Route, Redirect } from "react-router-dom";
 import auth from "./auth";
 
+
 export const ProtectedRoute = ({component: Component, ...rest}) => {
     return(
         <Route {...rest} render = {
             (props) => {
-                if(auth.isAuthenticate()) {
+                console.log('1');
+                const isAuth = auth.isAuthenticate();
+                console.log(isAuth);
+                if(isAuth === true) {
                     return(
                         <Component {...props}/>
                     );
-                } else {
+                } else if(isAuth === false) {
                     return(
                         <Redirect to = {
                             {
@@ -21,9 +25,13 @@ export const ProtectedRoute = ({component: Component, ...rest}) => {
                             }
                         }/>
                     );
+                } else {
+                    return(
+                        <div>Reload</div>
+                    );
                 }
             }
-        } >
+        }>
         </Route>
     );
 }

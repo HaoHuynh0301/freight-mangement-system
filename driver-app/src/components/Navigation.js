@@ -5,13 +5,10 @@ import {
     whiteColor,
     blackColor,
     orangeColor
-} from '../../contants';
+} from '../contants';
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
     Link,
-    Redirect,
     withRouter 
 } from "react-router-dom";
 const localStorage = require('local-storage');

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Auth from "../auth";
+import auth from "../auth";
 import {
     orangeColor,
     ipAddress
@@ -33,6 +33,9 @@ class LandingPage extends Component {
         })
         .then(async (response) => {
             await localStorage.set('token', response.data.access_token);
+            auth.login(() => {
+                this.props.history.push('/app');
+            })
             this.setState({
                 username: '',
                 password: '',
