@@ -12,10 +12,13 @@ import {
 import {
     orangeColor,
     orangeBlur,
-    userIcon,
     greyColor,
-    ipAddress
+    ipAddress,
 } from '../contants';
+import userIcon from '../assets/userIcon.png';
+import carIcon from '../assets/carIcon.png';
+import locationIcon from '../assets/locationIcon.png';
+import requestIcon from '../assets/requestIcon.png';
 import axios from "axios";
 import {
     Link,
@@ -185,67 +188,65 @@ class HomePage extends Component {
     // Hàm lấy thông tin
     async getInformation() {
         const token = localStorage.get('token');
-        setTimeout(() => {
-            console.log(token);
-            axios.get(`${ipAddress}/api/driver-view/`, {
+        console.log(token);
+        axios.get(`${ipAddress}/api/driver-view/`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            this.setState({
+                driverInfor: response.data
+            });
+            axios.get(`${ipAddress}/api/update-location?driver_id=${response.data.id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`
                 }
             })
-            .then((response) => {
-                this.setState({
-                    driverInfor: response.data
+            .then(async (response) => {
+                await this.setState({
+                    lastRides: response.data
                 });
-                axios.get(`${ipAddress}/api/update-location?driver_id=${response.data.id}`, {
+                axios.get(`${ipAddress}/api/order-drivers?driver_id=${this.state.driverInfor.id}`, {
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`
                     }
                 })
-                .then(async (response) => {
-                    await this.setState({
-                        lastRides: response.data
+                .then((response) => {
+                    this.setState({
+                        requests: response.data
                     });
-                    axios.get(`${ipAddress}/api/order-drivers?driver_id=${this.state.driverInfor.id}`, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${token}`
+                    var tmpList = [];
+                    tmpList = this.state.requests;
+                    for(let i=0; i<tmpList.length; i++) {
+                        var requestName = '';
+                        if(tmpList[i].request_option == 1) {
+                            requestName = 'Giục lấy'
+                        } else if(tmpList[i].request_option == 2) {
+                            requestName = 'Giao';
+                        } else if(tmpList[i].request_option == 3) {
+                            requestName = 'Trả hàng';
                         }
-                    })
-                    .then((response) => {
-                        this.setState({
-                            requests: response.data
-                        });
-                        var tmpList = [];
-                        tmpList = this.state.requests;
-                        for(let i=0; i<tmpList.length; i++) {
-                            var requestName = '';
-                            if(tmpList[i].request_option == 1) {
-                                requestName = 'Giục lấy'
-                            } else if(tmpList[i].request_option == 2) {
-                                requestName = 'Giao';
-                            } else if(tmpList[i].request_option == 3) {
-                                requestName = 'Trả hàng';
-                            }
-                            tmpList[i].request_option = requestName;
-                        }
-                        this.setState({
-                            requests: tmpList
-                        });
-                    })
-                    .catch((error) => {
-                        console.log('Error');
+                        tmpList[i].request_option = requestName;
+                    }
+                    this.setState({
+                        requests: tmpList
                     });
                 })
                 .catch((error) => {
-                    console.log('Error!');
+                    console.log('Error');
                 });
-            }).
-            catch((error) => {
+            })
+            .catch((error) => {
                 console.log('Error!');
             });
-        }, 2000);
+        }).
+        catch((error) => {
+            console.log('Error!');
+        });
     }
 
     // Hàm lấy đơn hàng hiện tại trên hệ thống
@@ -410,7 +411,7 @@ class HomePage extends Component {
                     }}>
                         <div style = {{
                             height: '42px',
-                            widows: '42px',
+                            width: '42px',
                             border: 'solid 0.5px grey',
                             display: 'flex',
                             flexDirection: 'column',
@@ -420,9 +421,9 @@ class HomePage extends Component {
                             padding: '1px',
                             marginRight: '20px'
                         }}>
-                            <img style = {{
-                                height: '40px',
-                                width: '40px',
+                            <img src = {requestIcon} style = {{
+                                height: '30px',
+                                width: '30px',
                             }}></img>
                         </div>
                         <p 
@@ -525,11 +526,13 @@ class HomePage extends Component {
                         borderRadius: '20px',
                         display: 'flex',
                         flexDirection: 'row',
-                        marginBottom: '10px'
+                        marginBottom: '10px',
+                        justifyContent: 'center',
+                        alignItems: 'center'
                     }}>
-                        <img style = {{
-                            height: '60px',
-                            width: '60px',
+                        <img src = {carIcon} style = {{
+                            height: '50px',
+                            width: '50px',
                         }}></img>
                     </div>
                     <div style = {{
@@ -540,7 +543,7 @@ class HomePage extends Component {
                     }}>
                         <p className = 'dashBoardTextStyle2'>{item.time}</p>
                         <p>
-                            <img height = '30px' width = '30px' style = {{marginRight: '10px'}}></img>
+                            <img src = {locationIcon} height = '30px' width = '30px' style = {{marginRight: '10px'}}></img>
                             {item.ward}, {item.province}, {item.city}
                         </p>
                     </div> 
@@ -698,7 +701,7 @@ class HomePage extends Component {
                                         <p className = 'dashBoardTextStyle'>{this.state.driverInfor.name}</p>
                                         <p className = 'dashBoardTextStyle'>{this.state.driverInfor.phone_number}</p>
                                     </div>
-                                    <img style = {{
+                                    <img src = {userIcon} style = {{
                                         marginLeft: '50px',
                                         height: '80px',
                                         width: '80px'

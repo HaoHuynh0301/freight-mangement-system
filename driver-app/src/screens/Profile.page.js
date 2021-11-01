@@ -99,7 +99,8 @@ class Profile extends Component {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    marginBottom: '20px'
                 }}>
                     {/* Title Wrapper */}
                     <div style = {{
