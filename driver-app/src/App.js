@@ -30,10 +30,10 @@ function App() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route exact path = '/' component = {LandingPage}></Route>
+                <ProtectedRoute exact path = '/' component = {HomePage}></ProtectedRoute>
                 <Route exact path = '/register' component = {Register}></Route>
                 <ProtectedRoute exact path = '/app' component = {AppView}></ProtectedRoute>
-                <ProtectedRoute exact path = '/home' component = {HomePage}></ProtectedRoute>
+                <Route exact path = '/sign-in' component = {LandingPage}></Route>
                 <ProtectedRoute exact path = '/profile' component = {Profile}></ProtectedRoute>
                 <Route path = "*" component = {() => {
                     return(

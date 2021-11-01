@@ -584,7 +584,7 @@ class HomePage extends Component {
                     // backgroundImage: `url(${background})`,
                     display: 'flex',
                     flexDirection: 'row',
-                    paddingLeft: '100px',
+                    paddingLeft: '60px',
                     width: '100%',
                 }}>
                     <Modal style = {{

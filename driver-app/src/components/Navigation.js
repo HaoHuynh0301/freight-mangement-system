@@ -18,11 +18,11 @@ class DoubleNavigationPage extends React.Component {
         return(
             <ReactBoostrap.Navbar collapseOnSelect expand="lg" bg={orangeColor} variant="light" style = {{backgroundColor: orangeColor}}>
                 <ReactBoostrap.Container>
-                    <ReactBoostrap.Navbar.Brand><Link style = {{textDecoration: "none", color: blackColor}} to = '#'>2HDelivery for driver</Link></ReactBoostrap.Navbar.Brand>
+                    <ReactBoostrap.Navbar.Brand><Link style = {{textDecoration: "none", color: blackColor}} to = '/home'>2HDelivery for driver</Link></ReactBoostrap.Navbar.Brand>
                     <ReactBoostrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <ReactBoostrap.Navbar.Collapse id="responsive-navbar-nav">
                         <ReactBoostrap.Nav className="me-auto">
-                        <ReactBoostrap.Nav.Link><Link style = {{textDecoration: "none", color: blackColor}} to = '#'>Trang chủ</Link></ReactBoostrap.Nav.Link>
+                        <ReactBoostrap.Nav.Link><Link style = {{textDecoration: "none", color: blackColor}} to = '/home'>Trang chủ</Link></ReactBoostrap.Nav.Link>
                         <ReactBoostrap.Nav.Link href="#pricing"></ReactBoostrap.Nav.Link>
                         <ReactBoostrap.NavDropdown title="Đơn hàng" id="collasible-nav-dropdown">
                             <ReactBoostrap.NavDropdown.Item><Link style = {{textDecoration: "none", color: blackColor}} to = '#'>Đơn hàng của bạn</Link></ReactBoostrap.NavDropdown.Item>
