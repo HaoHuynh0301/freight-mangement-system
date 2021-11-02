@@ -100,22 +100,16 @@ class MyOrders extends Component {
                         height: '100%',
                         width: '100%',
                         border: 'solid 0.5px grey'
-                    }} center={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]} zoom={10} scrollWheelZoom={true}>
+                    }} center={[14.058324, 108.277199]} zoom={8} scrollWheelZoom={true}>
                         <TileLayer
                             attribution='Vị trí đơn hàng'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        {/* <Marker position={[this.state.deliveredAddress.latitude, this.state.deliveredAddress.longitude]}>
-                            <Popup>
-                                Vị trí giao dự kiến
-                            </Popup>
-                        </Marker>
-                        <Marker position={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]}>
-                            <Popup>
-                                Vị trí hiện tại
-                            </Popup>
-                        </Marker> */}
-                        <RoutingMachine />
+                         
+                        <RoutingMachine 
+                            delivered = {[this.state.deliveredAddress.latitude, this.state.deliveredAddress.longitude]}
+                            current = {[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]} 
+                        />
                     </MapContainer>
                     <div style = {{
                         display: 'flex',
@@ -138,16 +132,18 @@ class MyOrders extends Component {
                 border: 'solid 0.5px grey',
                 marginLeft: '20px'
             }}>
-                <MapContainer style = {{
+                {/* <MapContainer style = {{
                     height: '100%',
                     width: '100%',
                     border: 'solid 0.5px grey'
-                }} center={[14.058324, 108.277199]} zoom={5} scrollWheelZoom={true}>
+                }} center={[14.058324, 108.277199]} zoom={8} scrollWheelZoom={true}>
                     <TileLayer
                         attribution='Vị trí đơn hàng'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                </MapContainer>
+                    
+                </MapContainer> */}
+                Loading
             </div>
         );
     }
