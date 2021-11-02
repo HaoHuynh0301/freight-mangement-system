@@ -93,7 +93,6 @@ class MyOrders extends Component {
 
     Map = () => {
         if (this.state.deliveredAddress != null) {
-            console.log('Here')
             return(
                 <div style = {{
                     height: '100%',
@@ -105,7 +104,7 @@ class MyOrders extends Component {
                         height: '100%',
                         width: '100%',
                         border: 'solid 0.5px grey'
-                    }} center={[14.058324, 108.277199]} zoom={5} scrollWheelZoom={true}>
+                    }} center={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]} zoom={5} scrollWheelZoom={true}>
                         <TileLayer
                             attribution='Vị trí đơn hàng'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -185,8 +184,13 @@ class MyOrders extends Component {
 
     componentDidMount() {
         this.getInstanceAddress();
+        this.interval = setInterval(() => {this.getInstanceAddress()}, 5000);
         this.fetchTask();
         this.getOrderInformation();
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     getInstanceAddress = () => {
