@@ -185,3 +185,19 @@ class InstanceOrderView(APIView):
         if len(ordersOfDrivers) > 0 :
             return Response(serializers.OrderSerializer(ordersOfDrivers[0]).data, status = status.HTTP_200_OK)
         return Response({'status': 'Cannot found!'}, status = status.HTTP_404_NOT_FOUND)
+    
+    
+class UpdatePaidOrder(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.UpdatePaidOrderSerilizer
+    
+    def post(self, request, format = None):
+        orderId = request.data['order_id']
+        orders = models.Order.objects.filter(id = orderId)
+        if len(orders) > 0:
+            serializer = self.serializer_class(orders[0], data = {'isDone': True})
+            if serializer.is_valid():
+                serializer.save()
+                return Response({'msg': 'OK'}, status = status.HTTP_200_OK)
+            print(serializer.errors)
+        return Response({'msg': 'Not found'}, status = status.HTTP_400_BAD_REQUEST)

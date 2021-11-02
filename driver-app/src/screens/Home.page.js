@@ -347,7 +347,7 @@ class HomePage extends Component {
                             textDecoration: "none",
                             color: 'black',
                             textAlign: 'center'
-                        }} to = {'/my-orders/' + this.state.instanceOrderId + '/'}>Xem chi tiết</Link>
+                        }} to = {'/my-order/'}>Xem chi tiết</Link>
                     </div>
                 </div>
             );
@@ -442,13 +442,27 @@ class HomePage extends Component {
                 </div>
             );
         } else {
-            <div style = {{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center'
-            }}>
-                Không có yêu cầu nào
-            </div>
+            return(
+                <div style = {{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '300px',
+                    width: '400px',
+                    margin: '20px',
+                    borderRadius: '30px',
+                    border: 'solid 0.5px grey',
+                    boxShadow: '5px 10px 18px #888888',
+                    backgroundColor: 'white'
+                }}>
+                    <p style = {{
+                        fontSize: '20px',
+                        fontWeight: 'bold'
+                    }}>Đơn hàng hiện chưa có yêu cầu nào</p>
+                </div>
+            );
+            
         }
     }
 

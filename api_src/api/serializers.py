@@ -137,3 +137,9 @@ class UpdateDriverOrderSerilizer(serializers.ModelSerializer):
     class Meta:
         model = models.Order
         fields = ['driver', 'isRecieved']
+        
+        
+class UpdatePaidOrderSerilizer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Order
+        fields = ['isDone']
