@@ -35,6 +35,7 @@ class MyOrders extends Component {
         this.handleupdateOrder = this.handleupdateOrder.bind(this);
         this.handleupdateStatus = this.handleupdateStatus.bind(this);
         this.handleupPaid = this.handleupPaid.bind(this);
+        this.getInstanceAddress = this.getInstanceAddress.bind(this);
     }
 
     fetchTask = () => {
@@ -67,7 +68,6 @@ class MyOrders extends Component {
                 instanceOrders: null,
                 deliveredAddress: null
             });
-
             this.props.history.push('/');
         })
         .catch((error) => {
@@ -97,6 +97,11 @@ class MyOrders extends Component {
                         <Marker position={[this.state.deliveredAddress.latitude, this.state.deliveredAddress.longitude]}>
                             <Popup>
                                 Vị trí giao dự kiến
+                            </Popup>
+                        </Marker>
+                        <Marker position={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]}>
+                            <Popup>
+                                Vị trí hiện tại
                             </Popup>
                         </Marker>
                     </MapContainer>
@@ -149,7 +154,6 @@ class MyOrders extends Component {
             })
             axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
             .then((response) => {
-                console.log(response.data.data[0]);
                 this.setState({
                     deliveredAddress: response.data.data[0]
                 })
@@ -164,14 +168,27 @@ class MyOrders extends Component {
     }
 
     componentDidMount() {
+        this.getInstanceAddress();
         this.fetchTask();
         this.getOrderInformation();
+    }
+
+    getInstanceAddress = () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            let context = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            }
+            this.setState({
+                instanceAddress: context
+            });
+        });
     }
 
     renderOrderInformation = () => {
         let isFetch = false;
         let renderItem;
-        if (this.state.instanceOrders !== null) {
+        if (this.state.instanceOrders !== null && this.state.instanceOrders !== null) {
             renderItem = (title, value) => {
                 return(
                     <div style = {{
