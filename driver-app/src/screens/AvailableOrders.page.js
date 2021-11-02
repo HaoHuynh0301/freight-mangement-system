@@ -186,7 +186,11 @@ class AvailableOrders extends Component {
                 <Footer />
                 <Modal style = {{
                         borderRadius: '20px'
-                    }} show={this.state.showModal} onHide={this.handleClose}>
+                    }} show={this.state.showModal} onHide={() => {
+                        this.setState({
+                            showModal: false
+                        })
+                    }}>
                         <Modal.Header closeButton>
                             <Modal.Title>Thông tin đơn hàng</Modal.Title>
                         </Modal.Header>
@@ -263,7 +267,7 @@ class AvailableOrders extends Component {
                             Nhận đơn hàng
                         </Button>
                         </Modal.Footer>
-                    </Modal>
+                </Modal>
             </div>
         );
     }

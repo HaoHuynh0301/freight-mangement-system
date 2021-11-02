@@ -155,7 +155,10 @@ class SetDriverOrderView(APIView):
         token = request.headers['Authorization']
         payload = jwt.decode(jwt = token[7: len(token)], key = settings.SECRET_KEY, algorithms = ['HS256'])
         instanceDriver = models.Driver.objects.filter(id = payload['user_id'])
-        print(instanceDriver)
+        ordersOfDrivers = instanceDriver[0].order_set.all()
+        for order in ordersOfDrivers:
+            if order.isDone == False:
+                return Response({'msg': 'Driver is in another order.'}, status = status.HTTP_400_BAD_REQUEST)
         orderId = request.data['orderId']
         instanceOrders = models.Order.objects.filter(id = orderId)
         serializer = self.serializer_class(instanceOrders[0], data = {'driver': instanceDriver[0].id, 'isRecieved': True})
