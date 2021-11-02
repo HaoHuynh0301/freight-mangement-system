@@ -54,10 +54,11 @@ class HomePage extends Component {
         this.handleCloseAndGetOrder = this.handleCloseAndGetOrder.bind(this);
         this.handleOpenOrderDetail = this.handleOpenOrderDetail.bind(this);
         this.getInstanceOrder = this.getInstanceOrder.bind(this);
+        this.getInstanceAddress = this.getInstanceAddress.bind(this);
     }
 
     Map = () => {
-        if(this.state.instanceAddress != null) {
+        if(this.state.instanceAddress !== null) {
             return(
                 <div style = {{
                     height: '250px',
@@ -179,11 +180,31 @@ class HomePage extends Component {
 
 
     componentDidMount() {
+        this.getInstanceAddress();
+        this.interval = setInterval(() => {this.getInstanceAddress()}, 10000);
         this.getInformation();
         this.getAvailableOrders();
         this.getInstanceOrder();
         this.setState({
             token: localStorage.get('token')
+        });
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
+    // Hàm lấy vị trí hiện tại của tài xế
+    getInstanceAddress = () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            let context = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            }
+            console.log(position.coords.latitude + ' - ' + position.coords.longitude)
+            this.setState({
+                instanceAddress: context
+            });
         });
     }
 
