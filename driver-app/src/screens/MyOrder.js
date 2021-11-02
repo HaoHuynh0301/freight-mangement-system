@@ -1,24 +1,20 @@
 import { extend } from "leaflet";
 import React, { Component } from "react";
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import background from '../assets/homePageBackground.jpg';
+import L from "leaflet";
+import "leaflet-routing-machine";
 import './css/myScreenStyle.css';
 import {
     ipAddress
 } from '../contants';
 import axios from "axios";
-import {
-    Link,
-    Redirect,
-    Route,
-    useHistory ,
-    withRouter 
-} from "react-router-dom";
 import { 
     DoubleNavigationPage ,
     Footer
 } from "../components";
+import { RoutingMachine } from ".";
 const localStorage = require('local-storage');
 
 class MyOrders extends Component {
@@ -104,12 +100,12 @@ class MyOrders extends Component {
                         height: '100%',
                         width: '100%',
                         border: 'solid 0.5px grey'
-                    }} center={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]} zoom={5} scrollWheelZoom={true}>
+                    }} center={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]} zoom={10} scrollWheelZoom={true}>
                         <TileLayer
                             attribution='Vị trí đơn hàng'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        <Marker position={[this.state.deliveredAddress.latitude, this.state.deliveredAddress.longitude]}>
+                        {/* <Marker position={[this.state.deliveredAddress.latitude, this.state.deliveredAddress.longitude]}>
                             <Popup>
                                 Vị trí giao dự kiến
                             </Popup>
@@ -118,7 +114,8 @@ class MyOrders extends Component {
                             <Popup>
                                 Vị trí hiện tại
                             </Popup>
-                        </Marker>
+                        </Marker> */}
+                        <RoutingMachine />
                     </MapContainer>
                     <div style = {{
                         display: 'flex',
@@ -171,7 +168,8 @@ class MyOrders extends Component {
             .then((response) => {
                 this.setState({
                     deliveredAddress: response.data.data[0]
-                })
+                });
+                console.log(response.data.data[0]);
             })
             .catch((error) => {
                 console.log(error);
