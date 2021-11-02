@@ -165,16 +165,15 @@ class HomePage extends Component {
                 Authorization: `Bearer ${token}`
             }
         })
-        .then(async (response) => {
-            alert('Nhận đơn hàng thành công');
-            console.log(response.data)
+        .then((response) => {
+            alert('NHẬN ĐƠN HÀNG THÀNH CÔNG!');
             this.setState({
-                showModal: false,
-                instanceOrders: response.data
-            });
+                avaiOrders: response.data,
+                showModal: false
+            })
         })
         .catch((error) => {
-            alert('Đã có lỗi xảy ra trong quá trình lấy thông tin, vui lòng thử lại sau!');
+            alert('BẠN ĐANG TRONG QUÁ TRÌNH VẬN CHUYỂN ĐƠN HÀNG KHÁC, VUI LÒNG THỬ LẠI SAU');
         })
     }
 
@@ -274,32 +273,21 @@ class HomePage extends Component {
     // Hàm lấy đơn hàng hiện tại của tài xế
     getInstanceOrder = () => {
         const token = localStorage.get('token');
-        axios.get(`${ipAddress}/api/instance-order?order_id=17`, {
+        axios.get(`${ipAddress}/api/instance-order`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
             }
         })
         .then((response) => {
-            console.log(response.data);
             this.setState({
-                instanceOrderId: response.data.id
-            });
-            axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
-            .then(async (response) => {
-                let tmpArr = response.data.data;
-                await this.setState({
-                    instanceAddress: tmpArr[0]
-                });
-                console.log(this.state.instanceAddress);
+                instanceOrders: response.data
             })
-            .catch((error) => {
-                // alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
-            });
+            console.log(this.state.instanceOrders)
         })
         .catch((error) => {
-            // alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
-        });
+            alert('ĐÃ CÓ LỖI TRONG QUÁ TRÌNH LẤY DỮ LIỆU!');
+        })
     }
 
     // Hàm xử lý sự kiện xử lý request của khách hàng
@@ -322,7 +310,7 @@ class HomePage extends Component {
 
     // Màn hình hiển thị chuyến xe hiện tại
     instanceOrder = () => {
-        if(this.state.instanceOrders == null) {
+        if(this.state.instanceOrders !== null) {
             return(
                 <div className = 'dashBoardInstanceOrderWrapper'>
                     {this.Map()}
@@ -338,10 +326,17 @@ class HomePage extends Component {
                     }}>
                         <p style = {{
                             fontSize: '15px'
-                        }}>Quan Như Tiên - 0918026392 - Màn hình - 10000VNĐ</p>
+                        }}>
+                            {this.state.instanceOrders.customer_name} - 
+                            {this.state.instanceOrders.customer_phonenumber} - 
+                            {this.state.instanceOrders.product_name} - 
+                            {this.state.instanceOrders.cast} VNĐ
+                        </p>
                         <p style = {{
                             fontSize: '15px'
-                        }}>Địa chỉ: số 59/31, Hưng Lợi, Ninh Kiều</p>
+                        }}>
+                            Địa chỉ: {this.state.instanceOrders.detail_address}, {this.state.instanceOrders.ward}, {this.state.instanceOrders.district}, {this.state.instanceOrders.province}
+                        </p>
                         <Link style = {{
                             width: '95%',
                             alignSelf: 'center',
@@ -370,6 +365,7 @@ class HomePage extends Component {
                     borderRadius: '30px',
                     border: 'solid 0.5px grey',
                     boxShadow: '5px 10px 18px #888888',
+                    backgroundColor: 'white'
                 }}>
                     <p style = {{
                         fontSize: '20px',

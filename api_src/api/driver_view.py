@@ -178,10 +178,10 @@ class InstanceOrderView(APIView):
     serializers_class = serializers.InstanceAddressSerilizer
     
     def get(self, request, format = None):
-        orderId = request.query_params.get('order_id')
-        instanceOrder = models.Order.objects.filter(id = orderId)
-        if len(instanceOrder) > 0:
-            instanceAddress = instanceOrder[0].instanceaddress_set.all()
-            serializer = self.serializers_class(instanceAddress[0])
-            return Response(serializer.data, status = status.HTTP_200_OK)
+        token = request.headers['Authorization']
+        payload = jwt.decode(jwt = token[7: len(token)], key = settings.SECRET_KEY, algorithms = ['HS256'])
+        instanceDriver = models.Driver.objects.filter(id = payload['user_id'])
+        ordersOfDrivers = instanceDriver[0].order_set.filter(isDone = False)
+        if len(ordersOfDrivers) > 0 :
+            return Response(serializers.OrderSerializer(ordersOfDrivers[0]).data, status = status.HTTP_200_OK)
         return Response({'status': 'Cannot found!'}, status = status.HTTP_404_NOT_FOUND)
