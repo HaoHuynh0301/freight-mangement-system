@@ -25,10 +25,10 @@ class MyOrders extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            orderInformation: {},
+            orderInformation: null,
             instanceAddress: null,
             deliveredAddress: null,
-            instanceOrders: {}
+            instanceOrders: null
         }
         this.fetchTask = this.fetchTask.bind(this);
         this.renderOrderInformation = this.renderOrderInformation.bind(this);
@@ -52,7 +52,27 @@ class MyOrders extends Component {
     }
 
     handleupPaid = () => {
-        alert('Paid');
+        const token = localStorage.get('token');
+        axios.post(`${ipAddress}/api/set_paid_order/`, {
+            order_id: this.state.instanceOrders.id
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            alert('Cập nhật thành công!');
+            this.setState({
+                instanceOrders: null,
+                deliveredAddress: null
+            });
+
+            this.props.history.push('/');
+        })
+        .catch((error) => {
+            alert('ĐÃ CÓ LỖI XẢY RA! VUI LÒNG THỬ LẠI SAU!');
+        });
     }
 
     Map = () => {
@@ -151,7 +171,7 @@ class MyOrders extends Component {
     renderOrderInformation = () => {
         let isFetch = false;
         let renderItem;
-        if (this.state.orderInformation != null) {
+        if (this.state.instanceOrders !== null) {
             renderItem = (title, value) => {
                 return(
                     <div style = {{
@@ -194,7 +214,7 @@ class MyOrders extends Component {
                     }}> 
                         <p style = {{
                             fontSize: '16px',
-                        }}>Ghi chú: {this.state.orderInformation.note}</p>
+                        }}>Ghi chú: {this.state.instanceOrders.note}</p>
                     </div>
                 </div>
             );

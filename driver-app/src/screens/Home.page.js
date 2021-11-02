@@ -286,7 +286,7 @@ class HomePage extends Component {
             console.log(this.state.instanceOrders)
         })
         .catch((error) => {
-            alert('ĐÃ CÓ LỖI TRONG QUÁ TRÌNH LẤY DỮ LIỆU!');
+            console.log('Error');
         })
     }
 
