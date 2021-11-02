@@ -4,9 +4,6 @@ import {
     Footer
 } from '../components';
 import {
-    orangeColor,
-    orangeBlur,
-    greyColor,
     ipAddress,
 } from '../contants';
 import { 
@@ -56,7 +53,25 @@ class AvailableOrders extends Component {
     }
 
     handleCloseAndGetOrder = () => {
-
+        const token = localStorage.get('token');
+        axios.post(`${ipAddress}/api/recieve-order/`, {
+            orderId: this.state.tmpOrders.id
+        } , {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            alert('NHẬN ĐƠN HÀNG THÀNH CÔNG!');
+            this.setState({
+                avaiOrders: response.data,
+                showModal: false
+            })
+        })
+        .catch((error) => {
+            alert('BẠN ĐANG TRONG QUÁ TRÌNH VẬN CHUYỂN ĐƠN HÀNG KHÁC, VUI LÒNG THỬ LẠI SAU');
+        })
     }
 
     componentDidMount = () => {

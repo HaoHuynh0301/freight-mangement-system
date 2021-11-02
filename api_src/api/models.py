@@ -175,7 +175,7 @@ class Order(models.Model):
     status = models.ForeignKey(OrderStatus, on_delete = models.CASCADE, related_name = 'order_status')
     cast = models.IntegerField()
     note = models.TextField()
-    driver = models.ForeignKey(Driver, on_delete = models.SET_NULL, null = True)
+    driver = models.ForeignKey(Driver, on_delete = models.SET_NULL, null = True, blank = True)
     isRecieved = models.BooleanField(default = False)
     isDone = models.BooleanField(default = False)
     # product_image = models.ImageField(null = True, blank = True, upload_to = 'images/')
