@@ -44,7 +44,23 @@ class MyOrders extends Component {
 
     // Handle Update order function
     handleupdateOrder = () => {
-        alert('Update');
+        const token = localStorage.get('token');
+        axios.post(`${ipAddress}/api/update-location/`, {
+            order_id: this.state.instanceOrders.id,
+            latitude: this.state.instanceAddress.latitude,
+            longitude: this.state.instanceAddress.longitude
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            alert('CẬP NHẬT THÀNH CÔNG!');
+        })
+        .catch((error) => {
+            alert('ĐÃ CÓ LỖI XẢY RA! VUI LÒNG THỬ LẠI SAU!');
+        })
     }
 
     // Handle Update request function
