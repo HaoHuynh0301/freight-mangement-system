@@ -194,8 +194,8 @@ class Order(models.Model):
 
 class InstanceAddress(models.Model):
     order = models.ForeignKey(Order, on_delete = models.CASCADE)
-    detail_address = models.CharField(max_length = 255, null = False, blank = True)
-    province = models.CharField(max_length = 255)
+    latitude = models.CharField(max_length = 255, null = True, blank = True)
+    longitude = models.CharField(max_length = 255, null = True, blank = True)
     
     def __str__(self):
         return str(self.id)

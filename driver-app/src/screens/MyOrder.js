@@ -179,6 +179,7 @@ class MyOrders extends Component {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
             }
+            console.log(position.coords.latitude + ' - ' + position.coords.longitude)
             this.setState({
                 instanceAddress: context
             });
@@ -188,7 +189,7 @@ class MyOrders extends Component {
     renderOrderInformation = () => {
         let isFetch = false;
         let renderItem;
-        if (this.state.instanceOrders !== null && this.state.instanceOrders !== null) {
+        if (this.state.instanceOrders !== null && this.state.instanceAddress !== null) {
             renderItem = (title, value) => {
                 return(
                     <div style = {{

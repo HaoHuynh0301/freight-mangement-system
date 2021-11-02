@@ -329,12 +329,4 @@ class InstanceAddressView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     
     def get(self, request, format = None):
-        userInstance = request.user
-        orderId = request.query_params.get('order_id')
-        orders = userInstance.account_order.filter(id = orderId)
-        if len(orders) > 0:
-            instanceAddress = orders[0].instanceaddress_set.all()
-            if len(instanceAddress) > 0:
-                serializer = serializers.InstanceAddressSerilizer(instanceAddress[0])
-                return Response(serializer.data, status = status.HTTP_200_OK)
-        return Response({'error': 'There are some errors! Please try again!'}, status = status.HTTP_400_BAD_REQUEST)
+        pass

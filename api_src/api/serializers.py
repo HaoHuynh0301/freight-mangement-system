@@ -93,7 +93,7 @@ class InstanceAddressSerilizer(serializers.ModelSerializer):
 class UpdateInstanceAddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.InstanceAddress
-        fields = ['detail_address', 'province']
+        fields = ['latitude', 'longitude']
         
         
 class DriverSerializer(serializers.ModelSerializer):
