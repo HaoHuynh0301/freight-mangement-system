@@ -2,6 +2,7 @@ import { extend } from "leaflet";
 import React, { Component } from "react";
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import background from '../assets/homePageBackground.jpg';
 import './css/myScreenStyle.css';
 import {
     ipAddress
@@ -237,7 +238,8 @@ class MyOrders extends Component {
                 <div style = {{
                     display: 'flex',
                     flexDirection: 'row',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    backgroundImage: `url(${background})`,
                 }}>
 
                     {/* General View Wrapper */}

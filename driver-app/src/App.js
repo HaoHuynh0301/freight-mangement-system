@@ -3,7 +3,8 @@ import {
     Register,
     HomePage,
     Profile,
-    MyOrders
+    MyOrders,
+    AvailableOrders
 } from './screens';
 import {
     BrowserRouter,
@@ -37,6 +38,7 @@ function App() {
                 <Route exact path = '/sign-in' component = {LandingPage}></Route>
                 <ProtectedRoute exact path = '/profile' component = {Profile}></ProtectedRoute>
                 <ProtectedRoute exact path = '/my-order' component = {MyOrders}></ProtectedRoute>
+                <ProtectedRoute exact path = '/available-orders' component = {AvailableOrders}></ProtectedRoute>
                 <Route path = "*" component = {() => {
                     return(
                         <div>

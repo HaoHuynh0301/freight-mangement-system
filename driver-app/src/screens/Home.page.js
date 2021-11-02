@@ -53,6 +53,7 @@ class HomePage extends Component {
         this.handleOpenOrder = this.handleOpenOrder.bind(this);
         this.handleCloseAndGetOrder = this.handleCloseAndGetOrder.bind(this);
         this.handleOpenOrderDetail = this.handleOpenOrderDetail.bind(this);
+        this.getInstanceOrder = this.getInstanceOrder.bind(this);
     }
 
     Map = () => {
@@ -190,7 +191,6 @@ class HomePage extends Component {
     // Hàm lấy thông tin
     async getInformation() {
         const token = localStorage.get('token');
-        console.log(token);
         axios.get(`${ipAddress}/api/driver-view/`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -253,55 +253,53 @@ class HomePage extends Component {
 
     // Hàm lấy đơn hàng hiện tại trên hệ thống
     getAvailableOrders = () => {
-        if(this.state.token !== null) {
-            axios.get(`${ipAddress}/api/available-order/`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${this.state.token}`
-                }
-            })
-            .then((response) => {
-                this.setState({
-                    avaiOrders: response.data
-                });
-                console.log(this.state.avaiOrders);
-            })
-            .catch((error) => {
-                console.log('Error');
+        const token = localStorage.get('token');
+        axios.get(`${ipAddress}/api/available-order/`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            this.setState({
+                avaiOrders: response.data
             });
-        }
-
+            console.log(this.state.avaiOrders);
+        })
+        .catch((error) => {
+            console.log('Error');
+        });
     }
 
     // Hàm lấy đơn hàng hiện tại của tài xế
     getInstanceOrder = () => {
-        if(this.state.token !== null) {
-            axios.get(`${ipAddress}/api/instance-order?order_id=17`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${this.state.token}`
-                }
-            })
-            .then((response) => {
-                this.setState({
-                    instanceOrderId: response.data.id
+        const token = localStorage.get('token');
+        axios.get(`${ipAddress}/api/instance-order?order_id=17`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            console.log(response.data);
+            this.setState({
+                instanceOrderId: response.data.id
+            });
+            axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
+            .then(async (response) => {
+                let tmpArr = response.data.data;
+                await this.setState({
+                    instanceAddress: tmpArr[0]
                 });
-                axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
-                .then(async (response) => {
-                    let tmpArr = response.data.data;
-                    await this.setState({
-                        instanceAddress: tmpArr[0]
-                    });
-                })
-                .catch((error) => {
-                    // alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
-                });
+                console.log(this.state.instanceAddress);
             })
             .catch((error) => {
                 // alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
             });
-        }
-        
+        })
+        .catch((error) => {
+            // alert('Đã có lỗi trong quá trình lấy dữ liệu, xin thử lại sau!');
+        });
     }
 
     // Hàm xử lý sự kiện xử lý request của khách hàng

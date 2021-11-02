@@ -26,7 +26,7 @@ class DoubleNavigationPage extends React.Component {
                         <ReactBoostrap.Nav.Link href="#pricing"></ReactBoostrap.Nav.Link>
                         <ReactBoostrap.NavDropdown title="Đơn hàng" id="collasible-nav-dropdown">
                             <ReactBoostrap.NavDropdown.Item><Link style = {{textDecoration: "none", color: blackColor}} to = '/my-order'>Đơn hàng của bạn</Link></ReactBoostrap.NavDropdown.Item>
-                            <ReactBoostrap.NavDropdown.Item><Link style = {{textDecoration: "none", color: blackColor}} to = '#'>Đơn hàng hiện có</Link></ReactBoostrap.NavDropdown.Item>
+                            <ReactBoostrap.NavDropdown.Item><Link style = {{textDecoration: "none", color: blackColor}} to = '/available-orders'>Đơn hàng hiện có</Link></ReactBoostrap.NavDropdown.Item>
                         </ReactBoostrap.NavDropdown>
                         </ReactBoostrap.Nav>
                         <ReactBoostrap.Nav>
