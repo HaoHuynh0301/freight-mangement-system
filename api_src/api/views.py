@@ -325,8 +325,13 @@ class StatusUpdate(APIView):
         return Response({'status': 'errors'}, status = status.HTTP_400_BAD_REQUEST)
      
 
-class InstanceAddressView(APIView):
+class StatusOrderView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     
     def get(self, request, format = None):
-        pass
+        orderId = request.query_params.get('order_id')
+        orders = models.Order.objects.filter(id = orderId)
+        if len(orders) > 0:
+            orderStatus = orders[0].status
+            return Response(orderStatus.name, status = status.HTTP_200_OK)
+        return Response({'msg': 'Error'}, status = status.HTTP_400_BAD_REQUEST)

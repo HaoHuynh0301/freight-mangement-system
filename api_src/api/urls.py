@@ -18,7 +18,7 @@ urlpatterns = [
     path('specific-order/', views.SpecificOrderView.as_view(), name = 'specific-orders'),
     path('status-update/', views.StatusUpdate.as_view(), name = 'status-update'),
     path('list-request/', views.ListRequestView.as_view(), name = 'list-request'),
-    path('instance-address/', views.InstanceAddressView.as_view(), name = 'instance-address'),
+    path('status-order/', views.StatusOrderView.as_view(), name = 'status-order'),
     
     # ============= #
     
@@ -35,6 +35,6 @@ urlpatterns = [
     path('update-driver/', driver_view.UpdateDriverInformationView.as_view(), name = 'update-driver-information'),
     path('recieve-order/', driver_view.SetDriverOrderView.as_view(), name = 'recieve-order'),
     path('instance-order/', driver_view.InstanceOrderView.as_view(), name = 'instance-order'),
-    path('set_paid_order/', driver_view.UpdatePaidOrder.as_view(), name = 'update_paid')
+    path('set_paid_order/', driver_view.UpdatePaidOrder.as_view(), name = 'update_paid'),
 
 ]

@@ -14,7 +14,6 @@ import {
 import {
     orangeColor,
     ipAddress,
-    orderIcon
 } from '../contants';
 import userIcon from '../assets/userIcon.png';
 import carIcon from '../assets/carIcon.png';

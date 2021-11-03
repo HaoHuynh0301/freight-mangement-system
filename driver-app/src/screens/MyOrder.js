@@ -6,13 +6,16 @@ import loading from '../assets/loading.gif';
 import "leaflet-routing-machine";
 import './css/myScreenStyle.css';
 import './css/style.css';
+import { 
+    Button,
+    Modal
+} from 'react-bootstrap';
 import {
-    ipAddress, orangeColor
+    ipAddress
 } from '../contants';
 import axios from "axios";
 import { 
     DoubleNavigationPage,
-    Footer
 } from "../components";
 import { RoutingMachine } from ".";
 const localStorage = require('local-storage');
@@ -24,7 +27,9 @@ class MyOrders extends Component {
             orderInformation: null,
             instanceAddress: null,
             deliveredAddress: null,
-            instanceOrders: null
+            instanceOrders: null,
+            isShow: false,
+            updateStatus: null
         }
         this.fetchTask = this.fetchTask.bind(this);
         this.renderOrderInformation = this.renderOrderInformation.bind(this);
@@ -32,6 +37,7 @@ class MyOrders extends Component {
         this.handleupdateStatus = this.handleupdateStatus.bind(this);
         this.handleupPaid = this.handleupPaid.bind(this);
         this.getInstanceAddress = this.getInstanceAddress.bind(this);
+        this.getStatusUpdate = this.getStatusUpdate.bind(this);
     }
 
     fetchTask = () => {
@@ -61,7 +67,10 @@ class MyOrders extends Component {
 
     // Handle Update request function
     handleupdateStatus = () => {
-        alert('update request');
+        this.getStatusUpdate();
+        this.setState({
+            isShow: true
+        })
     }
 
     handleupPaid = () => {
@@ -192,6 +201,52 @@ class MyOrders extends Component {
         clearInterval(this.interval);
     }
 
+    getStatusUpdate = () => {
+        const token = localStorage.get('token')
+        axios.get(`${ipAddress}/api/status-update/?order_id=${this.state.instanceOrders.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            this.setState({
+                updateStatus: response.data
+            });
+            console.log(this.state.updateStatus);
+            var tmpList = []
+            tmpList = this.state.updateStatus;
+            for(let i=0; i<tmpList.length; i++) {
+                var statusName = '';
+                if(tmpList[i].status == 1) {
+                    statusName = 'Đang xử lý';
+                } else if(tmpList[i].status == 2) {
+                    statusName = 'Đã tiếp nhận';
+                } else if(tmpList[i].status == 3) {
+                    statusName = 'Đang giao';
+                } else if(tmpList[i].status == 4) {
+                    statusName = 'Đã giao, đang đối soát';
+                } else if(tmpList[i].status == 5) {
+                    statusName = 'Đã đối soát';
+                } else if(tmpList[i].status == 6) {
+                    statusName = 'Không giao được';
+                }
+                else if(tmpList[i].status == 7) {
+                    statusName = 'Đang vận chuyển';
+                }
+                tmpList[i].status = statusName;
+            }
+            this.setState({
+                updateStatus: tmpList
+            });
+            console.log(this.state.updateStatus);
+        })
+        .catch((error) => {
+            console.log('Error');
+        });
+        
+    }
+
     getInstanceAddress = () => {
         navigator.geolocation.getCurrentPosition((position) => {
             let context = {
@@ -297,6 +352,36 @@ class MyOrders extends Component {
                         {this.Map()}
                     </div>
                 </div>
+                <Modal style = {{
+                        borderRadius: '20px'
+                    }} show={this.state.isShow} onHide={() => {
+                        this.setState({
+                            isShow: false
+                        })
+                    }}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Thông tin đơn hàng</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            
+                        </Modal.Body>
+                        <Modal.Footer>
+                        <Button variant="secondary" onClick={() => {
+                            this.setState({
+                                isShow: false
+                            })
+                        }}>
+                            Đóng
+                        </Button>
+                        <Button variant="primary" onClick={() => {
+                            this.setState({
+                                isShow: false
+                            })
+                        }}>
+                            Nhận đơn hàng
+                        </Button>
+                        </Modal.Footer>
+                </Modal>
             </div>
             
         );
