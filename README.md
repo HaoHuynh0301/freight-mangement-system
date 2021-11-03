@@ -1,6 +1,8 @@
 # Preferences
 
 https://www.vietqr.io/danh-sach-api/api-danh-sach-ma-ngan-hang
+https://www.c-sharpcorner.com/article/what-and-why-reactjs/
+https://en.wikipedia.org/wiki/React_(JavaScript_library)
 https://provinces.open-api.vn/
 https://vapi-vnappmob.readthedocs.io/en/latest/province.html#get--api-province-district-(string-province_id)
 https://realpython.com/getting-started-with-django-channels/
