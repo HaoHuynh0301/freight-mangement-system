@@ -13,11 +13,13 @@ import {
 import {
     orangeColor,
     ipAddress,
+    orderIcon
 } from '../contants';
 import userIcon from '../assets/userIcon.png';
 import carIcon from '../assets/carIcon.png';
 import locationIcon from '../assets/locationIcon.png';
 import requestIcon from '../assets/requestIcon.png';
+import addIcon from '../assets/addIcon.png';
 import axios from "axios";
 import background from '../assets/homePageBackground.jpg';
 import loading from '../assets/loading.gif';
@@ -503,7 +505,7 @@ class HomePage extends Component {
         const itemView = this.state.avaiOrders.map((item, index) => {
             return(
                 <button style = {{
-                    width: '360px',
+                    width: 'auto',
                     backgroundColor: '#FFF',
                     border: 'solid 0.2px grey',
                     borderRadius: '15px',
@@ -513,19 +515,20 @@ class HomePage extends Component {
                 }}  className = 'dashBoardAvaiOrdersItem' onClick = {() => {
                     this.handleOpenOrder(item.id);
                 }}>
-                    <img style = {{
-                        height: '40px',
-                        width: '40px'
-                    }}></img>
                     <div className = 'dashBoardAvaiOrdersItemInforWrapper'>
-                        <p>Extra Fast</p>
                         <p style = {{
-                            color: 'grey'
+                            fontSize: '12px'
+                        }}>Extra Fast</p>
+                        <p style = {{
+                            color: 'grey',
+                            fontSize: '12px'
                         }}>{item.customer_name}</p>
                     </div>
-                    <p>- {item.cast}VND</p>
+                    <p style = {{
+                            fontSize: '12px'
+                        }}>- {item.cast}VND</p>
                     <button className = 'dashBoardBtnGetOrder'>
-                        <img style = {{
+                        <img src = {addIcon} style = {{
                             height: '25px',
                             width: '25px'
                         }} ></img>

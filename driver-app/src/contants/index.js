@@ -6,6 +6,7 @@ const orangeColor = '#ff7733';
 // const backgroundImage = require('../assets/background-image.jpg');
 // const backgroundUserImage = require('../assets/dashboard-user-image.jpg');
 const userIcon = require('../assets/userIcon.png');
+const orderIcon = require('../assets/orderIcon.png');
 
 // Text, color
 const fontSize = '18px';
@@ -24,5 +25,6 @@ export {
     blackColor,
     ipAddress,
     orangeBlur,
-    userIcon
+    userIcon,
+    orderIcon
 }
