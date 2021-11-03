@@ -5,8 +5,9 @@ import background from '../assets/homePageBackground.jpg';
 import loading from '../assets/loading.gif';
 import "leaflet-routing-machine";
 import './css/myScreenStyle.css';
+import './css/style.css';
 import {
-    ipAddress
+    ipAddress, orangeColor
 } from '../contants';
 import axios from "axios";
 import { 
@@ -91,7 +92,7 @@ class MyOrders extends Component {
             return(
                 <div style = {{
                     height: '100%',
-                    width: '800px',
+                    width: '100%',
                     border: 'solid 0.5px grey',
                     marginLeft: '20px'
                 }}>
@@ -114,11 +115,21 @@ class MyOrders extends Component {
                         display: 'flex',
                         flexDirection: 'row',
                         marginTop: '10px',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        width: '100%',                        
                     }}>
-                        <button className = 'myUserBtnStyle' onClick = {this.handleupdateOrder}>Cập nhật vị trí</button>
-                        <button className = 'myUserBtnStyle' onClick = {this.handleupdateStatus}>Cập nhật trạng thái</button>
-                        <button className = 'myUserBtnStyle' onClick = {this.handleupPaid}>Xác nhận thanh toán</button>
+                        <button className = 'btn btn-outline-primary' style = {{
+                            marginRight: '20px',
+                            color: 'black'
+                        }} onClick = {this.handleupdateOrder}>Cập nhật vị trí</button>
+                        <button className = 'btn btn-outline-primary' style = {{
+                            marginRight: '20px',
+                            color: 'black'
+                        }}  onClick = {this.handleupdateStatus}>Cập nhật trạng thái</button>
+                        <button className = 'btn btn-outline-primary' style = {{
+                            marginRight: '20px',
+                            color: 'black'
+                        }}  onClick = {this.handleupPaid}>Xác nhận thanh toán</button>
                     </div>
                 </div>
             );
@@ -126,7 +137,7 @@ class MyOrders extends Component {
         return(
             <div style = {{
                 height: '100%',
-                width: '800px',
+                width: '1000px',
                 border: 'solid 0.5px grey',
                 marginLeft: '20px',
                 backgroundColor: 'white',
@@ -268,7 +279,7 @@ class MyOrders extends Component {
                     <div style = {{
                         display: 'flex',
                         flexDirection: 'row',
-                        width: '70%',
+                        width: '100%',
                         // height: 'auto',
                         marginTop: '30px',
                         padding: '10px'
@@ -278,7 +289,7 @@ class MyOrders extends Component {
                             display: 'flex',
                             flexDirection: 'column',
                             border: 'solid 0.1px grey',
-                            width: '30%',
+                            width: '20%',
                             borderRadius: '15px'
                         }}>
                             {this.renderOrderInformation()}

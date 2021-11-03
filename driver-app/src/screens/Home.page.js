@@ -6,6 +6,7 @@ import  {
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import './css/dashBoardStyle.css';
+import './css/style.css';
 import { 
     Button,
     Modal
@@ -21,7 +22,7 @@ import locationIcon from '../assets/locationIcon.png';
 import requestIcon from '../assets/requestIcon.png';
 import addIcon from '../assets/addIcon.png';
 import axios from "axios";
-import background from '../assets/homePageBackground.jpg';
+import background from '../assets/delivery-background.jpg';
 import loading from '../assets/loading.gif';
 import {
     Link,
@@ -352,7 +353,7 @@ class HomePage extends Component {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'flex-start',
-                        height: '100%',
+                        height: '80%',
                         width: '100%',
                         padding: '10px',
                         paddingLeft: '20px',
@@ -371,16 +372,13 @@ class HomePage extends Component {
                         }}>
                             Địa chỉ: {this.state.instanceOrders.detail_address}, {this.state.instanceOrders.ward}, {this.state.instanceOrders.district}, {this.state.instanceOrders.province}
                         </p>
-                        <Link style = {{
-                            width: '95%',
-                            alignSelf: 'center',
-                            height: '30px',
-                            border: 'solid 0px grey',
-                            borderRadius: '15px',
+                        <Link className = 'btn mb-2 mb-md-0 btn-secondary btn-block btn-round' style = {{
+                            // width: '95%',
+                            height: '40%',
                             backgroundColor: orangeColor,
                             textDecoration: "none",
-                            color: 'black',
-                            textAlign: 'center'
+                            alignItems: 'center',
+                            justifyContent: 'center'
                         }} to = {'/my-order/'}>Xem chi tiết</Link>
                     </div>
                 </div>
@@ -516,17 +514,18 @@ class HomePage extends Component {
                     this.handleOpenOrder(item.id);
                 }}>
                     <div className = 'dashBoardAvaiOrdersItemInforWrapper'>
-                        <p style = {{
+                        <span style = {{
                             fontSize: '12px'
-                        }}>Extra Fast</p>
-                        <p style = {{
+                        }}>Extra Fast</span>
+                        <span style = {{
                             color: 'grey',
                             fontSize: '12px'
-                        }}>{item.customer_name}</p>
+                        }}>{item.customer_name}</span>
                     </div>
-                    <p style = {{
-                            fontSize: '12px'
-                        }}>- {item.cast}VND</p>
+                    <span style = {{
+                            fontSize: '12px',
+                            fontWeight: 'bold'
+                        }}>- {item.cast} VNĐ</span>
                     <button className = 'dashBoardBtnGetOrder'>
                         <img src = {addIcon} style = {{
                             height: '25px',
@@ -573,7 +572,7 @@ class HomePage extends Component {
                         flexDirection: 'row',
                         marginBottom: '10px',
                         justifyContent: 'center',
-                        alignItems: 'center'
+                        alignItems: 'center',
                     }}>
                         <img src = {carIcon} style = {{
                             height: '50px',
@@ -743,13 +742,13 @@ class HomePage extends Component {
                                         display: "flex",
                                         flexDirection: 'column'
                                     }}>
-                                        <p className = 'dashBoardTextStyle'>{this.state.driverInfor.name}</p>
-                                        <p className = 'dashBoardTextStyle'>{this.state.driverInfor.phone_number}</p>
+                                        <span className = 'dashBoardTextStyle'>Họ và tên: {this.state.driverInfor.name}</span>
+                                        <span className = 'dashBoardTextStyle'>Số điện thoại: {this.state.driverInfor.phone_number}</span>
                                     </div>
                                     <img src = {userIcon} style = {{
-                                        marginLeft: '50px',
-                                        height: '80px',
-                                        width: '80px'
+                                        marginLeft: '140px',
+                                        height: '60px',
+                                        width: '60px'
                                     }}/>
                                 </div>
                                 <div style = {{
