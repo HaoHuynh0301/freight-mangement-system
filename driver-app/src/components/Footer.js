@@ -1,5 +1,6 @@
 import appstore from '../assets/appstore.png';
 import chplay from '../assets/chplay.jpg';
+import footerImage from '../assets/footerImg.jpg';
 
 function Footer() {
     return(
@@ -38,12 +39,12 @@ function Footer() {
                 flexDirection: 'column',
                 alignItems: 'center'
             }}>
-                <img style = {{
+                <img src = {footerImage} style = {{
                     height: '120px',
                     width: '120px',
                     borderRadius: '10px'
                 }} ></img>
-                <p style = {{color: 'grey', fontSize: '13px', marginTop: '15px'}}>2021 2HDelivery</p>
+                <p style = {{color: 'grey', fontSize: '13px', marginTop: '15px'}}>2021 @2HDelivery</p>
             </div>
             <div>
                 <p style = {{fontSize: '18px', marginBottom: '10px', fontWeight: 'bold'}}>Địa chỉ công ty</p>
