@@ -143,3 +143,9 @@ class UpdatePaidOrderSerilizer(serializers.ModelSerializer):
     class Meta:
         model = models.Order
         fields = ['isDone']
+        
+        
+class updateStatusOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Order
+        fields = ['status']

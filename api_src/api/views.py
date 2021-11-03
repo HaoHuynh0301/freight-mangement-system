@@ -335,3 +335,18 @@ class StatusOrderView(APIView):
             orderStatus = orders[0].status
             return Response(orderStatus.name, status = status.HTTP_200_OK)
         return Response({'msg': 'Error'}, status = status.HTTP_400_BAD_REQUEST)
+    
+    
+    def post(self, request, format = None):
+        statusId = request.data['status_id']
+        orderId = request.data['order_id']
+        instanceStatus = models.OrderStatus.objects.filter(id = statusId)
+        instanceOrder = models.Order.objects.filter(id = orderId)
+        if len(instanceStatus) > 0 and len(instanceOrder) > 0:
+            models.StatusUpdate.objects.create(order = instanceOrder[0], status = instanceStatus[0])
+            serializer = serializers.updateStatusOrderSerializer(instanceOrder[0], data = {'status': instanceStatus[0].id})
+            if serializer.is_valid():
+                serializer.save()
+                return Response(instanceStatus[0].name, status = status.HTTP_200_OK)
+            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'msg': 'error'}, status = status.HTTP_400_BAD_REQUEST)

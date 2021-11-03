@@ -8,7 +8,8 @@ import './css/myScreenStyle.css';
 import './css/style.css';
 import { 
     Button,
-    Modal
+    Modal,
+    Dropdown
 } from 'react-bootstrap';
 import {
     ipAddress
@@ -29,7 +30,37 @@ class MyOrders extends Component {
             deliveredAddress: null,
             instanceOrders: null,
             isShow: false,
-            updateStatus: null
+            orderStatus: null,
+            ordersStatus: [
+                {
+                    id: 1,
+                    name: 'Đang xử lý'
+                },
+                {
+                    id: 2,
+                    name: 'Đã tiếp nhận'
+                },
+                {
+                    id: 3,
+                    name: 'Đang giao'
+                },
+                {
+                    id: 4,
+                    name: 'Đã giao, đang đối soát'
+                },
+                {
+                    id: 5,
+                    name: 'Đã đối soát'
+                },
+                {
+                    id: 6,
+                    name: 'Không giao được'
+                },
+                {
+                    id: 7,
+                    name: 'Đang vận chuyển'
+                }
+            ]
         }
         this.fetchTask = this.fetchTask.bind(this);
         this.renderOrderInformation = this.renderOrderInformation.bind(this);
@@ -70,6 +101,25 @@ class MyOrders extends Component {
         this.getStatusUpdate();
         this.setState({
             isShow: true
+        })
+    }
+
+    confirmUpdateStatus = (id) => {
+        const token = localStorage.get('token');
+        axios.post(`${ipAddress}/api/status-order/`, {
+            status_id: id,
+            order_id: this.state.instanceOrders.id
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            alert('ĐÃ CÓ LỖI VUI LÒNG THỬ LẠI');
         })
     }
 
@@ -203,7 +253,7 @@ class MyOrders extends Component {
 
     getStatusUpdate = () => {
         const token = localStorage.get('token')
-        axios.get(`${ipAddress}/api/status-update/?order_id=${this.state.instanceOrders.id}`, {
+        axios.get(`${ipAddress}/api/status-order?order_id=${this.state.instanceOrders.id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
@@ -211,35 +261,8 @@ class MyOrders extends Component {
         })
         .then((response) => {
             this.setState({
-                updateStatus: response.data
+                orderStatus: response.data
             });
-            console.log(this.state.updateStatus);
-            var tmpList = []
-            tmpList = this.state.updateStatus;
-            for(let i=0; i<tmpList.length; i++) {
-                var statusName = '';
-                if(tmpList[i].status == 1) {
-                    statusName = 'Đang xử lý';
-                } else if(tmpList[i].status == 2) {
-                    statusName = 'Đã tiếp nhận';
-                } else if(tmpList[i].status == 3) {
-                    statusName = 'Đang giao';
-                } else if(tmpList[i].status == 4) {
-                    statusName = 'Đã giao, đang đối soát';
-                } else if(tmpList[i].status == 5) {
-                    statusName = 'Đã đối soát';
-                } else if(tmpList[i].status == 6) {
-                    statusName = 'Không giao được';
-                }
-                else if(tmpList[i].status == 7) {
-                    statusName = 'Đang vận chuyển';
-                }
-                tmpList[i].status = statusName;
-            }
-            this.setState({
-                updateStatus: tmpList
-            });
-            console.log(this.state.updateStatus);
         })
         .catch((error) => {
             console.log('Error');
@@ -321,6 +344,13 @@ class MyOrders extends Component {
     }
 
     render() {
+        const statusItem = this.state.ordersStatus.map((item, index) => {
+            return(
+                <Dropdown.Item key = {index} href="#" onClick = {() => {
+                    this.confirmUpdateStatus(item.id);
+                }}>{item.name}</Dropdown.Item>
+            );
+        });
         return(
             <div>
                 <DoubleNavigationPage />
@@ -360,10 +390,30 @@ class MyOrders extends Component {
                         })
                     }}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Thông tin đơn hàng</Modal.Title>
+                            <Modal.Title>
+                                <p style = {{
+                                    fontWeight: 'bold',
+                                }}>Trạng thái đơn hàng</p>
+                            </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            
+                            <div style = {{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center'
+                            }}>
+                                <p style = {{
+                                    fontSize: '20px'
+                                }}>Trạng thái: {this.state.orderStatus}</p>
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        Chọn trạng thái
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        {statusItem}
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </div>
                         </Modal.Body>
                         <Modal.Footer>
                         <Button variant="secondary" onClick={() => {
@@ -378,7 +428,7 @@ class MyOrders extends Component {
                                 isShow: false
                             })
                         }}>
-                            Nhận đơn hàng
+                            Cập nhật trạng thái
                         </Button>
                         </Modal.Footer>
                 </Modal>
