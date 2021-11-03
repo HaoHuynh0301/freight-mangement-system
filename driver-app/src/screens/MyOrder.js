@@ -1,9 +1,8 @@
-import { extend } from "leaflet";
 import React, { Component } from "react";
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import background from '../assets/homePageBackground.jpg';
-import L from "leaflet";
+import loading from '../assets/loading.gif';
 import "leaflet-routing-machine";
 import './css/myScreenStyle.css';
 import {
@@ -11,7 +10,7 @@ import {
 } from '../contants';
 import axios from "axios";
 import { 
-    DoubleNavigationPage ,
+    DoubleNavigationPage,
     Footer
 } from "../components";
 import { RoutingMachine } from ".";
@@ -100,7 +99,7 @@ class MyOrders extends Component {
                         height: '100%',
                         width: '100%',
                         border: 'solid 0.5px grey'
-                    }} center={[14.058324, 108.277199]} zoom={8} scrollWheelZoom={true}>
+                    }} center={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]} zoom={8} scrollWheelZoom={true}>
                         <TileLayer
                             attribution='Vị trí đơn hàng'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -121,7 +120,6 @@ class MyOrders extends Component {
                         <button className = 'myUserBtnStyle' onClick = {this.handleupdateStatus}>Cập nhật trạng thái</button>
                         <button className = 'myUserBtnStyle' onClick = {this.handleupPaid}>Xác nhận thanh toán</button>
                     </div>
-                    
                 </div>
             );
         }
@@ -130,20 +128,16 @@ class MyOrders extends Component {
                 height: '100%',
                 width: '800px',
                 border: 'solid 0.5px grey',
-                marginLeft: '20px'
+                marginLeft: '20px',
+                backgroundColor: 'white',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
             }}>
-                {/* <MapContainer style = {{
-                    height: '100%',
-                    width: '100%',
-                    border: 'solid 0.5px grey'
-                }} center={[14.058324, 108.277199]} zoom={8} scrollWheelZoom={true}>
-                    <TileLayer
-                        attribution='Vị trí đơn hàng'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    
-                </MapContainer> */}
-                Loading
+                <img src = {loading} style = {{
+                    height: '60px',
+                    height: '60px'
+                }}></img>
             </div>
         );
     }
@@ -225,7 +219,11 @@ class MyOrders extends Component {
         }
         if (isFetch) {
             return(
-                <div>
+                <div style = {{
+                    backgroundColor: 'white',
+                    borderRadius: '10px',
+                    border: 'solid 0.5px black'
+                }}>
                     {renderItem("Tên khách hàng", this.state.instanceOrders.customer_name)}
                     {renderItem("Tên sản phẩm", this.state.instanceOrders.product_name)}
                     {renderItem("Tổng tiền", this.state.instanceOrders.cast + 'VNĐ')}
@@ -264,7 +262,6 @@ class MyOrders extends Component {
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'center',
-                    backgroundImage: `url(${background})`,
                 }}>
 
                     {/* General View Wrapper */}
@@ -272,7 +269,7 @@ class MyOrders extends Component {
                         display: 'flex',
                         flexDirection: 'row',
                         width: '70%',
-                        height: 'auto',
+                        // height: 'auto',
                         marginTop: '30px',
                         padding: '10px'
                     }}>

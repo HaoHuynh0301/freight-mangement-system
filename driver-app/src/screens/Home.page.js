@@ -12,8 +12,6 @@ import {
 } from 'react-bootstrap';
 import {
     orangeColor,
-    orangeBlur,
-    greyColor,
     ipAddress,
 } from '../contants';
 import userIcon from '../assets/userIcon.png';
@@ -22,13 +20,11 @@ import locationIcon from '../assets/locationIcon.png';
 import requestIcon from '../assets/requestIcon.png';
 import axios from "axios";
 import background from '../assets/homePageBackground.jpg';
+import loading from '../assets/loading.gif';
 import {
     Link,
-    Redirect,
-    Route,
-    useHistory ,
-    withRouter 
 } from "react-router-dom";
+import { RoutingMachine } from ".";
 const localStorage = require('local-storage');
 
 class HomePage extends Component {
@@ -44,6 +40,7 @@ class HomePage extends Component {
             tmpOrders: {},
             instanceAddress: null,
             instanceOrderId: null,
+            deliveredAddress: null,
             token: null
         }
         this.getInformation = this.getInformation.bind(this);
@@ -53,12 +50,12 @@ class HomePage extends Component {
         this.handleOpenOrder = this.handleOpenOrder.bind(this);
         this.handleCloseAndGetOrder = this.handleCloseAndGetOrder.bind(this);
         this.handleOpenOrderDetail = this.handleOpenOrderDetail.bind(this);
-        this.getInstanceOrder = this.getInstanceOrder.bind(this);
         this.getInstanceAddress = this.getInstanceAddress.bind(this);
+        this.getOrderInformation = this.getOrderInformation.bind(this);
     }
 
     Map = () => {
-        if(this.state.instanceAddress !== null) {
+        if(this.state.instanceAddress !== null && this.state.deliveredAddress !== null) {
             return(
                 <div style = {{
                     height: '250px',
@@ -69,21 +66,15 @@ class HomePage extends Component {
                         height: '200px',
                         width: '100%',
                         border: 'solid 0.5px grey'
-                    }} center={[14.058324, 108.277199]} zoom={5} scrollWheelZoom={true}>
+                    }} center={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]} zoom={5} scrollWheelZoom={true}>
                         <TileLayer
                             attribution='Vị trí đơn hàng'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        <Marker position={[21.0245, 105.84117]}>
-                            <Popup>
-                                Vị trí giao dự kiến
-                            </Popup>
-                        </Marker>
-                        <Marker position={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]}>
-                            <Popup>
-                                Vị trí hiện tại
-                            </Popup>
-                        </Marker>
+                        <RoutingMachine 
+                            delivered = {[this.state.deliveredAddress.latitude, this.state.deliveredAddress.longitude]}
+                            current = {[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]} 
+                        />
                     </MapContainer>
                 </div>
             );
@@ -92,23 +83,15 @@ class HomePage extends Component {
                 <div style = {{
                     height: '250px',
                     width: '400px',
-                    border: 'solid 0.5px grey'
+                    border: 'solid 0.5px grey',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
                 }}>
-                    <MapContainer style = {{
-                        height: '200px',
-                        width: '100%',
-                        border: 'solid 0.5px grey'
-                    }} center={[14.058324, 108.277199]} zoom={5} scrollWheelZoom={false}>
-                        <TileLayer
-                            attribution='Vị trí đơn hàng'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        <Marker position={[21.0245, 105.84117]}>
-                            <Popup>
-                                Vị trí giao dự kiến
-                            </Popup>
-                        </Marker>
-                    </MapContainer>
+                    <img src = {loading} style = {{
+                        height: '30px',
+                        width: '30px'
+                    }}></img>
                 </div>
             );
         }
@@ -182,9 +165,9 @@ class HomePage extends Component {
     componentDidMount() {
         this.getInstanceAddress();
         this.interval = setInterval(() => {this.getInstanceAddress()}, 10000);
+        this.getOrderInformation();
         this.getInformation();
         this.getAvailableOrders();
-        this.getInstanceOrder();
         this.setState({
             token: localStorage.get('token')
         });
@@ -192,6 +175,34 @@ class HomePage extends Component {
 
     componentWillUnmount() {
         clearInterval(this.interval);
+    }
+
+    getOrderInformation = () => {
+        const token = localStorage.get('token');
+        axios.get(`${ipAddress}/api/instance-order`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            this.setState({
+                instanceOrders: response.data
+            })
+            axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
+            .then((response) => {
+                this.setState({
+                    deliveredAddress: response.data.data[0]
+                });
+                console.log(response.data.data[0]);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        })
+        .catch((error) => {
+            alert('ĐÃ CÓ LỖI TRONG QUÁ TRÌNH LẤY DỮ LIỆU!');
+        })
     }
 
     // Hàm lấy vị trí hiện tại của tài xế

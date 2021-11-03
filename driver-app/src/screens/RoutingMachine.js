@@ -9,7 +9,7 @@ const createRoutineMachineLayer = (props) => {
             L.latLng(props.current[0], props.current[1])
         ],
         lineOptions: {
-            styles: [{ color: "#6FA1EC", weight: 4 }]
+            styles: [{ color: "#6FA1EC", weight: 2}]
         },
         show: false,
         addWaypoints: false,
