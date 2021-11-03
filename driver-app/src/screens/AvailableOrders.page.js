@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap';
 import background from '../assets/delivery-background.jpg';
 import { ScrollView } from "@cantonjs/react-scroll-view";
+import rightArrow from '../assets/right-arrow.png';
 import axios from "axios";
 const localStorage = require('local-storage');
 
@@ -111,10 +112,10 @@ class AvailableOrders extends Component {
                     alignItems: 'center',
                     flexDirection: 'column'
                 }}>
-                    <p style = {{
+                    <span style = {{
                         fontWeight: 'bold',
                         fontSize: '22px'
-                    }}>HỆ THỐNG HIỆN KHÔNG CÓ ĐƠN HÀNG CÓ SẴN</p>
+                    }}>HỆ THỐNG HIỆN KHÔNG CÓ ĐƠN HÀNG CÓ SẴN</span>
                     <button onClick = {() => {
                         this.props.history.push('/');
                     }} style = {{
@@ -146,26 +147,33 @@ class AvailableOrders extends Component {
                             <div style = {{
                                 display: 'flex',
                                 flexDirection: 'column',
-                                alignItems: 'center',
+                                alignItems: 'flex-start',
                                 justifyContent: 'flex-start',
-                                paddingTop: '10px'
+                                paddingTop: '20px',
+                                paddingLeft: '10px'
                             }}>
-                                <p style = {{
-                                    marginLeft: '20px'
-                                }}>Tên khách hàng: {item.customer_name}</p>
-                                <p style = {{
-                                    marginLeft: '28px'
-                                }}>Số điện thoại: {item.customer_phonenumber}</p>
-                                <p style = {{
-                                    marginLeft: '5px'
-                                }}>Vật phẩm: {item.product_name}</p>
+                                <span style = {{
+                                    // marginLeft: '20px'
+                                }}>Tên khách hàng: {item.customer_name}</span>
+                                <span style = {{
+                                    // marginLeft: '28px'
+                                }}>Số điện thoại: {item.customer_phonenumber}</span>
+                                <span style = {{
+                                    // marginLeft: '5px'
+                                }}>Vật phẩm: {item.product_name}</span>
                             </div>
                             <p style  = {{
-                                marginTop: '40px',
-                                marginLeft: '100px',
+                                marginTop: '35px',
+                                marginLeft: '40px',
                                 fontSize: '22px',
                                 fontWeight: 'bold'
                             }}>Tổng tiền: {item.cast} VNĐ</p>
+                            <img src = {rightArrow} style = {{
+                                height: '20px',
+                                width: '20px',
+                                marginTop: '41px',
+                                marginLeft: '72px',
+                            }}></img>
                         </button>
                     </div>
                 );
