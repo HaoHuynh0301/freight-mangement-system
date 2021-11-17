@@ -161,7 +161,7 @@ class MyOrders extends Component {
                         height: '100%',
                         width: '100%',
                         border: 'solid 0.5px grey'
-                    }} center={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]} zoom={8} scrollWheelZoom={true}>
+                    }} center={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]} zoom={6} scrollWheelZoom={true}>
                         <TileLayer
                             attribution='Vị trí đơn hàng'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
