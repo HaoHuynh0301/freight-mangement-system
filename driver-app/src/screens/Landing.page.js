@@ -27,6 +27,7 @@ class LandingPage extends Component {
 
     handleSignIn(event) {
         event.preventDefault();
+        console.log('OK')
         axios.post(`${ipAddress}/api/driver-signin/`, {
             username: this.state.username,
             password: this.state.password

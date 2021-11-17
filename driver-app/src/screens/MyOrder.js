@@ -116,7 +116,9 @@ class MyOrders extends Component {
             }
         })
         .then((response) => {
-            console.log(response);
+            this.setState({
+                orderStatus: response.data
+            })
         })
         .catch((error) => {
             alert('ĐÃ CÓ LỖI VUI LÒNG THỬ LẠI');

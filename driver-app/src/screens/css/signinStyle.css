@@ -1,10 +1,4 @@
-.Container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-image: linear-gradient(	#e09952, #b3b3b3);
-    height: 100vh;
-}
+
 
 .mainContent {
     width: 400px;
