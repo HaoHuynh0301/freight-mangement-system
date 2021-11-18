@@ -110,7 +110,6 @@ class Orders extends Component {
     }
 
     oppenOrderInformation(id, order) {
-        console.log(order);
         this.props.navigation.navigate('OrderDetail', {
             'id': id,
             'order': order

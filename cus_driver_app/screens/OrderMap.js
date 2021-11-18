@@ -72,7 +72,6 @@ class OrderMap extends Component {
             }
         })
         .then(async (response) => {
-            console.log('AHAAAAAAAAAAAAAA');
             await axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
             .then(async (response) => {
                 var datas = response.data.data
@@ -80,7 +79,7 @@ class OrderMap extends Component {
                     insLatitude: datas[0].latitude,
                     insLongitude: datas[0].longitude
                 });
-                console.log('Here')
+                console.log(this.props.route.params.district);
                 await axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${this.props.route.params.district}`)
                 .then((response) => {
                     var datas = response.data.data
