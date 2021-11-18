@@ -65,13 +65,14 @@ class OrderMap extends Component {
     
     async getInstanceAddress() {
         const token = await AsyncStorage.getItem('token');
-        axios.get(`${ipAddress}/api/instance-address?order_id=${this.props.route.params.id}`, {
+        axios.get(`${ipAddress}/api/cus-instance-address?order_id=${this.props.route.params.id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
             }
         })
         .then(async (response) => {
+            console.log('AHAAAAAAAAAAAAAA');
             await axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
             .then(async (response) => {
                 var datas = response.data.data
