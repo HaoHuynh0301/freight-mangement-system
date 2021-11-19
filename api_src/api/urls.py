@@ -36,5 +36,7 @@ urlpatterns = [
     path('recieve-order/', driver_view.SetDriverOrderView.as_view(), name = 'recieve-order'),
     path('instance-order/', driver_view.InstanceOrderView.as_view(), name = 'instance-order'),
     path('set_paid_order/', driver_view.UpdatePaidOrder.as_view(), name = 'update_paid'),
+    path('cus-instance-address/', views.CustomerInstanceAddressView.as_view(), name = 'customer-instance-address'),
+    path('driver-address/', views.InstanceAddressCustomerView.as_view(), name = 'driver-address')
 
 ]

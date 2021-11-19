@@ -71,31 +71,18 @@ class OrderMap extends Component {
                 Authorization: `Bearer ${token}`
             }
         })
-        .then(async (response) => {
-            await axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
+        .then((response) => {
+            axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
             .then(async (response) => {
-                var datas = response.data.data
-                this.setState({
-                    insLatitude: datas[0].latitude,
-                    insLongitude: datas[0].longitude
-                });
-                console.log(this.props.route.params.district);
-                await axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${this.props.route.params.district}`)
-                .then((response) => {
-                    var datas = response.data.data
-                    console.log(datas[0]);
-                    this.setState({
-                        deliveredLatitude: datas[0].latitude,
-                        deliveredLongitude: datas[0].longitude
-                    });
-                    
-                })
-                .catch((error) => {
-                    displayAlert('There are some errors! Please try again later!');
+                var datas = response.data.data;
+                console.log(response.data.data[0]);
+                await this.setState({
+                    deliveredLatitude: datas[0].latitude,
+                    deliveredLatitude: datas[0].longitude
                 });
             })
             .catch((error) => {
-                displayAlert('There are some errors! Please try again later!');
+                displayAlert(String(error));
             });
         })
         .catch((error) => {
@@ -103,8 +90,28 @@ class OrderMap extends Component {
         });
     }
 
+    getDriverAddress = async () => {
+        const token = await AsyncStorage.getItem('token');
+        axios.get(`${ipAddress}/api/driver-address?order_id=${this.props.route.params.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            this.setState({
+                insLatitude: response.data.latitude,
+                insLongitude: response.data.longitude
+            });
+        })
+        .catch((error) => {
+            displayAlert('There are some errors! Please try again later!');
+        })
+    }
+
     componentDidMount() {
         this.getInstanceAddress();
+        // this.getDriverAddress();
     }
 
     renderHeader() {
@@ -129,6 +136,7 @@ class OrderMap extends Component {
 
     
     render() {
+        console.log(this.state.deliveredLatitude);
         return(
             <View style = {{flex: 1}}>
                 {this.renderHeader()}
@@ -145,12 +153,21 @@ class OrderMap extends Component {
                 >
                     <Marker
                         coordinate = {{
-                            latitude: Number(this.state.deliveredLatitude),
-                            longitude: Number(this.state.deliveredLongitude),
+                            latitude: 21.0245,
+                            longitude: 105.84117,
                         }}
-                        // image = {xIcon}
-                        title = 'Địa chỉ đơn hàng được giao đến'
-                    ></Marker>
+                        anchor = {{x: 0.5, y: 0.5}}
+                        flat = {true}
+                        title = 'Địa chỉ vận chuyển lần cuối của đơn hàng'
+                    >
+                        <Image
+                            source = {carIcon}
+                            style = {{
+                                height: 50,
+                                width: 50
+                            }}
+                        ></Image>
+                    </Marker>
                     <Marker
                         coordinate = {{
                             latitude: Number(this.state.insLatitude),

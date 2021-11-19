@@ -339,7 +339,7 @@ class StatusOrderView(APIView):
     
     def post(self, request, format = None):
         statusId = request.data['status_id']
-        orderId = request.data['order_id']
+        orderId = request.query_params.get('order_id')
         instanceStatus = models.OrderStatus.objects.filter(id = statusId)
         instanceOrder = models.Order.objects.filter(id = orderId)
         if len(instanceStatus) > 0 and len(instanceOrder) > 0:
@@ -350,3 +350,30 @@ class StatusOrderView(APIView):
                 return Response(instanceStatus[0].name, status = status.HTTP_200_OK)
             return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
         return Response({'msg': 'error'}, status = status.HTTP_400_BAD_REQUEST)
+    
+    
+class CustomerInstanceAddressView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request, format = None):
+        user = request.user
+        orderId = request.query_params.get('order_id')
+        orderInstance = models.Order.objects.filter(id = orderId)
+        if len(orderInstance) > 0:
+            serializer = serializers.OrderSerializer(orderInstance[0])
+            return Response(serializer.data, status = status.HTTP_200_OK)
+        return Response({'msg': 'Not found'}, status = status.HTTP_400_BAD_REQUEST)
+    
+    
+class InstanceAddressCustomerView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request, format = None):
+        orderId = request.query_params.get('order_id')
+        orderInstance = models.Order.objects.filter(id = orderId)
+        if len(orderInstance) > 0:
+            instanceAddress = orderInstance[0].instanceaddress_set.all()
+            instanceAddress = instanceAddress[0]
+            serializer = serializers.InstanceAddressSerilizer(instanceAddress)
+            return Response(serializer.data, status = status.HTTP_200_OK)
+        return Response({'msg': 'Not found'}, status = status.HTTP_400_BAD_REQUEST)
