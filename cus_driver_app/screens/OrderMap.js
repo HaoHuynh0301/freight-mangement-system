@@ -145,8 +145,8 @@ class OrderMap extends Component {
                     provider = {PROVIDER_GOOGLE}
                     showsUserLocation
                     region = {{
-                        latitude: 21.732568,
-                        longitude: 105.396672,
+                        latitude: Number(this.state.insLatitude),
+                        longitude: Number(this.state.insLongitude),
                         latitudeDelta: 12,
                         longitudeDelta: 6
                     }}
