@@ -78,7 +78,7 @@ class OrderMap extends Component {
                 console.log(response.data.data[0]);
                 await this.setState({
                     deliveredLatitude: datas[0].latitude,
-                    deliveredLatitude: datas[0].longitude
+                    deliveredLongitude: datas[0].longitude
                 });
             })
             .catch((error) => {
@@ -92,6 +92,7 @@ class OrderMap extends Component {
 
     getDriverAddress = async () => {
         const token = await AsyncStorage.getItem('token');
+        console.log('INSTANCE: ' + this.props.route.params.id)
         axios.get(`${ipAddress}/api/driver-address?order_id=${this.props.route.params.id}`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -111,7 +112,7 @@ class OrderMap extends Component {
 
     componentDidMount() {
         this.getInstanceAddress();
-        // this.getDriverAddress();
+        this.getDriverAddress();
     }
 
     renderHeader() {
@@ -136,7 +137,6 @@ class OrderMap extends Component {
 
     
     render() {
-        console.log(this.state.deliveredLatitude);
         return(
             <View style = {{flex: 1}}>
                 {this.renderHeader()}
@@ -153,20 +153,13 @@ class OrderMap extends Component {
                 >
                     <Marker
                         coordinate = {{
-                            latitude: 21.0245,
-                            longitude: 105.84117,
+                            latitude: Number(this.state.deliveredLatitude),
+                            longitude: Number(this.state.deliveredLongitude),
                         }}
                         anchor = {{x: 0.5, y: 0.5}}
                         flat = {true}
-                        title = 'Địa chỉ vận chuyển lần cuối của đơn hàng'
+                        title = 'Địa chỉ vận chuyển của đơn hàng'
                     >
-                        <Image
-                            source = {carIcon}
-                            style = {{
-                                height: 50,
-                                width: 50
-                            }}
-                        ></Image>
                     </Marker>
                     <Marker
                         coordinate = {{
@@ -175,7 +168,7 @@ class OrderMap extends Component {
                         }}
                         anchor = {{x: 0.5, y: 0.5}}
                         flat = {true}
-                        title = 'Địa chỉ vận chuyển lần cuối của đơn hàng'
+                        title = 'Vị trí hiện tại của đơn hàng'
                     >
                         <Image
                             source = {carIcon}
