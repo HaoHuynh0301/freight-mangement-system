@@ -303,7 +303,7 @@ class Register extends Component {
                     }}>
                         <p>Bạn đã có tài khoản ? 
                             <Link
-                                to = '/'
+                                to = '/sign-in'
                                 style = {{
                                     color: orangeColor,
                                     marginLeft: 10

@@ -4,7 +4,7 @@
     width: 400px;
     height: 600px;
     background-color: aliceblue;
-    border-radius: 30px;
+    /* border-radius: 30px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,6 +14,9 @@
 
 .signInTitleWrapper {
     margin-bottom: 10px;
+    align-self: flex-start;
+    margin-left: 55px;
+    margin-bottom: 30px;
 }
 
 .emailInput {
