@@ -203,7 +203,7 @@ class HomePage extends Component {
             })
         })
         .catch((error) => {
-            alert('ĐÃ CÓ LỖI TRONG QUÁ TRÌNH LẤY DỮ LIỆU!');
+            console.log(error);
         })
     }
 
