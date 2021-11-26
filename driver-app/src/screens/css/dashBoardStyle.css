@@ -34,6 +34,7 @@
     border-radius: 30px;
     border: solid 0.5px grey;
     box-shadow: 5px 10px 18px #888888;
+    margin-bottom: 50px;
 }
 
 .dashBoardInstanceOrderRequestWrapper {

@@ -60,7 +60,7 @@ class HomePage extends Component {
         if(this.state.instanceAddress !== null && this.state.deliveredAddress !== null) {
             return(
                 <div style = {{
-                    height: '250px',
+                    height: '200px',
                     width: '400px',
                     border: 'solid 0.5px grey'
                 }}>
