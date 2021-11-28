@@ -2,19 +2,15 @@ import React, { Component } from "react";
 import './css/userPage.css';
 import axios from "axios";
 import {
-    Link,
-    Redirect,
-    Route,
-    useHistory 
-} from "react-router-dom";
-import {
     ipAddress,
-    orangeColor
+    orangeColor,
+    blueColor
 } from '../contants';
 import {
     DoubleNavigationPage,
     Footer
 } from '../components';
+import accountIcon from '../assets/accountIcon.png';
 const localStorage = require('local-storage');
 
 class Profile extends Component {
@@ -29,7 +25,9 @@ class Profile extends Component {
             phonenumber: '',
             driverLicense: '',
             password: '',
-            cmnd: ''
+            cmnd: '',
+            avaLink: null,
+            img: null
         }
 
         this.getDriverInformation  = this.getDriverInformation.bind(this);
@@ -55,9 +53,19 @@ class Profile extends Component {
             }
         })
         .then((response) => {
+            console.log(response.data);
             this.setState({
                 driverInformation: response.data
             });
+            if(response.data.avatar !== null) {
+                this.setState({
+                    avaLink: `${ipAddress}${response.data.avatar}`
+                });
+            } else {
+                this.setState({
+                    avaLink: accountIcon
+                });
+            }
         })
         .catch((error) => {
             alert('Đã có lỗi trong quá trình lấy thông tin! Vui lòng thử lại sau!');
@@ -94,18 +102,27 @@ class Profile extends Component {
 
     render() {
         return(
-            <div>
+            <div style = {{
+                backgroundColor: '#f2f2f2'
+            }}>
                 <DoubleNavigationPage />
                 <div style = {{
                     display: 'flex',
+                    alignSelf: 'center',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
                     marginBottom: '30px',
+                    width: '60%',
+                    border: 'solid 0.5px grey',
+                    marginLeft: '300px',
+                    marginTop: '20px',
+                    paddingBottom: '20px',
+                    backgroundColor: 'white'
                 }}>
                     {/* Title Wrapper */}
                     <div style = {{
-                        width: '40%',
+                        width: '80%',
                         // textAlign: 'center'
                     }}>
                         <p style = {{
@@ -117,9 +134,65 @@ class Profile extends Component {
                         }}>Thông tin cá nhân</p>
                     </div>
 
+                    <div style = {{
+                        height: '20%',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        paddingTop: '20px',
+                        paddingLeft: '20px',
+                        borderBottom: 'solid 0.5px #e6e6e6',
+                        paddingBottom: '20px',
+                        alignItems: 'center'
+                    }}>
+                        <div style = {{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                        }}>
+                            <span style = {{
+                                fontWeight: 'bold',
+                                color: blueColor,
+                                marginBottom: '10px'
+                            }}>Tải ảnh đại diện</span>
+                            <img src = {this.state.avaLink} style = {{
+                                height: '70px',
+                                width: '70px',
+                                borderRadius: '50px',
+                                marginLeft: '20px'
+                            }} />
+                        </div>
+                        <div style = {{
+                            marginLeft: '50px'
+                        }}>
+                            <span>
+                                Tải ảnh lên từ 
+                                <input style = {{
+                                    borderWidth: '0px',
+                                    marginLeft: '5px',
+                                }} type="file" onChange = {(event) => {
+                                    this.setState({
+                                        img: event.target.files[0]
+                                    });
+                                }}></input>
+                            </span>
+                            <button style = {{
+                                border: 'solid 0.5px grey',
+                                padding: '15px',
+                                borderRadius: '20px',
+                                backgroundColor: blueColor,
+                                color: 'white',
+                                height: '30px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                marginTop: '5px',
+                            }} onClick = {() => this.handleChangeInformation()}>Cập nhật</button>
+                        </div>
+                    </div>
+
                     {/* User's information Wrapper */}
                     <div style = {{
-                        width: '40%',
+                        width: '80%',
                         display: 'flex',
                         flexDirection: 'column',
                         marginTop: '15px'
@@ -131,7 +204,7 @@ class Profile extends Component {
                             flexDirection: 'column',
                             marginBottom: '20px'
                         }}>
-                            <p style = {{fontWeight: 'bold'}}>Tên tài xế</p>
+                            <p style = {{fontWeight: 'bold'}}>Tên tài xế *</p>
                             <input 
                                 style = {{
                                     borderRadius: '10px',
@@ -152,7 +225,7 @@ class Profile extends Component {
                             flexDirection: 'column',
                             marginBottom: '20px'
                         }}>
-                            <p style = {{fontWeight: 'bold'}}>Email</p>
+                            <p style = {{fontWeight: 'bold'}}>Email *</p>
                             <input 
                                 style = {{
                                     borderRadius: '10px',
@@ -173,7 +246,7 @@ class Profile extends Component {
                             flexDirection: 'column',
                             marginBottom: '20px'
                         }}>
-                            <p style = {{fontWeight: 'bold'}}>Số điện thoại</p>
+                            <p style = {{fontWeight: 'bold'}}>Số điện thoại *</p>
                             <input 
                                 style = {{
                                     borderRadius: '10px',
@@ -194,7 +267,7 @@ class Profile extends Component {
                             flexDirection: 'column',
                             marginBottom: '20px'
                         }}>
-                            <p style = {{fontWeight: 'bold'}}>Bằng lái xe</p>
+                            <p style = {{fontWeight: 'bold'}}>Bằng lái xe *</p>
                             <input 
                                 style = {{
                                     borderRadius: '10px',
@@ -216,7 +289,7 @@ class Profile extends Component {
                             flexDirection: 'column',
                             marginBottom: '20px'
                         }}>
-                            <p style = {{fontWeight: 'bold'}}>Chứng minh nhân dân</p>
+                            <p style = {{fontWeight: 'bold'}}>Chứng minh nhân dân *</p>
                             <input 
                                 style = {{
                                     borderRadius: '10px',
@@ -238,7 +311,7 @@ class Profile extends Component {
                             flexDirection: 'column',
                             marginBottom: '20px'
                         }}>
-                            <p style = {{fontWeight: 'bold'}}>Mật khẩu</p>
+                            <p style = {{fontWeight: 'bold'}}>Mật khẩu *</p>
                             <input 
                                 type = 'password'
                                 style = {{
@@ -258,21 +331,22 @@ class Profile extends Component {
                         <button 
                             style = {{
                                 borderRadius: '30px',
-                                border: 'solid 0.2px',
-                                backgroundColor: orangeColor,
+                                borderWidth: '0px',
+                                backgroundColor: blueColor,
                                 display: 'flex',
                                 flexDirection: 'row',
                                 justifyContent: 'center',
                                 paddingTop: '5px',
                                 alignItems: 'center',
-                                height: '50px',
+                                height: '40px',
                                 marginTop: '15px'
                             }}
                             onClick = {this.handleUpdateInformation}
                         >
                             <span style = {{
                                 fontSize: '20px',
-                                fontWeight: 'bold'
+                                // fontWeight: 'bold'
+                                color: 'white'
                             }}>Lưu thông tin</span>
                         </button>
                     </div>

@@ -4,14 +4,14 @@ import './footer.css';
 function Footer() {
     return(
         <footer className="w-100 py-4 flex-shrink-0" style = {{
-            borderTop: 'solid 0.5px grey',
+            // borderTop: 'solid 0.5px grey',
         }}>
             <div className="container py-4">
             <div className="row gy-4 gx-5">
                 <div className="col-lg-4 col-md-6">
                 <h5 className="h1 text-dark">CONTACT</h5>
                 <p className="small text-muted">Bạn có thể trao đổi với chúng tôi qua email</p>
-                <p className="small text-muted mb-0"><a className="text-primary" href="#">thuanhaoctu@gmail.com</a></p>
+                <p className="small text-muted mb-0"><a className="text-primary" href="#">hao152903@gmail.com</a></p>
                 </div>
                 <div className="col-lg-2 col-md-6">
                 <h5 className="text-dark mb-3">Quick links</h5>

@@ -13,6 +13,7 @@ const fontSize = '18px';
 const whiteColor = '#FFF';
 const blackColor = '#000000';
 const orangeBlur = 'linear-gradient(#e09952, #b3b3b3)';
+const blueColor = '#4775d1';
 
 // IP address 
 const ipAddress = 'http://192.168.1.4:8000';
@@ -26,5 +27,6 @@ export {
     ipAddress,
     orangeBlur,
     userIcon,
-    orderIcon
+    orderIcon,
+    blueColor
 }
