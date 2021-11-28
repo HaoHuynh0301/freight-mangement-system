@@ -143,9 +143,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/images/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'api.Customer'
 
