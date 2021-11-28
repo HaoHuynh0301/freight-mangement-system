@@ -31,7 +31,7 @@ class DoubleNavigationPage extends Component {
 
     getUserInformation = () => {
         const token = localStorage.get('token');
-        axios.get(`${ipAddress}/api/customer-infor/`, {
+        axios.get(`${ipAddress}/api/user-information/`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
@@ -73,7 +73,7 @@ class DoubleNavigationPage extends Component {
                     <ReactBoostrap.Navbar.Collapse id="responsive-navbar-nav">
                         <ReactBoostrap.Nav className="me-auto">
                             <ReactBoostrap.Nav.Link style = {{
-                                marginRight: '10px'
+                                marginRight: '20px'
                             }}><Link style = {{textDecoration: "none", color: blackColor}} to = '/'>Trang chủ</Link></ReactBoostrap.Nav.Link>
                             <ReactBoostrap.NavDropdown title="Đơn hàng" id="collasible-nav-dropdown">
                                 <ReactBoostrap.NavDropdown.Item><Link style = {{textDecoration: "none", color: blackColor}} to = '/my-order'>Đơn hàng của bạn</Link></ReactBoostrap.NavDropdown.Item>

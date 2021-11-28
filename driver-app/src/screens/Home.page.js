@@ -68,7 +68,7 @@ class HomePage extends Component {
                         height: '200px',
                         width: '100%',
                         border: 'solid 0.5px grey'
-                    }} center={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]} zoom={5} scrollWheelZoom={true}>
+                    }} center={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]} zoom={8} scrollWheelZoom={true}>
                         <TileLayer
                             attribution='Vị trí đơn hàng'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -106,7 +106,7 @@ class LocationUpdateView(APIView):
                     tmpArr.append(item)
                     serializer = self.serializer_class(tmpArr, many = True)
                 return Response(serializer.data, status = status.HTTP_200_OK)
-        return Response('Errors!', status = status.HTTP_404_BAD_REQUEST)
+        return Response('Errors!', status = status.HTTP_400_BAD_REQUEST)
     
     def post(self, request, format = None):
         latitude = request.data['latitude']

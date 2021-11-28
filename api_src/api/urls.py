@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 from . import driver_view
 
@@ -39,4 +41,4 @@ urlpatterns = [
     path('cus-instance-address/', views.CustomerInstanceAddressView.as_view(), name = 'customer-instance-address'),
     path('driver-address/', views.InstanceAddressCustomerView.as_view(), name = 'driver-address')
 
-]
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

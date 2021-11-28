@@ -28,7 +28,8 @@ class CustomerSerializer(serializers.ModelSerializer):
                     'password',
                     'province',
                     'district',
-                    'ward'
+                    'ward',
+                    'avatar'
                 ]
         
         
