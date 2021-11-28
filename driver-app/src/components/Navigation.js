@@ -31,7 +31,7 @@ class DoubleNavigationPage extends Component {
 
     getUserInformation = () => {
         const token = localStorage.get('token');
-        axios.get(`${ipAddress}/api/user-information/`, {
+        axios.get(`${ipAddress}/api/driver-view/`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
