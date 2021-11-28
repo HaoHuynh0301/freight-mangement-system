@@ -16,7 +16,7 @@ import shopIcon from '../assets/shopIcon.png';
 import historyIcon from '../assets/historyIcon.png';
 import accountIcon from '../assets/accountIcon.png';
 import orderIcon from '../assets/orderIcon.png'
-import voucherIcon from '../assets/voucherIcon.png';
+import listIcon from '../assets/listIcon.png';
 import appLogo from '../assets/appLogo.svg';
 const axios = require('axios');
 const localStorage = require('local-storage');
@@ -72,13 +72,9 @@ class DoubleNavigationPage extends Component {
                     <ReactBoostrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <ReactBoostrap.Navbar.Collapse id="responsive-navbar-nav">
                         <ReactBoostrap.Nav className="me-auto">
-                            <ReactBoostrap.Nav.Link style = {{
+                            {/* <ReactBoostrap.Nav.Link style = {{
                                 marginRight: '20px'
-                            }}><Link style = {{textDecoration: "none", color: blackColor}} to = '/'>Trang chủ</Link></ReactBoostrap.Nav.Link>
-                            <ReactBoostrap.NavDropdown title="Đơn hàng" id="collasible-nav-dropdown">
-                                <ReactBoostrap.NavDropdown.Item><Link style = {{textDecoration: "none", color: blackColor}} to = '/my-order'>Đơn hàng của bạn</Link></ReactBoostrap.NavDropdown.Item>
-                                <ReactBoostrap.NavDropdown.Item><Link style = {{textDecoration: "none", color: blackColor}} to = '/available-orders'>Đơn hàng hiện có</Link></ReactBoostrap.NavDropdown.Item>
-                            </ReactBoostrap.NavDropdown>
+                            }}><Link style = {{textDecoration: "none", color: blackColor}} to = '/'>Trang chủ</Link></ReactBoostrap.Nav.Link> */}
                         </ReactBoostrap.Nav>
                         <ReactBoostrap.Nav>
                             <ReactBoostrap.NavDropdown style = {{
@@ -96,6 +92,16 @@ class DoubleNavigationPage extends Component {
                                     width: '30px',
                                     marginRight: '5px'
                                 }} /><Link style = {{textDecoration: "none", color: blackColor}} to = '/profile'>Cập nhật tài khoản</Link></ReactBoostrap.NavDropdown.Item>
+                                <ReactBoostrap.NavDropdown.Item><img src = {orderIcon} style = {{
+                                    height:'30px',
+                                    width: '30px',
+                                    marginRight: '5px'
+                                }} /><Link style = {{textDecoration: "none", color: blackColor}} to = '/my-order'>Đơn hàng của bạn</Link></ReactBoostrap.NavDropdown.Item>
+                                <ReactBoostrap.NavDropdown.Item><img src = {listIcon} style = {{
+                                    height:'30px',
+                                    width: '30px',
+                                    marginRight: '5px'
+                                }} /><Link style = {{textDecoration: "none", color: blackColor}} to = '/available-orders'>Đơn hàng hiện có</Link></ReactBoostrap.NavDropdown.Item>
                                 <ReactBoostrap.NavDropdown.Item><button style = {{
                                     borderWidth: '0px',
                                     backgroundColor: 'auto',

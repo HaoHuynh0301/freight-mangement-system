@@ -34,7 +34,6 @@ function App() {
             <Switch>
                 <ProtectedRoute exact path = '/' component = {HomePage}></ProtectedRoute>
                 <Route exact path = '/register' component = {Register}></Route>
-                <ProtectedRoute exact path = '/app' component = {AppView}></ProtectedRoute>
                 <Route exact path = '/sign-in' component = {LandingPage}></Route>
                 <ProtectedRoute exact path = '/profile' component = {Profile}></ProtectedRoute>
                 <ProtectedRoute exact path = '/my-order' component = {MyOrders}></ProtectedRoute>
