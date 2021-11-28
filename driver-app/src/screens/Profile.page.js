@@ -101,7 +101,7 @@ class Profile extends Component {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    marginBottom: '20px'
+                    marginBottom: '30px',
                 }}>
                     {/* Title Wrapper */}
                     <div style = {{
@@ -137,7 +137,7 @@ class Profile extends Component {
                                     borderRadius: '10px',
                                     padding: '5px',
                                     border: 'solid 0.5px grey',
-                                    backgroundColor: '#f5f5f0'
+                                    backgroundColor: 'white'
                                 }} placeholder = {this.state.driverInformation.name} 
                                 value = {this.state.name}
                                 onChange = {(event) => {
@@ -158,7 +158,7 @@ class Profile extends Component {
                                     borderRadius: '10px',
                                     padding: '5px',
                                     border: 'solid 0.5px grey',
-                                    backgroundColor: '#f5f5f0'
+                                    backgroundColor: 'white'
                                 }} placeholder = {this.state.driverInformation.email} 
                                 value = {this.state.email}
                                 onChange = {(event) => {
@@ -179,7 +179,7 @@ class Profile extends Component {
                                     borderRadius: '10px',
                                     padding: '5px',
                                     border: 'solid 0.5px grey',
-                                    backgroundColor: '#f5f5f0'
+                                    backgroundColor: 'white'
                                 }} placeholder = {this.state.driverInformation.phone_number} 
                                 value = {this.state.phonenumber}
                                 onChange = {(event) => {
@@ -200,7 +200,7 @@ class Profile extends Component {
                                     borderRadius: '10px',
                                     padding: '5px',
                                     border: 'solid 0.5px grey',
-                                    backgroundColor: '#f5f5f0'
+                                    backgroundColor: 'white'
                                 }} 
                                 placeholder = {this.state.driverInformation.driverLicense} 
                                 value = {this.state.driverLicense}
@@ -222,7 +222,7 @@ class Profile extends Component {
                                     borderRadius: '10px',
                                     padding: '5px',
                                     border: 'solid 0.5px grey',
-                                    backgroundColor: '#f5f5f0'
+                                    backgroundColor: 'white'
                                 }} 
                                 placeholder = {this.state.driverInformation.cmnd} 
                                 value = {this.state.cmnd}
@@ -245,7 +245,7 @@ class Profile extends Component {
                                     borderRadius: '10px',
                                     padding: '5px',
                                     border: 'solid 0.5px grey',
-                                    backgroundColor: '#f5f5f0'
+                                    backgroundColor: 'white'
                                 }} 
                                 value = {this.state.password}
                                 onChange = {(event) => {
@@ -257,20 +257,23 @@ class Profile extends Component {
                         </div>
                         <button 
                             style = {{
-                                borderRadius: '10px',
+                                borderRadius: '30px',
                                 border: 'solid 0.2px',
                                 backgroundColor: orangeColor,
                                 display: 'flex',
                                 flexDirection: 'row',
                                 justifyContent: 'center',
-                                paddingTop: '5px'
+                                paddingTop: '5px',
+                                alignItems: 'center',
+                                height: '50px',
+                                marginTop: '15px'
                             }}
                             onClick = {this.handleUpdateInformation}
                         >
-                            <p style = {{
+                            <span style = {{
                                 fontSize: '20px',
                                 fontWeight: 'bold'
-                            }}>Lưu thông tin</p>
+                            }}>Lưu thông tin</span>
                         </button>
                     </div>
                 </div>
