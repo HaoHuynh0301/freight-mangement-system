@@ -125,7 +125,8 @@ class UpdateDriverSerializer(serializers.ModelSerializer):
             'age',
             'driverLicense',
             'password',
-            'id'
+            'id',
+            'avatar'
         ]
         
         
@@ -144,7 +145,7 @@ class UpdateDriverOrderSerilizer(serializers.ModelSerializer):
 class UpdatePaidOrderSerilizer(serializers.ModelSerializer):
     class Meta:
         model = models.Order
-        fields = ['isDone']
+        fields = ['isDone', 'status']
         
         
 class updateStatusOrderSerializer(serializers.ModelSerializer):

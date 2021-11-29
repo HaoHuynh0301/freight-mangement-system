@@ -360,6 +360,7 @@ class MyOrders extends Component {
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'center',
+                    marginBottom: '20px'
                 }}>
 
                     {/* General View Wrapper */}
@@ -367,9 +368,8 @@ class MyOrders extends Component {
                         display: 'flex',
                         flexDirection: 'row',
                         width: '100%',
-                        // height: 'auto',
                         marginTop: '30px',
-                        padding: '10px'
+                        padding: '10px',
                     }}>
                         {/* Order information column View Wrapper */}
                         <div style = {{

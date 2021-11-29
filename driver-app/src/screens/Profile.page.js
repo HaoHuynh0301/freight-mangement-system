@@ -95,7 +95,27 @@ class Profile extends Component {
                 alert('Đã có lỗi xảy ra trong quá trình cập nhật thông tin!');
             })
         } else {
-
+            const token = localStorage.get('token');
+            let form_data = new FormData();
+            form_data.append('name', this.state.name);
+            form_data.append('phone_number', this.state.phonenumber);
+            form_data.append('email', this.state.email);
+            form_data.append('cmnd', this.state.cmnd);
+            form_data.append('driverLicense', this.state.driverLicense);
+            form_data.append('password', this.state.password);
+            form_data.append('avatar', this.state.img, this.state.img.name);
+            axios.post(`${ipAddress}/api/update-driver/`, form_data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            .then((response) => {
+                alert(response.data);
+            })
+            .catch((error) => {
+                alert('Đã có lỗi xảy ra trong quá trình cập nhật thông tin!');
+            })
         }
         
     }
