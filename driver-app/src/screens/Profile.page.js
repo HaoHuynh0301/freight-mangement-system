@@ -113,9 +113,9 @@ class Profile extends Component {
                     alignItems: 'center',
                     justifyContent: 'center',
                     marginBottom: '30px',
-                    width: '60%',
+                    width: '53%',
                     border: 'solid 0.5px #e6e6e6',
-                    marginLeft: '300px',
+                    marginLeft: '380px',
                     marginTop: '20px',
                     paddingBottom: '20px',
                     backgroundColor: 'white',
@@ -128,7 +128,7 @@ class Profile extends Component {
                     }}>
                         <p style = {{
                             paddingTop: '20px',
-                            fontSize: '30px',
+                            fontSize: '20px',
                             fontWeight: 'bold',
                             borderBottom: 'solid 1px #e6e6e6',
                             paddingBottom: '20px',
@@ -143,7 +143,7 @@ class Profile extends Component {
                         display: 'flex',
                         flexDirection: 'row',
                         paddingTop: '20px',
-                        paddingLeft: '20px',
+                        // paddingLeft: '20px',
                         borderBottom: 'solid 0.5px #e6e6e6',
                         paddingBottom: '20px',
                         alignItems: 'center',
@@ -169,21 +169,25 @@ class Profile extends Component {
                         <div style = {{
                             marginLeft: '80px'
                         }}>
-                            <span>
+                            <span style = {{
+                                fontStyle: 'italic'
+                            }}>
                                 Tải ảnh lên từ 
                                 <input style = {{
                                     borderWidth: '0px',
                                     marginLeft: '5px',
+                                    width: '100px'
                                 }} type="file" onChange = {(event) => {
                                     this.setState({
                                         img: event.target.files[0]
                                     });
                                 }}></input>
+                                Chấp nhận GIF, JPEG, PNG, BMP với kích thước tối đa 5.0 MB
                             </span>
                             <button style = {{
                                 border: 'solid 0.5px grey',
                                 padding: '15px',
-                                borderRadius: '20px',
+                                borderRadius: '10px',
                                 backgroundColor: blueColor,
                                 color: 'white',
                                 height: '30px',
@@ -200,16 +204,21 @@ class Profile extends Component {
                         width: '80%',
                         display: 'flex',
                         flexDirection: 'column',
-                        marginTop: '15px'
+                        marginTop: '32px'
                     }}>
-                        
+                        <span style = {{
+                            fontWeight: 'bold',
+                            color: blueColor,
+                            marginBottom: '10px'
+                        }}>Thay đổi thông tin</span>
+                    
                         {/* Name Wrapper */}
                         <div style = {{
                             display: 'flex',
-                            flexDirection: 'column',
-                            marginBottom: '20px'
+                            flexDirection: 'row',
+                            marginBottom: '20px',
                         }}>
-                            <p style = {{fontWeight: 'bold'}}>Tên tài xế *</p>
+                            <p style = {{fontWeight: 'bold', marginRight: '20px', width: '120px'}}>Tên tài xế *</p>
                             <input 
                                 style = {{
                                     borderRadius: '5px',
@@ -217,6 +226,7 @@ class Profile extends Component {
                                     border: 'solid 0.5px grey',
                                     backgroundColor: 'white',
                                     height: '30px',
+                                    width: '60%'
                                 }} placeholder = {this.state.driverInformation.name} 
                                 value = {this.state.name}
                                 onChange = {(event) => {
@@ -229,9 +239,10 @@ class Profile extends Component {
                         <div style = {{
                             display: 'flex',
                             flexDirection: 'column',
-                            marginBottom: '20px'
+                            marginBottom: '20px',
+                            flexDirection: 'row',
                         }}>
-                            <p style = {{fontWeight: 'bold'}}>Email *</p>
+                            <p style = {{fontWeight: 'bold', marginRight: '20px', width: '120px'}}>Email *</p>
                             <input 
                                 style = {{
                                     borderRadius: '5px',
@@ -239,6 +250,7 @@ class Profile extends Component {
                                     border: 'solid 0.5px grey',
                                     backgroundColor: 'white',
                                     height: '30px',
+                                    width: '60%'
                                 }} placeholder = {this.state.driverInformation.email} 
                                 value = {this.state.email}
                                 onChange = {(event) => {
@@ -251,9 +263,10 @@ class Profile extends Component {
                         <div style = {{
                             display: 'flex',
                             flexDirection: 'column',
-                            marginBottom: '20px'
+                            marginBottom: '20px',
+                            flexDirection: 'row',
                         }}>
-                            <p style = {{fontWeight: 'bold'}}>Số điện thoại *</p>
+                            <p style = {{fontWeight: 'bold', marginRight: '20px', width: '120px'}}>Số điện thoại *</p>
                             <input 
                                 style = {{
                                     borderRadius: '5px',
@@ -261,6 +274,7 @@ class Profile extends Component {
                                     border: 'solid 0.5px grey',
                                     backgroundColor: 'white',
                                     height: '30px',
+                                    width: '60%'
                                 }} placeholder = {this.state.driverInformation.phone_number} 
                                 value = {this.state.phonenumber}
                                 onChange = {(event) => {
@@ -273,9 +287,10 @@ class Profile extends Component {
                         <div style = {{
                             display: 'flex',
                             flexDirection: 'column',
-                            marginBottom: '20px'
+                            marginBottom: '20px',
+                            flexDirection: 'row',
                         }}>
-                            <p style = {{fontWeight: 'bold'}}>Bằng lái xe *</p>
+                            <p style = {{fontWeight: 'bold', marginRight: '20px', width: '120px'}}>Bằng lái xe *</p>
                             <input 
                                 style = {{
                                     borderRadius: '5px',
@@ -283,6 +298,7 @@ class Profile extends Component {
                                     border: 'solid 0.5px grey',
                                     backgroundColor: 'white',
                                     height: '30px',
+                                    width: '60%'
                                 }} 
                                 placeholder = {this.state.driverInformation.driverLicense} 
                                 value = {this.state.driverLicense}
@@ -296,9 +312,10 @@ class Profile extends Component {
                         <div style = {{
                             display: 'flex',
                             flexDirection: 'column',
-                            marginBottom: '20px'
+                            marginBottom: '20px',
+                            flexDirection: 'row',
                         }}>
-                            <p style = {{fontWeight: 'bold'}}>Chứng minh nhân dân *</p>
+                            <p style = {{fontWeight: 'bold', marginRight: '20px', width: '120px'}}>Chứng minh nhân dân *</p>
                             <input 
                                 style = {{
                                     borderRadius: '5px',
@@ -306,6 +323,7 @@ class Profile extends Component {
                                     border: 'solid 0.5px grey',
                                     backgroundColor: 'white',
                                     height: '30px',
+                                    width: '60%'
                                 }} 
                                 placeholder = {this.state.driverInformation.cmnd} 
                                 value = {this.state.cmnd}
@@ -319,9 +337,10 @@ class Profile extends Component {
                         <div style = {{
                             display: 'flex',
                             flexDirection: 'column',
-                            marginBottom: '20px'
+                            marginBottom: '20px',
+                            flexDirection: 'row',
                         }}>
-                            <p style = {{fontWeight: 'bold'}}>Mật khẩu *</p>
+                            <p style = {{fontWeight: 'bold', marginRight: '20px', width: '120px'}}>Mật khẩu *</p>
                             <input 
                                 type = 'password'
                                 style = {{
@@ -330,6 +349,7 @@ class Profile extends Component {
                                     border: 'solid 0.5px grey',
                                     backgroundColor: 'white',
                                     height: '30px',
+                                    width: '60%'
                                 }} 
                                 value = {this.state.password}
                                 onChange = {(event) => {
@@ -341,23 +361,22 @@ class Profile extends Component {
                         </div>
                         <button 
                             style = {{
-                                borderRadius: '30px',
-                                borderWidth: '0px',
+                                borderRadius: '10px',
                                 backgroundColor: blueColor,
                                 display: 'flex',
-                                flexDirection: 'row',
+                                flexDirection: 'column',
                                 justifyContent: 'center',
-                                paddingTop: '5px',
                                 alignItems: 'center',
-                                height: '40px',
-                                marginTop: '15px'
+                                height: '35px',
+                                width: '30%',
+                                border: 'solid 0.5px grey',
                             }}
                             onClick = {this.handleUpdateInformation}
                         >
                             <span style = {{
                                 fontSize: '20px',
                                 // fontWeight: 'bold'
-                                color: 'white'
+                                color: 'white',
                             }}>Lưu thông tin</span>
                         </button>
                     </div>
