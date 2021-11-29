@@ -114,24 +114,28 @@ class Profile extends Component {
                     justifyContent: 'center',
                     marginBottom: '30px',
                     width: '60%',
-                    border: 'solid 0.5px grey',
+                    border: 'solid 0.5px #e6e6e6',
                     marginLeft: '300px',
                     marginTop: '20px',
                     paddingBottom: '20px',
-                    backgroundColor: 'white'
+                    backgroundColor: 'white',
+                    boxShadow: '0px 0px 5px 2px #e6e6e6'
                 }}>
                     {/* Title Wrapper */}
                     <div style = {{
-                        width: '80%',
-                        // textAlign: 'center'
+                        width: '100%',
+                        // textAlign: 'center',
                     }}>
                         <p style = {{
-                            marginTop: '50px',
+                            paddingTop: '20px',
                             fontSize: '30px',
                             fontWeight: 'bold',
-                            borderBottom: 'solid 1px',
-                            paddingBottom: '20px'
-                        }}>Thông tin cá nhân</p>
+                            borderBottom: 'solid 1px #e6e6e6',
+                            paddingBottom: '20px',
+                            paddingLeft: '80px',
+                            backgroundColor: '#d9d9d9',
+                            borderBottomWidth: '0.5px'
+                        }}>Thông tin người dùng</p>
                     </div>
 
                     <div style = {{
@@ -142,7 +146,8 @@ class Profile extends Component {
                         paddingLeft: '20px',
                         borderBottom: 'solid 0.5px #e6e6e6',
                         paddingBottom: '20px',
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        width: '80%'
                     }}>
                         <div style = {{
                             display: 'flex',
@@ -162,7 +167,7 @@ class Profile extends Component {
                             }} />
                         </div>
                         <div style = {{
-                            marginLeft: '50px'
+                            marginLeft: '80px'
                         }}>
                             <span>
                                 Tải ảnh lên từ 
@@ -207,10 +212,11 @@ class Profile extends Component {
                             <p style = {{fontWeight: 'bold'}}>Tên tài xế *</p>
                             <input 
                                 style = {{
-                                    borderRadius: '10px',
+                                    borderRadius: '5px',
                                     padding: '5px',
                                     border: 'solid 0.5px grey',
-                                    backgroundColor: 'white'
+                                    backgroundColor: 'white',
+                                    height: '30px',
                                 }} placeholder = {this.state.driverInformation.name} 
                                 value = {this.state.name}
                                 onChange = {(event) => {
@@ -228,10 +234,11 @@ class Profile extends Component {
                             <p style = {{fontWeight: 'bold'}}>Email *</p>
                             <input 
                                 style = {{
-                                    borderRadius: '10px',
+                                    borderRadius: '5px',
                                     padding: '5px',
                                     border: 'solid 0.5px grey',
-                                    backgroundColor: 'white'
+                                    backgroundColor: 'white',
+                                    height: '30px',
                                 }} placeholder = {this.state.driverInformation.email} 
                                 value = {this.state.email}
                                 onChange = {(event) => {
@@ -249,10 +256,11 @@ class Profile extends Component {
                             <p style = {{fontWeight: 'bold'}}>Số điện thoại *</p>
                             <input 
                                 style = {{
-                                    borderRadius: '10px',
+                                    borderRadius: '5px',
                                     padding: '5px',
                                     border: 'solid 0.5px grey',
-                                    backgroundColor: 'white'
+                                    backgroundColor: 'white',
+                                    height: '30px',
                                 }} placeholder = {this.state.driverInformation.phone_number} 
                                 value = {this.state.phonenumber}
                                 onChange = {(event) => {
@@ -270,10 +278,11 @@ class Profile extends Component {
                             <p style = {{fontWeight: 'bold'}}>Bằng lái xe *</p>
                             <input 
                                 style = {{
-                                    borderRadius: '10px',
+                                    borderRadius: '5px',
                                     padding: '5px',
                                     border: 'solid 0.5px grey',
-                                    backgroundColor: 'white'
+                                    backgroundColor: 'white',
+                                    height: '30px',
                                 }} 
                                 placeholder = {this.state.driverInformation.driverLicense} 
                                 value = {this.state.driverLicense}
@@ -292,10 +301,11 @@ class Profile extends Component {
                             <p style = {{fontWeight: 'bold'}}>Chứng minh nhân dân *</p>
                             <input 
                                 style = {{
-                                    borderRadius: '10px',
+                                    borderRadius: '5px',
                                     padding: '5px',
                                     border: 'solid 0.5px grey',
-                                    backgroundColor: 'white'
+                                    backgroundColor: 'white',
+                                    height: '30px',
                                 }} 
                                 placeholder = {this.state.driverInformation.cmnd} 
                                 value = {this.state.cmnd}
@@ -315,10 +325,11 @@ class Profile extends Component {
                             <input 
                                 type = 'password'
                                 style = {{
-                                    borderRadius: '10px',
+                                    borderRadius: '5px',
                                     padding: '5px',
                                     border: 'solid 0.5px grey',
-                                    backgroundColor: 'white'
+                                    backgroundColor: 'white',
+                                    height: '30px',
                                 }} 
                                 value = {this.state.password}
                                 onChange = {(event) => {
