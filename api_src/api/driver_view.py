@@ -77,12 +77,22 @@ class UpdateDriverInformationView(APIView):
     
     def post(self, request, format = None):
         token = request.headers['Authorization']
+        password = request.data['password']
         payload = jwt.decode(jwt = token[7: len(token)], key = settings.SECRET_KEY, algorithms = ['HS256'])
         instanceDriver = models.Driver.objects.filter(id = payload['user_id'])
-        request.data['password'] = make_password(request.data['password']) 
-        serializer = serializers.UpdateDriverSerializer(instanceDriver[0], data = request.data)
+        tmpContext = {
+            'name': request.data['name'],
+            'phone_number': request.data['phone_number'],
+            'email': request.data['phone_number'],
+            'cmnd': request.data['phone_number'],
+            'driverLicense': request.data['phone_number'],
+            'password': make_password(request.data['password']),
+        }
+        serializer = serializers.UpdateDriverSerializer(instanceDriver[0], data = tmpContext)
         if serializer.is_valid():
             serializer.save()
+            # instanceDriver[0].password = tmpPassword
+            # instanceDriver[0].save()
             return Response('Update', status = status.HTTP_200_OK)
         print(serializer.errors)
         return Response({'error': 'Errors!'}, status = status.HTTP_400_BAD_REQUEST)
