@@ -185,7 +185,7 @@ class SetDriverOrderView(APIView):
                 return Response({'msg': 'Driver is in another order.'}, status = status.HTTP_400_BAD_REQUEST)
         orderId = request.data['orderId']
         instanceOrders = models.Order.objects.filter(id = orderId)
-        serializer = self.serializer_class(instanceOrders[0], data = {'driver': instanceDriver[0].id, 'isRecieved': True})
+        serializer = self.serializer_class(instanceOrders[0], data = {'driver': instanceDriver[0].id, 'isRecieved': True, 'status': 7})
         
         orders = models.Order.objects.filter(isRecieved = False)
         resSerializer = serializers.OrderSerializer(orders, many = True)
