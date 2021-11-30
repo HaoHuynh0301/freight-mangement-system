@@ -377,11 +377,12 @@ class HomePage extends Component {
                             {this.state.instanceOrders.product_name} - 
                             {this.state.instanceOrders.cast} VNĐ
                         </p>
-                        <p style = {{
-                            fontSize: '15px'
+                        <span style = {{
+                            fontSize: '15px',
+                            fontWeight: 'bold'
                         }}>
-                            Địa chỉ: {this.state.instanceOrders.detail_address}, {this.state.instanceOrders.ward}, {this.state.instanceOrders.district}, {this.state.instanceOrders.province}
-                        </p>
+                            Địa chỉ: <span style = {{fontWeight: 'normal'}}>{this.state.instanceOrders.detail_address}, {this.state.instanceOrders.ward}, {this.state.instanceOrders.district}, {this.state.instanceOrders.province}</span>
+                        </span>
                         <Link className = 'btn mb-2 mb-md-0 btn-secondary btn-block btn-round' style = {{
                             // width: '95%',
                             height: '40%',
@@ -728,12 +729,9 @@ class HomePage extends Component {
                                 height: '100%',
                                 width: '100%',
                                 borderColor: "black",
-                                borderRadius: '5px',
                                 display: "flex",
                                 flexDirection: 'column',
                                 alignItems: 'flex-start',
-                                // padding: '20px',
-                                
                             }}>
                                 <div style = {{
                                     backgroundColor: '#f2f2f2',

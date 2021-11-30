@@ -21,7 +21,7 @@ export default function RoutingMachine(props) {
       const routingControl = L.Routing.control({
         waypoints: [L.latLng(props.delivered[0], props.delivered[1]), L.latLng(props.current[0], props.current[1])],
         lineOptions: {
-            styles: [{ color: orangeColor, weight: 2}]
+            styles: [{ color: 'red', weight: 2}]
         },
         routeWhileDragging: true,
         addWaypoints: false,

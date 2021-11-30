@@ -3,48 +3,121 @@ import './footer.css';
 
 function Footer() {
     return(
-        <footer className="w-100 py-4 flex-shrink-0" style = {{
-            // borderTop: 'solid 0.5px grey',
-        }}>
-            <div className="container py-4">
-            <div className="row gy-4 gx-5">
-                <div className="col-lg-4 col-md-6">
-                <h5 className="h1 text-dark">CONTACT</h5>
-                <p className="small text-muted">Bạn có thể trao đổi với chúng tôi qua email</p>
-                <p className="small text-muted mb-0"><a className="text-primary" href="#">hao152903@gmail.com</a></p>
-                </div>
-                <div className="col-lg-2 col-md-6">
-                <h5 className="text-dark mb-3">Quick links</h5>
-                <ul className="list-unstyled text-muted">
-                    <li><a href="#">Trang chủ</a></li>
-                    <li><a href="#">Thông tin</a></li>
-                    <li><a href="#">Đơn hàng</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-                </div>
-                <div className="col-lg-2 col-md-6">
-                    <h5 className="text-dark mb-3">Tải ứng dụng tại</h5>
-                        <img src = {appstore} style = {{
-                            height: '100px',
-                            width: '170px',
-                            
-                        }}></img>
-                </div>
-                <div className="col-lg-4 col-md-6" style = {{
-                }}>
-                    <h5 className="text-dark mb-3">Hợp tác</h5>
-                    <p className="small text-muted">Hãy để lại số điện thoại của bạn, chúng tôi sẽ sớm liên hệ.</p>
-                    <form action="#">
-                        <div className="input-group mb-3">
-                        <input className="form-control" type="text" placeholder="Số điện thoại" aria-label="Recipient's username" aria-describedby="button-addon2" />
-                        <button style = {{
-                            backgroundColor: '#ff7733'
-                        }} className="btn btn-primary" id="button-addon2" type="button"><i className="fas fa-paper-plane" /></button>
-                        </div>
-                    </form>
-                </div>
+        <footer className="text-center text-lg-start bg-light text-muted">
+          {/* Section: Social media */}
+          <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            {/* Left */}
+            <div className="me-5 d-none d-lg-block">
+              <span>Get connected with us on social networks:</span>
             </div>
+            {/* Left */}
+            {/* Right */}
+            <div>
+              <a href className="me-4 text-reset">
+                <i className="fab fa-facebook-f" />
+              </a>
+              <a href className="me-4 text-reset">
+                <i className="fab fa-twitter" />
+              </a>
+              <a href className="me-4 text-reset">
+                <i className="fab fa-google" />
+              </a>
+              <a href className="me-4 text-reset">
+                <i className="fab fa-instagram" />
+              </a>
+              <a href className="me-4 text-reset">
+                <i className="fab fa-linkedin" />
+              </a>
+              <a href className="me-4 text-reset">
+                <i className="fab fa-github" />
+              </a>
             </div>
+            {/* Right */}
+          </section>
+          {/* Section: Social media */}
+          {/* Section: Links  */}
+          <section className>
+            <div className="container text-center text-md-start mt-5">
+              {/* Grid row */}
+              <div className="row mt-3">
+                {/* Grid column */}
+                <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                  {/* Content */}
+                  <h6 className="text-uppercase fw-bold mb-4">
+                    <i className="fas fa-gem me-3" />Company name
+                  </h6>
+                  <p>
+                    Here you can use rows and columns to organize your footer content. Lorem ipsum
+                    dolor sit amet, consectetur adipisicing elit.
+                  </p>
+                </div>
+                {/* Grid column */}
+                {/* Grid column */}
+                <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                  {/* Links */}
+                  <h6 className="text-uppercase fw-bold mb-4">
+                    Products
+                  </h6>
+                  <p>
+                    <a href="#!" className="text-reset">Angular</a>
+                  </p>
+                  <p>
+                    <a href="#!" className="text-reset">React</a>
+                  </p>
+                  <p>
+                    <a href="#!" className="text-reset">Vue</a>
+                  </p>
+                  <p>
+                    <a href="#!" className="text-reset">Laravel</a>
+                  </p>
+                </div>
+                {/* Grid column */}
+                {/* Grid column */}
+                <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                  {/* Links */}
+                  <h6 className="text-uppercase fw-bold mb-4">
+                    Useful links
+                  </h6>
+                  <p>
+                    <a href="#!" className="text-reset">Pricing</a>
+                  </p>
+                  <p>
+                    <a href="#!" className="text-reset">Settings</a>
+                  </p>
+                  <p>
+                    <a href="#!" className="text-reset">Orders</a>
+                  </p>
+                  <p>
+                    <a href="#!" className="text-reset">Help</a>
+                  </p>
+                </div>
+                {/* Grid column */}
+                {/* Grid column */}
+                <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                  {/* Links */}
+                  <h6 className="text-uppercase fw-bold mb-4">
+                    Contact
+                  </h6>
+                  <p><i className="fas fa-home me-3" /> New York, NY 10012, US</p>
+                  <p>
+                    <i className="fas fa-envelope me-3" />
+                    info@example.com
+                  </p>
+                  <p><i className="fas fa-phone me-3" /> + 01 234 567 88</p>
+                  <p><i className="fas fa-print me-3" /> + 01 234 567 89</p>
+                </div>
+                {/* Grid column */}
+              </div>
+              {/* Grid row */}
+            </div>
+          </section>
+          {/* Section: Links  */}
+          {/* Copyright */}
+          <div className="text-center p-4" style={{backgroundColor: 'rgba(0, 0, 0, 0.05)'}}>
+            © 2021 Copyright:
+            <a className="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+          </div>
+          {/* Copyright */}
         </footer>
     );
 }
