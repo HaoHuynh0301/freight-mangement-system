@@ -14,6 +14,7 @@ import {
 import {
     orangeColor,
     ipAddress,
+    blueColor,
 } from '../contants';
 import userIcon from '../assets/userIcon.png';
 import carIcon from '../assets/carIcon.png';
@@ -43,7 +44,8 @@ class HomePage extends Component {
             instanceAddress: null,
             instanceOrderId: null,
             deliveredAddress: null,
-            token: null
+            token: null,
+            avaLink: null
         }
         this.getInformation = this.getInformation.bind(this);
         this.getAvailableOrders = this.getAvailableOrders.bind(this);
@@ -231,6 +233,15 @@ class HomePage extends Component {
             }
         })
         .then((response) => {
+            if(response.data.avatar !== null) {
+                this.setState({
+                    avaLink: `${ipAddress}${response.data.avatar}`
+                });
+            } else {
+                this.setState({
+                    avaLink: userIcon
+                });
+            }
             this.setState({
                 driverInfor: response.data
             });
@@ -710,57 +721,103 @@ class HomePage extends Component {
                     <div className = 'dashBoardCol1'>
                         <div className = 'dashBoardUser'>
                             <div style = {{
-                                marginTop: '20px',
+                                // marginTop: '20px',
                                 marginLeft: '10px',
                                 marginRight: '10px',
                                 marginBottom: '20px',
-                                height: '90%',
-                                width: '90%',
+                                height: '100%',
+                                width: '100%',
                                 borderColor: "black",
-                                borderRadius: '30px',
-                                backgroundColor: 'rgba(0,0,0, 0.4)',
+                                borderRadius: '5px',
                                 display: "flex",
                                 flexDirection: 'column',
                                 alignItems: 'flex-start',
-                                padding: '20px',
+                                // padding: '20px',
                                 
                             }}>
-                                <p style = {{
-                                    color: '#FFF',
-                                    fontWeight: 'bold'
-                                }}>Thông tin tài xế</p>
+                                <div style = {{
+                                    backgroundColor: '#f2f2f2',
+                                    width: '100%',
+                                    paddingTop: '20px',
+                                    paddingLeft: '20px',
+                                    borderBottomColor: 'grey',
+                                    borderBottomWidth: '0.5px',
+                                    marginBottom: '10px'
+                                }}>
+                                    <p style = {{
+                                        fontWeight: 'bold'
+                                    }}>Thông tin tài xế</p>
+                                </div>
+                                
                                 <div style = {{
                                     display: 'flex',
                                     flexDirection: 'row',
-                                    border: '0.5px solid grey',
-                                    padding: '10px',
+                                    paddingBottom: '10px',
+                                    paddingLeft: '20px',
+                                    paddingRight: '20px',
                                     width: '99%',
                                     borderRadius: '20px'
                                 }}>
                                     <div style = {{
                                         display: "flex",
-                                        flexDirection: 'column'
+                                        flexDirection: 'column',
+                                        borderBottom: 'solid 0.5px grey',
+                                        width: '100%',
+                                        paddingBottom: '10px'
                                     }}>
-                                        <span className = 'dashBoardTextStyle'>Họ và tên: {this.state.driverInfor.name}</span>
-                                        <span className = 'dashBoardTextStyle'>Số điện thoại: {this.state.driverInfor.phone_number}</span>
+                                        <span style = {{
+                                            fontWeight: 'bold',
+                                            color: blueColor,
+                                            marginBottom: '15px'
+                                        }}>Thông tin cá nhân</span>
+                                        <span style = {{
+                                            display: 'flex',
+                                            flexDirection: 'row',
+                                            width: '150px',
+                                            fontWeight: 'bold'
+                                        }}>Tên tài xế: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.name}</p></span>
+                                        <span style = {{
+                                            display: 'flex',
+                                            flexDirection: 'row',
+                                            width: '200px',
+                                            fontWeight: 'bold'
+                                        }}>Username: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.username}</p></span>
                                     </div>
-                                    <img src = {userIcon} style = {{
-                                        marginLeft: '140px',
+                                    <img src = {this.state.avaLink} style = {{
+                                        marginLeft: '40px',
                                         height: '60px',
-                                        width: '60px'
+                                        width: '60px',
+                                        borderRadius: '50px',
+                                        marginTop: '20px'
                                     }}/>
                                 </div>
                                 <div style = {{
                                     display: "flex",
                                     flexDirection: "column",
-                                    marginTop: '10px',
-                                    border: '0.5px solid grey',
                                     width: '99%',
                                     borderRadius: '20px',
-                                    padding: '10px',
+                                    paddingBottom: '10px',
+                                    paddingLeft: '20px',
+                                    paddingRight: '20px',
+                                    paddingTop: '10px'
                                 }}>
-                                    <p className = 'dashBoardTextStyle'>Bằng lái xe: {this.state.driverInfor.driverLicense}</p>
-                                    <p className = 'dashBoardTextStyle'>Username: {this.state.driverInfor.username}</p>
+                                    <span style = {{
+                                        fontWeight: 'bold',
+                                        color: blueColor,
+                                        marginBottom: '15px'
+                                    }}>Thông tin liên hệ</span>
+                                    <span style = {{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        width: '200px',
+                                        fontWeight: 'bold'
+                                    }}>Bằng lái xe: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.driverLicense}</p></span>
+                                    <span style = {{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        width: '200px',
+                                        fontWeight: 'bold'
+                                    }}>Số điện thoại: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.phone_number}</p></span>
                                 </div>
                             </div>
                         </div>
