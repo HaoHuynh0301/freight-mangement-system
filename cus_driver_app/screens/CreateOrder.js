@@ -108,7 +108,9 @@ class CreateOrder extends Component {
 
             dis_fee: 0,
 
-            imgName: null
+            // Image of order
+            imgName: null,
+            imgLink: null
         }
     }
 
@@ -275,41 +277,40 @@ class CreateOrder extends Component {
             const res = await DocumentPicker.pick({
               type: [DocumentPicker.types.images],
             });
+            console.log(res[0]);
             this.setState({
-                imgName: res[0].name
+                imgName: res[0].name,
+                imgLink: res[0]
             })
-            console.log(
-                res
-            )
         } catch (err) {
             if (DocumentPicker.isCancel(err)) {
-              // User cancelled the picker, exit any dialogs or menus and move on
             } else {
-              throw err
+                throw err
             }
         }
     }
 
     async handleCreateOrder() {
         const token = await AsyncStorage.getItem('token');
-        axios.post(`${ipAddress}/api/order-information/`, {
-            cus_phonenumber: this.state.cus_phone_number,
-            cus_name: this.state.cus_name,
-            product_name: this.state.productName,
-            product_weight: Number(this.state.weight),
-            product_quantity: Number(this.state.quantity),
-            shipOptionId: this.state.orderSizeSelected,
-            statusId: 1,
-            cast: this.state.totalCast,
-            note: this.state.note,
-            province: this.state.locaProvince,
-            district: this.state.localDistrict,
-            ward: this.state.localWard,
-            address: this.state.cus_address
-        },
+        let form_data = new FormData();
+        form_data.append('cus_phonenumber', this.state.cus_phone_number);
+        form_data.append('cus_name', this.state.cus_name);
+        form_data.append('product_name', this.state.productName);
+        form_data.append('product_weight', this.state.weight);
+        form_data.append('product_quantity', this.state.quantity);
+        form_data.append('shipOptionId', this.state.orderSizeSelected);
+        form_data.append('statusId', 1);
+        form_data.append('cast', this.state.totalCast);
+        form_data.append('note', this.state.note);
+        form_data.append('province', this.state.locaProvince);
+        form_data.append('district', this.state.localDistrict);
+        form_data.append('ward', this.state.localWard);
+        form_data.append('address', this.state.cus_address);
+        form_data.append('product_image', this.state.imgLink);
+        axios.post(`${ipAddress}/api/order-information/`, form_data ,
         {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${token}`
             }
         })

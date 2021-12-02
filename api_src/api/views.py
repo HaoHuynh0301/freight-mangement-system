@@ -151,6 +151,7 @@ class OrderView(APIView):
                                                     province = request.data.get('province'),
                                                     district = request.data.get('district'),
                                                     ward = request.data.get('ward'),
+                                                    product_image = request.data.get('product_image')
                                                 )
         return Response('OK', status = status.HTTP_200_OK)
     
