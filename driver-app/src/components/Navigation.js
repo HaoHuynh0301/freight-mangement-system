@@ -110,7 +110,7 @@ class DoubleNavigationPage extends Component {
                                     backgroundColor: orangeColor
                                 }} onClick = {() => {
                                     auth.logout(() => {
-                                        this.props.history.push('/login');
+                                        this.props.history.push('/sign-in');
                                     })
                                 }}>Đăng xuất</button></ReactBoostrap.NavDropdown.Item>
                             </ReactBoostrap.NavDropdown>

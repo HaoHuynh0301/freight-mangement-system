@@ -21,6 +21,7 @@ import carIcon from '../assets/carIcon.png';
 import locationIcon from '../assets/locationIcon.png';
 import requestIcon from '../assets/requestIcon.png';
 import addIcon from '../assets/addIcon.png';
+import headerImg from '../assets/headerimg.jpg';
 import axios from "axios";
 import background from '../assets/delivery-background.jpg';
 import loading from '../assets/loading.gif';
@@ -28,6 +29,7 @@ import {
     Link,
 } from "react-router-dom";
 import { RoutingMachine } from ".";
+import 'animate.css';
 const localStorage = require('local-storage');
 
 class HomePage extends Component {
@@ -346,9 +348,20 @@ class HomePage extends Component {
             <div style = {{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center'
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '370px',
+                width: '400px',
+                margin: '20px',
+                borderRadius: '30px',
+                border: 'solid 0.5px grey',
+                boxShadow: '5px 10px 18px #888888',
+                backgroundColor: 'white'
             }}>
-                Không tồn tại chuyến xe
+                <p style = {{
+                    fontSize: '20px',
+                    fontWeight: 'bold'
+                }}>Không tồn tại chuyến xe cuối cùng</p>
             </div>
         );
     }
@@ -491,7 +504,7 @@ class HomePage extends Component {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    height: '300px',
+                    height: '370px',
                     width: '400px',
                     margin: '20px',
                     borderRadius: '30px',
@@ -520,7 +533,8 @@ class HomePage extends Component {
                     borderRadius: '15px',
                     display: 'flex',
                     flexDirection: 'row',
-                    backgroundColor: 'white'
+                    backgroundColor: 'white',
+                    height: 'auto'
                 }}  className = 'dashBoardAvaiOrdersItem' onClick = {() => {
                     this.handleOpenOrder(item.id);
                 }}>
@@ -641,6 +655,7 @@ class HomePage extends Component {
                     flexDirection: 'row',
                     paddingLeft: '60px',
                     width: '100%',
+                    height: 'auto'
                 }}>
                     <Modal style = {{
                         borderRadius: '20px'
@@ -718,118 +733,121 @@ class HomePage extends Component {
                         </Button>
                         </Modal.Footer>
                     </Modal>
-                    {/* Cột thứ nhất */}
-                    <div className = 'dashBoardCol1'>
-                        <div className = 'dashBoardUser'>
-                            <div style = {{
-                                // marginTop: '20px',
-                                marginLeft: '10px',
-                                marginRight: '10px',
-                                marginBottom: '20px',
-                                height: '100%',
-                                width: '100%',
-                                borderColor: "black",
-                                display: "flex",
-                                flexDirection: 'column',
-                                alignItems: 'flex-start',
-                            }}>
+                    <div>
+                        <div className = 'animate__animated animate__fadeInLeftBig dashBoardCol1'>
+                            <div className = 'dashBoardUser'>
                                 <div style = {{
-                                    backgroundColor: '#f2f2f2',
+                                    // marginTop: '20px',
+                                    marginLeft: '10px',
+                                    marginRight: '10px',
+                                    marginBottom: '20px',
+                                    height: '100%',
                                     width: '100%',
-                                    paddingTop: '20px',
-                                    paddingLeft: '20px',
-                                    borderBottomColor: 'grey',
-                                    borderBottomWidth: '0.5px',
-                                    marginBottom: '10px'
-                                }}>
-                                    <p style = {{
-                                        fontWeight: 'bold'
-                                    }}>Thông tin tài xế</p>
-                                </div>
-                                
-                                <div style = {{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    paddingBottom: '10px',
-                                    paddingLeft: '20px',
-                                    paddingRight: '20px',
-                                    width: '99%',
-                                    borderRadius: '20px'
+                                    borderColor: "black",
+                                    display: "flex",
+                                    flexDirection: 'column',
+                                    alignItems: 'flex-start',
                                 }}>
                                     <div style = {{
-                                        display: "flex",
-                                        flexDirection: 'column',
-                                        borderBottom: 'solid 0.5px grey',
+                                        backgroundColor: '#f2f2f2',
                                         width: '100%',
-                                        paddingBottom: '10px'
+                                        paddingTop: '20px',
+                                        paddingLeft: '20px',
+                                        borderBottomColor: 'grey',
+                                        borderBottomWidth: '0.5px',
+                                        marginBottom: '10px'
+                                    }}>
+                                        <p style = {{
+                                            fontWeight: 'bold'
+                                        }}>Thông tin tài xế</p>
+                                    </div>
+                                    
+                                    <div style = {{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        paddingBottom: '10px',
+                                        paddingLeft: '20px',
+                                        paddingRight: '20px',
+                                        width: '99%',
+                                        borderRadius: '20px'
+                                    }}>
+                                        <div style = {{
+                                            display: "flex",
+                                            flexDirection: 'column',
+                                            borderBottom: 'solid 0.5px grey',
+                                            width: '100%',
+                                            paddingBottom: '10px'
+                                        }}>
+                                            <span style = {{
+                                                fontWeight: 'bold',
+                                                color: blueColor,
+                                                marginBottom: '15px'
+                                            }}>Thông tin cá nhân</span>
+                                            <span style = {{
+                                                display: 'flex',
+                                                flexDirection: 'row',
+                                                width: '150px',
+                                                fontWeight: 'bold'
+                                            }}>Tên tài xế: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.name}</p></span>
+                                            <span style = {{
+                                                display: 'flex',
+                                                flexDirection: 'row',
+                                                width: '200px',
+                                                fontWeight: 'bold'
+                                            }}>Username: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.username}</p></span>
+                                        </div>
+                                        <img src = {this.state.avaLink} style = {{
+                                            marginLeft: '40px',
+                                            height: '60px',
+                                            width: '60px',
+                                            borderRadius: '50px',
+                                            marginTop: '20px'
+                                        }}/>
+                                    </div>
+                                    <div style = {{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        width: '99%',
+                                        borderRadius: '20px',
+                                        paddingBottom: '10px',
+                                        paddingLeft: '20px',
+                                        paddingRight: '20px',
+                                        paddingTop: '10px'
                                     }}>
                                         <span style = {{
                                             fontWeight: 'bold',
                                             color: blueColor,
                                             marginBottom: '15px'
-                                        }}>Thông tin cá nhân</span>
-                                        <span style = {{
-                                            display: 'flex',
-                                            flexDirection: 'row',
-                                            width: '150px',
-                                            fontWeight: 'bold'
-                                        }}>Tên tài xế: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.name}</p></span>
+                                        }}>Thông tin liên hệ</span>
                                         <span style = {{
                                             display: 'flex',
                                             flexDirection: 'row',
                                             width: '200px',
                                             fontWeight: 'bold'
-                                        }}>Username: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.username}</p></span>
+                                        }}>Bằng lái xe: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.driverLicense}</p></span>
+                                        <span style = {{
+                                            display: 'flex',
+                                            flexDirection: 'row',
+                                            width: '200px',
+                                            fontWeight: 'bold'
+                                        }}>Số điện thoại: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.phone_number}</p></span>
                                     </div>
-                                    <img src = {this.state.avaLink} style = {{
-                                        marginLeft: '40px',
-                                        height: '60px',
-                                        width: '60px',
-                                        borderRadius: '50px',
-                                        marginTop: '20px'
-                                    }}/>
-                                </div>
-                                <div style = {{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    width: '99%',
-                                    borderRadius: '20px',
-                                    paddingBottom: '10px',
-                                    paddingLeft: '20px',
-                                    paddingRight: '20px',
-                                    paddingTop: '10px'
-                                }}>
-                                    <span style = {{
-                                        fontWeight: 'bold',
-                                        color: blueColor,
-                                        marginBottom: '15px'
-                                    }}>Thông tin liên hệ</span>
-                                    <span style = {{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        width: '200px',
-                                        fontWeight: 'bold'
-                                    }}>Bằng lái xe: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.driverLicense}</p></span>
-                                    <span style = {{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        width: '200px',
-                                        fontWeight: 'bold'
-                                    }}>Số điện thoại: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.phone_number}</p></span>
                                 </div>
                             </div>
+                            {this.lastRides()}
                         </div>
-                        {this.lastRides()}
-                    </div>
 
-                    {/* Cột thứ hai */}
-                    <div className = 'dashBoardCol1'>
-                        {this.instanceOrder()}
-                        {this.instanceOrderRequets()}
-                    </div>
+                        {/* Cột thứ hai */}
+                        <div className = 'dashBoardCol1 animate__animated animate__fadeInRightBig'>
+                            {this.instanceOrder()}
+                            {this.instanceOrderRequets()}
+                        </div>
 
+                    </div>
+                    {/* Cột thứ nhất */}
+                    
                     {/* Cột thứ ba */}
-                    <div className = 'dashBoardCol1'>
+                    <div className = 'dashBoardCol1 animate__animated animate__fadeInDown'>
                         {this.availableOrder()}
                     </div>
                 </div>
