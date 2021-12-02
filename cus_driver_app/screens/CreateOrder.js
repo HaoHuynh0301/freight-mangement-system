@@ -18,13 +18,13 @@ import {
     callIcon, 
     homeIcon,
     accountIcon,
-    locationIcon,
     orangeColor,
     ipAddress
 } from '../contants';
 import {Picker} from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import DocumentPicker from 'react-native-document-picker'
 
 const displayAlert = (message) => {
     Alert.alert(
@@ -268,8 +268,21 @@ class CreateOrder extends Component {
         );
     }
 
-    handleAddProductImage() {
-        console.log('Add image for product')
+    handleAddProductImage = async () => {
+        try {
+            const res = await DocumentPicker.pick({
+              type: [DocumentPicker.types.images],
+            })
+            console.log(
+                res
+            )
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+              // User cancelled the picker, exit any dialogs or menus and move on
+            } else {
+              throw err
+            }
+        }
     }
 
     async handleCreateOrder() {
