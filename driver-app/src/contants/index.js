@@ -16,7 +16,7 @@ const orangeBlur = 'linear-gradient(#e09952, #b3b3b3)';
 const blueColor = '#4775d1';
 
 // IP address 
-const ipAddress = 'http://192.168.1.4:8000';
+const ipAddress = 'http://192.168.1.3:8000';
 
 export {
     greyColor,
