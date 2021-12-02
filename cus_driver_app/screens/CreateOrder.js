@@ -106,7 +106,9 @@ class CreateOrder extends Component {
             new_phonenumber: '',
             new_address: '',
 
-            dis_fee: 0
+            dis_fee: 0,
+
+            imgName: null
         }
     }
 
@@ -272,6 +274,9 @@ class CreateOrder extends Component {
         try {
             const res = await DocumentPicker.pick({
               type: [DocumentPicker.types.images],
+            });
+            this.setState({
+                imgName: res[0].name
             })
             console.log(
                 res
@@ -475,7 +480,7 @@ class CreateOrder extends Component {
                     </View>
                     <View style={styles.productInformationDetail}>
                         <View style={styles.productTitleInformationDetail}>
-                            <Text style={styles.titleFontSize}>Sản phẩm</Text>
+                            <Text style={styles.titleFontSize}>Sản phẩm {this.state.imgName}</Text>
                             <TouchableOpacity
                                 style={styles.buttonAddProduct}
                                 onPress = {() => {
@@ -614,7 +619,9 @@ const styles = StyleSheet.create({
     },
     titleFontSize: {
         fontSize: appFontSize,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        overflow: 'hidden',
+        width: 200
     },
     appFontSize: {
         fontSize: appFontSize
