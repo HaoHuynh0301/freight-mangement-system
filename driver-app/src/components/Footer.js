@@ -35,19 +35,13 @@ function Footer() {
                 <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                   {/* Links */}
                   <h6 className="text-uppercase fw-bold mb-4">
-                    Products
+                    Địa chỉ
                   </h6>
                   <p>
-                    <a href="#!" className="text-reset">Angular</a>
+                    14, Quan Trong Hoang, Can Tho
                   </p>
                   <p>
-                    <a href="#!" className="text-reset">React</a>
-                  </p>
-                  <p>
-                    <a href="#!" className="text-reset">Vue</a>
-                  </p>
-                  <p>
-                    <a href="#!" className="text-reset">Laravel</a>
+                    59/31, Ben Hoa Vien, Can Tho
                   </p>
                 </div>
                 {/* Grid column */}

@@ -71,9 +71,6 @@ class DoubleNavigationPage extends Component {
                     <ReactBoostrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <ReactBoostrap.Navbar.Collapse id="responsive-navbar-nav">
                         <ReactBoostrap.Nav className="me-auto">
-                            {/* <ReactBoostrap.Nav.Link style = {{
-                                marginRight: '20px'
-                            }}><Link style = {{textDecoration: "none", color: blackColor}} to = '/'>Trang chủ</Link></ReactBoostrap.Nav.Link> */}
                         </ReactBoostrap.Nav>
                         <ReactBoostrap.Nav>
                             <ReactBoostrap.NavDropdown style = {{

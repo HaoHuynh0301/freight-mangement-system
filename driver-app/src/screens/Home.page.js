@@ -14,6 +14,7 @@ import {
 import {
     ipAddress,
     blueColor,
+    orangeColor,
 } from '../contants';
 import userIcon from '../assets/userIcon.png';
 import carIcon from '../assets/carIcon.png';
@@ -22,7 +23,7 @@ import requestIcon from '../assets/requestIcon.png';
 import addIcon from '../assets/addIcon.png';
 import axios from "axios";
 import loading from '../assets/loading.gif';
-import arrow from '../assets/arrowRight.gif';
+import arrow from '../assets/arrowRight.png';
 import {
     Link,
 } from "react-router-dom";
@@ -663,10 +664,16 @@ class HomePage extends Component {
                         borderRadius: '20px'
                     }} show={this.state.showModal} onHide={this.handleClose}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Thông tin đơn hàng</Modal.Title>
+                            <Modal.Title>
+                                <p style = {{
+                                    fontWeight: 'bold'
+                                }}>Thông tin đơn hàng</p>
+                            </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <p>Tên khách hàng: {this.state.tmpOrders.customer_name}</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Tên khách hàng: </span>{this.state.tmpOrders.customer_name}</p>
                             <div
                                 style = {{
                                     height: '0.001px',
@@ -674,7 +681,9 @@ class HomePage extends Component {
                                     marginBottom: '10px'
                                 }}
                             ></div>
-                            <p>Số điện thoại: {this.state.tmpOrders.customer_phonenumber}</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Số điện thoại:</span> {this.state.tmpOrders.customer_phonenumber}</p>
                             <div
                                 style = {{
                                     height: '0.001px',
@@ -683,7 +692,9 @@ class HomePage extends Component {
                                 }}
                             ></div>
                             <p>
-                                Địa chỉ: {this.state.tmpOrders.detail_address}, {this.state.tmpOrders.ward}, {this.state.tmpOrders.district}, {this.state.tmpOrders.province}
+                                <span style = {{
+                                    fontWeight: 'bold'
+                                }}>Địa chỉ: </span>{this.state.tmpOrders.detail_address}, {this.state.tmpOrders.ward}, {this.state.tmpOrders.district}, {this.state.tmpOrders.province}
                             </p>
                             <div
                                 style = {{
@@ -692,7 +703,9 @@ class HomePage extends Component {
                                     marginBottom: '10px'
                                 }}
                             ></div>
-                            <p>Tên mặc hàng: {this.state.tmpOrders.product_name}</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Tên mặc hàng: </span>{this.state.tmpOrders.product_name}</p>
                             <div
                                 style = {{
                                     height: '0.001px',
@@ -700,7 +713,9 @@ class HomePage extends Component {
                                     marginBottom: '10px'
                                 }}
                             ></div>
-                            <p>Số lượng: {this.state.tmpOrders.product_quantity}</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Số lượng: </span>{this.state.tmpOrders.product_quantity}</p>
                             <div
                                 style = {{
                                     height: '0.001px',
@@ -708,7 +723,9 @@ class HomePage extends Component {
                                     marginBottom: '10px'
                                 }}
                             ></div>
-                            <p>Đơn giá: {this.state.tmpOrders.cast}VNĐ</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Đơn giá: </span>{this.state.tmpOrders.cast}VNĐ</p>
                             <div
                                 style = {{
                                     height: '0.001px',
@@ -716,7 +733,9 @@ class HomePage extends Component {
                                     marginBottom: '10px'
                                 }}
                             ></div>
-                            <p>Hình thức giao hàng: {this.state.tmpOrders.ship_option}</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Hình thức giao hàng: </span>{this.state.tmpOrders.ship_option}</p>
                             <div
                                 style = {{
                                     height: '0.001px',
@@ -724,13 +743,20 @@ class HomePage extends Component {
                                     marginBottom: '10px'
                                 }}
                             ></div>
-                            <p>Ghi chú: {this.state.tmpOrders.note}</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Ghi chú: </span>{this.state.tmpOrders.note}</p>
                         </Modal.Body>
                         <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleClose}>
+                        <Button  style = {{
+                            color: 'black'
+                        }}  variant="secondary" onClick={this.handleClose}>
                             Đóng
                         </Button>
-                        <Button variant="primary" onClick={this.handleCloseAndGetOrder}>
+                        <Button style = {{
+                            backgroundColor: orangeColor,
+                            color: 'black'
+                        }} className = 'btn btnDetail' variant="primary" onClick={this.handleCloseAndGetOrder}>
                             Nhận đơn hàng
                         </Button>
                         </Modal.Footer>
