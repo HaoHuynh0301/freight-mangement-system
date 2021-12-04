@@ -99,6 +99,7 @@ class MyOrders extends Component {
 
     // Handle Update request function
     handleupdateStatus = () => {
+        console.log(this.state.instanceOrders.id);
         const token = localStorage.get('token');
         axios.post(`${ipAddress}/api/status-order/`, {
             status_id: this.state.willUpdateOrderStatus,

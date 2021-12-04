@@ -340,7 +340,8 @@ class StatusOrderView(APIView):
     
     def post(self, request, format = None):
         statusId = request.data['status_id']
-        orderId = request.query_params.get('order_id')
+        orderId = request.data['order_id']
+        print(orderId)
         instanceStatus = models.OrderStatus.objects.filter(id = statusId)
         instanceOrder = models.Order.objects.filter(id = orderId)
         if len(instanceStatus) > 0 and len(instanceOrder) > 0:
