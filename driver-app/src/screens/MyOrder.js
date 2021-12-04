@@ -60,7 +60,8 @@ class MyOrders extends Component {
                     id: 7,
                     name: 'Đang vận chuyển'
                 }
-            ]
+            ],
+            willUpdateOrderStatus: null
         }
         this.fetchTask = this.fetchTask.bind(this);
         this.renderOrderInformation = this.renderOrderInformation.bind(this);
@@ -98,10 +99,28 @@ class MyOrders extends Component {
 
     // Handle Update request function
     handleupdateStatus = () => {
+        const token = localStorage.get('token');
+        axios.post(`${ipAddress}/api/status-order/`, {
+            status_id: this.state.willUpdateOrderStatus,
+            order_id: this.state.instanceOrders.id
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            this.setState({
+                orderStatus: response.data
+            })
+        })
+        .catch((error) => {
+            alert('ĐÃ CÓ LỖI VUI LÒNG THỬ LẠI');
+        })
         this.getStatusUpdate();
         this.setState({
             isShow: true
-        })
+        });
     }
 
     confirmUpdateStatus = (id) => {
@@ -154,7 +173,8 @@ class MyOrders extends Component {
                 <div style = {{
                     height: '100%',
                     width: '100%',
-                    border: 'solid 0.5px grey',
+                    borderRadius: '5px',
+                    boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px', 
                     marginLeft: '20px'
                 }}>
                     <MapContainer style = {{
@@ -186,7 +206,12 @@ class MyOrders extends Component {
                         <button className = 'btn btn-outline-primary' style = {{
                             marginRight: '20px',
                             color: 'black'
-                        }}  onClick = {this.handleupdateStatus}>Cập nhật trạng thái</button>
+                        }}  onClick = {() => {
+                            this.setState({
+                                isShow: true
+                            });
+                            this.getStatusUpdate();
+                        }}>Cập nhật trạng thái</button>
                         <button className = 'btn btn-outline-primary' style = {{
                             marginRight: '20px',
                             color: 'black'
@@ -297,12 +322,14 @@ class MyOrders extends Component {
                         alignItems: 'center',
                         justifyContent: 'flex-start',
                         marginTop: '5px',
-                        borderBottom: 'solid 0.2px grey',
+                        borderBottom: 'solid 0.2px rgba(17, 17, 26, 0.1)',
                         paddingLeft: '10px'
                     }}> 
                         <p style = {{
                             fontSize: '16px',
-                        }}>{title}: {value}</p>
+                        }}><span style = {{
+                            fontWeight: 'bold'
+                        }}>{title}</span>: {value}</p>
                     </div>
                 );
             } 
@@ -312,8 +339,8 @@ class MyOrders extends Component {
             return(
                 <div style = {{
                     backgroundColor: 'white',
-                    borderRadius: '10px',
-                    border: 'solid 0.5px black'
+                    borderRadius: '5px',
+                    boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px', 
                 }}>
                     {renderItem("Tên khách hàng", this.state.instanceOrders.customer_name)}
                     {renderItem("Tên sản phẩm", this.state.instanceOrders.product_name)}
@@ -349,7 +376,9 @@ class MyOrders extends Component {
         const statusItem = this.state.ordersStatus.map((item, index) => {
             return(
                 <Dropdown.Item key = {index} href="#" onClick = {() => {
-                    this.confirmUpdateStatus(item.id);
+                    this.setState({
+                        willUpdateOrderStatus: item.id
+                    })
                 }}>{item.name}</Dropdown.Item>
             );
         });
@@ -375,7 +404,6 @@ class MyOrders extends Component {
                         <div style = {{
                             display: 'flex',
                             flexDirection: 'column',
-                            border: 'solid 0.1px grey',
                             width: '20%',
                             borderRadius: '15px'
                         }}>
@@ -426,9 +454,7 @@ class MyOrders extends Component {
                             Đóng
                         </Button>
                         <Button variant="primary" onClick={() => {
-                            this.setState({
-                                isShow: false
-                            })
+                            this.handleupdateStatus();
                         }}>
                             Cập nhật trạng thái
                         </Button>
