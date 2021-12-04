@@ -13,6 +13,9 @@ import {
 import background from '../assets/delivery-background.jpg';
 import { ScrollView } from "@cantonjs/react-scroll-view";
 import rightArrow from '../assets/right-arrow.png';
+import coinIcon from '../assets/coin.png';
+import phoneIcon from '../assets/phoneIcon.png';
+import locationIcon from  '../assets/locationIcon.png';
 import axios from "axios";
 const localStorage = require('local-storage');
 
@@ -133,69 +136,97 @@ class AvailableOrders extends Component {
                 return(
                     <div key = {index}>
                         <button style = {{
-                            border: 'solid 0.5px white',
                             width: '100%',
                             height: '120px',
-                            borderBottomWidth: '0.5px',
-                            borderBottomColor: 'grey',
                             display: 'flex',
                             flexDirection: 'row',
                             margin: '10px',
-                            borderRadius: '10px',
+                            backgroundColor: 'white',
+                            fontSize: '13px',
+                            borderWidth: '0px',
+                            justifyContent: 'center',
+                            alignItems: 'center'
                         }} onClick = {() => {
                             this.handleOpenOrder(item.id);
                         }}>
+                            <img  src = {`${ipAddress}${item.product_image}`}  style = {{
+                                width: '100px',
+                                height: '100px',
+                                marginRight: '20px',
+                                borderRadius: '5px',
+                                boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px',
+                            }}></img>
                             <div style = {{
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'flex-start',
-                                justifyContent: 'flex-start',
-                                paddingTop: '20px',
+                                justifyContent: 'space-between',
+                                paddingLeft: '10px',
+                                width: '60%',
+                                borderRadius: '5px',
+                                boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px',
+                                height: '100px',
+                                padding: '5px',
                                 paddingLeft: '10px'
                             }}>
                                 <span style = {{
-                                    // marginLeft: '20px'
-                                }}>Tên khách hàng: {item.customer_name}</span>
-                                <span style = {{
-                                    // marginLeft: '28px'
-                                }}>Số điện thoại: {item.customer_phonenumber}</span>
-                                <span style = {{
-                                    // marginLeft: '5px'
-                                }}>Vật phẩm: {item.product_name}</span>
+                                    fontWeight: 'bold'
+                                }}>{item.customer_name} - {item.product_name}</span>
+                                <span><img src = {locationIcon} style = {{
+                                        height: '20px',
+                                        width: '20px',
+                                        marginRight: '5px'
+                                    }}></img>{item.detail_address}, {item.province}, {item.district}, {item.ward}
+                                </span>
+                                <div>
+                                    <span style = {{
+                                        }}><img src = {phoneIcon} style = {{
+                                            height: '20px',
+                                            width: '20px',
+                                            marginRight: '5px'
+                                        }}></img>{item.customer_phonenumber}
+                                    </span>
+                                    <span style = {{
+                                        }}><img src = {coinIcon} style = {{
+                                            height: '20px',
+                                            width: '20px',
+                                            marginRight: '5px',
+                                            marginLeft: '10px'
+                                        }}></img>{item.cast} vnđ
+                                    </span>
+                                </div>
                             </div>
-                            <p style  = {{
-                                marginTop: '35px',
-                                marginLeft: '40px',
-                                fontSize: '22px',
-                                fontWeight: 'bold'
-                            }}>Tổng tiền: {item.cast} VNĐ</p>
                             <img src = {rightArrow} style = {{
                                 height: '20px',
                                 width: '20px',
-                                marginTop: '41px',
-                                marginLeft: '72px',
                                 borderRadius: '10px',
+                                marginLeft: '5px'
                             }}></img>
                         </button>
                     </div>
                 );
             });
             return(
-                <div style = {{
+                <div className = 'animate__animated animate__fadeInDown' style = {{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     flexDirection: 'column',
                     height: '710px',
-                    width: 'auto',
-                    backgroundImage: `url(${background})`,
-                    backgroundRepeat: 'none',
-                    borderRadius: '10px',
+                    width: '40%',
+                    borderRadius: '5px',
+                    boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px',
+                    marginLeft: '500px',
+                    paddingTop: '10px',
+                    backgroundColor: 'white'
                 }}>
+                    <span style = {{
+                        fontSize: '25px',
+                        fontWeight: 'bold'
+                    }}>ĐƠN HÀNG HIỆN CÓ</span>
                     <ScrollView style = {{
-                        width: '40%',
+                        width: '100%',
                         height: '90%',
-                        
                     }} onEndReached={this.handleEndReached}>
                         {item}
                     </ScrollView>
@@ -209,7 +240,13 @@ class AvailableOrders extends Component {
             <div style = {{
             }}>
                 <DoubleNavigationPage />
-                {this.mainView()}
+                <div style = {{
+                    width: '100%',
+                    backgroundImage: `url(${background})`
+                }}>
+                    {this.mainView()}
+                </div>
+                
                 <Footer />
                 <Modal style = {{
                         borderRadius: '20px'
