@@ -396,13 +396,16 @@ class HomePage extends Component {
                         }}>
                             Địa chỉ: <span style = {{fontWeight: 'normal'}}>{this.state.instanceOrders.detail_address}, {this.state.instanceOrders.ward}, {this.state.instanceOrders.district}, {this.state.instanceOrders.province}</span>
                         </span>
-                        <Link className = 'btn mb-2 mb-md-0 btn-secondary btn-block btn-round' style = {{
-                            // width: '95%',
-                            height: '40%',
-                            backgroundColor: '#ff7733',
+                        <Link className = 'btnDetail btn' style = {{
+                            width: '100%',
+                            height: '38%',
                             textDecoration: "none",
                             alignItems: 'center',
-                            justifyContent: 'center'
+                            justifyContent: 'center',
+                            borderRadius: '30px',
+                            color: 'black',
+                            boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, grey 0px 0px 3px', 
+                            marginTop: '5px'
                         }} to = {'/my-order/'}>Xem chi tiết</Link>
                     </div>
                 </div>

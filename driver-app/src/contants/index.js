@@ -1,6 +1,6 @@
 // Color
 const greyColor = '#DCDCDC';
-const orangeColor = '#ebccad';
+const orangeColor = '#ff7733';
 //#ff7733
 
 // Images

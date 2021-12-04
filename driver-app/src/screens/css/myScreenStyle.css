@@ -6,3 +6,7 @@
     font-weight: bold;
     margin-right: 10px;
 }
+
+.btnUpdate:hover {
+    background-color: #ff7733;
+}

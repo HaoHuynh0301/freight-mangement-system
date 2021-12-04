@@ -61,7 +61,7 @@ class MyOrders extends Component {
                     name: 'Đang vận chuyển'
                 }
             ],
-            willUpdateOrderStatus: null
+            willUpdateOrderStatus: 'Chọn trạng thái'
         }
         this.fetchTask = this.fetchTask.bind(this);
         this.renderOrderInformation = this.renderOrderInformation.bind(this);
@@ -124,27 +124,6 @@ class MyOrders extends Component {
         });
     }
 
-    confirmUpdateStatus = (id) => {
-        const token = localStorage.get('token');
-        axios.post(`${ipAddress}/api/status-order/`, {
-            status_id: id,
-            order_id: this.state.instanceOrders.id
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then((response) => {
-            this.setState({
-                orderStatus: response.data
-            })
-        })
-        .catch((error) => {
-            alert('ĐÃ CÓ LỖI VUI LÒNG THỬ LẠI');
-        })
-    }
-
     handleupPaid = () => {
         const token = localStorage.get('token');
         axios.post(`${ipAddress}/api/set_paid_order/`, {
@@ -200,22 +179,28 @@ class MyOrders extends Component {
                         justifyContent: 'center',
                         width: '100%',                        
                     }}>
-                        <button className = 'btn btn-outline-primary' style = {{
+                        <button className = 'btn btnUpdate' style = {{
                             marginRight: '20px',
-                            color: 'black'
+                            color: 'black',
+                            boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px',
+                            borderWidth: '0px'
                         }} onClick = {this.handleupdateOrder}>Cập nhật vị trí</button>
-                        <button className = 'btn btn-outline-primary' style = {{
+                        <button className = 'btn btnUpdate' style = {{
                             marginRight: '20px',
-                            color: 'black'
+                            color: 'black',
+                            boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px',
+                            borderWidth: '0px'
                         }}  onClick = {() => {
                             this.setState({
                                 isShow: true
                             });
                             this.getStatusUpdate();
                         }}>Cập nhật trạng thái</button>
-                        <button className = 'btn btn-outline-primary' style = {{
+                        <button className = 'btn btnUpdate' style = {{
                             marginRight: '20px',
-                            color: 'black'
+                            color: 'black',
+                            boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px',
+                            borderWidth: '0px'
                         }}  onClick = {this.handleupPaid}>Xác nhận thanh toán</button>
                     </div>
                 </div>
