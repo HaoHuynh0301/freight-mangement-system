@@ -56,6 +56,7 @@ class HomePage extends Component {
         this.handleOpenOrderDetail = this.handleOpenOrderDetail.bind(this);
         this.getInstanceAddress = this.getInstanceAddress.bind(this);
         this.getOrderInformation = this.getOrderInformation.bind(this);
+        this.getInstanceOrderRequest = this.getInstanceOrderRequest.bind(this);
     }
 
     Map = () => {
@@ -177,6 +178,41 @@ class HomePage extends Component {
         this.setState({
             token: localStorage.get('token')
         });
+        // this.getInstanceOrderRequest();
+    }
+
+    getInstanceOrderRequest = () => {
+        const token = localStorage.get('token');
+        axios.get(`${ipAddress}/api/order-drivers?driver_id=${this.state.driverInfor.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            this.setState({
+                requests: response.data
+            });
+            var tmpList = [];
+            tmpList = this.state.requests;
+            for(let i=0; i<tmpList.length; i++) {
+                var requestName = '';
+                if(tmpList[i].request_option == 1) {
+                    requestName = 'Giục lấy'
+                } else if(tmpList[i].request_option == 2) {
+                    requestName = 'Giao';
+                } else if(tmpList[i].request_option == 3) {
+                    requestName = 'Trả hàng';
+                }
+                tmpList[i].request_option = requestName;
+            }
+            this.setState({
+                requests: tmpList
+            });
+        })
+        .catch((error) => {
+            console.log('Error');
+        });
     }
 
     componentWillUnmount() {
@@ -247,6 +283,36 @@ class HomePage extends Component {
             this.setState({
                 driverInfor: response.data
             });
+            axios.get(`${ipAddress}/api/order-drivers?driver_id=${this.state.driverInfor.id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            .then((response) => {
+                this.setState({
+                    requests: response.data
+                });
+                var tmpList = [];
+                tmpList = this.state.requests;
+                for(let i=0; i<tmpList.length; i++) {
+                    var requestName = '';
+                    if(tmpList[i].request_option == 1) {
+                        requestName = 'Giục lấy'
+                    } else if(tmpList[i].request_option == 2) {
+                        requestName = 'Giao';
+                    } else if(tmpList[i].request_option == 3) {
+                        requestName = 'Trả hàng';
+                    }
+                    tmpList[i].request_option = requestName;
+                }
+                this.setState({
+                    requests: tmpList
+                });
+            })
+            .catch((error) => {
+                console.log('Error');
+            });
             axios.get(`${ipAddress}/api/update-location?driver_id=${response.data.id}`, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -256,36 +322,6 @@ class HomePage extends Component {
             .then(async (response) => {
                 await this.setState({
                     lastRides: response.data
-                });
-                axios.get(`${ipAddress}/api/order-drivers?driver_id=${this.state.driverInfor.id}`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-                .then((response) => {
-                    this.setState({
-                        requests: response.data
-                    });
-                    var tmpList = [];
-                    tmpList = this.state.requests;
-                    for(let i=0; i<tmpList.length; i++) {
-                        var requestName = '';
-                        if(tmpList[i].request_option == 1) {
-                            requestName = 'Giục lấy'
-                        } else if(tmpList[i].request_option == 2) {
-                            requestName = 'Giao';
-                        } else if(tmpList[i].request_option == 3) {
-                            requestName = 'Trả hàng';
-                        }
-                        tmpList[i].request_option = requestName;
-                    }
-                    this.setState({
-                        requests: tmpList
-                    });
-                })
-                .catch((error) => {
-                    console.log('Error');
                 });
             })
             .catch((error) => {
@@ -435,7 +471,7 @@ class HomePage extends Component {
     instanceOrderRequets = () => {
         const renderListofRequest = this.state.requests.map((item, index) => {
             return(
-                <div style = {{
+                <div key = {index} style = {{
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
