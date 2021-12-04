@@ -218,7 +218,9 @@ class AvailableOrders extends Component {
                             <Modal.Title>Thông tin đơn hàng</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <p>Tên khách hàng: {this.state.tmpOrders.customer_name}</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Tên khách hàng: </span>{this.state.tmpOrders.customer_name}</p>
                             <div
                                 style = {{
                                     height: '0.001px',
@@ -226,7 +228,9 @@ class AvailableOrders extends Component {
                                     marginBottom: '10px'
                                 }}
                             ></div>
-                            <p>Số điện thoại: {this.state.tmpOrders.customer_phonenumber}</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Số điện thoại:</span> {this.state.tmpOrders.customer_phonenumber}</p>
                             <div
                                 style = {{
                                     height: '0.001px',
@@ -235,7 +239,9 @@ class AvailableOrders extends Component {
                                 }}
                             ></div>
                             <p>
-                                Địa chỉ: {this.state.tmpOrders.detail_address}, {this.state.tmpOrders.ward}, {this.state.tmpOrders.district}, {this.state.tmpOrders.province}
+                                <span style = {{
+                                    fontWeight: 'bold'
+                                }}>Địa chỉ: </span>{this.state.tmpOrders.detail_address}, {this.state.tmpOrders.ward}, {this.state.tmpOrders.district}, {this.state.tmpOrders.province}
                             </p>
                             <div
                                 style = {{
@@ -244,7 +250,9 @@ class AvailableOrders extends Component {
                                     marginBottom: '10px'
                                 }}
                             ></div>
-                            <p>Tên mặc hàng: {this.state.tmpOrders.product_name}</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Tên mặc hàng: </span>{this.state.tmpOrders.product_name}</p>
                             <div
                                 style = {{
                                     height: '0.001px',
@@ -252,7 +260,9 @@ class AvailableOrders extends Component {
                                     marginBottom: '10px'
                                 }}
                             ></div>
-                            <p>Số lượng: {this.state.tmpOrders.product_quantity}</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Số lượng: </span>{this.state.tmpOrders.product_quantity}</p>
                             <div
                                 style = {{
                                     height: '0.001px',
@@ -260,7 +270,9 @@ class AvailableOrders extends Component {
                                     marginBottom: '10px'
                                 }}
                             ></div>
-                            <p>Đơn giá: {this.state.tmpOrders.cast}VNĐ</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Đơn giá: </span>{this.state.tmpOrders.cast}VNĐ</p>
                             <div
                                 style = {{
                                     height: '0.001px',
@@ -268,7 +280,9 @@ class AvailableOrders extends Component {
                                     marginBottom: '10px'
                                 }}
                             ></div>
-                            <p>Hình thức giao hàng: {this.state.tmpOrders.ship_option}</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Hình thức giao hàng: </span>{this.state.tmpOrders.ship_option}</p>
                             <div
                                 style = {{
                                     height: '0.001px',
@@ -276,7 +290,9 @@ class AvailableOrders extends Component {
                                     marginBottom: '10px'
                                 }}
                             ></div>
-                            <p>Ghi chú: {this.state.tmpOrders.note}</p>
+                            <p><span style = {{
+                                    fontWeight: 'bold'
+                                }}>Ghi chú: </span>{this.state.tmpOrders.note}</p>
                         </Modal.Body>
                         <Modal.Footer>
                         <Button variant="secondary" onClick={() => {
