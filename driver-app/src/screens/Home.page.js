@@ -56,7 +56,6 @@ class HomePage extends Component {
         this.handleOpenOrderDetail = this.handleOpenOrderDetail.bind(this);
         this.getInstanceAddress = this.getInstanceAddress.bind(this);
         this.getOrderInformation = this.getOrderInformation.bind(this);
-        this.getInstanceOrderRequest = this.getInstanceOrderRequest.bind(this);
     }
 
     Map = () => {
@@ -177,41 +176,6 @@ class HomePage extends Component {
         this.getAvailableOrders();
         this.setState({
             token: localStorage.get('token')
-        });
-        // this.getInstanceOrderRequest();
-    }
-
-    getInstanceOrderRequest = () => {
-        const token = localStorage.get('token');
-        axios.get(`${ipAddress}/api/order-drivers?driver_id=${this.state.driverInfor.id}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then((response) => {
-            this.setState({
-                requests: response.data
-            });
-            var tmpList = [];
-            tmpList = this.state.requests;
-            for(let i=0; i<tmpList.length; i++) {
-                var requestName = '';
-                if(tmpList[i].request_option == 1) {
-                    requestName = 'Giục lấy'
-                } else if(tmpList[i].request_option == 2) {
-                    requestName = 'Giao';
-                } else if(tmpList[i].request_option == 3) {
-                    requestName = 'Trả hàng';
-                }
-                tmpList[i].request_option = requestName;
-            }
-            this.setState({
-                requests: tmpList
-            });
-        })
-        .catch((error) => {
-            console.log('Error');
         });
     }
 
@@ -488,7 +452,6 @@ class HomePage extends Component {
         if(this.state.requests.length > 0) {
             return(
                 <div className = 'dashBoardInstanceOrderRequestWrapper'>
-
                     {/* Title Wrapper */}
                     <div style = {{
                         display: 'flex',
@@ -503,14 +466,15 @@ class HomePage extends Component {
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            justifyItems: 'center',
+                            justifyContent: 'center',
                             borderRadius: '40px',
-                            padding: '1px',
-                            marginRight: '20px'
+                            marginRight: '20px',
+                            paddingLeft: '6px'
                         }}>
                             <img src = {requestIcon} style = {{
                                 height: '30px',
                                 width: '30px',
+                                alignSelf: 'center'
                             }}></img>
                         </div>
                         <p 
