@@ -12,8 +12,6 @@ import {
     withRouter 
 } from "react-router-dom";
 import auth from "../auth";
-import shopIcon from '../assets/shopIcon.png';
-import historyIcon from '../assets/historyIcon.png';
 import accountIcon from '../assets/accountIcon.png';
 import orderIcon from '../assets/orderIcon.png'
 import listIcon from '../assets/listIcon.png';

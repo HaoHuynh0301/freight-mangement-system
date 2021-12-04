@@ -4,7 +4,8 @@ import {
     HomePage,
     Profile,
     MyOrders,
-    AvailableOrders
+    AvailableOrders,
+    NotFoundPage
 } from './screens';
 import {
     BrowserRouter,
@@ -38,13 +39,7 @@ function App() {
                 <ProtectedRoute exact path = '/profile' component = {Profile}></ProtectedRoute>
                 <ProtectedRoute exact path = '/my-order' component = {MyOrders}></ProtectedRoute>
                 <ProtectedRoute exact path = '/available-orders' component = {AvailableOrders}></ProtectedRoute>
-                <Route path = "*" component = {() => {
-                    return(
-                        <div>
-                            404
-                        </div>
-                    );
-                }}></Route>
+                <Route path = "*" component = {NotFoundPage}></Route>
             </Switch>
         </BrowserRouter>
     );

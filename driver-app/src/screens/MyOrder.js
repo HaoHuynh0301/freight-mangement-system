@@ -17,6 +17,7 @@ import {
 import axios from "axios";
 import { 
     DoubleNavigationPage,
+    Footer
 } from "../components";
 import { RoutingMachine } from ".";
 const localStorage = require('local-storage');
@@ -237,7 +238,6 @@ class MyOrders extends Component {
             }
         })
         .then((response) => {
-            console.log(response.data);
             if(response.data.product_image !== null) {
                 this.setState({
                     avaLink: `${ipAddress}${response.data.product_image}`
@@ -250,7 +250,6 @@ class MyOrders extends Component {
             this.setState({
                 instanceOrders: response.data
             });
-            console.log(this.state.instanceOrders);
             axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
             .then((response) => {
                 this.setState({
@@ -263,7 +262,7 @@ class MyOrders extends Component {
             })
         })
         .catch((error) => {
-            alert('ĐÃ CÓ LỖI TRONG QUÁ TRÌNH LẤY DỮ LIỆU!');
+            console.log(error);
         })
     }
 
@@ -393,6 +392,17 @@ class MyOrders extends Component {
                 }}>{item.name}</Dropdown.Item>
             );
         });
+        if(this.state.instanceOrders === null) {
+            return(
+                <div>
+                    <DoubleNavigationPage />
+                    <div>
+                        
+                    </div>
+                    <Footer />
+                </div>
+            );
+        } 
         return(
             <div>
                 <DoubleNavigationPage />
@@ -502,7 +512,6 @@ class MyOrders extends Component {
                         </Modal.Body>
                 </Modal>
             </div>
-            
         );
     }
 } 

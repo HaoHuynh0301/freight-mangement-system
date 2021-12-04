@@ -110,7 +110,7 @@ class AvailableOrders extends Component {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    flexDirection: 'column'
+                    flexDirection: 'column',
                 }}>
                     <span style = {{
                         fontWeight: 'bold',
@@ -136,11 +136,12 @@ class AvailableOrders extends Component {
                             border: 'solid 0.5px white',
                             width: '100%',
                             height: '120px',
-                            borderRadius: '10px',
                             borderBottomWidth: '0.5px',
                             borderBottomColor: 'grey',
                             display: 'flex',
-                            flexDirection: 'row'
+                            flexDirection: 'row',
+                            margin: '10px',
+                            borderRadius: '10px',
                         }} onClick = {() => {
                             this.handleOpenOrder(item.id);
                         }}>
@@ -173,6 +174,7 @@ class AvailableOrders extends Component {
                                 width: '20px',
                                 marginTop: '41px',
                                 marginLeft: '72px',
+                                borderRadius: '10px',
                             }}></img>
                         </button>
                     </div>
@@ -187,11 +189,13 @@ class AvailableOrders extends Component {
                     height: '710px',
                     width: 'auto',
                     backgroundImage: `url(${background})`,
-                    backgroundRepeat: 'none'
+                    backgroundRepeat: 'none',
+                    borderRadius: '10px',
                 }}>
                     <ScrollView style = {{
                         width: '40%',
-                        height: '90%'
+                        height: '90%',
+                        
                     }} onEndReached={this.handleEndReached}>
                         {item}
                     </ScrollView>

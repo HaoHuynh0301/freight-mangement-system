@@ -5,6 +5,7 @@ import Profile from "./Profile.page";
 import MyOrders from "./MyOrder";
 import AvailableOrders from "./AvailableOrders.page";
 import RoutingMachine from "./RoutingMachine";
+import NotFoundPage from "./404.page";
 
 export {
     LandingPage,
@@ -13,5 +14,6 @@ export {
     Profile,
     MyOrders,
     AvailableOrders,
-    RoutingMachine
+    RoutingMachine,
+    NotFoundPage
 }
