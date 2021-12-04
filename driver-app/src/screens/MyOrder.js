@@ -19,6 +19,11 @@ import {
     DoubleNavigationPage,
     Footer
 } from "../components";
+import {
+    BrowserRouter as Router,
+    Link,
+    withRouter 
+} from "react-router-dom";
 import { RoutingMachine } from ".";
 const localStorage = require('local-storage');
 
@@ -396,8 +401,30 @@ class MyOrders extends Component {
             return(
                 <div>
                     <DoubleNavigationPage />
-                    <div>
-                        
+                    <div style = {{
+                        height: '400px',
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
+                        <span style = {{
+                            fontSize: '30px',
+                            marginBottom: '20px',
+                            fontWeight: 'bold'
+                        }}>Bạn chưa có đơn hàng nào</span>
+                        <Link to = '/' className = 'btnUpdate' style = {{
+                            height: '50px',
+                            width: 'auto',
+                            border: 'solid 0.5px grey',
+                            padding: '20px',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            display: 'flex',
+                            borderRadius: '30px',
+                            color: 'black'
+                        }}>Bắt đầu giao hàng ngay</Link>
                     </div>
                     <Footer />
                 </div>

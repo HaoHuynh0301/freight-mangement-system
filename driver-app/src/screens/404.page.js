@@ -4,7 +4,6 @@ import {
     Link,
     withRouter 
 } from "react-router-dom";
-import './css/404.css';
 
 class NotFoundPage extends Component {
     constructor(props) {
@@ -13,43 +12,45 @@ class NotFoundPage extends Component {
 
     render() {
         return(
-            <div>
-                <a href target="_blank">
-                <header className="top-header">
-                </header>
-                {/*dust particel*/}
-                <div>
-                    <div className="starsec" />
-                    <div className="starthird" />
-                    <div className="starfourth" />
-                    <div className="starfifth" />
+            <body style = {{
+                backgroundColor: '#95c2de'
+            }}>
+                <div style = {{
+                    backgroundColor: '#95c2de',
+                    margin: 'auto',
+                    height: '100%',
+                    width: '600px',
+                    position: 'relative',
+                }}>
+                    <div style = {{
+                        color: '#ffffff',
+                        fontFamily: 'Nunito Sans',
+                        fontSize: '11rem',
+                        position:'absolute',
+                        left: '20%',
+                        top: '8%',
+                    }}>4</div>
+                    <i className="far fa-question-circle fa-spin" />
+                    <div style = {{
+                        color: '#ffffff',
+                        fontFamily: 'Nunito Sans',
+                        fontSize: '11rem',
+                        position:'absolute',
+                        left: '68%',
+                        top: '8%',
+                    }}>4</div>
+                    <div style = {{
+                        textAlign: 'center',
+                        fontFamily: 'Nunito Sans',
+                        fontSize: '1.6rem',
+                        position:'absolute',
+                        left: '16%',
+                        top: '45%',
+                        width: '75%',
+                    }}>Maybe this page moved? Got deleted? Is hiding out in quarantine? Never existed in the first place?<p>Let's go <a href="#">home</a> and try from there.</p></div>
                 </div>
-                {/*Dust particle end-*/}
-                <div className="lamp__wrap">
-                    <div className="lamp">
-                    <div className="cable" />
-                    <div className="cover" />
-                    <div className="in-cover">
-                        <div className="bulb" />
-                    </div>
-                    <div className="light" />
-                    </div>
-                </div>
-                {/* END Lamp */}
-                </a><section className="error"><a href target="_blank">
-                    {/* Content */}
-                </a><div className="error__content"><a href target="_blank">
-                    <div className="error__message message">
-                        <h1 className="message__title">Page Not Found</h1>
-                        <p className="message__text">We're sorry, the page you were looking for isn't found here. The link you followed may either be broken or no longer exists. Please try again, or take a look at our.</p>
-                    </div>
-                    </a><div className="error__nav e-nav"><a href target="_blank">
-                    </a><a href target="_blanck" className="e-nav__link" />
-                    </div>
-                </div>
-                {/* END Content */}
-                </section>
-            </div>
+            </body>
+            
         );
     }
 }
