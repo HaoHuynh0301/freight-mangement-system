@@ -12,7 +12,6 @@ import {
     Modal
 } from 'react-bootstrap';
 import {
-    orangeColor,
     ipAddress,
     blueColor,
 } from '../contants';
@@ -21,10 +20,9 @@ import carIcon from '../assets/carIcon.png';
 import locationIcon from '../assets/locationIcon.png';
 import requestIcon from '../assets/requestIcon.png';
 import addIcon from '../assets/addIcon.png';
-import headerImg from '../assets/headerimg.jpg';
 import axios from "axios";
-import background from '../assets/delivery-background.jpg';
 import loading from '../assets/loading.gif';
+import arrow from '../assets/arrowRight.gif';
 import {
     Link,
 } from "react-router-dom";
@@ -66,12 +64,13 @@ class HomePage extends Component {
                 <div style = {{
                     height: '200px',
                     width: '400px',
-                    border: 'solid 0.5px grey'
+                    border: 'solid 0.5px grey',
+                    boxShadow: '1px 5px 5px #888888',
                 }}>
                     <MapContainer style = {{
                         height: '200px',
                         width: '100%',
-                        border: 'solid 0.5px grey'
+                        border: 'solid 0.5px grey',
                     }} center={[this.state.instanceAddress.latitude, this.state.instanceAddress.longitude]} zoom={8} scrollWheelZoom={true}>
                         <TileLayer
                             attribution='Vị trí đơn hàng'
@@ -92,7 +91,8 @@ class HomePage extends Component {
                     border: 'solid 0.5px grey',
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    boxShadow: '1px 5px 5px #888888',
                 }}>
                     <img src = {loading} style = {{
                         height: '30px',
@@ -353,9 +353,8 @@ class HomePage extends Component {
                 height: '370px',
                 width: '400px',
                 margin: '20px',
-                borderRadius: '30px',
-                border: 'solid 0.5px grey',
-                boxShadow: '5px 10px 18px #888888',
+                borderRadius: '5px',
+                boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px', 
                 backgroundColor: 'white'
             }}>
                 <p style = {{
@@ -380,7 +379,8 @@ class HomePage extends Component {
                         width: '100%',
                         padding: '10px',
                         paddingLeft: '20px',
-                        backgroundColor: 'white'
+                        backgroundColor: 'white',
+                        boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px', 
                     }}>
                         <p style = {{
                             fontSize: '15px'
@@ -399,7 +399,7 @@ class HomePage extends Component {
                         <Link className = 'btn mb-2 mb-md-0 btn-secondary btn-block btn-round' style = {{
                             // width: '95%',
                             height: '40%',
-                            backgroundColor: orangeColor,
+                            backgroundColor: '#ff7733',
                             textDecoration: "none",
                             alignItems: 'center',
                             justifyContent: 'center'
@@ -419,8 +419,7 @@ class HomePage extends Component {
                     width: '400px',
                     margin: '20px',
                     borderRadius: '30px',
-                    border: 'solid 0.5px grey',
-                    boxShadow: '5px 10px 18px #888888',
+                    boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px', 
                     backgroundColor: 'white'
                 }}>
                     <p style = {{
@@ -507,9 +506,8 @@ class HomePage extends Component {
                     height: '370px',
                     width: '400px',
                     margin: '20px',
-                    borderRadius: '30px',
-                    border: 'solid 0.5px grey',
-                    boxShadow: '5px 10px 18px #888888',
+                    borderRadius: '5px',
+                    boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px', 
                     backgroundColor: 'white'
                 }}>
                     <p style = {{
@@ -650,12 +648,13 @@ class HomePage extends Component {
             <div>
                 <DoubleNavigationPage />
                 <div style = {{
-                    backgroundImage: `url(${background})`,
+                    // backgroundImage: `url(${background})`,
                     display: 'flex',
                     flexDirection: 'row',
                     paddingLeft: '60px',
-                    width: '100%',
-                    height: 'auto'
+                    width: 'auto',
+                    height: 'auto',
+                    background: '#f2f2f2'
                 }}>
                     <Modal style = {{
                         borderRadius: '20px'
@@ -788,13 +787,13 @@ class HomePage extends Component {
                                                 flexDirection: 'row',
                                                 width: '150px',
                                                 fontWeight: 'bold'
-                                            }}>Tên tài xế: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.name}</p></span>
+                                            }}>Tên tài xế: <p style = {{marginLeft: '5px', fontWeight: 'normal'}}>{this.state.driverInfor.name}</p></span>
                                             <span style = {{
                                                 display: 'flex',
                                                 flexDirection: 'row',
                                                 width: '200px',
                                                 fontWeight: 'bold'
-                                            }}>Username: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.username}</p></span>
+                                            }}>Username: <p style = {{marginLeft: '5px', fontWeight: 'normal'}}>{this.state.driverInfor.username}</p></span>
                                         </div>
                                         <img src = {this.state.avaLink} style = {{
                                             marginLeft: '40px',
@@ -806,31 +805,49 @@ class HomePage extends Component {
                                     </div>
                                     <div style = {{
                                         display: "flex",
-                                        flexDirection: "column",
+                                        flexDirection: "row",
                                         width: '99%',
                                         borderRadius: '20px',
                                         paddingBottom: '10px',
                                         paddingLeft: '20px',
                                         paddingRight: '20px',
-                                        paddingTop: '10px'
+                                        paddingTop: '5px'
                                     }}>
-                                        <span style = {{
-                                            fontWeight: 'bold',
-                                            color: blueColor,
-                                            marginBottom: '15px'
-                                        }}>Thông tin liên hệ</span>
-                                        <span style = {{
+                                        <div style = {{
                                             display: 'flex',
-                                            flexDirection: 'row',
-                                            width: '200px',
-                                            fontWeight: 'bold'
-                                        }}>Bằng lái xe: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.driverLicense}</p></span>
-                                        <span style = {{
-                                            display: 'flex',
-                                            flexDirection: 'row',
-                                            width: '200px',
-                                            fontWeight: 'bold'
-                                        }}>Số điện thoại: <p style = {{fontWeight: 'normal'}}>{this.state.driverInfor.phone_number}</p></span>
+                                            flexDirection: 'column'
+                                        }}>
+                                            <span style = {{
+                                                fontWeight: 'bold',
+                                                color: blueColor,
+                                                marginBottom: '15px'
+                                            }}>Thông tin liên hệ</span>
+                                            <span style = {{
+                                                display: 'flex',
+                                                flexDirection: 'row',
+                                                width: '200px',
+                                                fontWeight: 'bold'
+                                            }}>Bằng lái xe: <p style = {{marginLeft: '5px', fontWeight: 'normal'}}>{this.state.driverInfor.driverLicense}</p></span>
+                                            <span style = {{
+                                                display: 'flex',
+                                                flexDirection: 'row',
+                                                width: '200px',
+                                                fontWeight: 'bold'
+                                            }}>Số điện thoại: <p style = {{marginLeft: '5px', fontWeight: 'normal'}}>{this.state.driverInfor.phone_number}</p></span>
+                                        </div>
+                                        <Link to = '/profile' style = {{
+                                            border: 'solid 0 white',
+                                            backgroundColor: 'white',
+                                            alignSelf: 'center',
+                                            marginLeft: '100px'
+                                        }}>
+                                            <img src = {arrow} style = {{
+                                                height: '30px',
+                                                width: '30px',
+                                                border: 'solid 0 white',
+                                                backgroundColor: 'white'
+                                            }}></img>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

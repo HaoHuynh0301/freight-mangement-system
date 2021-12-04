@@ -8,7 +8,7 @@
 .dashBoardCol1 {
     display: flex;
     flex-direction: row;
-    margin-right: 100px;
+    margin-right: 50px;
 }
 
 .dashBoardUser {
@@ -16,10 +16,11 @@
     flex-direction: column;
     align-items: center;
     background-color: white;
-    height: 362px;
+    height: 370px;
     width: 400px;
     margin: 20px;
     border-radius: 5px;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
 }
 
 .dashBoardInstanceOrderWrapper {
@@ -31,8 +32,6 @@
     margin: 20px;
     border-radius: 30px;
     border: solid 0.5px grey;
-    box-shadow: 5px 10px 18px #888888;
-    margin-bottom: 50px;
 }
 
 .dashBoardInstanceOrderRequestWrapper {

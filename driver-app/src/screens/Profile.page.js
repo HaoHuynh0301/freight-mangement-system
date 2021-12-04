@@ -130,7 +130,7 @@ class Profile extends Component {
                 backgroundColor: '#f2f2f2'
             }}>
                 <DoubleNavigationPage />
-                <div style = {{
+                <div className = 'animate__animated animate__fadeInLeftBig' style = {{
                     display: 'flex',
                     alignSelf: 'center',
                     flexDirection: 'column',

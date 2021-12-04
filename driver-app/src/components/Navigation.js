@@ -59,7 +59,6 @@ class DoubleNavigationPage extends Component {
     }
 
     render() {
-        console.log(this.state.avaLink);
          return(
             <ReactBoostrap.Navbar collapseOnSelect expand="lg" bg={orangeColor} variant="light" style = {{backgroundColor: orangeColor}}>
                 <ReactBoostrap.Container>
@@ -79,7 +78,7 @@ class DoubleNavigationPage extends Component {
                         <ReactBoostrap.Nav>
                             <ReactBoostrap.NavDropdown style = {{
                                 fontWeight: 'bold',
-                                width: '130px'
+                                // width: '80px'
                             }} title={
                                 <img src = {this.state.avaLink} style = {{
                                     height: '35px',
