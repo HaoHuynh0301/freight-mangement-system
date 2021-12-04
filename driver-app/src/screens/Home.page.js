@@ -158,10 +158,12 @@ class HomePage extends Component {
         })
         .then((response) => {
             alert('NHẬN ĐƠN HÀNG THÀNH CÔNG!');
+            console.log(response.data);
             this.setState({
-                avaiOrders: response.data,
-                showModal: false
-            })
+                avaiOrders: response.data.avaiorders,
+                showModal: false,
+            });
+            this.getOrderInformation();
         })
         .catch((error) => {
             alert('BẠN ĐANG TRONG QUÁ TRÌNH VẬN CHUYỂN ĐƠN HÀNG KHÁC, VUI LÒNG THỬ LẠI SAU');
@@ -311,7 +313,6 @@ class HomePage extends Component {
             this.setState({
                 avaiOrders: response.data
             });
-            console.log(this.state.avaiOrders);
         })
         .catch((error) => {
             console.log('Error');

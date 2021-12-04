@@ -193,8 +193,11 @@ class SetDriverOrderView(APIView):
         resSerializer = serializers.OrderSerializer(orders, many = True)
         if serializer.is_valid():
             serializer.save()
-            print(resSerializer.data)
-            return Response(resSerializer.data, status = status.HTTP_200_OK)
+            context = {
+                'avaiorders': resSerializer.data,
+                'order': serializer.data
+            }
+            return Response(context, status = status.HTTP_200_OK)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 
