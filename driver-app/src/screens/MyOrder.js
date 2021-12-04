@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
-import background from '../assets/homePageBackground.jpg';
+import { MapContainer, TileLayer} from 'react-leaflet';
+import orderIcon from '../assets/noImage.png'
 import loading from '../assets/loading.gif';
 import "leaflet-routing-machine";
 import './css/myScreenStyle.css';
@@ -61,7 +61,10 @@ class MyOrders extends Component {
                     name: 'Đang vận chuyển'
                 }
             ],
-            willUpdateOrderStatus: 'Chọn trạng thái'
+            willUpdateOrderStatus: 'Chọn trạng thái',
+
+            isShowImg: false,
+            avaLink: null
         }
         this.fetchTask = this.fetchTask.bind(this);
         this.renderOrderInformation = this.renderOrderInformation.bind(this);
@@ -234,9 +237,20 @@ class MyOrders extends Component {
             }
         })
         .then((response) => {
+            console.log(response.data);
+            if(response.data.product_image !== null) {
+                this.setState({
+                    avaLink: `${ipAddress}${response.data.product_image}`
+                });
+            } else {
+                this.setState({
+                    avaLink: orderIcon
+                });
+            }
             this.setState({
                 instanceOrders: response.data
-            })
+            });
+            console.log(this.state.instanceOrders);
             axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
             .then((response) => {
                 this.setState({
@@ -350,6 +364,17 @@ class MyOrders extends Component {
                             fontSize: '16px',
                         }}>Ghi chú: {this.state.instanceOrders.note}</p>
                     </div>
+                    <button className = 'btnUpdate' style = {{
+                        borderRadius: '5px',
+                        boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px', 
+                        borderWidth: '0px',
+                        width: '100%',
+                        // backgroundColor: 'white'
+                    }} onClick = {() => {
+                        this.setState({
+                            isShowImg: true
+                        });
+                    }}>Xem hình ảnh</button>
                 </div>
             );
         }
@@ -445,6 +470,36 @@ class MyOrders extends Component {
                             Cập nhật trạng thái
                         </Button>
                         </Modal.Footer>
+                </Modal>
+                <Modal style = {{
+                        borderRadius: '20px'
+                    }} show={this.state.isShowImg} onHide={() => {
+                        this.setState({
+                            isShowImg: false
+                        })
+                    }}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>
+                                <p style = {{
+                                    fontWeight: 'bold',
+                                }}>Hình ảnh đơn hàng</p>
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <div style = {{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <img src = {this.state.avaLink} style = {{
+                                    height: '60%',
+                                    width: '60%',
+                                    alignSelf: 'center'
+                                }}>
+                                </img>
+                            </div>
+                        </Modal.Body>
                 </Modal>
             </div>
             

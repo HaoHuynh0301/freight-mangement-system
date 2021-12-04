@@ -184,7 +184,7 @@ class AvailableOrders extends Component {
                     justifyContent: 'center',
                     alignItems: 'center',
                     flexDirection: 'column',
-                    height: '700px',
+                    height: '710px',
                     width: 'auto',
                     backgroundImage: `url(${background})`,
                     backgroundRepeat: 'none'

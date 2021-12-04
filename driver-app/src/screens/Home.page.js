@@ -822,7 +822,7 @@ class HomePage extends Component {
                                                 flexDirection: 'row',
                                                 width: '200px',
                                                 fontWeight: 'bold'
-                                            }}>Username: <p style = {{marginLeft: '5px', fontWeight: 'normal'}}>{this.state.driverInfor.username}</p></span>
+                                            }}>Tên đăng nhập: <p style = {{marginLeft: '5px', fontWeight: 'normal'}}>{this.state.driverInfor.username}</p></span>
                                         </div>
                                         <img src = {this.state.avaLink} style = {{
                                             marginLeft: '40px',

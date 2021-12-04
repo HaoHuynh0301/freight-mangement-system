@@ -219,7 +219,7 @@ class Profile extends Component {
                                 flexDirection: 'column',
                                 justifyContent: 'center',
                                 marginTop: '5px',
-                            }} onClick = {() => this.handleChangeInformation()}>Cập nhật</button>
+                            }} onClick = {() => this.handleUpdateInformation()}>Cập nhật</button>
                         </div>
                     </div>
 

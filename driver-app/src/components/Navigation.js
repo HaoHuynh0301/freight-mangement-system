@@ -47,7 +47,6 @@ class DoubleNavigationPage extends Component {
                     avaLink: accountIcon
                 });
             }
-            
         })
         .catch((error) => {
             console.log('Error');
