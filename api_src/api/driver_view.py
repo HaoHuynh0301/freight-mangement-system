@@ -111,7 +111,7 @@ class UpdateDriverInformationView(APIView):
     
 class LocationUpdateView(APIView):
     permission_classes = [permissions.IsAuthenticated]
-    serializer_class = serializers.LocationUpdateSerializer
+    serializer_class = serializers.OrderSerializer
     
     def get(self, request, format = None):
         driverId = request.query_params.get('driver_id')
@@ -120,13 +120,8 @@ class LocationUpdateView(APIView):
             # Get lastest order
             orders = instanceDriver[0].order_set.all()
             lastestOrder = orders[0]
-            updateLocation = lastestOrder.locationupdate_set.all()
-            if len(updateLocation) > 0:
-                tmpArr = []
-                for item in updateLocation:
-                    tmpArr.append(item)
-                    serializer = self.serializer_class(tmpArr, many = True)
-                return Response(serializer.data, status = status.HTTP_200_OK)
+            serializer = self.serializer_class(lastestOrder)
+            return Response(serializer.data, status = status.HTTP_200_OK)
         return Response('Errors!', status = status.HTTP_400_BAD_REQUEST)
     
     def post(self, request, format = None):
@@ -181,7 +176,6 @@ class SetDriverOrderView(APIView):
         payload = jwt.decode(jwt = token[7: len(token)], key = settings.SECRET_KEY, algorithms = ['HS256'])
         instanceDriver = models.Driver.objects.filter(id = payload['user_id'])
         ordersOfDrivers = instanceDriver[0].order_set.all()
-        print(ordersOfDrivers)
         for order in ordersOfDrivers:
             if order.isDone == False:
                 return Response({'msg': 'Driver is in another order.'}, status = status.HTTP_400_BAD_REQUEST)
