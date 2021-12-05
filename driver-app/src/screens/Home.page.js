@@ -17,10 +17,14 @@ import {
     orangeColor,
 } from '../contants';
 import userIcon from '../assets/userIcon.png';
-import carIcon from '../assets/carIcon.png';
-import locationIcon from '../assets/locationIcon.png';
 import requestIcon from '../assets/requestIcon.png';
 import addIcon from '../assets/addIcon.png';
+import coinIcon from '../assets/coin2.png';
+import phoneIcon from '../assets/phoneIcon2.png';
+import locationIcon from  '../assets/locationIcon2.png';
+import lastOrderIcon from '../assets/orderTrackingIcon.png';
+import noteIcon from '../assets/noteIcon.png';
+import itemIcon from '../assets/itemIcon.png';
 import axios from "axios";
 import loading from '../assets/loading.gif';
 import arrow from '../assets/arrowRight.png';
@@ -35,7 +39,7 @@ class HomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lastRides: [],
+            lastRides: null,
             instanceOrders: null,
             requests: [],
             avaiOrders: [],
@@ -287,6 +291,7 @@ class HomePage extends Component {
                 }
             })
             .then(async (response) => {
+                console.log(response.data);
                 await this.setState({
                     lastRides: response.data
                 });
@@ -588,57 +593,127 @@ class HomePage extends Component {
     }
 
     lastRides = () => {
-        const listOfLastRides = this.state.lastRides.map((item, index) => {
-            return(
-                <div class = 'dashBoardLastRideItem' key = {index}>
-                    {/* Danh sách vận chuyển của đơn hàng cuối cùng */}
-                    <div style = {{
-                        height: '63px',
-                        width: '63px',
-                        border: '0.5px solid grey',
-                        borderRadius: '20px',
-                        display: 'flex',
-                        flexDirection: 'row',
-                        marginBottom: '10px',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}>
-                        <img src = {carIcon} style = {{
-                            height: '50px',
-                            width: '50px',
-                        }}></img>
-                    </div>
-                    <div style = {{
-                        marginLeft: '30px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        padding: '0'
-                    }}>
-                        <p className = 'dashBoardTextStyle2'>{item.time}</p>
-                        <p>
-                            <img src = {locationIcon} height = '30px' width = '30px' style = {{marginRight: '10px'}}></img>
-                            {item.ward}, {item.province}, {item.city}
-                        </p>
-                    </div> 
-                </div>
-            );
-        });
-        if (this.state.lastRides.length > 0) {
+        if (this.state.lastRides !== null) {
             return(
                 <div className = 'dashBoardLastRide'>
                     <div style = {{
                         display: 'flex',
-                        flexDirection: 'row',
-                        marginBottom: '5px',
-                        backgroundColor: 'white'
-                        
+                        flexDirection: 'column',
+                        backgroundColor: 'white',
+                        justifyContent: 'center',
                     }}>
-                        <p style = {{
-                            fontSize: '25px',
-                            fontWeight: 'bold'
-                        }}>Chuyến xe cuối</p>
+                        <div>
+                            <img src = {lastOrderIcon} style = {{
+                                height: '40px',
+                                width: '40px'
+                            }}></img>
+                            <span style = {{
+                                fontSize: '20px',
+                                fontWeight: 'bold',
+                                marginTop: '10px',
+                                marginLeft: '20px'
+                            }}>Chuyến xe cuối</span>
+                        </div>
+                        
+                        <div style = {{
+                            width: '100%',
+                            height: '120px',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            backgroundColor: 'white',
+                            fontSize: '13px',
+                            borderWidth: '0px',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                            <img src = {`${ipAddress}${this.state.lastRides.product_image}`}  style = {{
+                                width: '100px',
+                                height: '100px',
+                                marginRight: '20px',
+                                borderRadius: '5px',
+                                boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px',
+                            }}></img>
+                            <div style = {{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'flex-start',
+                                justifyContent: 'space-between',
+                                width: '60%',
+                                borderRadius: '5px',
+                                boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px',
+                                height: '100px',
+                                padding: '10px',
+                            }}>
+                                <span style = {{
+                                    fontWeight: 'bold'
+                                }}>{this.state.lastRides.customer_name} - {this.state.lastRides.product_name}</span>
+                                <span style = {{
+
+                                }}>
+                                    <img src = {phoneIcon} style = {{
+                                        height: '20px',
+                                        width: '20px',
+                                        marginRight: '5px'
+                                    }}></img>
+                                    {this.state.lastRides.customer_phonenumber}
+                                </span>
+                                <span style = {{
+                                    }}><img src = {coinIcon} style = {{
+                                        height: '20px',
+                                        width: '20px',
+                                        marginRight: '5px',
+                                    }}></img>{this.state.lastRides.cast} vnđ
+                                </span>
+                            </div>
+                        </div>
+                        <div style = {{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'flex-start',
+                            width: '100%',
+                            borderRadius: '5px',
+                            boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px',
+                            height: '150px',
+                            padding: '5px',
+                        }}>
+                            <span>
+                                <img src = {locationIcon} style = {{
+                                    height: '20px',
+                                    width: '20px',
+                                    marginRight: '5px'
+                                }}></img>
+                                {this.state.lastRides.detail_address}, 
+                                {this.state.lastRides.ward}, 
+                                {this.state.lastRides.district},
+                                {this.state.lastRides.province}
+                            </span>
+                            <span>
+                                <img src = {itemIcon} style = {{
+                                        height: '20px',
+                                        width: '20px',
+                                        marginRight: '5px'
+                                    }}></img>
+                                Số lượng: {this.state.lastRides.product_quantity}
+                            </span>
+                            <span>
+                                <img src = {itemIcon} style = {{
+                                        height: '20px',
+                                        width: '20px',
+                                        marginRight: '5px'
+                                    }}></img>
+                                Khối lượng: {this.state.lastRides.product_weight} kg
+                            </span>
+                            <span>
+                                <img src = {noteIcon} style = {{
+                                        height: '20px',
+                                        width: '20px',
+                                        marginRight: '5px'
+                                    }}></img>
+                                Ghi chú: {this.state.lastRides.note}
+                            </span>
+                        </div>
                     </div>
-                    {listOfLastRides}
+                    
                 </div>
             );
         } else  {

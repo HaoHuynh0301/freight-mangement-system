@@ -55,7 +55,7 @@ class LandingPage extends Component {
                 width: 'auto',
                 backgroundImage: `url(${background})`
             }}>
-                <div className = 'mainContent'>
+                <div className = 'mainContent animate__animated animate__fadeInDown'>
                     <div className  = 'signInTitleWrapper'>
                         <h1>Đăng nhập</h1>
                     </div>
