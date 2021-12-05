@@ -602,7 +602,9 @@ class HomePage extends Component {
                         backgroundColor: 'white',
                         justifyContent: 'center',
                     }}>
-                        <div>
+                        <div style = {{
+                            marginBottom: '10px'
+                        }}>
                             <img src = {lastOrderIcon} style = {{
                                 height: '40px',
                                 width: '40px'

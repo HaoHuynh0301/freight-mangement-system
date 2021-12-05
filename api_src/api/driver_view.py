@@ -119,7 +119,8 @@ class LocationUpdateView(APIView):
         if len(instanceDriver) > 0:
             # Get lastest order
             orders = instanceDriver[0].order_set.all()
-            lastestOrder = orders[0]
+            print(orders[len(orders) - 1])
+            lastestOrder = orders[len(orders) - 1]
             if lastestOrder.isDone == True:
                 serializer = self.serializer_class(lastestOrder)
                 return Response(serializer.data, status = status.HTTP_200_OK)
@@ -148,10 +149,10 @@ class OrderDriver(APIView):
     
     def get(self, request, format = None):
         driverId = request.query_params.get('driver_id')
-        print(driverId)
         instanceDriver = models.Driver.objects.filter(id = driverId)
         if len(instanceDriver) > 0:
             orders = instanceDriver[0].order_set.all().filter(isRecieved = True, isDone = False)
+            print(orders)
             if len(orders) > 0:
                 serializer = self.serializer_class(orders[0].request_set.all(), many = True)
                 return Response(serializer.data, status = status.HTTP_200_OK)
