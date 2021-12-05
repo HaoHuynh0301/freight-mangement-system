@@ -47,7 +47,7 @@ class NotFoundPage extends Component {
                         left: '16%',
                         top: '45%',
                         width: '75%',
-                    }}>Maybe this page moved? Got deleted? Is hiding out in quarantine? Never existed in the first place?<p>Let's go <a href="#">home</a> and try from there.</p></div>
+                    }}>Maybe this page moved? Got deleted? Is hiding out in quarantine? Never existed in the first place?<p>Let's go <a href="/sign-in">home</a> and try from there.</p></div>
                 </div>
             </body>
             

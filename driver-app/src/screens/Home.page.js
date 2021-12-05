@@ -551,9 +551,10 @@ class HomePage extends Component {
                         }}>{item.customer_name}</span>
                     </div>
                     <span style = {{
-                            fontSize: '12px',
-                            fontWeight: 'bold'
-                        }}>- {item.cast} VNĐ</span>
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                        width: '80px'
+                    }}>- {item.cast} VNĐ</span>
                     <button className = 'dashBoardBtnGetOrder'>
                         <img src = {addIcon} style = {{
                             height: '25px',

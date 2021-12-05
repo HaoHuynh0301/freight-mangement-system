@@ -13,9 +13,9 @@ import {
 import background from '../assets/delivery-background.jpg';
 import { ScrollView } from "@cantonjs/react-scroll-view";
 import rightArrow from '../assets/right-arrow.png';
-import coinIcon from '../assets/coin.png';
-import phoneIcon from '../assets/phoneIcon.png';
-import locationIcon from  '../assets/locationIcon.png';
+import coinIcon from '../assets/coin2.png';
+import phoneIcon from '../assets/phoneIcon2.png';
+import locationIcon from  '../assets/locationIcon2.png';
 import axios from "axios";
 const localStorage = require('local-storage');
 
