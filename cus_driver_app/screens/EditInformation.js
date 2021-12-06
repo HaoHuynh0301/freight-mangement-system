@@ -15,11 +15,7 @@ import {Picker} from '@react-native-picker/picker';
 import {
     headerFontSize,
     backIcon,
-    bankIcon,
-    homeIcon,
-    cartIcon,
     locationIcon,
-    moneyIcon,
     accountIcon,
     messageIcon,
     callIcon,
@@ -99,7 +95,6 @@ class EditInformation extends Component {
         console.log('GET')
         await axios.get(`https://api.vietqr.io/v1/banks/`)
             .then(async (response) => {
-                console.log(response.data);
                 await this.setState({
                     banks: response.data.data
                 });
@@ -183,7 +178,6 @@ class EditInformation extends Component {
         this.getListOfProvinces();
         this.getUserInformation();
         this.getListOfProvincesDetail();
-        // this.getListOfDistrict();
     }
 
     async saveButtonPressed() {
@@ -290,6 +284,7 @@ class EditInformation extends Component {
     }
 
     toggleModal() {
+        this.getUserInformation();
         this.setState({
             isVisible: !this.state.isVisible
         });
@@ -673,14 +668,12 @@ class EditInformation extends Component {
                 borderWidth: 0.8,
                 borderColor: greyColor,
                 borderRadius: 10,
-                // height: 245
             }}>
                 <View style = {{
                     backgroundColor: greyColor,
                     flexDirection: 'row',
                     width: '100%',
                     justifyContent: 'flex-start',
-                    // alignItems: 'center',
                     height: 45,
                     padding: 10
                 }}>
@@ -700,7 +693,7 @@ class EditInformation extends Component {
                         <Text style = {{
                             marginLeft: 10,
                             fontSize: appFontSize
-                        }}>ITH</Text>
+                        }}>{this.state.userInformation['customer_name']}</Text>
                     </View>
                     <View style = {styles.khoDoInforDetail}>
                         <Image
@@ -710,7 +703,7 @@ class EditInformation extends Component {
                         <Text style = {{
                             marginLeft: 10,
                             fontSize: appFontSize
-                        }}>0932843656</Text>
+                        }}>{String(this.state.userInformation['phone_numner'])}</Text>
                     </View>
                     <View style = {{
                         padding: 10,

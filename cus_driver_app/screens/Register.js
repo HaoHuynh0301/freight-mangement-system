@@ -106,7 +106,7 @@ class Register extends Component {
                 password: '',
                 email: ''
             })
-            this.props.navigation.navigate('User', {
+            this.props.navigation.navigate('SignIn', {
 
             });
         })
