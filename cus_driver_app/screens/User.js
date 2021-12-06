@@ -4,7 +4,6 @@ import {
     Text,
     StyleSheet,
     SafeAreaView,
-    TextInput,
     ScrollView,
     TouchableOpacity,
     Image,
@@ -22,7 +21,8 @@ import {
     bankIcon,
     locationIcon,
     moneyIcon,
-    ipAddress
+    ipAddress,
+    reloadIcon
 } from '../contants';
 import {
     Header
@@ -134,6 +134,20 @@ class User extends Component {
                         <Text style = {styles.norText}>{this.state.userInformation['customer_name']}</Text>
                         <Text style = {styles.norText}>S321312</Text>
                     </View>
+                    <TouchableOpacity 
+                        onPress = {() => {
+                            this.getUserInformation();
+                        }} style = {{
+                        marginRight: 'auto'
+                    }}>
+                        <Image
+                            source = {reloadIcon}
+                            style={{
+                                height: 20,
+                                width: 20
+                            }}
+                        ></Image>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.basicInformationWrapper}>
                     <View style = {{

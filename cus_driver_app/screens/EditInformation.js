@@ -9,7 +9,8 @@ import {
     Image,
     ScrollView,
     TextInput,
-    Alert
+    Alert,
+    FlatList
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {
@@ -768,6 +769,7 @@ class EditInformation extends Component {
         return(
             this.renderLocationEditView()
         );
+        
     } 
 
     render() {

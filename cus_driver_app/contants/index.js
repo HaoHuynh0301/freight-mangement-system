@@ -19,6 +19,7 @@ const deliveryIcon = require('../assets/delivery-icon.png');
 const bycicleIcon = require('../assets/bycicle-icon.png');
 const mapIcon = require('../assets/map-icon.png');
 const carIcon = require('../assets/car-icon.png');
+const reloadIcon = require('../assets/reloadIcon.png');
 
 // Font size
 const headerFontSize = 22;
@@ -59,5 +60,6 @@ export {
     newIcon,
     greyColor,
     plusIcon,
-    mapIcon
+    mapIcon,
+    reloadIcon
 }
