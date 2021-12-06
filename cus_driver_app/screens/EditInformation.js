@@ -236,7 +236,7 @@ class EditInformation extends Component {
         const token = await AsyncStorage.getItem('token');
         axios.post(`${ipAddress}/api/location-information/`, {
             customer_name: this.state.new_name,
-            phone_numner: Number(this.state.new_phonenumber),
+            phone_numner: this.state.new_phonenumber,
             address: this.state.new_address,
             province: this.state.locaProvince,
             district: this.state.localDistrict,

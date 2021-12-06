@@ -52,20 +52,12 @@ class MyOrders extends Component {
                 },
                 {
                     id: 4,
-                    name: 'Đã giao, đang đối soát'
-                },
-                {
-                    id: 5,
-                    name: 'Đã đối soát'
+                    name: 'Đã giao, đối soát'
                 },
                 {
                     id: 6,
                     name: 'Không giao được'
                 },
-                {
-                    id: 7,
-                    name: 'Đang vận chuyển'
-                }
             ],
             willUpdateOrderStatus: 'Chọn trạng thái',
 
@@ -273,7 +265,7 @@ class MyOrders extends Component {
 
     componentDidMount() {
         this.getInstanceAddress();
-        this.interval = setInterval(() => {this.getInstanceAddress()}, 5000);
+        this.interval = setInterval(() => {this.getInstanceAddress()}, 3000);
         this.fetchTask();
         this.getOrderInformation();
     }

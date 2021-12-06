@@ -11,12 +11,9 @@ import {
 } from "react-native";
 import {
     headerFontSize,
-    backIcon,
     orangeColor
     ,greyColor,
     appFontSize,
-    plusIcon,
-    deliveryIcon,
     bycicleIcon,
     rightArrowIcon,
     xIcon,
@@ -250,7 +247,7 @@ class Orders extends Component {
             } else if(item.status == 3) {
                 statusName = 'Đang giao';
             } else if(item.status == 4) {
-                statusName = 'Đã giao, đang đối soát';
+                statusName = 'Đã giao, đối soát';
             } else if(item.status == 5) {
                 statusName = 'Đã đối soát';
             } else if(item.status == 6) {

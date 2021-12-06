@@ -226,13 +226,13 @@ class PaidMoneyView(APIView):
         # 1 is paid-money
         if moneyStatus == str(1):
             for order in orders:
-                if order.status.id == 5:
+                if order.status.id == 4:
                     totalMoney += order.cast
                     
         # 2 is un-paid-money
         if moneyStatus == str(2):
             for order in orders:
-                if order.status.id == 1:
+                if order.status.id != 4:
                     totalMoney += order.cast
         
         # 3 is shipping-money

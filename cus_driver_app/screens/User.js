@@ -138,7 +138,7 @@ class User extends Component {
                         onPress = {() => {
                             this.getUserInformation();
                         }} style = {{
-                        marginRight: 'auto'
+                        marginLeft: 50
                     }}>
                         <Image
                             source = {reloadIcon}
