@@ -3,6 +3,7 @@ import {
     fontSize,
     orangeColor
 } from '../contants';
+import background from '../assets/delivery.jpg';
 import {
     Link
 } from 'react-router-dom';
@@ -38,34 +39,35 @@ class Register extends Component {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '100vh',
-                width: 'auto'
+                height: '1100px',
+                width: 'auto',
+                backgroundImage: `url(${background})`
             }}>
-                <div style = {{
-                    height: 'auto',
-                    width: '50%',
-                    border: 'solid 0.5px grey',
+                <div className = 'mainContent animate__animated animate__fadeInDown' style = {{
+                    height: '95%',
+                    width: '40%',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    borderRadius: '10px'
+                    backgroundColor: 'white'
                 }}>
-                    <h1 style = {{marginBottom: '40px'}}>Đăng ký</h1>
+                    <h1 style = {{
+                        alignSelf: 'flex-start',
+                        marginTop : '30px',
+                        marginLeft: '70px',
+                        marginBottom: '30px'
+                    }}
+                    >Đăng ký</h1>
                     <form onSubmit = {this.handleRegister}>
-                        <div style = {{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            marginBottom: '10px'
-                        }}>
+                        <div className = 'inputWrapper' >
                             <div style = {{
                                 display: "flex",
                                 flexDirection: "row",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
-                                width: '180px',
-                                fontSize: fontSize,
+                                alignSelf: "flex-start",
+                                marginLeft: "12px",
+                                fontSize: "18px",
+                                fontWeight: 'bold'
                             }}>
                                 Họ và tên
                             </div>
@@ -79,19 +81,14 @@ class Register extends Component {
                                 }}
                             ></input>
                         </div>
-                        <div style = {{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            marginBottom: '10px'
-                        }}>
+                        <div className = 'inputWrapper' >
                             <div style = {{
                                 display: "flex",
                                 flexDirection: "row",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
-                                width: '180px',
-                                fontSize: fontSize
+                                alignSelf: "flex-start",
+                                marginLeft: "12px",
+                                fontSize: "18px",
+                                fontWeight: 'bold'
                             }}>
                                 Số điện thoại
                             </div>
@@ -105,19 +102,14 @@ class Register extends Component {
                                 }}
                             ></input>
                         </div>
-                        <div style = {{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            marginBottom: '10px'
-                        }}>
+                        <div className = 'inputWrapper' >
                             <div style = {{
                                 display: "flex",
                                 flexDirection: "row",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
-                                width: '180px',
-                                fontSize: fontSize
+                                alignSelf: "flex-start",
+                                marginLeft: "12px",
+                                fontSize: "18px",
+                                fontWeight: 'bold'
                             }}>
                                 Email
                             </div>
@@ -131,19 +123,14 @@ class Register extends Component {
                                 }}
                             ></input>
                         </div>
-                        <div style = {{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            marginBottom: '10px'
-                        }}>
+                        <div className = 'inputWrapper' >
                             <div style = {{
                                 display: "flex",
                                 flexDirection: "row",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
-                                width: '180px',
-                                fontSize: fontSize
+                                alignSelf: "flex-start",
+                                marginLeft: "12px",
+                                fontSize: "18px",
+                                fontWeight: 'bold'
                             }}>
                                 CMND/Hộ chiếu
                             </div>
@@ -157,19 +144,14 @@ class Register extends Component {
                                 }}
                             ></input>
                         </div>
-                        <div style = {{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            marginBottom: '10px'
-                        }}>
+                        <div className = 'inputWrapper' >
                             <div style = {{
                                 display: "flex",
                                 flexDirection: "row",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
-                                width: '180px',
-                                fontSize: fontSize
+                                alignSelf: "flex-start",
+                                marginLeft: "12px",
+                                fontSize: "18px",
+                                fontWeight: 'bold'
                             }}>
                                 Tuổi
                             </div>
@@ -183,19 +165,14 @@ class Register extends Component {
                                 }}
                             ></input>
                         </div>
-                        <div style = {{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            marginBottom: '10px'
-                        }}>
+                        <div className = 'inputWrapper' >
                             <div style = {{
                                 display: "flex",
                                 flexDirection: "row",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
-                                width: '180px',
-                                fontSize: fontSize
+                                alignSelf: "flex-start",
+                                marginLeft: "12px",
+                                fontSize: "18px",
+                                fontWeight: 'bold'
                             }}>
                                 Bằng lái xe
                             </div>
@@ -209,19 +186,14 @@ class Register extends Component {
                                 }}
                             ></input>
                         </div>
-                        <div style = {{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            marginBottom: '10px'
-                        }}>
+                        <div className = 'inputWrapper' >
                             <div style = {{
                                 display: "flex",
                                 flexDirection: "row",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
-                                width: '180px',
-                                fontSize: fontSize
+                                alignSelf: "flex-start",
+                                marginLeft: "12px",
+                                fontSize: "18px",
+                                fontWeight: 'bold'
                             }}>
                                 Tên đăng nhập
                             </div>
@@ -235,19 +207,14 @@ class Register extends Component {
                                 }}
                             ></input>
                         </div>   
-                        <div style = {{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            marginBottom: '10px'
-                        }}>
+                        <div className = 'inputWrapper' >
                             <div style = {{
                                 display: "flex",
                                 flexDirection: "row",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
-                                width: '180px',
-                                fontSize: fontSize
+                                alignSelf: "flex-start",
+                                marginLeft: "12px",
+                                fontSize: "18px",
+                                fontWeight: 'bold'
                             }}>
                                 Mật khẩu
                             </div>
@@ -261,19 +228,14 @@ class Register extends Component {
                                 }}
                             ></input>
                         </div>   
-                        <div style = {{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            marginBottom: '10px'
-                        }}>
+                        <div className = 'inputWrapper' >
                             <div style = {{
                                 display: "flex",
                                 flexDirection: "row",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
-                                width: '180px',
-                                fontSize: fontSize
+                                alignSelf: "flex-start",
+                                marginLeft: "12px",
+                                fontSize: "18px",
+                                fontWeight: 'bold'
                             }}>
                                 Xác nhận mật khẩu
                             </div>
@@ -288,18 +250,24 @@ class Register extends Component {
                             ></input>
                         </div>
                         <input style = {{
-                            width: '350px',
+                            arginTop: '20px',
                             height: '40px',
+                            width: '100%',
+                            backgroundColor: '#ff7733',
+                            fontSize: '18px',
                             fontWeight: 'bold',
-                            backgroundColor: orangeColor,
-                            borderRadius: '5px'
+                            borderRadius: '30px',
+                            borderWidth: '0px',
+                            marginBottom: '20px',
+                            marginTop: '20px'
                         }} type = 'submit' value = 'Đăng ký'></input>
                     </form>
                     <div style = {{
                         display: "flex", 
                         flexDirection: "row",
                         justifyContent: "center",
-                        justifyContent: "center"
+                        justifyContent: "center",
+                        fontWeight: 'bold',
                     }}>
                         <p>Bạn đã có tài khoản ? 
                             <Link

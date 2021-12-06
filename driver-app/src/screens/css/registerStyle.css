@@ -1,3 +1,19 @@
 .inputType {
-    width: '400px';
+    margin-left: 10px;
+    height: 30px;
+    width: 470px;
+    font-size: 18px;
+    border-radius: 10px;
+    border-width: 0;
+    /* color: #FFF; */
+    border-bottom-width: 1px;
+    background-color: aliceblue;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    margin-bottom: 20px;
 }
