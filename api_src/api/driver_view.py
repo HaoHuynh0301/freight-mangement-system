@@ -119,8 +119,8 @@ class LocationUpdateView(APIView):
         if len(instanceDriver) > 0:
             # Get lastest order
             orders = instanceDriver[0].order_set.all()
-            print(orders[len(orders) - 1])
-            lastestOrder = orders[len(orders) - 1]
+            lastestOrder = orders[0]
+            print(orders[0])
             if lastestOrder.isDone == True:
                 serializer = self.serializer_class(lastestOrder)
                 return Response(serializer.data, status = status.HTTP_200_OK)

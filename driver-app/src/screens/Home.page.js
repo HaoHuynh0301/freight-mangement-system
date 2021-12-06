@@ -201,10 +201,10 @@ class HomePage extends Component {
         .then((response) => {
             this.setState({
                 instanceOrders: response.data
-            })
+            });
             axios.get(`http://api.positionstack.com/v1/forward?access_key=ee95aa7c3e382e9aa806014b08955f13&query=1600 ${response.data.province}`)
-            .then((response) => {
-                this.setState({
+            .then(async (response) => {
+                await this.setState({
                     deliveredAddress: response.data.data[0]
                 });
                 console.log(response.data.data[0]);
