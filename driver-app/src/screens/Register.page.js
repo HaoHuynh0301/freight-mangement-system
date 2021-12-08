@@ -1,6 +1,5 @@
 import React, { Component }  from "react";
 import {
-    fontSize,
     orangeColor
 } from '../contants';
 import background from '../assets/delivery.jpg';
@@ -8,6 +7,8 @@ import {
     Link
 } from 'react-router-dom';
 import './css/registerStyle.css';
+import axios from "axios";
+const localStorage = require('local-storage');
 
 class Register extends Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class Register extends Component {
 
     handleRegister(event) {
         event.preventDefault();
-        console.log('Register');
+        alert('THÔNG TIN CỦA BẠN ĐANG ĐƯỢC XÁC NHẬN!');
     }
 
     render() {
@@ -249,7 +250,9 @@ class Register extends Component {
                                 }}
                             ></input>
                         </div>
-                        <input style = {{
+                        <input onClick = {(event) => {
+                            this.handleRegister(event);
+                        }} style = {{
                             arginTop: '20px',
                             height: '40px',
                             width: '100%',

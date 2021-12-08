@@ -119,8 +119,7 @@ class LocationUpdateView(APIView):
         if len(instanceDriver) > 0:
             # Get lastest order
             orders = instanceDriver[0].order_set.all()
-            lastestOrder = orders[0]
-            print(orders[0])
+            lastestOrder = orders[len(orders) - 1]
             if lastestOrder.isDone == True:
                 serializer = self.serializer_class(lastestOrder)
                 return Response(serializer.data, status = status.HTTP_200_OK)
@@ -226,3 +225,16 @@ class UpdatePaidOrder(APIView):
                 return Response({'msg': 'OK'}, status = status.HTTP_200_OK)
             print(serializer.errors)
         return Response({'msg': 'Not found'}, status = status.HTTP_400_BAD_REQUEST)
+    
+    
+class DriverRegisterView(APIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = serializers.DriverSerializer
+    
+    def post(self, request, format = None):
+        serializer = self.serializer_class(data = request.data)
+        if serializer.is_valid():
+            serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+        return Response({'error': serializer.errors}, status = status.HTTP_400_BAD_REQUEST)

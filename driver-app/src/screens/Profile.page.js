@@ -73,6 +73,7 @@ class Profile extends Component {
     }
 
     handleUpdateInformation = () => {
+        console.log(this.state.img);
         if (this.state.img === null) {
             const token = localStorage.get('token');
             let form_data = new FormData();
@@ -103,7 +104,7 @@ class Profile extends Component {
             form_data.append('cmnd', this.state.cmnd);
             form_data.append('driverLicense', this.state.driverLicense);
             form_data.append('password', this.state.password);
-            form_data.append('avatar', this.state.img, this.state.img.name);
+            form_data.append('avatar', this.state.img);
             axios.post(`${ipAddress}/api/update-driver/`, form_data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
