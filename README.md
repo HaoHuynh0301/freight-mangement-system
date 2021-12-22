@@ -1,54 +1,73 @@
-# Installing
-1. ReactJS
+# Project Title
+
+This is simple freight management system.
+
+## Description
+
+This is a project on the subject of professionalism at the University. This system I developed consists of two applications: a mobile application for customers and a website for drivers. The system does about the management of freight.
+
+## Getting Started
+
+### Dependencies
+
+Hardware: 
+	- Personal computers have an Internet connection and connect to the network of the system.
+	- Intel(R) Core(TM) i7-7700H CPU @ 2.80GHz 3.30 GHz; GeForce GTX 1060 6GB GDDR5 GPU; RAM 24.00 GB; SSHD 1TB; SSD 250MB.
+	Operating system and software:
+	- Windows 10 Home Single Language operating system, 20H2 version
+	- Google Chrome Browser 91.0.4472.106 (Official version) (64 bits)
+
+### Installing
+
+ReactJS
 - npm install - To install the necessary libraries
 - npm start - To run the reactjs app with url localhost:3000
 - Edit the ip address in the contants/index file.js to match the ip address of the server
-2. Django
+Django
 - pip install -r requirements.txt - To install the necessary libraries
 - python manage makemigrations
 - python manage migrate
 - python manage runserver *your_ip_address
 
-# Distance-fee
-< 10km: 10000
->= 10km && < 100: 20000
->= 100: 30000
+### Executing program
 
-# Preferences
+* How to run the program
+* Step-by-step bullets
+```
+code blocks for commands
+```
 
-https://www.vietqr.io/danh-sach-api/api-danh-sach-ma-ngan-hang
-https://www.c-sharpcorner.com/article/what-and-why-reactjs/
-https://en.wikipedia.org/wiki/React_(JavaScript_library)
-https://provinces.open-api.vn/
-https://vapi-vnappmob.readthedocs.io/en/latest/province.html#get--api-province-district-(string-province_id)
-https://realpython.com/getting-started-with-django-channels/
-https://www.byprogrammers.com/2020/11/how-to-integrate-google-maps-in-react-native-app/
-https://www.byprogrammers.com/2020/11/how-to-generate-google-maps-api-key-for-mobile-app/
-https://viblo.asia/p/react-native-location-tracking-XL6lANBA5ek
-https://github.com/react-native-geolocation/react-native-geolocation
-https://www.npmjs.com/package/react-native-geocoding
-https://positionstack.com/documentation
-https://positionstack.com/quickstart
-https://github.com/bramus/react-native-maps-directions
-https://npm.io/package/react-native-webview-leaflet
-https://www.instamobile.io/react-native-tutorials/react-native-draw-directions-map/
-https://www.npmjs.com/package/react-native-leaflet-routing
-https://stackoverflow.com/questions/64644995/how-to-get-the-length-in-km-of-a-polyline-from-react-native-maps
-https://www.movable-type.co.uk/scripts/latlong.html
-https://viblo.asia/p/4-cach-de-style-react-components-OeVKB4w2lkW
-https://viblo.asia/p/can-giua-phan-tu-trong-css-JlkRymBxRZW
-https://reactjs.org/docs/
-https://mobirise.com/bootstrap-template/navbar-template.html
-https://store.enappd.com/product/react-native-taxi-driver-app-template/
-https://www.npmjs.com/package/react-js-pull-to-refresh
-https://www.geeksforgeeks.org/how-to-connect-django-with-reactjs/
-https://reactrouter.com/native/example/auth-workflow
-https://react-leaflet.js.org/docs/
-https://icons8.com/
-https://react-bootstrap.github.io/getting-started/introduction/
-https://react-leaflet.js.org/docs/example-other-layers/
-https://www.pluralsight.com/guides/how-to-use-geolocation-call-in-reactjs
-https://www.liedman.net/leaflet-routing-machine/tutorials/interaction/
-https://codesandbox.io/s/rlv3-routing-machine-gzdt1?file=/src/Map.js:583-601
-https://uicookies.com/css-buttons/
+## Help
 
+Any advise for common problems or issues.
+```
+command to run if program contains helper info
+```
+
+## Authors
+
+Contributors names and contact info
+
+ex. Dominique Pizzie  
+ex. [@DomPizzie](https://twitter.com/dompizzie)
+
+## Version History
+
+* 0.2
+    * Various bug fixes and optimizations
+    * See [commit change]() or See [release history]()
+* 0.1
+    * Initial Release
+
+## License
+
+This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+
+## Acknowledgments
+
+Inspiration, code snippets, etc.
+* [awesome-readme](https://github.com/matiassingers/awesome-readme)
+* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
+* [dbader](https://github.com/dbader/readme-template)
+* [zenorocha](https://gist.github.com/zenorocha/4526327)
+* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
