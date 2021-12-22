@@ -11,11 +11,11 @@ This is a project on the subject of professionalism at the University. This syst
 ### Dependencies
 
 Hardware: 
-	- Personal computers have an Internet connection and connect to the network of the system.
-	- Intel(R) Core(TM) i7-7700H CPU @ 2.80GHz 3.30 GHz; GeForce GTX 1060 6GB GDDR5 GPU; RAM 24.00 GB; SSHD 1TB; SSD 250MB.
-	Operating system and software:
-	- Windows 10 Home Single Language operating system, 20H2 version
-	- Google Chrome Browser 91.0.4472.106 (Official version) (64 bits)
+- Personal computers have an Internet connection and connect to the network of the system.
+- Intel(R) Core(TM) i7-7700H CPU @ 2.80GHz 3.30 GHz; GeForce GTX 1060 6GB GDDR5 GPU; RAM 24.00 GB; SSHD 1TB; SSD 250MB.
+Operating system and software:
+- Windows 10 Home Single Language operating system, 20H2 version
+- Google Chrome Browser 91.0.4472.106 (Official version) (64 bits)
 
 ### Installing
 
@@ -51,6 +51,7 @@ https://www.facebook.com/hulo.bungchay/
 ## Acknowledgments
 
 Inspiration, code snippets, etc.
+
 [1]	https://www.vietqr.io/danh-sach-api/api-danh-sach-ma-ngan-hang
 [2]	https://www.c-sharpcorner.com/article/what-and-why-reactjs/
 [3]	https://en.wikipedia.org/wiki/React_(JavaScript_library)
