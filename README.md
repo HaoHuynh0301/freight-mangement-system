@@ -52,13 +52,13 @@ https://www.facebook.com/hulo.bungchay/
 
 Inspiration, code snippets, etc.
 
-[1]	https://www.vietqr.io/danh-sach-api/api-danh-sach-ma-ngan-hang
-[2]	https://www.c-sharpcorner.com/article/what-and-why-reactjs/
-[3]	https://en.wikipedia.org/wiki/React_(JavaScript_library)
-[4]	https://provinces.open-api.vn/
-[5]	https://vapi-vnappmob.readthedocs.io/en/latest/province.html#get--api-province-district-(string-province_id)
-[6]	https://realpython.com/getting-started-with-django-channels/
-[7]	https://www.byprogrammers.com/2020/11/how-to-integrate-google-maps-in-react-native-app/
-[8]	https://www.byprogrammers.com/2020/11/how-to-generate-google-maps-api-key-for-mobile-app/
-[9]	https://viblo.asia/p/react-native-location-tracking-XL6lANBA5ek
+- https://www.vietqr.io/danh-sach-api/api-danh-sach-ma-ngan-hang
+- https://www.c-sharpcorner.com/article/what-and-why-reactjs/
+- https://en.wikipedia.org/wiki/React_(JavaScript_library)
+- https://provinces.open-api.vn/
+- https://vapi-vnappmob.readthedocs.io/en/latest/province.html#get--api-province-district-(string-province_id)
+- https://realpython.com/getting-started-with-django-channels/
+- https://www.byprogrammers.com/2020/11/how-to-integrate-google-maps-in-react-native-app/
+- https://www.byprogrammers.com/2020/11/how-to-generate-google-maps-api-key-for-mobile-app/
+- https://viblo.asia/p/react-native-location-tracking-XL6lANBA5ek
 
