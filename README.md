@@ -1,4 +1,4 @@
-# Project Title
+# FREIGHT MANAGEMENT SYSTEM WITH PYTHON, JAVASCRIPT
 
 This is simple freight management system.
 
@@ -31,43 +31,33 @@ Django
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+ReactJS
+- npm start
+React-Native
+- npx react-native run-androi
+Django
+- python manage runserver *your_ip_address
 
 ## Help
 
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+Contact me by email hao152903@gmail.com
 
 ## Authors
 
 Contributors names and contact info
 
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
-
-## Version History
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+https://www.facebook.com/hulo.bungchay/
 
 ## Acknowledgments
 
 Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+[1]	https://www.vietqr.io/danh-sach-api/api-danh-sach-ma-ngan-hang
+[2]	https://www.c-sharpcorner.com/article/what-and-why-reactjs/
+[3]	https://en.wikipedia.org/wiki/React_(JavaScript_library)
+[4]	https://provinces.open-api.vn/
+[5]	https://vapi-vnappmob.readthedocs.io/en/latest/province.html#get--api-province-district-(string-province_id)
+[6]	https://realpython.com/getting-started-with-django-channels/
+[7]	https://www.byprogrammers.com/2020/11/how-to-integrate-google-maps-in-react-native-app/
+[8]	https://www.byprogrammers.com/2020/11/how-to-generate-google-maps-api-key-for-mobile-app/
+[9]	https://viblo.asia/p/react-native-location-tracking-XL6lANBA5ek
+
