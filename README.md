@@ -1,5 +1,9 @@
 # FREIGHT MANAGEMENT SYSTEM WITH PYTHON, JAVASCRIPT
 
+![image](https://user-images.githubusercontent.com/66119850/147167896-9d232425-9fa6-447d-b5ed-15032d351f1d.png)
+
+![image](https://user-images.githubusercontent.com/66119850/147167919-aa13c808-5414-4b6d-9d08-8ddc8d2081f1.png)
+
 This is simple freight management system.
 
 ## Description
