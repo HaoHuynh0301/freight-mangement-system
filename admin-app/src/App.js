@@ -13,16 +13,20 @@ import indexRoutes from './routes/index.route';
 const switchRouters = (
     <Suspense fallback={<ProgressingComponent />}>
         <Routes>
-            
+            {indexRoutes.map((item, index) => {
+                return(
+                    <Route path = {item.path} element = {item.component} key = {index}></Route>
+                );
+            })}
         </Routes>
     </Suspense>
 );
 
 function App() {
     return (
-        <div>
-            
-        </div>
+        <BrowserRouter>
+            {switchRouters}
+        </BrowserRouter>
     );
 }
 
