@@ -91,9 +91,21 @@ const st = () => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        minHeight: '130px'
-    }
+        minHeight: '130px',
+        paddingTop: '50px',
+    },
 
+    iconsContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        paddingTop: '15px'
+    },
+
+    icon: {
+        height: '100px',
+        width: '100px'
+    }
 });
 
 export default st;

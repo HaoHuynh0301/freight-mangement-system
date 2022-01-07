@@ -6,6 +6,9 @@ import Typography from '@mui/material/Typography';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
+import GoogleIcon from '@mui/icons-material/Google';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
 import {
     Link
 } from 'react-router-dom';
@@ -43,10 +46,15 @@ class LoginComponent extends React.Component {
                         />
                     </div>
                     <Link className = {classes.forgotPassTextField} to = '#'>Forgot password ?</Link>
-                    <div className = {classes.integrationContainer}>
-                        <Typography>Hello</Typography>
-                    </div>
                     <Button variant="contained" className = {classes.loginBtn}>Login</Button>
+                    <div className = {classes.integrationContainer}>
+                        <Typography>Or sign up using</Typography>
+                        <div className = {classes.iconsContainer}>
+                            <GoogleIcon sx={{height: '40px', width: '40px'}}/>
+                            <FacebookIcon sx={{height: '40px', width: '40px'}}/>
+                            <TwitterIcon sx={{height: '40px', width: '40px'}}/>
+                        </div>
+                    </div>
                     <div className = {classes.signUpContainer}>
                         <Typography className = {classes.signUpTxtField}>Or sign up using</Typography>
                         <Link to = '/' className = {classes.signUpBtn}>SIGN UP</Link>
