@@ -222,8 +222,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 10,
         marginTop: 20,
-        // paddingLeft: 10,
-        // paddingRight: 10
     },
     basicInforDetail: {
         height: 50,
@@ -243,7 +241,6 @@ const styles = StyleSheet.create({
     bankingInforWrapper: {
         height: 290,
         flexDirection: 'column',
-        // alignItems: 'center',
         width: '92%',
         backgroundColor: '#FFF',
         alignSelf: 'center',
@@ -253,7 +250,6 @@ const styles = StyleSheet.create({
     locationInforWrapper: {
         height: 140,
         flexDirection: 'column',
-        // alignItems: 'center',
         width: '92%',
         backgroundColor: '#FFF',
         alignSelf: 'center',
