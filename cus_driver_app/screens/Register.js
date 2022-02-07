@@ -106,9 +106,7 @@ class Register extends Component {
                 password: '',
                 email: ''
             })
-            this.props.navigation.navigate('SignIn', {
-
-            });
+            this.props.navigation.navigate('SignIn', {});
         })
         .catch((error) => {
             displayAlert("Account information is invalid! Try again!");
@@ -126,9 +124,8 @@ class Register extends Component {
                 <TouchableOpacity
                     style = {styles.iconBackWrapper}
                     onPress={() => {
-                        
                         this.props.navigation.goBack()
-                    } }
+                    }}
                 >
                     <Image
                         source = {backIcon}
