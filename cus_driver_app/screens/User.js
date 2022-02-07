@@ -159,7 +159,6 @@ class User extends Component {
                         paddingLeft: 10,
                         paddingRight: 10,
                         flexDirection: 'row'
-                        // borderRadius: 10
                     }}>
                         <Text style = {{fontSize: 17}}>Thông tin cơ bản</Text>
                         <TouchableOpacity
@@ -209,7 +208,6 @@ class User extends Component {
                         paddingLeft: 10,
                         paddingRight: 10,
                         flexDirection: 'row'
-                        // borderRadius: 10
                     }}>
                         <Text style = {{fontSize: 17}}>Thông tin ngân hàng, đối soát</Text>
                         <TouchableOpacity
@@ -266,7 +264,6 @@ class User extends Component {
                         paddingLeft: 10,
                         paddingRight: 10,
                         flexDirection: 'row'
-                        // borderRadius: 10
                     }}>
                         <Text style = {{fontSize: 17}}>Địa chỉ, thông tin lấy hàng</Text>
                         <TouchableOpacity
@@ -393,8 +390,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 10,
         marginTop: 20,
-        // paddingLeft: 10,
-        // paddingRight: 10
     },
     basicInforDetail: {
         height: 50,
@@ -414,7 +409,6 @@ const styles = StyleSheet.create({
     bankingInforWrapper: {
         height: 290,
         flexDirection: 'column',
-        // alignItems: 'center',
         width: '92%',
         backgroundColor: '#FFF',
         alignSelf: 'center',
@@ -424,7 +418,6 @@ const styles = StyleSheet.create({
     locationInforWrapper: {
         height: 140,
         flexDirection: 'column',
-        // alignItems: 'center',
         width: '92%',
         backgroundColor: '#FFF',
         alignSelf: 'center',
