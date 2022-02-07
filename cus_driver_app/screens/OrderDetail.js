@@ -168,7 +168,6 @@ class OrderDetail extends Component {
             }
         })
         .then((response) => {
-            console.log('CU')
             this.setState({
                 instanceAddress: response.data
             });
@@ -263,7 +262,6 @@ class OrderDetail extends Component {
                     <Text style = {styles.fontSize}>Trạng thái: {this.state.status}</Text>
                     <Text style = {styles.fontSize}>Ghi chú: {this.state.item.note}</Text>
                     <Text style = {styles.fontSize}>Sản phẩm: {this.state.item.product_name}</Text>
-                    {/* <Text style = {styles.fontSize}>Đơn hàng đang được giao tới: {this.state.instanceAddress.province}</Text> */}
                 </View>
                 <View style = {styles.basicInforWrapper}>
                     <Text style = {{
@@ -348,7 +346,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        // marginTop: 65
     },
     basicInforWrapper: {
         width: '90%',
