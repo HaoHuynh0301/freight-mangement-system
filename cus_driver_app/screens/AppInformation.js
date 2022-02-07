@@ -148,7 +148,6 @@ const styles = StyleSheet.create({
         height: 65
     },  
     nameWrapper: {
-        // left: 140,
         fontSize: 22,
         color: '#000'
     },
