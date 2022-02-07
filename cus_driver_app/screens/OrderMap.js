@@ -25,7 +25,6 @@ import {
 } from '../contants';
 import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
-// import Routing from 'react-native-leaflet-routing';
 
 const displayAlert = (message) => {
     Alert.alert(
@@ -209,9 +208,6 @@ const styles = StyleSheet.create({
     titleWrapper: {
         paddingLeft: 120
     },
-    // map: {
-    //     ...StyleSheet.absoluteFillObject,
-    // },
 });
 
 export default OrderMap;
