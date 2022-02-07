@@ -275,12 +275,6 @@ class Register extends Component {
                     </View>
                 </View>
                 <View style={styles.confirmationWrapper}>
-                    {/* <RadioGroup 
-                        radioButtons = {['1']}
-                        onPress = {(key) => {
-                            console.log(key[0])
-                        }}
-                    /> */}
                 </View>
                 <View style={{alignItems: 'center'}}>
                     <TouchableOpacity 
