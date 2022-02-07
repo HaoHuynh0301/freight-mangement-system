@@ -195,13 +195,11 @@ class CreateOrder extends Component {
     }
 
     getListOfProvinces() {
-        console.log('OK')
         axios.get('https://provinces.open-api.vn/api/')
             .then(async (response) => {
                 await this.setState({
                     provinces: response.data
                 });
-                // console.log(this.state.provinces);
             })
             .catch((error) => {
                 console.log(error);
@@ -214,7 +212,6 @@ class CreateOrder extends Component {
                 await this.setState({
                     districts: response.data.results
                 });
-                // console.log(response.data.results);
             })
             .catch((error) => {
                 console.log(error);
@@ -384,10 +381,6 @@ class CreateOrder extends Component {
                         </View>
                     </View>
                     <View>
-                        {/* <Image
-                            source = {locationIcon}
-                            style={styles.iconLocationInfor}
-                        ></Image> */}
                         <View style = {{
                         }}>
                             <Picker
@@ -491,11 +484,7 @@ class CreateOrder extends Component {
                                 <Text style={styles.appFontSize}>Thêm hình ảnh</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={{
-                            // flexDirection: 'row',
-                            // paddingLeft: 10,
-                            // paddingRight: 10
-                        }}>
+                        <View>
                             <View style={styles.locationInforDetail}>
                                 <TextInput
                                     placeholder = '1. Nhập tên sản phẩm'
