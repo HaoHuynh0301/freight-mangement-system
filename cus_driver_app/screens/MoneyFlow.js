@@ -229,7 +229,6 @@ const styles = StyleSheet.create({
     },
     mainViewWrapper: {
         flexDirection: 'column',
-        // flex: 1,
         paddingLeft: 10,
         paddingRight: 10
     },
