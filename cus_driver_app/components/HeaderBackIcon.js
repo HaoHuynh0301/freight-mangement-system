@@ -18,7 +18,6 @@ class HeaderBackIcon extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.title);
     }
 
     render() {
