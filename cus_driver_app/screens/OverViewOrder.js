@@ -315,7 +315,6 @@ const styles = StyleSheet.create({
     },
     addNewOrderWrapper: {
         flexDirection: 'row',
-        // justifyContent: 'space-between'
     },
     sizeChooseWrapper: {
         flexDirection: 'row',
@@ -417,11 +416,9 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
         paddingBottom: 5,
         marginBottom: 5
-        // justifyContent: 'space-between'
     },
     orderStatusTitle: {
         flexDirection: 'row',
-        // justifyContent: 'space-between',
         alignItems: 'center'
     },
     buttonAddRequest: {
