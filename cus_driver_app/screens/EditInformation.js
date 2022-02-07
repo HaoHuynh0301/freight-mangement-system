@@ -103,7 +103,6 @@ class EditInformation extends Component {
             .catch((error) => {
                 console.log(error);
             });
-        console.log('DONE')
     }
 
     getListOfProvinces() {
@@ -448,7 +447,6 @@ class EditInformation extends Component {
                         paddingLeft: 10,
                         paddingRight: 10,
                         flexDirection: 'row'
-                        // borderRadius: 10
                     }}>
                         <Text style = {{fontSize: 17}}>Thông tin cơ bản</Text>
                     </View>
@@ -552,7 +550,6 @@ class EditInformation extends Component {
                         paddingLeft: 10,
                         paddingRight: 10,
                         flexDirection: 'row'
-                        // borderRadius: 10
                     }}>
                         <Text style = {{fontSize: 17}}>Sửa thông tin ngân hàng, đối soát</Text>
                     </View>
@@ -804,7 +801,6 @@ const styles = StyleSheet.create({
         height: 65
     },  
     nameWrapper: {
-        // left: 140,
         fontSize: 22,
         color: '#000'
     },
@@ -815,7 +811,6 @@ const styles = StyleSheet.create({
     bankingInforWrapper: {
         height: 240,
         flexDirection: 'column',
-        // alignItems: 'center',
         width: '92%',
         backgroundColor: '#FFF',
         alignSelf: 'center',
@@ -844,7 +839,6 @@ const styles = StyleSheet.create({
     bankingEditInforWrapper: {
         height: 400,
         flexDirection: 'column',
-        // alignItems: 'center',
         width: '92%',
         backgroundColor: '#FFF',
         alignSelf: 'center',
