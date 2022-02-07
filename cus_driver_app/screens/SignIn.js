@@ -80,9 +80,7 @@ class SignIn extends Component {
                 email: '',
                 password: ''
             })
-            this.props.navigation.navigate('Tabs', {
-                
-            });
+            this.props.navigation.navigate('Tabs', {});
         })
         .catch((error) => {
             displayAlert("Email or password is invalid!");
@@ -150,9 +148,7 @@ class SignIn extends Component {
 }
 
 const styles = StyleSheet.create({
-    scrollView: {
-        
-    },
+    scrollView: {},
     signInWrapper: {
         height: '100%',
         width: '100%',
