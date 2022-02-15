@@ -5,24 +5,12 @@ import {backIcon, newIcon} from '../../contants';
 import styles from './appInfor.style';
 import {DIEUKHOAN_CONSTANTS, NEWS_CONTSTANTS} from './appInfor.constants';
 import {Button} from 'react-native-ui-lib';
+import Header from '../Header';
 
 class AppInformation extends Component {
   constructor(props) {
     super(props);
   }
-
-  renderHeader = () => {
-    <View style={styles.container}>
-      <Button
-        style={styles.iconBackWrapper}
-        onPress={() => this.props.navigation.goBack()}>
-        <Image source={backIcon} resizeMode="contain" style={styles.backIcon} />
-      </Button>
-      <View style={{alignItems: 'center', flex: 1}}>
-        <Text style={styles.nameWrapper}>{this.props.route.params.title}</Text>
-      </View>
-    </View>;
-  };
 
   renderDieuKhoan = () => {
     <View style={styles.dieuKhoanWrapper}>
@@ -71,7 +59,7 @@ class AppInformation extends Component {
   render() {
     return (
       <SafeAreaView>
-        {this.renderHeader()}
+        {<Header styles={styles} />}
         {this.renderMainView()}
       </SafeAreaView>
     );
