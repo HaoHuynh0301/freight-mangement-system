@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import {
   Text,
   SafeAreaView,
-  StyleSheet,
   TouchableOpacity,
   View,
   Image,
@@ -13,7 +12,6 @@ import {
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {
-  headerFontSize,
   backIcon,
   locationIcon,
   accountIcon,
@@ -24,8 +22,10 @@ import {
   greyColor,
   ipAddress,
   xIcon,
-} from '../contants';
+} from '../../contants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Button} from 'react-native-ui-lib';
+import styles from './editInfor.style';
 import Modal from 'react-native-modal';
 const axios = require('axios');
 
@@ -89,7 +89,6 @@ class EditInformation extends Component {
   }
 
   async getListOfBankds() {
-    console.log('GET');
     await axios
       .get('https://api.vietqr.io/v1/banks/')
       .then(async response => {
@@ -124,7 +123,6 @@ class EditInformation extends Component {
         await this.setState({
           districts: response.data.results,
         });
-        console.log(response.data.results);
       })
       .catch(error => {
         console.log(error);
@@ -287,7 +285,7 @@ class EditInformation extends Component {
   renderHeader() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity
+        <Button
           style={styles.iconBackWrapper}
           onPress={() => this.props.navigation.goBack()}>
           <Image
@@ -295,7 +293,7 @@ class EditInformation extends Component {
             resizeMode="contain"
             style={styles.backIcon}
           />
-        </TouchableOpacity>
+        </Button>
         <View style={{alignItems: 'center', flex: 1}}>
           <Text style={styles.nameWrapper}>
             {this.props.route.params.status}
@@ -329,12 +327,12 @@ class EditInformation extends Component {
             style={{
               flexDirection: 'row',
             }}>
-            <TouchableOpacity
+            <Button
               onPress={() => {
                 this.toggleModal();
               }}>
               <Image source={xIcon} style={styles.xIconStyle} />
-            </TouchableOpacity>
+            </Button>
             <Text
               style={{
                 left: 90,
@@ -415,7 +413,6 @@ class EditInformation extends Component {
                     localDistrictCode:
                       this.state.districts[itemIndex].district_id,
                   });
-                  console.log(this.state.localDistrictCode);
                   this.getListOfWard();
                 }}>
                 {this.state.districts.map((item, key) => {
@@ -447,23 +444,13 @@ class EditInformation extends Component {
                 })}
               </Picker>
             </View>
-            <TouchableOpacity
-              style={{
-                width: '92%',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                alignSelf: 'center',
-                height: 40,
-                backgroundColor: '#ff7733',
-                marginTop: 10,
-                borderRadius: 10,
-              }}
+            <Button
+              style={styles.btnSaveLocation}
               onPress={() => {
                 this.saveLocation();
               }}>
               <Text style={{fontSize: appFontSize}}>Lưu</Text>
-            </TouchableOpacity>
+            </Button>
           </View>
         </View>
       </Modal>
@@ -474,17 +461,7 @@ class EditInformation extends Component {
     return (
       <ScrollView>
         <View style={styles.bankingInforWrapper}>
-          <View
-            style={{
-              backgroundColor: '#E0E0E0',
-              height: 40,
-              width: 380,
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              paddingLeft: 10,
-              paddingRight: 10,
-              flexDirection: 'row',
-            }}>
+          <View style={styles.basicInforWrapper}>
             <Text style={{fontSize: 17}}>Thông tin cơ bản</Text>
           </View>
           <View style={styles.basicInforDetail}>
@@ -540,23 +517,13 @@ class EditInformation extends Component {
             />
           </View>
         </View>
-        <TouchableOpacity
-          style={{
-            width: '92%',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            alignSelf: 'center',
-            height: 40,
-            backgroundColor: '#ff7733',
-            marginTop: 10,
-            borderRadius: 10,
-          }}
+        <Button
+          style={styles.btnSave}
           onPress={() => {
             this.saveButtonPressed();
           }}>
           <Text style={{fontSize: appFontSize}}>Lưu</Text>
-        </TouchableOpacity>
+        </Button>
       </ScrollView>
     );
   }
@@ -565,23 +532,11 @@ class EditInformation extends Component {
     return (
       <ScrollView>
         <View style={styles.bankingEditInforWrapper}>
-          <View
-            style={{
-              backgroundColor: '#E0E0E0',
-              height: 40,
-              width: 380,
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              paddingLeft: 10,
-              paddingRight: 10,
-              flexDirection: 'row',
-            }}>
-            <Text style={{fontSize: 17}}>
-              Sửa thông tin ngân hàng, đối soát
-            </Text>
+          <View style={styles.btnBankEdit}>
+            <Text style={styles.font17}>Sửa thông tin ngân hàng, đối soát</Text>
           </View>
           <View style={styles.editBakingDetailWrapper}>
-            <Text style={{fontSize: 17}}>Chủ tài khoản</Text>
+            <Text style={styles.font17}>Chủ tài khoản</Text>
             <TextInput
               onChangeText={text => {
                 this.setState({
@@ -594,7 +549,7 @@ class EditInformation extends Component {
             />
           </View>
           <View style={styles.editBakingDetailWrapper}>
-            <Text style={{fontSize: 17}}>Số tài khoản</Text>
+            <Text style={styles.font17}>Số tài khoản</Text>
             <TextInput
               onChangeText={text => {
                 this.setState({
@@ -607,7 +562,7 @@ class EditInformation extends Component {
             />
           </View>
           <View style={styles.editBakingDetailWrapper}>
-            <Text style={{fontSize: 17}}>Bấm để chọn ngân hàng</Text>
+            <Text style={styles.font17}>Bấm để chọn ngân hàng</Text>
             <View
               style={{
                 borderWidth: 0.3,
@@ -619,12 +574,10 @@ class EditInformation extends Component {
                 style={styles.banksPicker}
                 selectedValue={this.state.bankSelectedValue}
                 onValueChange={(itemValue, itemIndex) => {
-                  console.log(itemValue);
                   this.setState({
                     bankSelectedValue: itemValue,
                     bankSelectedIndex: itemIndex,
                   });
-                  console.log(this.state.bankSelectedValue);
                 }}>
                 {this.state.banks.map((item, key) => {
                   return (
@@ -639,14 +592,8 @@ class EditInformation extends Component {
             </View>
           </View>
           <View style={styles.editBakingDetailWrapper}>
-            <Text style={{fontSize: 17}}>Bấm để chọn chi nhánh</Text>
-            <View
-              style={{
-                borderWidth: 0.3,
-                borderColor: greyColor,
-                marginTop: 5,
-                borderRadius: 10,
-              }}>
+            <Text style={styles.font17}>Bấm để chọn chi nhánh</Text>
+            <View style={styles.pickerWrapper}>
               <Picker
                 style={styles.banksPicker}
                 selectedValue={this.state.provinceSelectedValue}
@@ -669,17 +616,7 @@ class EditInformation extends Component {
           </View>
         </View>
         <TouchableOpacity
-          style={{
-            width: '92%',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            alignSelf: 'center',
-            height: 40,
-            backgroundColor: '#ff7733',
-            marginTop: 10,
-            borderRadius: 10,
-          }}
+          style={styles.btnBankEditedSave}
           onPress={() => {
             this.bankingSaveButtonPressed();
           }}>
@@ -691,26 +628,8 @@ class EditInformation extends Component {
 
   renderLocationEditView() {
     return (
-      <View
-        style={{
-          flexDirection: 'column',
-          alignItems: 'center',
-          marginLeft: 10,
-          marginTop: 10,
-          marginRight: 10,
-          borderWidth: 0.8,
-          borderColor: greyColor,
-          borderRadius: 10,
-        }}>
-        <View
-          style={{
-            backgroundColor: greyColor,
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'flex-start',
-            height: 45,
-            padding: 10,
-          }}>
+      <View style={styles.locaInforContainer}>
+        <View style={styles.addressTitleWrapper}>
           <Text
             style={{
               fontSize: appFontSize,
@@ -815,122 +734,5 @@ class EditInformation extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: 70,
-    width: '100%',
-    flexDirection: 'row',
-    backgroundColor: '#ff7733',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  userInformationText: {
-    fontSize: headerFontSize,
-    fontWeight: 'bold',
-    marginLeft: 10,
-  },
-  headerWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFF',
-    height: 65,
-  },
-  nameWrapper: {
-    fontSize: 22,
-    color: '#000',
-  },
-  backIcon: {
-    width: 25,
-    height: 25,
-  },
-  bankingInforWrapper: {
-    height: 240,
-    flexDirection: 'column',
-    width: '92%',
-    backgroundColor: '#FFF',
-    alignSelf: 'center',
-    marginTop: 20,
-    borderRadius: 10,
-  },
-  basicInforDetail: {
-    height: 50,
-    flexDirection: 'row',
-    paddingLeft: 10,
-    alignItems: 'center',
-    borderBottomWidth: 0.5,
-  },
-  basicInforImage: {
-    height: 30,
-    width: 30,
-  },
-  basicInforText: {
-    fontSize: 17,
-    marginLeft: 10,
-  },
-  inputText: {
-    marginLeft: 10,
-    fontSize: appFontSize,
-  },
-  bankingEditInforWrapper: {
-    height: 400,
-    flexDirection: 'column',
-    width: '92%',
-    backgroundColor: '#FFF',
-    alignSelf: 'center',
-    marginTop: 20,
-    borderRadius: 10,
-  },
-  editBakingDetailWrapper: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 10,
-  },
-  bankingEditInput: {
-    fontSize: 17,
-    borderWidth: 0.3,
-    borderRadius: 10,
-    marginTop: 5,
-    height: 40,
-    paddingLeft: 10,
-  },
-  banksPicker: {
-    borderWidth: 0.3,
-    borderColor: greyColor,
-  },
-  khoDoInforDetail: {
-    height: 50,
-    padding: 10,
-    borderBottomWidth: 0.8,
-    borderBottomColor: greyColor,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    width: 385,
-  },
-  locationEditWrapper: {
-    height: 80,
-    padding: 10,
-    borderBottomWidth: 0.8,
-    borderBottomColor: greyColor,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    width: 385,
-  },
-  xIconStyle: {
-    height: 20,
-    width: 20,
-  },
-  modalLocationEditDetailWrapper: {
-    width: '90%',
-    borderBottomWidth: 0.8,
-    borderBottomColor: greyColor,
-    flexDirection: 'row',
-    alignSelf: 'center',
-  },
-});
 
 export default EditInformation;
