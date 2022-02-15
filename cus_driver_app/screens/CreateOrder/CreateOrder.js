@@ -167,7 +167,6 @@ class CreateOrder extends Component {
                 dis_fee: 30000,
               });
             }
-            console.log(this.state.dis_fee);
           })
           .catch(error => {
             displayAlert('There are some errors! Please try again later!');
@@ -233,7 +232,6 @@ class CreateOrder extends Component {
         await this.setState({
           wards: response.data.results,
         });
-        console.log(this.state.wards);
       })
       .catch(error => {
         console.log(error);
@@ -267,7 +265,6 @@ class CreateOrder extends Component {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.images],
       });
-      console.log(res[0]);
       this.setState({
         imgName: res[0].name,
         imgLink: res[0],
@@ -400,7 +397,6 @@ class CreateOrder extends Component {
                   this.getListOfWard();
                 }}>
                 {this.state.districts.map((item, key) => {
-                  console.log(item.name);
                   return (
                     <Picker.Item
                       key={key}

@@ -58,7 +58,6 @@ class OrderMap extends Component {
           // eslint-disable-next-line no-shadow
           .then(async response => {
             var datas = response.data.data;
-            console.log(response.data.data[0]);
             await this.setState({
               deliveredLatitude: datas[0].latitude,
               deliveredLongitude: datas[0].longitude,

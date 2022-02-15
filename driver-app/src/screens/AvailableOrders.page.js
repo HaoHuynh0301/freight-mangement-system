@@ -98,7 +98,6 @@ class AvailableOrders extends Component {
             this.setState({
                 avaiOrders: response.data
             });
-            console.log(this.state.avaiOrders);
         })
         .catch((error) => {
             console.log('Error');

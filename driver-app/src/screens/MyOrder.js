@@ -99,7 +99,6 @@ class MyOrders extends Component {
 
     // Handle Update request function
     handleupdateStatus = () => {
-        console.log(this.state.instanceOrders.id);
         const token = localStorage.get('token');
         axios.post(`${ipAddress}/api/status-order/`, {
             status_id: this.state.willUpdateOrderStatus,
@@ -251,7 +250,6 @@ class MyOrders extends Component {
                 this.setState({
                     deliveredAddress: response.data.data[0]
                 });
-                console.log(response.data.data[0]);
             })
             .catch((error) => {
                 console.log(error);
@@ -298,7 +296,6 @@ class MyOrders extends Component {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
             }
-            console.log(position.coords.latitude + ' - ' + position.coords.longitude)
             this.setState({
                 instanceAddress: context
             });
