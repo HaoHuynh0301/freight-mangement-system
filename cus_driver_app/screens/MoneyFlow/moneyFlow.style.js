@@ -1,4 +1,4 @@
-import {headerFontSize, appFontSize, greyColor} from '../contants';
+import {headerFontSize, appFontSize, greyColor} from '../../contants';
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({

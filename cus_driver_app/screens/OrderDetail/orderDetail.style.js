@@ -54,6 +54,11 @@ const styles = StyleSheet.create({
     borderBottomColor: greyColor,
     paddingBottom: 10,
   },
+  mapIcon: {
+    marginLeft: 120,
+              height: 25,
+              width: 25,
+  }
 });
 
 export default styles;

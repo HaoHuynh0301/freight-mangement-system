@@ -29,4 +29,19 @@ const STATUS_CONSTANT = [
   },
 ];
 
-export {STATUS_CONSTANT};
+const REQUEST_OPTIONS = [
+  {
+    id: 1,
+    name: 'Giục lấy',
+  },
+  {
+    id: 2,
+    name: 'Giao',
+  },
+  {
+    id: 3,
+    name: 'Trả hàng',
+  },
+];
+
+export {STATUS_CONSTANT, REQUEST_OPTIONS};

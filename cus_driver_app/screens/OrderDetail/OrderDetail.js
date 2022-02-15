@@ -2,15 +2,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import React, {Component} from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Alert,
-  FlatList,
-} from 'react-native';
+import {SafeAreaView, View, Image, Alert, FlatList} from 'react-native';
 import {
   xIcon,
   appFontSize,
@@ -18,8 +10,9 @@ import {
   ipAddress,
   mapIcon,
 } from '../../contants';
+import {Button, Text} from 'react-native-ui-lib';
 import styles from './orderDetail.style';
-import {STATUS_CONSTANT} from './orderDetail.constants';
+import {STATUS_CONSTANT, REQUEST_OPTIONS} from './orderDetail.constants';
 
 const displayAlert = message => {
   Alert.alert('Notification', message, [
@@ -71,22 +64,9 @@ class OrderDetail extends Component {
         var tmpList = [];
         tmpList = this.state.updateStatus;
         for (let i = 0; i < tmpList.length; i++) {
-          var statusName = '';
-          if (tmpList[i].status == 1) {
-            statusName = 'Đang xử lý';
-          } else if (tmpList[i].status == 2) {
-            statusName = 'Đã tiếp nhận';
-          } else if (tmpList[i].status == 3) {
-            statusName = 'Đang giao';
-          } else if (tmpList[i].status == 4) {
-            statusName = 'Đã giao, đang đối soát';
-          } else if (tmpList[i].status == 5) {
-            statusName = 'Đã đối soát';
-          } else if (tmpList[i].status == 6) {
-            statusName = 'Không giao được';
-          } else if (tmpList[i].status == 7) {
-            statusName = 'Đang vận chuyển';
-          }
+          var statusName = STATUS_CONSTANT.find(
+            status => status.id === tmpList[i].status,
+          );
           tmpList[i].status = statusName;
         }
         await this.setState({
@@ -120,15 +100,11 @@ class OrderDetail extends Component {
         var tmpList = [];
         tmpList = this.state.requests;
         for (let i = 0; i < tmpList.length; i++) {
-          var requestName = '';
-          if (tmpList[i].request_option == 1) {
-            requestName = 'Giục lấy';
-          } else if (tmpList[i].request_option == 2) {
-            requestName = 'Giao';
-          } else if (tmpList[i].request_option == 3) {
-            requestName = 'Trả hàng';
-          }
-          tmpList[i].request_option = requestName;
+          var request = REQUEST_OPTIONS.find(
+            // eslint-disable-next-line no-shadow
+            request => tmpList[i].request_option === request.id,
+          );
+          tmpList[i].request_option = request.name;
         }
         await this.setState({
           requests: tmpList,
@@ -184,29 +160,25 @@ class OrderDetail extends Component {
   renderHeader() {
     return (
       <View style={styles.headerContainer}>
-        <TouchableOpacity
+        <Button
           onPress={() => {
             this.props.navigation.goBack();
           }}>
           <Image source={xIcon} style={styles.xIconStyle} />
-        </TouchableOpacity>
+        </Button>
         <View style={styles.titleWrapper}>
           <Text style={styles.userInformationText}>CHÍ TIẾT ĐƠN HÀNG</Text>
         </View>
-        <TouchableOpacity
+        <Button
           onPress={() => {
             this.oppenOrderMap();
           }}>
           <Image
             // eslint-disable-next-line react-native/no-inline-styles
-            style={{
-              marginLeft: 120,
-              height: 25,
-              width: 25,
-            }}
+            style={styles.mapIcon}
             source={mapIcon}
           />
-        </TouchableOpacity>
+        </Button>
       </View>
     );
   }

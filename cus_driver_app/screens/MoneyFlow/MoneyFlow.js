@@ -9,7 +9,7 @@ import {
   Alert,
   FlatList,
 } from 'react-native';
-import {appFontSize, greyColor, rightArrowIcon, ipAddress} from '../contants';
+import {appFontSize, rightArrowIcon, ipAddress} from '../../contants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './moneyFlow.style';
 import axios from 'axios';
