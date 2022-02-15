@@ -20,7 +20,10 @@ import {
 import Modal from 'react-native-modal';
 import {Picker} from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {STATUS_CONSTANT} from '../OrderDetail/orderDetail.constants';
+import {
+  STATUS_CONSTANT,
+  REQUEST_OPTIONS,
+} from '../OrderDetail/orderDetail.constants';
 import {SHIP_OPTIONS} from './orders.constants';
 import styles from './order.style';
 const axios = require('axios');
@@ -47,20 +50,7 @@ class Orders extends Component {
       // Modal
       isVisible: false,
       actionRequestSelected: '',
-      actions: [
-        {
-          name: 'Giục lấy',
-          id: 1,
-        },
-        {
-          name: 'Giao',
-          id: 2,
-        },
-        {
-          name: 'Trả hàng',
-          id: 3,
-        },
-      ],
+      actions: REQUEST_OPTIONS,
 
       isFetching: false,
     };

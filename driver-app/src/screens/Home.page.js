@@ -162,7 +162,6 @@ class HomePage extends Component {
         })
         .then((response) => {
             alert('NHẬN ĐƠN HÀNG THÀNH CÔNG!');
-            console.log(response.data);
             this.setState({
                 avaiOrders: response.data.avaiorders,
                 showModal: false,
@@ -207,7 +206,6 @@ class HomePage extends Component {
                 await this.setState({
                     deliveredAddress: response.data.data[0]
                 });
-                console.log(response.data.data[0]);
             })
             .catch((error) => {
                 console.log(error);
@@ -225,7 +223,6 @@ class HomePage extends Component {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
             }
-            console.log(position.coords.latitude + ' - ' + position.coords.longitude)
             this.setState({
                 instanceAddress: context
             });
@@ -291,7 +288,6 @@ class HomePage extends Component {
                 }
             })
             .then(async (response) => {
-                console.log(response.data);
                 await this.setState({
                     lastRides: response.data
                 });
@@ -337,7 +333,6 @@ class HomePage extends Component {
             this.setState({
                 instanceOrders: response.data
             })
-            console.log(this.state.instanceOrders)
         })
         .catch((error) => {
             console.log('Error');

@@ -74,7 +74,6 @@ class MyOrders extends Component {
     }
 
     fetchTask = () => {
-        // console.log(this.props.match.params.id);
     }
 
     // Handle Update order function

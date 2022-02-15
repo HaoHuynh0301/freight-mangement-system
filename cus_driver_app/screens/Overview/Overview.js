@@ -4,15 +4,14 @@ import {
   Text,
   StyleSheet,
   SafeAreaView,
-  TouchableOpacity,
   Image,
   Alert,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
-import {Header} from '../components';
-import {appFontSize, rightArrowIcon, ipAddress} from '../contants';
+import {Header} from '../../components';
+import {appFontSize, rightArrowIcon, ipAddress} from '../../contants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Modal from 'react-native-modal';
 const axios = require('axios');
 
 const displayAlert = message => {
@@ -179,7 +178,7 @@ class OverView extends Component {
             onPress={() => {
               this.handleGetAppInformation('Điều khoản và quy định');
             }}>
-            <Image source={rightArrowIcon} style={styles.rightIcon}></Image>
+            <Image source={rightArrowIcon} style={styles.rightIcon} />
           </TouchableOpacity>
         </View>
         <View style={styles.appInforDetailWrapper}>
@@ -188,7 +187,7 @@ class OverView extends Component {
             onPress={() => {
               this.handleGetAppInformation('Những câu hỏi thường gặp');
             }}>
-            <Image source={rightArrowIcon} style={styles.rightIcon}></Image>
+            <Image source={rightArrowIcon} style={styles.rightIcon} />
           </TouchableOpacity>
         </View>
         <View style={styles.appInforDetailWrapper}>
@@ -197,7 +196,7 @@ class OverView extends Component {
             onPress={() => {
               this.handleGetAppInformation('Tin tức');
             }}>
-            <Image source={rightArrowIcon} style={styles.rightIcon}></Image>
+            <Image source={rightArrowIcon} style={styles.rightIcon} />
           </TouchableOpacity>
         </View>
       </View>
@@ -247,7 +246,8 @@ class OverView extends Component {
         onRefresh={() => {
           this.onRefresh();
         }}
-        refreshing={this.state.isFetching}></FlatList>
+        refreshing={this.state.isFetching}
+      />
     );
   }
 

@@ -53,7 +53,6 @@ class Profile extends Component {
             }
         })
         .then((response) => {
-            console.log(response.data);
             this.setState({
                 driverInformation: response.data
             });
@@ -73,7 +72,6 @@ class Profile extends Component {
     }
 
     handleUpdateInformation = () => {
-        console.log(this.state.img);
         if (this.state.img === null) {
             const token = localStorage.get('token');
             let form_data = new FormData();
