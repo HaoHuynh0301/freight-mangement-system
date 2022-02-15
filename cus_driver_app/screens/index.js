@@ -5,7 +5,7 @@ import User from './User';
 import AppInformation from './AppInformation/AppInformation';
 import Register from './Register/Register';
 import EditInformation from './EditInformation';
-import CreateOrder from './CreateOrder';
+import CreateOrder from './CreateOrder/CreateOrder';
 import OrderDetail from './OrderDetail';
 import SignIn from './SignIn/SignIn';
 import OverViewOrder from './OverViewOrder';
