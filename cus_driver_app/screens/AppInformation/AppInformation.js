@@ -1,10 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {View, Text, SafeAreaView, Image} from 'react-native';
-import {backIcon, newIcon} from '../../contants';
+import {newIcon} from '../../contants';
 import styles from './appInfor.style';
 import {DIEUKHOAN_CONSTANTS, NEWS_CONTSTANTS} from './appInfor.constants';
-import {Button} from 'react-native-ui-lib';
 import Header from '../Header';
 
 class AppInformation extends Component {

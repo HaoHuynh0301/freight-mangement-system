@@ -1,7 +1,4 @@
-import Header from "./Header";
+import Header from './Header';
 import HeaderBackIcon from './HeaderBackIcon';
 
-export {
-    Header,
-    HeaderBackIcon
-}
+export {Header, HeaderBackIcon};

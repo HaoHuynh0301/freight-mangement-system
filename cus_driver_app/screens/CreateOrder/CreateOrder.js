@@ -7,20 +7,17 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  StyleSheet,
   TextInput,
   ScrollView,
   Alert,
 } from 'react-native';
 import {
   greyColor,
-  headerFontSize,
   xIcon,
   appFontSize,
   callIcon,
   homeIcon,
   accountIcon,
-  orangeColor,
   ipAddress,
 } from '../../contants';
 import {Picker} from '@react-native-picker/picker';
@@ -28,6 +25,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import DocumentPicker from 'react-native-document-picker';
 import {haversine} from '../../utils/createOrder.utils';
+import styles from './createOrder.style';
 
 const displayAlert = message => {
   Alert.alert('Notification', message, [
@@ -450,16 +448,7 @@ class CreateOrder extends Component {
             </Picker>
           </View>
           <View style={styles.locationInforDetail}>
-            <Text
-              style={{
-                flex: 1,
-                alignItems: 'flex-start',
-                fontSize: appFontSize,
-                marginTop: 10,
-                borderBottomWidth: 0.6,
-                borderBottomColor: greyColor,
-                paddingBottom: 10,
-              }}>
+            <Text style={styles.shippingFeeContainer}>
               Phí ship:{' '}
               {this.state.orderSizes[this.state.orderSizeSelected - 1].fee +
                 this.state.dis_fee}
@@ -574,117 +563,5 @@ class CreateOrder extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  headerContainer: {
-    height: 60,
-    width: '100%',
-    flexDirection: 'row',
-    backgroundColor: '#FFF',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    borderBottomWidth: 0.5,
-    borderBottomColor: greyColor,
-  },
-  userInformationText: {
-    fontSize: headerFontSize,
-    fontWeight: 'bold',
-    marginLeft: 10,
-    alignSelf: 'center',
-  },
-  xIconStyle: {
-    height: 20,
-    width: 25,
-    marginLeft: 10,
-  },
-  titleWrapper: {
-    paddingLeft: 90,
-  },
-  createOrderMainView: {
-    flexDirection: 'column',
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 15,
-  },
-  titleFontSize: {
-    fontSize: appFontSize,
-    fontWeight: 'bold',
-    overflow: 'hidden',
-    width: 200,
-  },
-  appFontSize: {
-    fontSize: appFontSize,
-  },
-  shippingLocationInforWrapper: {
-    flexDirection: 'column',
-    marginTop: 5,
-    height: 150,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    width: '100%',
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  iconLocationInfor: {
-    height: 20,
-    width: 20,
-  },
-  locationInforDetail: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputStyle: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: greyColor,
-    width: '100%',
-    paddingLeft: 10,
-    fontSize: appFontSize,
-  },
-  locationPickerWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  chooseSizeWrapper: {
-    marginTop: 10,
-    borderBottomWidth: 0.5,
-    borderBottomColor: greyColor,
-  },
-  productInformationDetail: {
-    marginTop: 20,
-  },
-  productTitleInformationDetail: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  buttonAddProduct: {
-    borderWidth: 0.5,
-    padding: 5,
-    borderColor: orangeColor,
-    borderRadius: 10,
-  },
-  productInputStyle: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: greyColor,
-    width: '100%',
-    fontSize: appFontSize,
-  },
-  buttonCreateOrder: {
-    width: '100%',
-    marginTop: 10,
-    borderWidth: 0.5,
-    height: 45,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    backgroundColor: orangeColor,
-  },
-  banksPicker: {
-    borderWidth: 0.3,
-    borderColor: greyColor,
-  },
-});
 
 export default CreateOrder;
