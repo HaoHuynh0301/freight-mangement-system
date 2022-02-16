@@ -1,20 +1,5 @@
-import React, {Component} from 'react';
-import {Text, StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {headerFontSize} from '../contants';
-
-class Header extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.userInformationText}>ITH - S312379</Text>
-      </View>
-    );
-  }
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -30,6 +15,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 10,
   },
+  headerWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    height: 65,
+  },
+  nameWrapper: {
+    left: 140,
+    fontSize: 22,
+    color: '#000',
+  },
+  backIcon: {
+    width: 25,
+    height: 25,
+  },
 });
 
-export default Header;
+export default styles;
