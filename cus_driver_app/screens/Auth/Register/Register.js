@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {View, Text, SafeAreaView, Image, Alert} from 'react-native';
-import {backIcon, greyColor, ipAddress} from '../../contants';
+import {backIcon, greyColor, ipAddress} from '../../../contants';
 import {Button, TextField} from 'react-native-ui-lib';
 import {Picker} from '@react-native-picker/picker';
 import styles from './register.style';

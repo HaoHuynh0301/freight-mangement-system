@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {impText, appFontSize, headerFontSize} from '../../contants';
+import {impText, appFontSize, headerFontSize} from '../../../contants';
 
 const styles = StyleSheet.create({
   scrollView: {},

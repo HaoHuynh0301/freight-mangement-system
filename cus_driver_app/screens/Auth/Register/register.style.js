@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {headerFontSize, appFontSize, greyColor} from '../../contants';
+import {headerFontSize, appFontSize, greyColor} from '../../../contants';
 
 const styles = StyleSheet.create({
   container: {

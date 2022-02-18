@@ -3,11 +3,11 @@ import Orders from './Orders/Orders';
 import OverView from './Overview/Overview';
 import User from './User/User';
 import AppInformation from './AppInformation/AppInformation';
-import Register from './Register/Register';
+import Register from './Auth/Register/Register';
 import EditInformation from './Editinformation/EditInformation';
 import CreateOrder from './CreateOrder/CreateOrder';
 import OrderDetail from './OrderDetail/OrderDetail';
-import SignIn from './SignIn/SignIn';
+import SignIn from './Auth/SignIn/SignIn';
 import OverViewOrder from './OverviewOrders/OverViewOrder';
 import OrderMap from './OrderMap/OrderMap';
 
