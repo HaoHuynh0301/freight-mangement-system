@@ -38,7 +38,7 @@ Django
 ReactJS
 - npm start
 React-Native
-- npx react-native run-androi
+- npx react-native run-android
 Django
 - python manage runserver *your_ip_address
 
