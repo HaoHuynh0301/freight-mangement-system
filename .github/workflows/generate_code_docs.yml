@@ -1,0 +1,22 @@
+name: Generate Code documents
+run-name: Generating Code Documents
+on: [workflow_dispatch]
+          
+jobs:
+  gen-ai-doc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Generate AI docs
+        uses: knowl-doc/code-to-doc-manual@main
+        env:
+          KNOWL_API_KEY: ${{secrets.KNOWL_API_KEY}}
+          OPENAI_API_KEY: ${{secrets.OPENAI_API_KEY}}
+          OPENAI_BATCH_SIZE: 25
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: knowl_results
+          path: knowl_results
