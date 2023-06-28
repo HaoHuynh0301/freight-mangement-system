@@ -39,11 +39,6 @@ class App extends Component {
           isSignedIn: true,
         });
       })
-      .catch(error => {
-        this.setState({
-          isSignedIn: false,
-        });
-      });
   }
 
   componentDidMount() {
