@@ -1,0 +1,21 @@
+name: Generate Code documents
+run-name: Generating Code Documents
+on:
+  push:
+    branches:
+      - 'main'
+          
+jobs:
+  gen-ai-doc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Generate AI docs
+        uses: Krishanu230/code-to-doc-dev@main
+        env:
+          KNOWL_API_KEY: ${{secrets.KNOWL_API_KEY}}
+          OPENAI_API_KEY: ${{secrets.OPENAI_API_KEY}}
+          OPENAI_BATCH_SIZEH_SIZE
+      : 25
