@@ -1,5 +1,5 @@
-name: Generate Code documents
-run-name: Generating Code Documents
+name: Update Code documents
+run-name: Update Code Documents
 on:
   push:
     branches:
